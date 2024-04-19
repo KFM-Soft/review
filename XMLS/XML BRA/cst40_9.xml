@@ -1,0 +1,333 @@
+<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+    <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+        <infNFe Id="NFe35210761068276030780550010042629331165051653" versao="4.00">
+            <ide>
+                <cUF>35</cUF>
+                <cNF>16505165</cNF>
+                <natOp>Venda merc adq rec terc dest ZFM Ar Liv Com</natOp>
+                <mod>55</mod>
+                <serie>1</serie>
+                <nNF>4262933</nNF>
+                <dhEmi>2021-07-14T15:50:51-03:00</dhEmi>
+                <tpNF>1</tpNF>
+                <idDest>2</idDest>
+                <cMunFG>3527306</cMunFG>
+                <tpImp>2</tpImp>
+                <tpEmis>1</tpEmis>
+                <cDV>3</cDV>
+                <tpAmb>1</tpAmb>
+                <finNFe>1</finNFe>
+                <indFinal>0</indFinal>
+                <indPres>9</indPres>
+                <procEmi>0</procEmi>
+                <verProc>SAP GRC NFE 10.0</verProc>
+            </ide>
+            <emit>
+                <CNPJ>61068276030780</CNPJ>
+                <xNome>Unilever Brasil Ltda</xNome>
+                <xFant>Unilever Brasil Ltda</xFant>
+                <enderEmit>
+                    <xLgr>Av Jose Luiz Mazzali</xLgr>
+                    <nro>450</nro>
+                    <xCpl>Parte</xCpl>
+                    <xBairro>Santo Antonio</xBairro>
+                    <cMun>3527306</cMun>
+                    <xMun>Louveira</xMun>
+                    <UF>SP</UF>
+                    <CEP>13290000</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                    <fone>08007077322</fone>
+                </enderEmit>
+                <IE>421071114110</IE>
+                <CRT>3</CRT>
+            </emit>
+            <dest>
+                <CNPJ>05394630000292</CNPJ>
+                <xNome>KARINA DISTRIBUIDORA EIRELI</xNome>
+                <enderDest>
+                    <xLgr>EST BR 317</xLgr>
+                    <nro>240</nro>
+                    <xCpl>KM 01</xCpl>
+                    <xBairro>AEROPORTO</xBairro>
+                    <cMun>1200252</cMun>
+                    <xMun>EPITACIOLANDIA</xMun>
+                    <UF>AC</UF>
+                    <CEP>69934000</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                    <fone>6835464786</fone>
+                </enderDest>
+                <indIEDest>1</indIEDest>
+                <IE>0100095200203</IE>
+                <ISUF>200410873</ISUF>
+            </dest>
+            <retirada>
+                <CNPJ>10914122000147</CNPJ>
+                <xNome>ALFALOG ARMZ GERAIS LTDA</xNome>
+                <xLgr>R ANTONIO AMSTALDEN</xLgr>
+                <nro>70</nro>
+                <xBairro>DA CAPELA</xBairro>
+                <cMun>3556701</cMun>
+                <xMun>VINHEDO</xMun>
+                <UF>SP</UF>
+                <CEP>13280000</CEP>
+                <cPais>1058</cPais>
+                <xPais>BRASIL</xPais>
+                <IE>714108756114</IE>
+            </retirada>
+            <det nItem="1">
+                <prod>
+                    <cProd>000000000068431883</cProd>
+                    <cEAN>27891150074976</cEAN>
+                    <xProd>Gel Rexona Higienizador Para Maos Original 12X300ML</xProd>
+                    <NCM>38089429</NCM>
+                    <CFOP>6110</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>1.0000</qCom>
+                    <vUnCom>78.3600000000</vUnCom>
+                    <vProd>78.36</vProd>
+                    <cEANTrib>7891150074972</cEANTrib>
+                    <uTrib>UN</uTrib>
+                    <qTrib>12.0000</qTrib>
+                    <vUnTrib>6.5300000000</vUnTrib>
+                    <indTot>1</indTot>
+                    <xPed>INOV VSPER PC J</xPed>
+                </prod>
+                <imposto>
+                    <vTotTrib>12.73</vTotTrib>
+                    <ICMS>
+                        <ICMS40>
+                            <orig>0</orig>
+                            <CST>40</CST>
+                            <vICMSDeson>5.49</vICMSDeson>
+                            <motDesICMS>7</motDesICMS>
+                        </ICMS40>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>345</cEnq>
+                        <IPINT>
+                            <CST>52</CST>
+                        </IPINT>
+                    </IPI>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>78.36</vBC>
+                            <pPIS>1.6500</pPIS>
+                            <vPIS>1.29</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>78.36</vBC>
+                            <pCOFINS>7.6000</pCOFINS>
+                            <vCOFINS>5.96</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Lei 12.741/12 Valor Aproximado dos Impostos R$ 12,73 (16,25%)</infAdProd>
+            </det>
+            <det nItem="2">
+                <prod>
+                    <cProd>000000000068437699</cProd>
+                    <cEAN>17891150076409</cEAN>
+                    <xProd>Gel Rexona Higienizador Para Maos Original Pump 6X500ML</xProd>
+                    <NCM>38089429</NCM>
+                    <CFOP>6110</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>1.0000</qCom>
+                    <vUnCom>59.2200000000</vUnCom>
+                    <vProd>59.22</vProd>
+                    <cEANTrib>7891150076402</cEANTrib>
+                    <uTrib>UN</uTrib>
+                    <qTrib>6.0000</qTrib>
+                    <vUnTrib>9.8700000000</vUnTrib>
+                    <indTot>1</indTot>
+                    <xPed>INOV VSPER PC J</xPed>
+                </prod>
+                <imposto>
+                    <vTotTrib>9.62</vTotTrib>
+                    <ICMS>
+                        <ICMS40>
+                            <orig>0</orig>
+                            <CST>40</CST>
+                            <vICMSDeson>4.15</vICMSDeson>
+                            <motDesICMS>7</motDesICMS>
+                        </ICMS40>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>345</cEnq>
+                        <IPINT>
+                            <CST>52</CST>
+                        </IPINT>
+                    </IPI>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>59.22</vBC>
+                            <pPIS>1.6500</pPIS>
+                            <vPIS>0.98</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>59.22</vBC>
+                            <pCOFINS>7.6000</pCOFINS>
+                            <vCOFINS>4.50</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Lei 12.741/12 Valor Aproximado dos Impostos R$ 9,62 (16,25%)</infAdProd>
+            </det>
+            <total>
+                <ICMSTot>
+                    <vBC>0.00</vBC>
+                    <vICMS>0.00</vICMS>
+                    <vICMSDeson>9.64</vICMSDeson>
+                    <vFCP>0.00</vFCP>
+                    <vBCST>0.00</vBCST>
+                    <vST>0.00</vST>
+                    <vFCPST>0.00</vFCPST>
+                    <vFCPSTRet>0.00</vFCPSTRet>
+                    <vProd>137.58</vProd>
+                    <vFrete>0.00</vFrete>
+                    <vSeg>0.00</vSeg>
+                    <vDesc>0.00</vDesc>
+                    <vII>0.00</vII>
+                    <vIPI>0.00</vIPI>
+                    <vIPIDevol>0.00</vIPIDevol>
+                    <vPIS>2.27</vPIS>
+                    <vCOFINS>10.46</vCOFINS>
+                    <vOutro>0.00</vOutro>
+                    <vNF>127.94</vNF>
+                    <vTotTrib>22.35</vTotTrib>
+                </ICMSTot>
+            </total>
+            <transp>
+                <modFrete>0</modFrete>
+                <transporta>
+                    <CNPJ>63935688000111</CNPJ>
+                    <xNome>RACA TRANSPORTES LTDA</xNome>
+                    <IE>112726703117</IE>
+                    <xEnder>R MATEUS DE LEAO 117</xEnder>
+                    <xMun>SAO PAULO</xMun>
+                    <UF>SP</UF>
+                </transporta>
+                <vol>
+                    <qVol>2</qVol>
+                    <esp>Caixa</esp>
+                    <pesoL>5.808</pesoL>
+                    <pesoB>7.200</pesoB>
+                </vol>
+            </transp>
+            <cobr>
+                <fat>
+                    <nFat>0042629331</nFat>
+                    <vOrig>127.94</vOrig>
+                    <vDesc>0.00</vDesc>
+                    <vLiq>127.94</vLiq>
+                </fat>
+                <dup>
+                    <nDup>001</nDup>
+                    <dVenc>2021-08-18</dVenc>
+                    <vDup>127.94</vDup>
+                </dup>
+            </cobr>
+            <pag>
+                <detPag>
+                    <tPag>15</tPag>
+                    <vPag>127.94</vPag>
+                </detPag>
+            </pag>
+            <infAdic>
+                <infCpl>ICMS isento conf. Art.8o e Art.5o, Anexo I, RICMS/SP Dec. 45490/00//ART. 120
+                    DO DECRETO 7.212/2010//Pedido do Cliente: INOV VSPER PC JUN21//A mercadoria
+                    saira de: ALFALOG ARMZ GERAIS LTDA, Endereco: R ANTONIO AMSTALDEN 70 , VINHEDO,
+                    SP, CNPJ: 10914122000147, IE : 714108756114//Codigo Suframa:
+                    200410873//Dispensado o Visto Previo pela Reparticao Fiscal cfe TARE Nr
+                    025/07-GSF Demonstrativo de Abatimento dos Impostos Valor Total (c/Impostos) R$
+                    137 .58//Valor Desconto R$ 9.64//Resolucao do Senado - Teste #//Valor para
+                    Seguro R$ 93,39//Cobranca a cargo de: Banco Citibank S.A Ate o vencimento o
+                    titulo podera ser pago em qualquer agencia bancaria. Na falta do boleto, favor
+                    obter a 2 via atraves do site www.citibank.com.br/boletos ou ligue para
+                    0800-7092484/01 2109</infCpl>
+            </infAdic>
+            <compra>
+                <xPed>INOV VSPER PC JUN21</xPed>
+            </compra>
+        </infNFe>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+                <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+                <Reference URI="#NFe35210761068276030780550010042629331165051653">
+                    <Transforms>
+                        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                        <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                    <DigestValue>Y6X6PLeGD72HKAOI9xyg1V5jBm8=</DigestValue>
+                </Reference>
+            </SignedInfo>
+            <SignatureValue>J8McLFNVvHingSmj0mX+aiCQHBqoJLO5oOeEEryHmZuX0sOHy7EcsI0TQHZajPRJvK6NW2gW59j1
+                5eU6i23HUnQP7cDSy5+Tsa7QjtFmn5Su8TSLYp3qokgcDI62y2dBnsRxOSE0Ndhuv6ck0/haq6nX
+                zeHqjFYZTzp9XWRvIyQRD6sxjom99/aU3yg4fHyMc+UImcDX9+PxlopXiaUTVLA5uCYSghq36XtQ
+                PqliC8pHC374V/043QWv4ON4dTYZzZMjeXEzMvVzIGGgI8cHYV6QUchwtlP4IWC2W/8FasMw4aGg
+                v1qzXPS2W66PEOsQEzmJhbDPpc+HIDww1DyVwg==</SignatureValue>
+            <KeyInfo>
+                <X509Data>
+                    <X509Certificate>MIIHrTCCBZWgAwIBAgIIQl1QudwXAV8wDQYJKoZIhvcNAQELBQAwTDELMAkGA1UEBhMCQlIxEzAR
+                        BgNVBAoMCklDUC1CcmFzaWwxKDAmBgNVBAMMH1NFUkFTQSBDZXJ0aWZpY2Fkb3JhIERpZ2l0YWwg
+                        djUwHhcNMjAxMjI5MTgxNTAwWhcNMjExMjI5MTgxNTAwWjCB+zELMAkGA1UEBhMCQlIxEzARBgNV
+                        BAoMCklDUC1CcmFzaWwxFDASBgNVBAsMCyhFTSBCUkFOQ08pMRgwFgYDVQQLDA8wMDAwMDEwMDk5
+                        ODAzNzAxFDASBgNVBAsMCyhFTSBCUkFOQ08pMRQwEgYDVQQLDAsoRU0gQlJBTkNPKTEoMCYGA1UE
+                        CwwfU0VSQVNBIENlcnRpZmljYWRvcmEgRGlnaXRhbCB2NTEXMBUGA1UECwwONjIxNzM2MjAwMDAx
+                        ODAxGTAXBgNVBAsMEFZJREVPQ09ORkVSRU5DSUExHTAbBgNVBAMMFFVOSUxFVkVSIEJSQVNJTCBM
+                        VERBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxrB6w9jy3jSBM/JCOscmyjr1oPSN
+                        0LbsqqAc3ghJ1MoDIVlx4VJ4e5Yl3ZL/y+A8MoZWYfejy+YZw5B237b0dX87+z1NaTd8cgDkBuxy
+                        ity60PSrHf5KwHo461DagwZgVHR3e6V6ibe+Jfc6GZppP+90AuaLfgZbnfWuNp8TLkU7deCW/7ld
+                        e87fAyxArUvo/qkwfFaLFWdyh92HnQFsWGx+mqKaMkBz5htcwrnlZgQGLww+L9R7lHVMLwNI0lMO
+                        iS1C8E5mi4lZKNKPHGt34uBaOd9kDVF0rKOGB/4csAv2kZFG2wHTt1nNECnbQSE1CKQHASzwJ2LN
+                        K5kPxvoB3QIDAQABo4IC4TCCAt0wHwYDVR0jBBgwFoAUVnWvSnOy2AjEfftsKBwR1ffBqMwwgZcG
+                        CCsGAQUFBwEBBIGKMIGHMEcGCCsGAQUFBzAChjtodHRwOi8vd3d3LmNlcnRpZmljYWRvZGlnaXRh
+                        bC5jb20uYnIvY2FkZWlhcy9zZXJhc2FjZHY1LnA3YjA8BggrBgEFBQcwAYYwaHR0cDovL29jc3Au
+                        Y2VydGlmaWNhZG9kaWdpdGFsLmNvbS5ici9zZXJhc2FjZHY1MIHABgNVHREEgbgwgbWBGENPQ0tQ
+                        SVQuTkZFQFVOSUxFVkVSLkNPTaA+BgVgTAEDBKA1EzMyNzEyMTk3NjI0MTQ1ODU2ODQ4MDAwMDAw
+                        MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDCgJQYFYEwBAwKgHBMaTFVDSUFOTyBNQVJUSU4gV0lT
+                        Wk5JRVdTS0mgGQYFYEwBAwOgEBMONjEwNjgyNzYwMDAxMDSgFwYFYEwBAwegDhMMMDAwMDAwMDAw
+                        MDAwMHEGA1UdIARqMGgwZgYGYEwBAgEGMFwwWgYIKwYBBQUHAgEWTmh0dHA6Ly9wdWJsaWNhY2Fv
+                        LmNlcnRpZmljYWRvZGlnaXRhbC5jb20uYnIvcmVwb3NpdG9yaW8vZHBjL2RlY2xhcmFjYW8tc2Nk
+                        LnBkZjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgZsGA1UdHwSBkzCBkDBJoEegRYZD
+                        aHR0cDovL3d3dy5jZXJ0aWZpY2Fkb2RpZ2l0YWwuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9zZXJh
+                        c2FjZHY1LmNybDBDoEGgP4Y9aHR0cDovL2xjci5jZXJ0aWZpY2Fkb3MuY29tLmJyL3JlcG9zaXRv
+                        cmlvL2xjci9zZXJhc2FjZHY1LmNybDAdBgNVHQ4EFgQUJvJeKs3OIBRTQQhDqS8uB/M/VocwDgYD
+                        VR0PAQH/BAQDAgXgMA0GCSqGSIb3DQEBCwUAA4ICAQBeT41YtIl0uBkAkzPjOO5yRGs+bjr+TQj0
+                        EYVS9Dmh2iMvWs2/Zd7zNMuj/f1JoyqbjYtX8ljkpH+oLfQzAU6085KLbbAq47t7lUhh7pB25Len
+                        rMWhs/LoBuY7P7gYjm1UyRjdWQ9bVu7scUsikctbDVpIDADd8FzZWun6z7JSHWvesqdWTS94yT/6
+                        c2SleqKnSD7zaIaE/dvvA1RxVHl2qxT8GH31HIIDmXs1mDsXoQKyA3Cqtik76f6oOhBt514BYYX4
+                        GPMZzh6JRjU331puYO9AKuFnvUMyyemQFI7F5p1dT8GZ+oy+HARl+1J0vwlYsbqAuUxH3gdGskIf
+                        ZKJiQkzFSlT7/3SU5WPvkGtdsdbpdmJlCgZLohGznmyxyeHqRCn1xSPHemuCljt8f/pdOq3VVIpZ
+                        RyW/UbUabdUZDQa1WorhOUrZoBZJPjvqFbYhVjY61TYrtsNT1CuCmfsw2Bcvn7NhYKipyrKwJIKb
+                        1s681rMAC+0OH/xat8j/txHzEsklfiB7dlKB6eybv8I8pIbAdKBjzgji9sitJaXumEQIQ8ZdJiUJ
+                        wYPQimaafgP7gJMtTJNO+BxQu8ojM4S7gzd7l7nVP0eCGwnT4F4MfprC5TQ5rRHxiD3LBX1Uh2Wr
+                        fu8Ic179f3eLGYQu7ihSijAnZNiQWwfVP/H3PmEdzQ==</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </Signature>
+    </NFe>
+    <protNFe versao="4.00">
+        <infProt Id="Id135210793952404">
+            <tpAmb>1</tpAmb>
+            <verAplic>SP_NFE_PL009_V4</verAplic>
+            <chNFe>35210761068276030780550010042629331165051653</chNFe>
+            <dhRecbto>2021-07-14T15:51:28-03:00</dhRecbto>
+            <nProt>135210793952404</nProt>
+            <digVal>Y6X6PLeGD72HKAOI9xyg1V5jBm8=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+        </infProt>
+    </protNFe>
+</nfeProc>

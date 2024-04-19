@@ -1,0 +1,307 @@
+<nfeProc xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+    <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+        <infNFe Id="NFe13210704402277000100550180000113801535266718" versao="4.00">
+            <ide>
+                <cUF>13</cUF>
+                <cNF>53526671</cNF>
+                <natOp>VENDA DE PRODUCAO DO ESTAB., DESTINADA A ZFM OU ALC</natOp>
+                <mod>55</mod>
+                <serie>18</serie>
+                <nNF>11380</nNF>
+                <dhEmi>2021-07-20T03:00:00-03:00</dhEmi>
+                <tpNF>1</tpNF>
+                <idDest>2</idDest>
+                <cMunFG>1302603</cMunFG>
+                <tpImp>1</tpImp>
+                <tpEmis>1</tpEmis>
+                <cDV>8</cDV>
+                <tpAmb>1</tpAmb>
+                <finNFe>1</finNFe>
+                <indFinal>0</indFinal>
+                <indPres>0</indPres>
+                <procEmi>0</procEmi>
+                <verProc>1.0</verProc>
+            </ide>
+            <emit>
+                <CNPJ>04402277000100</CNPJ>
+                <xNome>BIC AMAZONIA SA</xNome>
+                <xFant>BIC AMAZONIA SA</xFant>
+                <enderEmit>
+                    <xLgr>AVENIDA ICA</xLgr>
+                    <nro>400</nro>
+                    <xCpl>FRENTE P/NRO.445-FUNDOS 2645 DA AV.ACAI</xCpl>
+                    <xBairro>DISTRITO INDUSTRIAL</xBairro>
+                    <cMun>1302603</cMun>
+                    <xMun>MANAUS</xMun>
+                    <UF>AM</UF>
+                    <CEP>69075090</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                </enderEmit>
+                <IE>062000454</IE>
+                <CRT>3</CRT>
+            </emit>
+            <dest>
+                <CNPJ>05394630000292</CNPJ>
+                <xNome>V SPEROTTO IMPORTACAO E EXPORTACAO ME</xNome>
+                <enderDest>
+                    <xLgr>RODOVIA BR 317</xLgr>
+                    <nro>240</nro>
+                    <xCpl>KM 01</xCpl>
+                    <xBairro>AEROPORTO</xBairro>
+                    <cMun>1200252</cMun>
+                    <xMun>EPITACIOLANDIA</xMun>
+                    <UF>AC</UF>
+                    <CEP>69934000</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                </enderDest>
+                <indIEDest>1</indIEDest>
+                <IE>0100095200203</IE>
+                <ISUF>200410873</ISUF>
+                <email>karinarecebenfe@gmail.com</email>
+            </dest>
+            <retirada>
+                <CNPJ>22578120000294</CNPJ>
+                <xNome>SUPPLOG ARMAZENS GERAIS LTDA</xNome>
+                <xLgr>RUA MINI JOAO G DE ARAUJO</xLgr>
+                <nro>338</nro>
+                <xBairro>DISTRITO INDUSTRIAL</xBairro>
+                <cMun>1302603</cMun>
+                <xMun>MANAUS</xMun>
+                <UF>AM</UF>
+                <CEP>69075840</CEP>
+                <cPais>1058</cPais>
+                <xPais>BRASIL</xPais>
+                <email>nfebic@supportelogistica.com.br</email>
+                <IE>053740050</IE>
+            </retirada>
+            <det nItem="1">
+                <prod>
+                    <cProd>846004</cProd>
+                    <cEAN>00070330613652</cEAN>
+                    <xProd>ISQUEIRO A GAS DESC</xProd>
+                    <NCM>96131000</NCM>
+                    <CFOP>6109</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>80.0000</qCom>
+                    <vUnCom>139.5000000000</vUnCom>
+                    <vProd>11160.00</vProd>
+                    <cEANTrib>070330609723</cEANTrib>
+                    <uTrib>BT</uTrib>
+                    <qTrib>4000.0000</qTrib>
+                    <vUnTrib>2.7900000000</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>0.00</vTotTrib>
+                    <ICMS>
+                        <ICMS40>
+                            <orig>4</orig>
+                            <CST>40</CST>
+                            <vICMSDeson>1339.20</vICMSDeson>
+                            <motDesICMS>7</motDesICMS>
+                        </ICMS40>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>335</cEnq>
+                        <IPINT>
+                            <CST>52</CST>
+                        </IPINT>
+                    </IPI>
+                    <PIS>
+                        <PISAliq>
+                            <CST>02</CST>
+                            <vBC>11160.00</vBC>
+                            <pPIS>0.65</pPIS>
+                            <vPIS>72.54</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>02</CST>
+                            <vBC>11160.00</vBC>
+                            <pCOFINS>3.00</pCOFINS>
+                            <vCOFINS>334.80</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>MAXI J6 CTL 50X1 CX50 *** DCR-E2015/923645 Port.Int.151/94 e RESOL.39/14
+                    *** (ISQUEIRO) ONU 1057 2.1 III *** V26 4 / 80,0000</infAdProd>
+            </det>
+            <det nItem="2">
+                <prod>
+                    <cProd>902585</cProd>
+                    <cEAN>20070330643356</cEAN>
+                    <xProd>ISQUEIRO A GAS DESC</xProd>
+                    <NCM>96131000</NCM>
+                    <CFOP>6109</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>170.0000</qCom>
+                    <vUnCom>631.7200000000</vUnCom>
+                    <vProd>107392.40</vProd>
+                    <cEANTrib>070330909229</cEANTrib>
+                    <uTrib>PC</uTrib>
+                    <qTrib>44880.0000</qTrib>
+                    <vUnTrib>2.3928787879</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>0.00</vTotTrib>
+                    <ICMS>
+                        <ICMS40>
+                            <orig>4</orig>
+                            <CST>40</CST>
+                            <vICMSDeson>12887.09</vICMSDeson>
+                            <motDesICMS>7</motDesICMS>
+                        </ICMS40>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>335</cEnq>
+                        <IPINT>
+                            <CST>52</CST>
+                        </IPINT>
+                    </IPI>
+                    <PIS>
+                        <PISAliq>
+                            <CST>02</CST>
+                            <vBC>107392.40</vBC>
+                            <pPIS>0.65</pPIS>
+                            <vPIS>698.05</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>02</CST>
+                            <vBC>107392.40</vBC>
+                            <pCOFINS>3.00</pCOFINS>
+                            <vCOFINS>3221.77</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>J6 MAXI CTL 22X12 CX264 *** DCR-E2021/054068 Port.Int.151/94 e
+                    RESOL.39/14 *** (ISQUEIRO) ONU 1057 2.1 III *** V28 6 7 / 170,0000</infAdProd>
+            </det>
+            <total>
+                <ICMSTot>
+                    <vBC>0.00</vBC>
+                    <vICMS>0.00</vICMS>
+                    <vICMSDeson>14226.29</vICMSDeson>
+                    <vFCP>0.00</vFCP>
+                    <vBCST>0.00</vBCST>
+                    <vST>0.00</vST>
+                    <vFCPST>0.00</vFCPST>
+                    <vFCPSTRet>0.00</vFCPSTRet>
+                    <vProd>118552.40</vProd>
+                    <vFrete>0.00</vFrete>
+                    <vSeg>0.00</vSeg>
+                    <vDesc>0.00</vDesc>
+                    <vII>0.00</vII>
+                    <vIPI>0.00</vIPI>
+                    <vIPIDevol>0.00</vIPIDevol>
+                    <vPIS>770.59</vPIS>
+                    <vCOFINS>3556.57</vCOFINS>
+                    <vOutro>0.00</vOutro>
+                    <vNF>104326.11</vNF>
+                    <vTotTrib>0.00</vTotTrib>
+                </ICMSTot>
+                <retTrib />
+            </total>
+            <transp>
+                <modFrete>1</modFrete>
+                <transporta>
+                    <CNPJ>03447983000954</CNPJ>
+                    <xNome>SUPPORTE ARMAZ.VENDAS E LOG INTEG. LTDA</xNome>
+                    <IE>042339170</IE>
+                    <xEnder>RUA MIM JOAO GONCALVES DE ARAUJO</xEnder>
+                    <xMun>MANAUS</xMun>
+                    <UF>AM</UF>
+                </transporta>
+                <vol>
+                    <qVol>250</qVol>
+                    <esp>CAIXA(S)</esp>
+                    <nVol>000000000000000</nVol>
+                    <pesoL>1051.897</pesoL>
+                    <pesoB>1242.640</pesoB>
+                </vol>
+            </transp>
+            <cobr>
+                <fat>
+                    <nFat>11380</nFat>
+                    <vOrig>104326.11</vOrig>
+                    <vLiq>104326.11</vLiq>
+                </fat>
+                <dup>
+                    <nDup>001</nDup>
+                    <dVenc>2021-09-19</dVenc>
+                    <vDup>104326.11</vDup>
+                </dup>
+            </cobr>
+            <pag>
+                <detPag>
+                    <tPag>15</tPag>
+                    <vPag>104326.11</vPag>
+                </detPag>
+            </pag>
+            <infAdic>
+                <infCpl>===== &amp;gt; Nosso Pedido: 364076 SO &amp;lt; ===== Vendedor: B70 ULISSES
+                    Mercadoria Produzida na Zona Franca de Manaus Isento de IPI conforme Art.9o.Dec
+                    reto Lei 288/67 C/C Art 81 Inciso II do Decreto No.7.212/10. Declaramos que os
+                    produtos estao adequadamente acondicionados para suportar os r iscos normais de
+                    carregamento e descarregamento, transbordo e transportes e que atende a
+                    regulamentacao em vigor. Excecao a reducao da aliquota 0% para o PIS e a COFINS.
+                    Lei no 10.996, de 2004, art. 2o, 4o incluido pela Lei no 12.350, de 2010, art.
+                    59. IN no 1.911, de 201 9, art. 87, 1o. Prod.Nacional Isento de IPI conforme
+                    Art.9o.Decreto Lei 288/67 C/C Art 81 a 120 Inciso II do Decreto No.7.212/10.As
+                    Mercadorias constantes nesta N.Fiscal SAIRAM da SUPPLOG ARMAZENS GERAIS LTDA
+                    CNPJ 22.578.120/0002 94 INSCRICAO ESTADUAL 05.3 74.005 0 sito a Rua Min. Joao G.
+                    de Araujo N. 338 Dist.Industrial 1. Modalidade DCI Mensal. CONFIRA OS VOLUMES
+                    ENTREGUES, POIS NAO SERAO ACEITAS RECLAMACOES POS TERIORES SERVICO DE
+                    ATENDIMENTO AO CLIENTE: 11 21588000.Em caso de devolucao en viar XML para nf</infCpl>
+                <obsCont xCampo="FINALIDADEPIN">
+                    <xTexto>COMERCIO</xTexto>
+                </obsCont>
+            </infAdic>
+            <infRespTec>
+                <CNPJ>16966535000151</CNPJ>
+                <xContato>Luiz Bruno Lima da Frota</xContato>
+                <email>suporte@veroit.com.br</email>
+                <fone>1140635818</fone>
+            </infRespTec>
+        </infNFe>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+                <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+                <Reference URI="#NFe13210704402277000100550180000113801535266718">
+                    <Transforms>
+                        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                        <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                    <DigestValue>XQSTZ7WrJyT5mRbb7KJCMtDEdHQ=</DigestValue>
+                </Reference>
+            </SignedInfo>
+            <SignatureValue>
+                e2H4dzfDxhC6e5yX4yci0552zZkZO6ba3rwKvNRK0FDJaWmWljPRyYFhBIewY6PdvIeyd831QgFzXJ7/4U6IQKLdpT+iCaoYKJhzoF0LuPfloGCNA0BBruRXp/nRj82+/S39VO5N3IOmJBoT4hQW8a8C+YmNJBDNLUWZDiLsJnzeXPtf3sBYbZgZp8n6QQn9maqNTliqGAj1o6cFYssb6BXYMrwqZHLesnnoD9CBj8latQ92qY8/VyGFh8DcV9sa/zXGm6YzRmtQbkIROaPJpSJLsGIw4+dausJg+bwIfyi6ARTQ00h7qCUoXZyB4lbu1OUvoTfpCN6UMr4MRNoy2A==</SignatureValue>
+            <KeyInfo>
+                <X509Data>
+                    <X509Certificate>
+                        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</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </Signature>
+    </NFe>
+    <protNFe xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+        <infProt Id="ID113211800616275">
+            <tpAmb>1</tpAmb>
+            <verAplic>AM4.00</verAplic>
+            <chNFe>13210704402277000100550180000113801535266718</chNFe>
+            <dhRecbto>2021-07-20T09:13:51-04:00</dhRecbto>
+            <nProt>113211800616275</nProt>
+            <digVal>XQSTZ7WrJyT5mRbb7KJCMtDEdHQ=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+        </infProt>
+    </protNFe>
+</nfeProc>

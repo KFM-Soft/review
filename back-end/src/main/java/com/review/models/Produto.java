@@ -1,18 +1,46 @@
 package com.review.models;
 
-public class Produto {
-    public String cProd;
-    public String cEAN;
-    public String xProd;
-    public String NCM;
-    public String CFOP;
-    public String uCom;
-    public Double qCom;
-    public Double vUnCom;
-    public Double vProd;
-    public String cEANTrib;
-    public String uTrib;
-    public Double qTrib;
-    public Double vUnTrib;
-    public String indTot;
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="Produtos")
+public class Produto implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
+    private Long id;
+
+    @ManyToOne(optional = false)
+    private Estado UF;
+
+    @Column(columnDefinition = "VARCHAR(500)")
+    private String descricao;
+
+    @Column(nullable = false, updatable = false)
+    private String ean;
+
+    @Column(nullable = false)
+    private String aliquotaInterna;
+
+    @Column(nullable = false)
+    private String mvaOriginal;
+
+    @Column(nullable = false)
+    private String ncm;
+
+    @Column(nullable = false)
+    private String cest;
+
+    @Column(nullable = false)
+    private String cfop;
+
 }

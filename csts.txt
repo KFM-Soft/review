@@ -1,0 +1,5 @@
+icms proprio - cst 00 | cst 10 | cst 70 | cst 90
+imcs com redução da base de cálculo -  CST 20 ou 90, ou CSOSN 900
+icms diferimento - cst 51
+icms substituição tributária - CST 10, 30, 70 ou 90, ou CSOSN 201, 202, 203 ou 900
+icms  diferencial de alíquota – DIFAL

@@ -1,0 +1,454 @@
+<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+    <NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+        <infNFe Id="NFe35210702916265008659550010003334941730529909" versao="4.00">
+            <ide>
+                <cUF>35</cUF>
+                <cNF>73052990</cNF>
+                <natOp>VENDA PROD. DO ESTABELEC.</natOp>
+                <mod>55</mod>
+                <serie>1</serie>
+                <nNF>333494</nNF>
+                <dhEmi>2021-07-27T00:00:00-03:00</dhEmi>
+                <dhSaiEnt>2021-07-27T00:00:00-03:00</dhSaiEnt>
+                <tpNF>1</tpNF>
+                <idDest>2</idDest>
+                <cMunFG>3527108</cMunFG>
+                <tpImp>1</tpImp>
+                <tpEmis>1</tpEmis>
+                <cDV>9</cDV>
+                <tpAmb>1</tpAmb>
+                <finNFe>1</finNFe>
+                <indFinal>0</indFinal>
+                <indPres>3</indPres>
+                <procEmi>0</procEmi>
+                <verProc>4.00 N:21.5.1</verProc>
+            </ide>
+            <emit>
+                <CNPJ>02916265008659</CNPJ>
+                <xNome>JBS S/A</xNome>
+                <xFant>JBS S/A</xFant>
+                <enderEmit>
+                    <xLgr>Parque Industrial, S/N</xLgr>
+                    <nro>0</nro>
+                    <xBairro>Distrito Industrial</xBairro>
+                    <cMun>3527108</cMun>
+                    <xMun>LINS</xMun>
+                    <UF>SP</UF>
+                    <CEP>16404110</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                    <fone>1435112000</fone>
+                </enderEmit>
+                <IE>419137041116</IE>
+                <CRT>3</CRT>
+            </emit>
+            <dest>
+                <CNPJ>05394630000101</CNPJ>
+                <xNome>V SPEROTTO IMPORTACAO E EXPORTACAO</xNome>
+                <enderDest>
+                    <xLgr>ROD AC 10</xLgr>
+                    <nro>2000</nro>
+                    <xCpl>KM 02</xCpl>
+                    <xBairro>ALTO ALEGRE</xBairro>
+                    <cMun>1200401</cMun>
+                    <xMun>RIO BRANCO</xMun>
+                    <UF>AC</UF>
+                    <CEP>69921282</CEP>
+                    <cPais>1058</cPais>
+                    <xPais>BRASIL</xPais>
+                </enderDest>
+                <indIEDest>1</indIEDest>
+                <IE>0100095200122</IE>
+                <email>compras@karinanet.com.br</email>
+            </dest>
+            <det nItem="1">
+                <prod>
+                    <cProd>381635</cProd>
+                    <cEAN>17899567247306</cEAN>
+                    <xProd>CARNE CONS TRADICIONAL CCM 24X320G BERTIN</xProd>
+                    <NCM>16025000</NCM>
+                    <CEST>1707906</CEST>
+                    <CFOP>6101</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>350.0000</qCom>
+                    <vUnCom>140.34</vUnCom>
+                    <vProd>49119.00</vProd>
+                    <cEANTrib>7899567247309</cEANTrib>
+                    <uTrib>KG</uTrib>
+                    <qTrib>2688.0000</qTrib>
+                    <vUnTrib>18.2734375</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>4027.76</vTotTrib>
+                    <ICMS>
+                        <ICMS00>
+                            <orig>0</orig>
+                            <CST>00</CST>
+                            <modBC>3</modBC>
+                            <vBC>49119.00</vBC>
+                            <pICMS>7.00</pICMS>
+                            <vICMS>3438.33</vICMS>
+                        </ICMS00>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>999</cEnq>
+                        <IPINT>
+                            <CST>51</CST>
+                        </IPINT>
+                    </IPI>
+                    <II>
+                        <vBC>0</vBC>
+                        <vDespAdu>0</vDespAdu>
+                        <vII>0</vII>
+                        <vIOF>0</vIOF>
+                    </II>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>49119.00</vBC>
+                            <pPIS>1.65</pPIS>
+                            <vPIS>810.46</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>49119.00</vBC>
+                            <pCOFINS>7.60</pCOFINS>
+                            <vCOFINS>3733.04</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Trib aprox R$: 2063,00 Federal, R$: 1964,76 Estadual</infAdProd>
+            </det>
+            <det nItem="2">
+                <prod>
+                    <cProd>384699</cProd>
+                    <cEAN>17899567248556</cEAN>
+                    <xProd>CARNE CONS TRADICIONAL CCM 24X320G BORDON</xProd>
+                    <NCM>16025000</NCM>
+                    <CEST>1707906</CEST>
+                    <CFOP>6101</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>100.0000</qCom>
+                    <vUnCom>136.48</vUnCom>
+                    <vProd>13648.00</vProd>
+                    <cEANTrib>7899567248559</cEANTrib>
+                    <uTrib>KG</uTrib>
+                    <qTrib>768.0000</qTrib>
+                    <vUnTrib>17.770833333</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>1119.14</vTotTrib>
+                    <ICMS>
+                        <ICMS00>
+                            <orig>0</orig>
+                            <CST>00</CST>
+                            <modBC>3</modBC>
+                            <vBC>13648.00</vBC>
+                            <pICMS>7.00</pICMS>
+                            <vICMS>955.36</vICMS>
+                        </ICMS00>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>999</cEnq>
+                        <IPINT>
+                            <CST>51</CST>
+                        </IPINT>
+                    </IPI>
+                    <II>
+                        <vBC>0</vBC>
+                        <vDespAdu>0</vDespAdu>
+                        <vII>0</vII>
+                        <vIOF>0</vIOF>
+                    </II>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>13648.00</vBC>
+                            <pPIS>1.65</pPIS>
+                            <vPIS>225.19</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>13648.00</vBC>
+                            <pCOFINS>7.60</pCOFINS>
+                            <vCOFINS>1037.25</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Trib aprox R$: 573,22 Federal, R$: 545,92 Estadual</infAdProd>
+            </det>
+            <det nItem="3">
+                <prod>
+                    <cProd>384701</cProd>
+                    <cEAN>17899567248570</cEAN>
+                    <xProd>CARNE CONS SABOR TRADICIONAL CCM 24X320G HEREFORD</xProd>
+                    <NCM>16025000</NCM>
+                    <CEST>1707906</CEST>
+                    <CFOP>6101</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>30.0000</qCom>
+                    <vUnCom>140.34</vUnCom>
+                    <vProd>4210.20</vProd>
+                    <cEANTrib>7899567248573</cEANTrib>
+                    <uTrib>KG</uTrib>
+                    <qTrib>230.4000</qTrib>
+                    <vUnTrib>18.2734375</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>345.24</vTotTrib>
+                    <ICMS>
+                        <ICMS00>
+                            <orig>0</orig>
+                            <CST>00</CST>
+                            <modBC>3</modBC>
+                            <vBC>4210.20</vBC>
+                            <pICMS>7.00</pICMS>
+                            <vICMS>294.71</vICMS>
+                        </ICMS00>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>999</cEnq>
+                        <IPINT>
+                            <CST>51</CST>
+                        </IPINT>
+                    </IPI>
+                    <II>
+                        <vBC>0</vBC>
+                        <vDespAdu>0</vDespAdu>
+                        <vII>0</vII>
+                        <vIOF>0</vIOF>
+                    </II>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>4210.20</vBC>
+                            <pPIS>1.65</pPIS>
+                            <vPIS>69.47</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>4210.20</vBC>
+                            <pCOFINS>7.60</pCOFINS>
+                            <vCOFINS>319.98</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Trib aprox R$: 176,83 Federal, R$: 168,41 Estadual</infAdProd>
+            </det>
+            <det nItem="4">
+                <prod>
+                    <cProd>384700</cProd>
+                    <cEAN>17899567248563</cEAN>
+                    <xProd>CARNE CONS TRADICIONAL CCM 24X320G KITUT</xProd>
+                    <NCM>16025000</NCM>
+                    <CEST>1707906</CEST>
+                    <CFOP>6101</CFOP>
+                    <uCom>CX</uCom>
+                    <qCom>30.0000</qCom>
+                    <vUnCom>136.48</vUnCom>
+                    <vProd>4094.40</vProd>
+                    <cEANTrib>7899567248566</cEANTrib>
+                    <uTrib>KG</uTrib>
+                    <qTrib>230.4000</qTrib>
+                    <vUnTrib>17.770833333</vUnTrib>
+                    <indTot>1</indTot>
+                </prod>
+                <imposto>
+                    <vTotTrib>335.74</vTotTrib>
+                    <ICMS>
+                        <ICMS00>
+                            <orig>0</orig>
+                            <CST>00</CST>
+                            <modBC>3</modBC>
+                            <vBC>4094.40</vBC>
+                            <pICMS>7.00</pICMS>
+                            <vICMS>286.61</vICMS>
+                        </ICMS00>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>999</cEnq>
+                        <IPINT>
+                            <CST>51</CST>
+                        </IPINT>
+                    </IPI>
+                    <II>
+                        <vBC>0</vBC>
+                        <vDespAdu>0</vDespAdu>
+                        <vII>0</vII>
+                        <vIOF>0</vIOF>
+                    </II>
+                    <PIS>
+                        <PISAliq>
+                            <CST>01</CST>
+                            <vBC>4094.40</vBC>
+                            <pPIS>1.65</pPIS>
+                            <vPIS>67.56</vPIS>
+                        </PISAliq>
+                    </PIS>
+                    <COFINS>
+                        <COFINSAliq>
+                            <CST>01</CST>
+                            <vBC>4094.40</vBC>
+                            <pCOFINS>7.60</pCOFINS>
+                            <vCOFINS>311.17</vCOFINS>
+                        </COFINSAliq>
+                    </COFINS>
+                </imposto>
+                <infAdProd>Trib aprox R$: 171,96 Federal, R$: 163,78 Estadual</infAdProd>
+            </det>
+            <total>
+                <ICMSTot>
+                    <vBC>71071.60</vBC>
+                    <vICMS>4975.01</vICMS>
+                    <vICMSDeson>0</vICMSDeson>
+                    <vFCPUFDest>0.00</vFCPUFDest>
+                    <vICMSUFDest>0.00</vICMSUFDest>
+                    <vICMSUFRemet>0.00</vICMSUFRemet>
+                    <vFCP>0</vFCP>
+                    <vBCST>0</vBCST>
+                    <vST>0.00</vST>
+                    <vFCPST>0</vFCPST>
+                    <vFCPSTRet>0</vFCPSTRet>
+                    <vProd>71071.60</vProd>
+                    <vFrete>0</vFrete>
+                    <vSeg>0</vSeg>
+                    <vDesc>0</vDesc>
+                    <vII>0</vII>
+                    <vIPI>0</vIPI>
+                    <vIPIDevol>0</vIPIDevol>
+                    <vPIS>1172.68</vPIS>
+                    <vCOFINS>5401.44</vCOFINS>
+                    <vOutro>0</vOutro>
+                    <vNF>71071.60</vNF>
+                    <vTotTrib>5827.88</vTotTrib>
+                </ICMSTot>
+            </total>
+            <transp>
+                <modFrete>0</modFrete>
+                <transporta>
+                    <CNPJ>12935253000136</CNPJ>
+                    <xNome>WANDSCHER TRANSPORTES LTDA</xNome>
+                    <IE>104873256</IE>
+                    <xEnder>AV JOSE PEREIRA DO NASCIMENTO 4039</xEnder>
+                    <xMun>SAO MIGUEL DO ARAGUAIA</xMun>
+                    <UF>GO</UF>
+                </transporta>
+                <vol>
+                    <qVol>510</qVol>
+                    <esp>CX</esp>
+                    <pesoL>3916.800</pesoL>
+                    <pesoB>4947.000</pesoB>
+                </vol>
+            </transp>
+            <cobr>
+                <fat>
+                    <nFat>333494</nFat>
+                    <vOrig>71071.60</vOrig>
+                    <vDesc>0.00</vDesc>
+                    <vLiq>71071.60</vLiq>
+                </fat>
+                <dup>
+                    <nDup>001</nDup>
+                    <dVenc>2021-08-24</dVenc>
+                    <vDup>23688.16</vDup>
+                </dup>
+                <dup>
+                    <nDup>002</nDup>
+                    <dVenc>2021-08-31</dVenc>
+                    <vDup>23688.17</vDup>
+                </dup>
+                <dup>
+                    <nDup>003</nDup>
+                    <dVenc>2021-09-08</dVenc>
+                    <vDup>23695.27</vDup>
+                </dup>
+            </cobr>
+            <pag>
+                <detPag>
+                    <tPag>15</tPag>
+                    <vPag>23688.16</vPag>
+                </detPag>
+                <detPag>
+                    <tPag>15</tPag>
+                    <vPag>23688.17</vPag>
+                </detPag>
+                <detPag>
+                    <tPag>15</tPag>
+                    <vPag>23695.27</vPag>
+                </detPag>
+            </pag>
+            <infAdic>
+                <infCpl>VALOR DO FRETE R$ 3327,74. CODIGO DO TERCEIRO E 174996. VALOR DO FRETE A
+                    RECEBER R$ 3327,74. - Trib aprox R$: 2985,01 Federal, R$: 2842,87 Estadual FONTE
+                    IBPT</infCpl>
+                <obsCont xCampo="nCdTerceiro">
+                    <xTexto>174996</xTexto>
+                </obsCont>
+                <obsCont xCampo="nValorFrete">
+                    <xTexto>0.00</xTexto>
+                </obsCont>
+                <obsCont xCampo="nCdDocumento">
+                    <xTexto>4662828</xTexto>
+                </obsCont>
+                <obsCont xCampo="nCdInstrucao">
+                    <xTexto>3125929</xTexto>
+                </obsCont>
+                <obsCont xCampo="CPFMOTORISTA">
+                    <xTexto>994.854.942-20</xTexto>
+                </obsCont>
+                <obsCont xCampo="PLACA">
+                    <xTexto>PQZ-7352</xTexto>
+                </obsCont>
+            </infAdic>
+            <infRespTec>
+                <CNPJ>00447041000120</CNPJ>
+                <xContato>INVENTTI SOLUCOES EMPRESARIAIS LTDA</xContato>
+                <email>suporte@inventti.com.br</email>
+                <fone>4730387700</fone>
+            </infRespTec>
+        </infNFe>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+                <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+                <Reference URI="#NFe35210702916265008659550010003334941730529909">
+                    <Transforms>
+                        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+                        <Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                    <DigestValue>g5gBUmf68NvNngo1iOjzARoAdMU=</DigestValue>
+                </Reference>
+            </SignedInfo>
+            <SignatureValue>
+                qJcxv25JllmlIbb1c/+Tdpuo2gIfKYGA/rA17sE+QZq9WeNE9mrY+0B7ocbizwwUNiUUZZwg3luID7ZUAFqaHKTBgoAxInIfkmphMygLqOZe2DIylPhJFv3+6Ll8tdW+aSrlLfoB0zSKaDm3qzOYm4kPqM49dcy2BUL0m6ewAXXVKlBOex6YkzLtzx8XfiFBQIZfwBSQQuw5z3RZZFTAatSFJOwplY1Vb0xD7/yxvo7+IOVfW8isS1jdt4Rf0BzqmKA5VN2xwvWqMnkLv2QTsGLUdZ9V0emY5DLSMlw3OjaWzbqvgaPpCIRNZH1bQqBoiapYSBobf3m2FL81X9f9Lg==</SignatureValue>
+            <KeyInfo>
+                <X509Data>
+                    <X509Certificate>
+                        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</X509Certificate>
+                </X509Data>
+            </KeyInfo>
+        </Signature>
+    </NFe>
+    <protNFe versao="4.00">
+        <infProt Id="Id135210850817396">
+            <tpAmb>1</tpAmb>
+            <verAplic>SP_NFE_PL009_V4</verAplic>
+            <chNFe>35210702916265008659550010003334941730529909</chNFe>
+            <dhRecbto>2021-07-27T17:44:01-03:00</dhRecbto>
+            <nProt>135210850817396</nProt>
+            <digVal>g5gBUmf68NvNngo1iOjzARoAdMU=</digVal>
+            <cStat>100</cStat>
+            <xMotivo>Autorizado o uso da NF-e</xMotivo>
+        </infProt>
+    </protNFe>
+</nfeProc>
