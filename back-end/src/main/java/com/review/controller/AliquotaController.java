@@ -18,7 +18,7 @@ import com.review.models.Aliquota;
 import com.review.service.AliquotaService;
 
 @RestController
-@RequestMapping("/Aliquota")
+@RequestMapping("/aliquota")
 public class AliquotaController {
     
     @Autowired

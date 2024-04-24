@@ -10,9 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "multiplicadores_produtos")
+@Getter
+@Setter
 public class Multiplicador implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

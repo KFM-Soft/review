@@ -10,10 +10,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 // Essa classe trata das aliquotas interestaduais
 @Entity
 @Table(name = "aliquotas_interestaduais")
+@Getter
+@Setter
 public class Aliquota implements Serializable{
 
     @Id
