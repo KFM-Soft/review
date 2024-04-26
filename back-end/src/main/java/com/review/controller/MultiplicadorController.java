@@ -60,4 +60,10 @@ public class MultiplicadorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/cest/{cest}")
+    public ResponseEntity<Multiplicador> getMultiplicadorByCest(@PathVariable String cest) {
+        Multiplicador registro = service.getByProductCest(cest);
+        return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
+
 }

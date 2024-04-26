@@ -29,6 +29,9 @@ public class Multiplicador implements Serializable{
     @ManyToOne(optional = false)
     private Aliquota aliquota;
 
+    @Column(columnDefinition = "DECIMAL(5,2)")
+    private BigDecimal mvaOriginal;
+
     @Column(nullable = false, columnDefinition = "DECIMAL(5,2)")
     private BigDecimal multiplicadorOriginal;
 

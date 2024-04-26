@@ -33,6 +33,5 @@ public class ProdutoEstado implements Serializable {
     @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal aliquotaInterna;
 
-    @Column(columnDefinition = "DECIMAL(5,2)")
-    private BigDecimal mvaOriginal;
+    
 }

@@ -22,6 +22,10 @@ public class MultiplicadorService {
         return repository.findById(id).orElse(null);
     }
 
+    public Multiplicador getByProductCest(String id) {
+        return repository.getMultiplicadorByCest(id);
+    }
+
     public Multiplicador save(Multiplicador objeto) {
         return repository.save(objeto);
     }

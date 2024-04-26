@@ -34,6 +34,10 @@ public class AliquotaService {
         repository.deleteById(id);
     }
 
+    public Aliquota getByOrigemDestino(String origem, String destino) {
+        return repository.findByOrigemDestino(origem, destino);
+    }
+
 
 
 }
