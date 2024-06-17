@@ -15,8 +15,4 @@ public class ReviewApplication {
 		SpringApplication.run(ReviewApplication.class, args);
 	}
 
-	public Double calculaIcmsProprio() {
-		return 0.0;
-	}
-
 }

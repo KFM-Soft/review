@@ -12,45 +12,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.review.models.Multiplicador;
-import com.review.service.MultiplicadorService;
+import com.review.models.ProdutoEstado;
+import com.review.service.ProdutoEstadoService;
 
 @RestController
-@RequestMapping("/multiplicador")
-public class MultiplicadorController {
+@RequestMapping("/ProdutoEstado")
+public class ProdutoEstadoController {
     
     @Autowired
-    private MultiplicadorService service;
+    private ProdutoEstadoService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Multiplicador>> getMultiplicadores(){
-        List<Multiplicador> registros = service.getAll();
+    public ResponseEntity<List<ProdutoEstado>> getProdutoEstado(){
+        List<ProdutoEstado> registros = service.getAll();
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Multiplicador> getMultiplicadorById(@PathVariable Long id) {
-        Multiplicador registro = service.getById(id);
+    public ResponseEntity<ProdutoEstado> getProdutoEstadoById(@PathVariable Long id) {
+        ProdutoEstado registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Multiplicador> createMultiplicador(@RequestBody Multiplicador multiplicador) {
-        Multiplicador registro = service.save(multiplicador);
+    public ResponseEntity<ProdutoEstado> createProdutoEstado(@RequestBody ProdutoEstado ProdutoEstado) {
+        ProdutoEstado registro = service.save(ProdutoEstado);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Multiplicador>> createMultiplicadores(@RequestBody List<Multiplicador> multiplicadores) {
-        List<Multiplicador> registros = service.saveList(multiplicadores);
+    public ResponseEntity<List<ProdutoEstado>> createProdutoEstado(@RequestBody List<ProdutoEstado> ProdutoEstado) {
+        List<ProdutoEstado> registros = service.saveList(ProdutoEstado);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Multiplicador> updateMultiplicador(@RequestBody Multiplicador multiplicador) {
-        Multiplicador registro = service.save(multiplicador);
+    public ResponseEntity<ProdutoEstado> updateProdutoEstado(@RequestBody ProdutoEstado ProdutoEstado) {
+        ProdutoEstado registro = service.save(ProdutoEstado);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
@@ -60,15 +61,15 @@ public class MultiplicadorController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/cest/{cest}")
-    public ResponseEntity<Multiplicador> getMultiplicadorByCest(@PathVariable String cest) {
-        Multiplicador registro = service.getByProductCest(cest);
+    @GetMapping("/cest/")
+    public ResponseEntity<ProdutoEstado> getProdutoEstadoByCest(@RequestParam("cest") String cest, @RequestParam("uf") String uf) {
+        ProdutoEstado registro = service.getByProductCestAndUf(cest, uf);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
-    @GetMapping("/ncm/{ncm}")
-    public ResponseEntity<Multiplicador> getMultiplicadorByNcm(@PathVariable String ncm) {
-        Multiplicador registro = service.getByProductNcm(ncm);
+    @GetMapping("/ncm/")
+    public ResponseEntity<ProdutoEstado> getProdutoEstadoByNcm(@RequestParam("ncm") String ncm, @RequestParam("uf") String uf) {
+        ProdutoEstado registro = service.getByProductNcmAndUF(ncm, uf);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 

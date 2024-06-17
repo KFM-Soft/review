@@ -26,6 +26,10 @@ public class MultiplicadorService {
         return repository.getMultiplicadorByCest(id);
     }
 
+    public Multiplicador getByProductNcm(String ncm) {
+        return repository.getMultiplicadorByNCM(ncm);
+    }
+
     public Multiplicador save(Multiplicador objeto) {
         return repository.save(objeto);
     }

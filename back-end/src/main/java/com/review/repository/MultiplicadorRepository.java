@@ -9,4 +9,7 @@ public interface MultiplicadorRepository extends JpaRepository<Multiplicador, Lo
     
     @Query("SELECT multi FROM Multiplicador multi WHERE produto.cest = ?1")
     public Multiplicador getMultiplicadorByCest(String cest);
+
+    @Query("SELECT multi FROM Multiplicador multi WHERE produto.ncm = ?1")
+    public Multiplicador getMultiplicadorByNCM(String ncm);
 }

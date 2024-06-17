@@ -8,13 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,20 +18,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.review.models.Aliquota;
 import com.review.models.Multiplicador;
-import com.review.models.Produto;
 import com.review.service.AliquotaService;
 import com.review.service.MultiplicadorService;
-import com.review.service.ProdutoService;
 
 @RestController
 @RequestMapping("/icms")
 public class ICMSController {
     
-    @Autowired
-    private ProdutoService prodService;
-
     @Autowired
     private MultiplicadorService multService;
 
@@ -65,12 +53,12 @@ public class ICMSController {
 				document.getDocumentElement().normalize();
 				
 				Element emitente = (Element) document.getElementsByTagName("emit").item(0);
-				String ufEmitente = emitente.getElementsByTagName("UF").item(0).getTextContent();
+				String ufEmit = emitente.getElementsByTagName("UF").item(0).getTextContent();
 
 				Element destinatario = (Element) document.getElementsByTagName("dest").item(0);
 				String ufDest = destinatario.getElementsByTagName("UF").item(0).getTextContent();
 
-				returnString += "\nUF EMITENTE = " + ufEmitente + "\n";
+				returnString += "\nUF EMITENTE = " + ufEmit + "\n";
 				returnString += "UF DESTINATARIO = " + ufDest + "\n\n";
 	
 				NodeList productsList = document.getElementsByTagName("det");
@@ -88,32 +76,54 @@ public class ICMSController {
 						}
                         BigDecimal valorProduto = new BigDecimal(eElement.getElementsByTagName("vProd").item(0).getTextContent());
                         returnString += "Valor do produto - " + valorProduto.toString() + "\n";
+						
+						Multiplicador multiplicador = new Multiplicador();
 
-                        if(cstType.equals("90")) {
-                            String cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();
+						BigDecimal convertPercent = new BigDecimal(100);
+						
+						try {
+							System.out.println("ESTOU BUSCANDO PELO CEST");
+							String cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();
+							multiplicador = multService.getByProductCest(cest);
 
-                            Aliquota aliquota = aliquotaService.getByOrigemDestino(ufEmitente, ufDest);
+						} catch (NullPointerException cantFindCest) {
+							System.out.println("CEST NÃO DEU, AGORA TO NO NCM");
+							String ncm = eElement.getElementsByTagName("NCM").item(0).getTextContent();
+							multiplicador = multService.getByProductNcm(ncm);
 
-                            Aliquota aliquotaInternaEmit = aliquotaService.getByOrigemDestino(ufEmitente, ufEmitente);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 
-                            BigDecimal aliquotaInterestadual = aliquota.getPorcentagem();
-                            returnString += "Aliquota Interestadual (icms) " + aliquotaInterestadual.toString() + "\n";
+						if(multiplicador == null || multiplicador.equals(null)) {
+							returnString += "\n\n A NOTA POSSUI UM PRODUTO NÃO CADASTRADO, NOTA IMPOSSÍVEL DE SER CALCULADA\n\n";
+							break;
+						}
 
-                            BigDecimal valorIcms = valorProduto.multiply((aliquotaInterestadual.divide(new BigDecimal(100))));
-                            returnString += "VALOR ICMS -- " + valorIcms.toString() + "\n";
-
-                            Multiplicador multiplicador = multService.getByProductCest(cest);
-                            BigDecimal vProdComMva = valorProduto.multiply(multiplicador.getMvaOriginal().divide(new BigDecimal(100)));
-                            returnString += "VALOR PRODUTO COM MVA -- " + vProdComMva.toString() + "\n\n";
-
-                            BigDecimal baseST = vProdComMva.add(valorProduto);
-                            returnString += "BASE ST -- " + baseST.toString() + "\n\n";
-                            BigDecimal valorAliquotaInterna = baseST.multiply(aliquotaInternaEmit.getPorcentagem().divide(new BigDecimal(100)));
-                            
-                            BigDecimal resultadoICMSSt = valorAliquotaInterna.subtract(valorIcms);
-                            returnString += "RESULTADO ICMS ST -- " + resultadoICMSSt.toString() + "\n\n";
-                        }
-
+						if(ufDest.equals(ufEmit)) {
+							BigDecimal aliquotaInterna = aliquotaService.getByOrigemDestino(ufEmit, ufEmit).getPorcentagem();
+							returnString += "Aliquota interna: " + aliquotaInterna.toString() + "\n";
+							returnString += "Valor entre o mesmo estado (vProd * aliquota interna): " + valorProduto.multiply(aliquotaInterna.divide(convertPercent)) + "\n\n";
+						} else {
+							BigDecimal aliquotaInterestadual = aliquotaService.getByOrigemDestino(ufEmit, ufDest).getPorcentagem();
+	
+							BigDecimal aliquotaInternaEmit = aliquotaService.getByOrigemDestino(ufEmit, ufEmit).getPorcentagem();
+	
+							returnString += "icms(" + aliquotaInterestadual.toString() + ")\n";
+	
+							BigDecimal valorIcms = valorProduto.multiply((aliquotaInterestadual.divide(convertPercent)));
+							returnString += "VALOR ICMS -- " + valorIcms.toString() + "\n";
+							
+							BigDecimal vProdComMva = valorProduto.multiply(multiplicador.getMvaOriginal().divide(convertPercent));
+							returnString += "VALOR PRODUTO COM MVA -- " + vProdComMva.toString() + "\n\n";
+	
+							BigDecimal baseST = vProdComMva.add(valorProduto);
+							returnString += "BASE ST -- " + baseST.toString() + "\n\n";
+							BigDecimal valorAliquotaInterna = baseST.multiply(aliquotaInternaEmit.divide(convertPercent));
+							
+							BigDecimal resultadoICMSSt = valorAliquotaInterna.subtract(valorIcms);
+							returnString += "RESULTADO ICMS ST -- " + resultadoICMSSt.toString() + "\n\n";
+						}
 					}
 				}
 				returnString += "\n";

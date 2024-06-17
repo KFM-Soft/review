@@ -1,33 +1,11 @@
+-- drop database review;
 use review;
 
 insert into review.estados (uf) values 
-("AC"),
-("AL"),
-("AM"),
-("AP"),
-("BA"),
-("CE"),
-("DF"),
-("ES"),
-("GO"),
-("MA"),
-("MT"),
-("MS"),
-("MG"),
-("PA"),
-("PB"),
-("PR"),
-("PE"),
-("PI"),
-("RN"),
-("RS"),
-("RJ"),
-("RO"),
-("RR"),
-("SC"),
-("SP"),
-("SE"),
-("TO");
+("AC"), ("AL"), ("AM"), ("AP"), ("BA"), ("CE"), ("DF"), 
+("ES"), ("GO"), ("MA"), ("MT"), ("MS"), ("MG"), ("PA"), 
+("PB"), ("PR"), ("PE"), ("PI"), ("RN"), ("RS"), ("RJ"), 
+("RO"), ("RR"), ("SC"), ("SP"), ("SE"), ("TO");
 
 insert into review.produtos (ncm, cest, cfop, descricao) values 
 (19023000, 1704701, 6102, "Massas alimentícias tipo instantânea, exceto as descritas no CEST 17047.01."),
