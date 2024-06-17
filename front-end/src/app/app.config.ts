@@ -4,16 +4,17 @@ import { provideClientHydration } from '@angular/platform-browser';
 
 import { routes } from './app.routes';
 import { provideNzIcons } from './icons-provider';
-import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
+import { pt_BR, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
+import pt from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 
-registerLocaleData(en);
+registerLocaleData(pt);
 
 export const appConfig: ApplicationConfig = {
+<<<<<<< HEAD
   providers: [
     provideRouter(routes), 
     provideClientHydration(), 
@@ -23,4 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     provideHttpClient()
   ]
+=======
+  providers: [provideRouter(routes), provideClientHydration(), provideNzIcons(), provideNzI18n(pt_BR), importProvidersFrom(FormsModule), provideAnimationsAsync(), provideHttpClient()]
+>>>>>>> 2c3d6868e3d54639d175160bd83790f837929790
 };
