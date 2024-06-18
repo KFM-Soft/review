@@ -1,0 +1,54 @@
+<div>
+  <nz-card [nzHoverable]="true">
+    <div nz-flex [nzGap]="20">
+      <img src="../../../assets/svgs/compartilhar.svg">
+      
+      <div nz-flex [nzVertical]="true">
+  
+        <h4> Compartilhamento de conta </h4>
+        <p>
+          Acesse facilmente as contas que você gerencia
+        </p>
+  
+      </div>
+    </div>
+  </nz-card>
+
+  <h1>ICMS</h1>
+
+  
+  <nz-table #headerTable [nzData]="empresas" [nzScroll]="{ y: '340px' }" [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th nzWidth="5%">&nbsp;</th>
+        <th>&nbsp;</th>
+        <th nzWidth="20%">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of headerTable.data">
+        <td [nzAlign]="'center'">
+          <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
+        </td>
+        <td>
+          <nz-flex [nzVertical]="true">
+            <h3>{{ data.nome }}</h3>
+            <p>Expira em {{ data.data_expirar }}</p>
+          </nz-flex>
+        </td>
+        <td [nzAlign]="'center'">
+          <ng-container *ngIf="data.button">
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar">Gerenciar</button>
+          </ng-container>
+          <ng-container *ngIf="!data.button">
+            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  
+  <h1>Serviços Futuros</h1>
+  
+</div>
+

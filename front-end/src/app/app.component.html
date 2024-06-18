@@ -1,14 +1,15 @@
 <nz-layout class="app-layout">
   <nz-layout>
     <nz-header nzTheme="light">
-      <div class="logo">
+      <div class="logo" routerLink="/" routerLinkActive="active">
         <img src="../assets/svgs/logoReview.svg" alt="logo da Review+">
       </div>
       <div class="list">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
-          <li nz-menu-item>nav 1</li>
-          <li nz-menu-item>nav 2</li>
-          <li nz-menu-item>nav 3</li>
+          <li nz-menu-item routerLink="/inicio" routerLinkActive="active">Início</li>
+          <li nz-menu-item routerLink="/teste" routerLinkActive="active">ICMS</li>
+          <li nz-menu-item routerLink="/table">Faturas</li>
+          <li nz-menu-item>Sobre</li>
         </ul>
       </div>
       <div class="user-profile">

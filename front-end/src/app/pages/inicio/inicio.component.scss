@@ -1,0 +1,26 @@
+nz-card{
+    width: 400px;
+    margin-top: 16px;
+    border-radius: 16px;
+}
+
+img {
+    height: 100%;
+}
+
+.botao {
+    min-width: 150px;
+    color: white;
+    border-radius: 16px;
+}
+
+.botaoGerenciar {
+    background-color: blue;
+}
+
+.botaoAdicionar {
+    background-color: green;
+    font-size: x-large;
+    padding: 0;
+    margin: 0;
+}
