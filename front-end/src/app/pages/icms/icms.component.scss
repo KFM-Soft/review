@@ -9,10 +9,48 @@ img {
     margin: 0 auto;
 }
 
+.container{
+    max-width: 90%;
+    margin: 0 auto;
+}
+.container .icms {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    
+}
+.container h1 {
+    display: inline-block;
+
+}
+.container .botaoComprar {
+    display: inline-block;
+    background-color: #005CAA;
+
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search nz-input-group{
+    margin: auto;
+
+}
+
+.search nz-select{
+    margin: auto;
+    width: 200px;
+}
+
 .botao {
     min-width: 150px;
     color: white;
-    border-radius: 16px;
+    border-radius: 9px;
 }
 
 .botaoAdicionar {
@@ -26,13 +64,9 @@ img {
     background-color: #005CAA;
 }
 
-.container{
-    max-width: 90%;
-    margin: 0 auto;
-}
-
 .paginacao {
     text-align: right;
     margin: 20px 0;
 }
+
 
