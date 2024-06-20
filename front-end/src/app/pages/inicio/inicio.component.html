@@ -1,28 +1,24 @@
-<div>
-  <nz-card [nzHoverable]="true">
-    <div nz-flex [nzGap]="20">
-      <img src="../../../assets/svgs/compartilhar.svg">
-      
-      <div nz-flex [nzVertical]="true">
-  
-        <h4> Compartilhamento de conta </h4>
-        <p>
-          Acesse facilmente as contas que você gerencia
-        </p>
-  
+<div class="container">
+  <a href="/">
+    <nz-card [nzHoverable]="true" class="compartilhar">
+      <div nz-flex [nzGap]="20">
+        <img src="../../../assets/svgs/compartilhar.svg">
+        <div>
+          <h4>Compartilhamento de conta</h4>
+          <p>Acesse facilmente as contas que você gerencia</p>
+        </div>
       </div>
-    </div>
-  </nz-card>
+    </nz-card>
+  </a>
 
   <h1>ICMS</h1>
 
-  
-  <nz-table #headerTable [nzData]="empresas" [nzScroll]="{ y: '340px' }" [nzShowPagination]="false">
+  <nz-table #headerTable [nzData]="empresas" [nzShowPagination]="false" class="table">
     <thead>
       <tr>
-        <th nzWidth="5%">&nbsp;</th>
-        <th>&nbsp;</th>
-        <th nzWidth="20%">&nbsp;</th>
+        <th nzWidth="5%"><h2>Empresas</h2></th>
+        <th></th>
+        <th nzWidth="20%"></th>
       </tr>
     </thead>
     <tbody>
@@ -45,10 +41,17 @@
           </ng-container>
         </td>
       </tr>
+      <tr>
+        <td colspan="3" class="gerenciarTodos">
+          <ng-container>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos">Gerenciar Todos</button>
+          </ng-container>
+        </td>
+      </tr>
     </tbody>
   </nz-table>
-  
-  <h1>Serviços Futuros</h1>
-  
-</div>
 
+
+  <h1>Serviços Futuros</h1>
+
+</div>
