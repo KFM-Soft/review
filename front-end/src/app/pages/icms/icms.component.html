@@ -1,0 +1,48 @@
+<div class="container">
+    <h1>ICMS</h1>
+  
+    <nz-table #headerTable [nzData]="displayData" [nzShowPagination]="false"  class="table">
+      <thead>
+        <tr>
+          <th nzWidth="5%"><h2>Empresas</h2></th>
+          <th></th>
+          <th nzWidth="20%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of headerTable.data">
+          <td [nzAlign]="'center'">
+            <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
+          </td>
+          <td>
+            <nz-flex [nzVertical]="true">
+              <h3>{{ data.nome }}</h3>
+              <p>Expira em {{ data.data_expirar }}</p>
+            </nz-flex>
+          </td>
+          <td [nzAlign]="'center'">
+            <ng-container *ngIf="data.button">
+              <button nz-button [nzSize]="'large'" class="botao botaoGerenciar">Gerenciar</button>
+            </ng-container>
+            <ng-container *ngIf="!data.button">
+              <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+      
+    </nz-table>
+    <div class="paginacao">
+      <nz-pagination
+      [nzPageIndex]="paginaIndex"
+      [nzTotal]="total"
+      nzShowSizeChanger
+      [nzPageSize]="paginaTamanho"
+      (nzPageIndexChange)="atulizarPagina($event)"
+      (nzPageSizeChange)="tamanhoPagina($event)"
+      [nzPageSizeOptions]= [5,10,20,30,40,50]>
+      </nz-pagination>      
+    </div>
+
+  
+  </div>
