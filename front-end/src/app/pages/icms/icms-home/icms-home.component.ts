@@ -39,8 +39,8 @@ interface Empresas {
     NzSelectModule,
     FormsModule,
   ],
-  templateUrl: './icms.component.html',
-  styleUrls: ['./icms.component.scss']
+  templateUrl: './icms-home.component.html',
+  styleUrls: ['./icms-home.component.scss']
 })
 export class IcmsHomeComponent {
   empresas: Empresas[] = [
