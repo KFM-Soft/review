@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
+import { InicioComponent } from './pages/inicio/inicio.component';
+import { IcmsComponent } from './pages/icms/icms.component';
+import { TesteComponent } from './pages/teste/teste.component';
 
 export const routes: Routes = [
 
   
-  { path: '', pathMatch: 'full', redirectTo: '/inicio' },
-  { path: 'inicio', loadChildren: () => import('./pages/inicio/inicio.routes').then(m => m.INICIO_ROUTES) },
-  { path: "icms", loadChildren: () => import("./pages/icms/icms.routes").then(m => m.ICMS_ROUTES) },
-  { path: 'teste', loadChildren: () => import('./pages/teste/teste.routes').then(m => m.TESTE_ROUTES) },
+  { path: '',component: InicioComponent},
+  { path: "icms", component: IcmsComponent},
+  { path: 'teste', component: TesteComponent},
+  
 
 ];
