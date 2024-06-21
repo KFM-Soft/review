@@ -16,7 +16,7 @@ registerLocaleData(pt);
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), 
-    provideClientHydration(), 
+ 
     provideNzIcons(), 
     provideNzI18n(pt_BR), 
     importProvidersFrom(FormsModule), 
