@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IcmsComponent } from './icms.component';
+import { IcmsHomeComponent } from './icms-home.component';
 
-describe('IcmsComponent', () => {
-  let component: IcmsComponent;
-  let fixture: ComponentFixture<IcmsComponent>;
+describe('IcmsHomeComponent', () => {
+  let component: IcmsHomeComponent;
+  let fixture: ComponentFixture<IcmsHomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IcmsComponent]
+      imports: [IcmsHomeComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(IcmsComponent);
+    fixture = TestBed.createComponent(IcmsHomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

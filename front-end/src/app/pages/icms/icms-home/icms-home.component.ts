@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -42,7 +42,7 @@ interface Empresas {
   templateUrl: './icms.component.html',
   styleUrls: ['./icms.component.scss']
 })
-export class IcmsComponent {
+export class IcmsHomeComponent {
   empresas: Empresas[] = [
     { nome: 'Tech Innovators Ltd', data_expirar: '15/09/2024', button: true, tag: 'tecnologia' },
     { nome: 'Green Energy Corp', data_expirar: '27/04/2024', button: true, tag: 'agricola'  },
