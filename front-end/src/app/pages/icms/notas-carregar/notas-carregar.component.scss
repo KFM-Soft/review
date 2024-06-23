@@ -1,0 +1,36 @@
+.empresa table {
+    width: 100%;
+}
+
+nz-card{
+    border-radius: 16px;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.link-top{
+  padding: 0;
+}
+
+.logo-empresa{
+  height: 3em;
+  margin: 2px 2px 15px 15px;
+}
+
+.empresa h3 , .empresa p{
+  margin: 0;
+}
+
+
+.empresa-name{
+  margin-left: 1em;
+  display: inline-block;
+}
+
+.botaoEdit {
+    padding: 0;
+    background-color: #005CAA;
+    height: 3em;
+    width: 3em;
+    border-radius: 16px;
+}
