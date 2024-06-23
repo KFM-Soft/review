@@ -81,17 +81,27 @@ nz-card{
     padding: 0;
   }
 
+  .empresa table {
+      width: 100%;
+  }
+
   .link-top{
     padding: 0;
   }
 
-  .empresa img{
-    height: 5em;
-    margin: auto, 1em;
+  .logo-empresa{
+    height: 3em;
+    margin: 2px 2px 15px 15px;
   }
+
+  .empresa h3 , .empresa p{
+    margin: 0;
+  }
+  
 
   .empresa-name{
     margin-left: 1em;
+    display: inline-block;
   }
 
   td.empresa-buttom{
@@ -100,10 +110,6 @@ nz-card{
 
   nz-flex.empresa-dados{
     margin: 0 1em;
-  }
-
-  .table{
-    width: 100%;
   }
 
   .paginacao {
