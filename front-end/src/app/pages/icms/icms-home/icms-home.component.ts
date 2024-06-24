@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -38,6 +38,7 @@ interface Empresas {
     NzInputModule,
     NzSelectModule,
     FormsModule,
+    RouterLink,
   ],
   templateUrl: './icms-home.component.html',
   styleUrls: ['./icms-home.component.scss']

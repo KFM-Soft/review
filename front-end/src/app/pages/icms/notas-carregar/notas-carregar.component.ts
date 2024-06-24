@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -28,6 +28,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
     NzMenuModule, 
     CommonModule,
     NzUploadModule,
+    RouterLink,
 
   ],
   templateUrl: './notas-carregar.component.html',
