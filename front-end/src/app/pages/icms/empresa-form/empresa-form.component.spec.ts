@@ -1,22 +1,23 @@
-import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { EmpresaFormComponent } from './empresa-form.component';
 
 describe('EmpresaFormComponent', () => {
   let component: EmpresaFormComponent;
   let fixture: ComponentFixture<EmpresaFormComponent>;
 
-  beforeEach(fakeAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EmpresaFormComponent ]
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [EmpresaFormComponent]
     })
     .compileComponents();
-
+    
     fixture = TestBed.createComponent(EmpresaFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
-  it('should compile', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
