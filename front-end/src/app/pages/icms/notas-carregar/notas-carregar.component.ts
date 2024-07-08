@@ -10,8 +10,9 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { IcmsService } from '../../../services/icms.service';
 
 @Component({
   selector: 'app-notas-carregar',
@@ -37,9 +38,16 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class NotasCarregarComponent {
 
 
-  constructor(private msg: NzMessageService) {}
+  constructor(
+    private msg: NzMessageService,
+    private service: IcmsService,
+  ) {}
+
+  xmlFile: NzUploadFile = <NzUploadFile>{};
+  fileList: NzUploadFile[] = [];
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
+    
     const status = file.status;
     if (status !== 'uploading') {
       console.log(file, fileList);
@@ -50,5 +58,29 @@ export class NotasCarregarComponent {
       this.msg.error(`${file.name} file upload failed.`);
     }
   }
+
+  beforeUploadSupply = (file: NzUploadFile): boolean => {
+    this.xmlFile = file;
+    // if(this.fileList.length > 0) this.fileList = [];
+    this.fileList = this.fileList.concat(file);
+    return false;
+  };
+
+  convertNzUploadFileToFile(nzUploadFiles: NzUploadFile[]): File[] {
+    return nzUploadFiles.map(nzFile => nzFile as unknown as File).filter(file => !!file);
+  }
+
+  enviar() {
+    const files: File[] = this.convertNzUploadFileToFile(this.fileList);
+
+    this.service.passXmlsFiles(files).subscribe({
+      next: (response: any) => console.log(response.texto), 
+      error: (error: any) => {
+        console.error('Erro no upload', error)
+      }
+    });
+
+  }
+
 }
 

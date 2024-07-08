@@ -62,25 +62,30 @@
 
     <nz-card [nzHoverable]="true" class="empresa">
         <nz-upload
-        nzType="drag"
-        [nzMultiple]="true"
-        nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        (nzChange)="handleChange($event)"
-      >
-        <p class="ant-upload-drag-icon">
-          <span nz-icon nzType="inbox"></span>
-        </p>
-        <p class="ant-upload-text">Selecione um arquivo ou arraste e solte aqui</p>
-        <p class="ant-upload-hint">
-            Suporte para upload único ou em massa. arquivos XML.
-        </p>
-        <ng-container>
-            <div class="selecinar">
-                <p >Selecionar</p>
-            </div>
-            
-        </ng-container>
-      </nz-upload>
+            [nzBeforeUpload]="beforeUploadSupply"
+            [nzAccept]="'.xml'"
+            [(nzFileList)]="fileList"
+            nzType="drag"
+            [nzMultiple]="true"
+            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            (nzChange)="handleChange($event)"
+        >
+            <p class="ant-upload-drag-icon">
+            <span nz-icon nzType="inbox"></span>
+            </p>
+            <p class="ant-upload-text">Selecione um arquivo ou arraste e solte aqui</p>
+            <p class="ant-upload-hint">
+                Suporte para upload único ou em massa. arquivos XML.
+            </p>
+            <ng-container>
+                <div class="selecinar">
+                    <p >Selecionar</p>
+                </div>    
+            </ng-container>
+        </nz-upload>
+
+        <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Enviar</button>
+
     </nz-card>
 
 <div>
