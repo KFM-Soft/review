@@ -1,0 +1,113 @@
+nz-card{
+    border-radius: 16px;
+    padding: 0;
+  }
+
+  a.link-top{
+    min-height: 15em;
+    padding: 0;
+  }
+  
+  img {
+    height: 5em;
+    margin: 0 auto;
+  }
+
+  img.download{
+    height: 2em;
+  }
+
+  button img.edit{
+    height: 2em;
+  }
+  
+  .botao {
+    color: white;
+    border-radius: 16px;
+    margin-right: 0;
+  }
+  
+  
+  .botaoAdicionar {
+    min-width: 150px;
+    background-color: #005CAA;
+    padding: 0;
+    margin: 0.5em 1em 0 0;
+  }
+
+  .botaoEdit {
+    padding: 0;
+    background-color: #005CAA;
+    height: 3em;
+    width: 3em;
+  }
+  
+  .botaoGerenciar {
+    padding: 0;
+    background-color: #005CAA;
+    height: 3em;
+    width: 3em;
+  }
+
+  .botaoDownload {
+    padding: 0;
+    background-color: #005CAA;
+    height: 3em;
+    width: 3em;
+  }
+  
+  .botaoGerenciarTodos{
+    background-color: #005CAA;
+    width: 50%;
+    height: 3em;
+  }
+  
+  
+  .gerenciarTodos{
+    text-align: center;
+  }
+  
+  nz-card.empresa{
+    max-height: 90vh;
+    margin-bottom: 2em;
+    padding: 0;
+  }
+
+
+  .link-top{
+    padding: 0;
+  }
+
+  .logo-empresa{
+    height: 3em;
+    margin: 2px 2px 15px 15px;
+  }
+
+  .empresa h3 , .empresa p{
+    margin: 0;
+  }
+  
+
+  .empresa-name{
+    margin-left: 1em;
+    display: inline-block;
+  }
+
+  td.empresa-buttom{
+    border-right: 0;
+  }
+
+  div.empresa-dados-maior{
+    display: flex;
+    
+  }
+
+  nz-flex.empresa-dados{
+    margin: 0 1em;
+    display: block;
+  }
+
+  .paginacao {
+    text-align: right;
+    margin: 2em 0;
+}

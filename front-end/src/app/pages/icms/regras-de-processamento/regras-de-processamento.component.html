@@ -1,0 +1,90 @@
+<div class="container">
+
+    <h1>ICMS - Notas Processadas</h1>
+
+    <a routerLink="/icms/empresa-form" routerLinkActive="active"  class="link-top">
+        <nz-card [nzHoverable]="true" class="empresa">
+                    <div>
+                        <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
+                        <nz-flex  class="empresa-name">
+                            <h3>Recol Distribuição e Comércio LdivA</h3>
+                        </nz-flex>
+                        <nz-flex [nzVertical]="false" class="empresa-name">
+                            <h3>Arquivo XML:</h3>
+                            <p>csosn101.xml</p>
+                        </nz-flex>
+                    </div>
+                
+    
+                <div class="empresa-dados-maior">
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Item:</h3>
+                            <p>1.0</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Nome:</h3>
+                            <p>Sandalias Havaianas Brasil FC Azul Natal</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex class="empresa-dados">
+                            <h3>Valor:</h3>
+                            <p>R$ 10.324,80</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>NCM/SH:</h3>
+                            <p>64022000</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Cest:</h3>
+                            <p>Não tem</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Descrição:</h3>
+                            <p>Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes</p>
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Alíquota Interestadual:</h3>
+                            <input type="text" placeholder="12%">
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>Alíquota interna do emitente:</h3>
+                            <input type="text" placeholder="23%">
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex  class="empresa-dados">
+                            <h3>MVA Original:</h3>
+                            <input type="text" placeholder="36,56%">
+                        </nz-flex>
+                    </div>
+                    <div class="empresa-dados">
+                        <nz-flex class="empresa-dados">
+                            <h3>Multiplicador:</h3>
+                            <input type="text" placeholder="11,22%">
+                        </nz-flex>
+                    </div>
+                </div>
+                    <div nzWidth="5%" class="btt-add">
+                        <ng-container>
+                            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/notas-carregar" routerLinkActive="active">Adicionar Nota</button>
+                        </ng-container>
+                    </div>
+            
+        </nz-card>
+    </a>
+
+</div>
