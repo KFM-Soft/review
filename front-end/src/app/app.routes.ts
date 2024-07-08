@@ -5,6 +5,7 @@ import { TesteComponent } from './pages/teste/teste.component';
 import { NotasProcessadasComponent } from './pages/icms/notas-processadas/notas-processadas.component';
 import {  NotasCarregarComponent } from './pages/icms/notas-carregar/notas-carregar.component'
 import { EmpresaFormComponent } from './pages/icms/empresa-form/empresa-form.component';
+import { RegrasDeProcessamentoComponent } from './pages/icms/regras-de-processamento/regras-de-processamento.component';
 
 export const routes: Routes = [
 
@@ -15,6 +16,7 @@ export const routes: Routes = [
       { path: 'notas-processadas', component: NotasProcessadasComponent },
       { path: 'notas-carregar', component: NotasCarregarComponent },
       { path: 'empresa-form', component: EmpresaFormComponent},
+      { path: 'regras-processamento', component: RegrasDeProcessamentoComponent},
     ]
   },
   { path: 'teste', component: TesteComponent},
