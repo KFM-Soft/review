@@ -37,6 +37,7 @@ nz-card{
 
 .botaoEnviar {
   margin-top: 5px;
+  padding: 0 30px;
   background-color: #005CAA;
   height: 3em;
   border-radius: 8px;
@@ -50,4 +51,8 @@ nz-card{
     border-radius: 10px;
     width: 25%;
     margin: auto;
+}
+
+.containerButton{
+  text-align: right;
 }
