@@ -6,6 +6,7 @@ import { NotasProcessadasComponent } from './pages/icms/notas-processadas/notas-
 import {  NotasCarregarComponent } from './pages/icms/notas-carregar/notas-carregar.component'
 import { EmpresaFormComponent } from './pages/icms/empresa-form/empresa-form.component';
 import { RegrasDeProcessamentoComponent } from './pages/icms/regras-de-processamento/regras-de-processamento.component';
+import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 
 export const routes: Routes = [
 
@@ -20,5 +21,8 @@ export const routes: Routes = [
     ]
   },
   { path: 'teste', component: TesteComponent},
+  { path: 'adm', children: [
+    { path: 'aliquota', component: AliquotaComponent }
+  ]}
 
 ];

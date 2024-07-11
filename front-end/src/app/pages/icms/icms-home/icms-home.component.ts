@@ -92,7 +92,7 @@ export class IcmsHomeComponent {
     this.registros = filtro.slice(startIndex, endIndex);
   }
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }

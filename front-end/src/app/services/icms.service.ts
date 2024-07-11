@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
