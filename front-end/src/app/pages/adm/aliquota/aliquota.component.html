@@ -1,0 +1,61 @@
+<nz-layout>
+    <nz-layout>
+        <nz-sider>
+            <ul nz-menu [nzMode]="'vertical'" [nzTheme]="'light'">
+                <li nz-menu-item>
+                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
+                    Produtos
+                </li>
+                <li nz-menu-item>
+                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
+                    Alíquotas
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-content>
+            <div class="content">
+                <div class="search">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                        <!-- [(ngModel)]="termoBusca" (input)="atualizarTabela()" -->
+                        <input type="text" nz-input placeholder="Buscar empresa" />
+                    </nz-input-group>
+                    <ng-template #suffixIconButton>
+                        <!-- (click)="atualizarTabela()" -->
+                        <button nz-button nzType="primary" nzSearch>
+                            <span nz-icon nzType="search"></span>
+                        </button>
+                    </ng-template>
+                </div>
+                <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
+                    <thead>
+                        <tr>
+                            <th nzWidth="5%">Id</th>
+                            <th>Origem</th>
+                            <th>Destino</th>
+                            <th nzWidth="15%">Porcentagem</th>
+                            <th nzWidth="20%">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of headerTable.data">
+                            <td [nzAlign]="'center'">{{ data.id }}</td>
+                            <td> {{ data.origem.uf }}</td>
+                            <td> {{ data.destino.uf }}</td>
+                            <td> {{ data.porcentagem }}</td>
+                            <td [nzAlign]="'center'">
+                                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar">Editar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </nz-table>
+                <div class="paginacao">
+                    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+                        [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+                        (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+                    </nz-pagination>
+                </div>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
