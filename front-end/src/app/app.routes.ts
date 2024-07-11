@@ -9,6 +9,7 @@ import { RegrasDeProcessamentoComponent } from './pages/icms/regras-de-processam
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
+import { AdmComponent } from './pages/adm/adm.component';
 
 export const routes: Routes = [
 
@@ -22,6 +23,7 @@ export const routes: Routes = [
   ]},
   { path: 'teste', component: TesteComponent},
   { path: 'adm', children: [
+    { path: '', component: AdmComponent },
     { path: 'aliquotas', children: [
       { path: '', component: AliquotaComponent },
       { path: 'form', component: AliquotaFormComponent }

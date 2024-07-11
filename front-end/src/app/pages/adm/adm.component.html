@@ -1,0 +1,19 @@
+<nz-layout style="height: 100%;">
+    <nz-layout style="height: 100%;">
+        <nz-sider nzTheme="light">
+            <ul nz-menu [nzMode]="'vertical'" [nzTheme]="'light'" class="menu-adm">
+                <li nz-menu-item routerLink="/adm/produtos" routerLinkActive="active">
+                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
+                    Produtos
+                </li>
+                <li nz-menu-item routerLink="/adm/aliquotas" routerLinkActive="active">
+                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
+                    Alíquotas
+                </li>
+            </ul>
+        </nz-sider>
+        <nz-content class="content">
+            <ng-content select="conteudoCentral"></ng-content>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

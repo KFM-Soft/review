@@ -1,61 +1,45 @@
-<nz-layout>
-    <nz-layout>
-        <nz-sider nzTheme="light">
-            <ul nz-menu [nzMode]="'vertical'" class="menu-adm">
-                <li nz-menu-item routerLink="/adm/produtos" routerLinkActive="active">
-                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
-                    Produtos
-                </li>
-                <li nz-menu-item routerLink="/adm/aliquotas" routerLinkActive="active">
-                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
-                    Alíquotas
-                </li>
-            </ul>
-        </nz-sider>
-        <nz-content>
-            <div class="content">
-                <div class="search">
-                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                        <input type="text" nz-input placeholder="Buscar produto" [(ngModel)]="termoBusca" (input)="atualizarTabela()" />
-                    </nz-input-group>
-                    <ng-template #suffixIconButton>
-                        <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()">
-                            <span nz-icon nzType="search"></span>
-                        </button>
-                    </ng-template>
-                </div>
-                <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
-                    <thead>
-                        <tr>
-                            <th nzWidth="5%">Id</th>
-                            <th>Descrição</th>
-                            <th nzWidth="15%">NCM</th>
-                            <th nzWidth="15%">CEST</th>
-                            <th nzWidth="15%">CFOP</th>
-                            <th nzWidth="15%">Açôes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let data of headerTable.data">
-                            <td [nzAlign]="'center'">{{ data.id }}</td>
-                            <td> {{ data.descricao }}</td>
-                            <td> {{ data.ncm }}</td>
-                            <td> {{ data.cest }}</td>
-                            <td> {{ data.cfop }}</td>
-                            <td [nzAlign]="'center'">
-                                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar">Editar</button>
-                            </td>
-                        </tr>
-                    </tbody>
+<nz-content>
+    <div class="content">
+        <div class="search">
+            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+                <input type="text" nz-input placeholder="Buscar produto" [(ngModel)]="termoBusca" (input)="atualizarTabela()" />
+            </nz-input-group>
+            <ng-template #suffixIconButton>
+                <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()">
+                    <span nz-icon nzType="search"></span>
+                </button>
+            </ng-template>
+        </div>
+        <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
+            <thead>
+                <tr>
+                    <th nzWidth="5%">Id</th>
+                    <th>Descrição</th>
+                    <th nzWidth="15%">NCM</th>
+                    <th nzWidth="15%">CEST</th>
+                    <th nzWidth="15%">CFOP</th>
+                    <th nzWidth="15%">Açôes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of headerTable.data">
+                    <td [nzAlign]="'center'">{{ data.id }}</td>
+                    <td> {{ data.descricao }}</td>
+                    <td> {{ data.ncm }}</td>
+                    <td> {{ data.cest }}</td>
+                    <td> {{ data.cfop }}</td>
+                    <td [nzAlign]="'center'">
+                        <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar">Editar</button>
+                    </td>
+                </tr>
+            </tbody>
 
-                </nz-table>
-                <div class="paginacao">
-                    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
-                        [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
-                        (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
-                    </nz-pagination>
-                </div>
-            </div>
-        </nz-content>
-    </nz-layout>
-</nz-layout>
+        </nz-table>
+        <div class="paginacao">
+            <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+                [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+                (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+            </nz-pagination>
+        </div>
+    </div>
+</nz-content>
