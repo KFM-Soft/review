@@ -7,22 +7,26 @@ import {  NotasCarregarComponent } from './pages/icms/notas-carregar/notas-carre
 import { EmpresaFormComponent } from './pages/icms/empresa-form/empresa-form.component';
 import { RegrasDeProcessamentoComponent } from './pages/icms/regras-de-processamento/regras-de-processamento.component';
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
+import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
+import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 
 export const routes: Routes = [
 
   { path: '',component: InicioComponent},
-  { 
-    path: 'icms', children: [
-      { path: '', component: IcmsHomeComponent }, 
-      { path: 'notas-processadas', component: NotasProcessadasComponent },
-      { path: 'notas-carregar', component: NotasCarregarComponent },
-      { path: 'empresa-form', component: EmpresaFormComponent},
-      { path: 'regras-processamento', component: RegrasDeProcessamentoComponent},
-    ]
-  },
+  { path: 'icms', children: [
+    { path: '', component: IcmsHomeComponent }, 
+    { path: 'notas-processadas', component: NotasProcessadasComponent },
+    { path: 'notas-carregar', component: NotasCarregarComponent },
+    { path: 'empresa-form', component: EmpresaFormComponent},
+    { path: 'regras-processamento', component: RegrasDeProcessamentoComponent},
+  ]},
   { path: 'teste', component: TesteComponent},
   { path: 'adm', children: [
-    { path: 'aliquota', component: AliquotaComponent }
+    { path: 'aliquotas', children: [
+      { path: '', component: AliquotaComponent },
+      { path: 'form', component: AliquotaFormComponent }
+    ]},
+    { path: 'produtos', component: ProdutoComponent },
   ]}
 
 ];
