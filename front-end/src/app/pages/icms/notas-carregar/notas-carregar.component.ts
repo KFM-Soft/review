@@ -13,6 +13,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { IcmsService } from '../../../services/icms.service';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-notas-carregar',
@@ -30,6 +32,8 @@ import { IcmsService } from '../../../services/icms.service';
     CommonModule,
     NzUploadModule,
     RouterLink,
+    NzRadioModule,
+    FormsModule,
 
   ],
   templateUrl: './notas-carregar.component.html',
@@ -45,6 +49,7 @@ export class NotasCarregarComponent {
 
   xmlFile: NzUploadFile = <NzUploadFile>{};
   fileList: NzUploadFile[] = [];
+  reviewValue = 'Y';
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     

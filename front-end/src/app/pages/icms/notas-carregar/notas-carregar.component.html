@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>ICMS - Carregar Notas</h1>
+    <h1>ICMS - Importar Notas</h1>
 
     <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top" >
         <nz-card [nzHoverable]="true" class="empresa">
@@ -60,6 +60,12 @@
         </nz-card>
     </a>
 
+    <h3>Usar valores cadastrados pela Review+</h3>
+    <nz-radio-group [(ngModel)]="reviewValue" nzButtonStyle="solid">
+        <label nz-radio-button nzValue="Y">Usar</label>
+        <label nz-radio-button nzValue="N">Não Usar</label>
+    </nz-radio-group>
+
     <nz-card [nzHoverable]="true" class="empresa">
         <nz-upload
             [nzBeforeUpload]="beforeUploadSupply"
@@ -84,7 +90,10 @@
             </ng-container>
         </nz-upload>
 
-        <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Enviar</button>
+        <div class="containerButton">
+            <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Enviar</button>
+        </div>
+        
 
     </nz-card>
 
