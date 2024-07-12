@@ -2,7 +2,7 @@
 
     <h1>ICMS - Notas Processadas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active"  class="link-top">
+    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
@@ -14,15 +14,16 @@
                         </nz-flex>
                     </td>
 
-    
+
                     <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
                         <ng-container>
                             <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px" class="edit"></button>
+                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
+                                    class="edit"></button>
                         </ng-container>
                     </td>
                 </tr>
-    
+
                 <tr>
                     <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
@@ -56,17 +57,18 @@
                     </td>
                 </tr>
             </table>
-            
+
         </nz-card>
     </a>
 
 
-    <nz-table #headerTable [nzData]="empresas" [nzShowPagination]="false" class="table">
+    <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
         <thead>
             <tr>
                 <td nzWidth="5%" [nzAlign]="'right'" colspan="8" class="btt-add">
                     <ng-container>
-                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/importar-nota" routerLinkActive="active">Adicionar Nota</button>
+                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar"
+                            routerLink="/icms/importar-nota" routerLinkActive="active">Adicionar Nota</button>
                     </ng-container>
                 </td>
             </tr>
@@ -132,7 +134,8 @@
                 </td>
                 <td [nzAlign]="'center'">
                     <ng-container *ngIf="data.button">
-                        <button nz-button [nzSize]="'large'" routerLink="./notas-processadas" routerLinkActive="active"  class="botao botaoNotas">Notas</button>
+                        <button nz-button [nzSize]="'large'" routerLink="./notas-processadas" routerLinkActive="active"
+                            class="botao botaoNotas">Notas</button>
                     </ng-container>
                 </td>
             </tr>
@@ -140,7 +143,7 @@
     </nz-table>
     <div class="paginacao">
         <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
-            (nzPageIndexChange)="atulizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+            (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
             [nzPageSizeOptions]=[5,10,20,30,40,50]>
         </nz-pagination>
     </div>

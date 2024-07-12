@@ -11,7 +11,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
-interface Empresas {
+interface gruposNotas {
   numero: Number;
   data_processamento: string;
   valor: string;
@@ -28,7 +28,8 @@ interface Empresas {
   styleUrl: './icms-grupo-notas.component.scss'
 })
 export class IcmsGrupoNotasComponent {
-  empresas: Empresas[] = [
+  gruposNotas: gruposNotas[] = [
+    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
@@ -36,8 +37,8 @@ export class IcmsGrupoNotasComponent {
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
   ];
 
-  registros: Empresas[] = [];
-  total = this.empresas.length;
+  registros: gruposNotas[] = [];
+  total = this.gruposNotas.length;
   paginaTamanho = 5;
   paginaIndex = 1;
   termoBusca: string = '';
@@ -48,15 +49,14 @@ export class IcmsGrupoNotasComponent {
   };
 
   atualizarTabela(): void {
-    let filtro = this.empresas;
-
+    let filtro = this.gruposNotas;
     this.total = filtro.length;
     const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
     const endIndex = startIndex + this.paginaTamanho;
     this.registros = filtro.slice(startIndex, endIndex);
   };
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }
