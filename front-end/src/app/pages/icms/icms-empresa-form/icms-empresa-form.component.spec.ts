@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotasCarregarComponent } from './notas-carregar.component';
+import { IcmsEmpresaFormComponent } from './icms-empresa-form.component';
 
-describe('NotasCarregarComponent', () => {
-  let component: NotasCarregarComponent;
-  let fixture: ComponentFixture<NotasCarregarComponent>;
+describe('IcmsEmpresaFormComponent', () => {
+  let component: IcmsEmpresaFormComponent;
+  let fixture: ComponentFixture<IcmsEmpresaFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotasCarregarComponent]
+      imports: [IcmsEmpresaFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NotasCarregarComponent);
+    fixture = TestBed.createComponent(IcmsEmpresaFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -25,13 +25,13 @@ interface Empresas {
 }
 
 @Component({
-  selector: 'app-notas-processadas',
+  selector: 'app-icms-regras-de-processamento',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
-  templateUrl: './notas-processadas.component.html',
-  styleUrl: './notas-processadas.component.scss'
+  templateUrl: './icms-regras-de-processamento.component.html',
+  styleUrl: './icms-regras-de-processamento.component.scss'
 })
-export class NotasProcessadasComponent {
+export class IcmsRegrasDeProcessamentoComponent {
   empresas: Empresas[] = [
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
