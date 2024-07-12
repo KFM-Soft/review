@@ -1,0 +1,41 @@
+<form nz-form class="form-cadastrar">
+    <nz-row [nzGutter]="[24, 0]">
+
+        <nz-col nzXs="24" nzMd="12" nzLg="8">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">Origem</nz-form-label>
+                <nz-form-control>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="aliquota.origem" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                        <nz-option *ngFor="let estado of estados" [nzLabel]="estado.uf" [nzValue]="estado"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+
+        <nz-col nzXs="24" nzMd="12" nzLg="8">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">Destino</nz-form-label>
+                <nz-form-control>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Destino" [(ngModel)]="aliquota.destino" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                        <nz-option *ngFor="let estado of estados" [nzLabel]="estado.uf" [nzValue]="estado"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+
+        <nz-col nzXs="24" nzLg="8">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">Porcentagem</nz-form-label>
+                <nz-form-control>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="Porcentagem" [(ngModel)]="aliquota.porcentagem" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        
+        <nz-col nzSpan="24">
+            <nz-row nzJustify="end">
+                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar" (click)="submit()">Adicionar</button>
+            </nz-row>
+        </nz-col>
+    </nz-row>
+</form>

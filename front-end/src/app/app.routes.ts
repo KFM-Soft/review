@@ -6,6 +6,9 @@ import { IcmsNotasProcessadasComponent } from './pages/icms/icms-notas-processad
 import {  IcmsImportarNotasComponent } from './pages/icms/icms-importar-notas/icms-importar-notas.component'
 import { IcmsEmpresaFormComponent } from './pages/icms/icms-empresa-form/icms-empresa-form.component';
 import { IcmsRegrasDeProcessamentoComponent } from './pages/icms/icms-regras-de-processamento/icms-regras-de-processamento.component';
+import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
+import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
+import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 
 export const routes: Routes = [
 
@@ -20,5 +23,12 @@ export const routes: Routes = [
     ]
   },
   { path: 'teste', component: TesteComponent},
+  { path: 'adm', children: [
+    { path: 'aliquotas', children: [
+      { path: '', component: AliquotaComponent },
+      { path: 'form', component: AliquotaFormComponent }
+    ]},
+    { path: 'produtos', component: ProdutoComponent },
+  ]}
 
 ];

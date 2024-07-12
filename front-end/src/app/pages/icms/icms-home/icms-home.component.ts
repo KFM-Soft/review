@@ -75,12 +75,13 @@ export class IcmsHomeComponent {
 
   atualizarTabela(): void {
     let filtro = this.empresas;
-
+    console.log(this.termoBusca)
     if (this.termoBusca) {
+      console.log("entrei")
       filtro = filtro.filter(empresa => 
         empresa.nome.toLowerCase().includes(this.termoBusca.toLowerCase())
       );
-    }
+    } else { console.log("nnnn entrei ")}
 
     if (this.selectTag) {
       filtro = filtro.filter(empresa => empresa.tag === this.selectTag);
@@ -92,7 +93,7 @@ export class IcmsHomeComponent {
     this.registros = filtro.slice(startIndex, endIndex);
   }
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }
