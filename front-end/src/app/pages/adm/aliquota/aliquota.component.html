@@ -1,45 +1,56 @@
+<app-adm>
+    <nz-row class="content" conteudoCentral>
+        <nz-col nzSpan="24" class="container-acoes">
+            <nz-row [nzGutter]="[24, 8]">
+                <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
+                        <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
+                            (input)="atualizarTabela()" />
+                    </nz-input-group>
+                </nz-col>
+                <nz-col nzXs="24" nzSm="24" nzMd="6">
+                    <button nz-button nzSize="large" class="btn-novo" routerLink="./form">Adicionar</button>
+                </nz-col>
+            </nz-row>
+        </nz-col>
+        <nz-col nzSpan="24">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
+                <thead>
+                    <tr>
+                        <th nzWidth="5%">Id</th>
+                        <th>Origem</th>
+                        <th>Destino</th>
+                        <th nzWidth="15%">Porcentagem</th>
+                        <th nzWidth="20%">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of headerTable.data">
+                        <td [nzAlign]="'center'">{{ data.id }}</td>
+                        <td> {{ data.origem.uf }}</td>
+                        <td> {{ data.destino.uf }}</td>
+                        <td> {{ data.porcentagem }}</td>
+                        <td [nzAlign]="'center'">
+                            <button nz-button [nzSize]="'large'" nzType="primary"
+                                class="botao botaoAdicionar">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
 
-<app-adm-component></app-adm>
-<nz-content conteudoCentral>
-    <div class="content">
-        <div class="search">
-            <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                <input type="text" nz-input placeholder="Buscar alíquotas" [(ngModel)]="termoBusca" (input)="atualizarTabela()" />
-            </nz-input-group>
-            <ng-template #suffixIconButton>
-                <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()">
-                    <span nz-icon nzType="search"></span>
-                </button>
-            </ng-template>
-        </div>
-        <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
-            <thead>
-                <tr>
-                    <th nzWidth="5%">Id</th>
-                    <th>Origem</th>
-                    <th>Destino</th>
-                    <th nzWidth="15%">Porcentagem</th>
-                    <th nzWidth="20%">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let data of headerTable.data">
-                    <td [nzAlign]="'center'">{{ data.id }}</td>
-                    <td> {{ data.origem.uf }}</td>
-                    <td> {{ data.destino.uf }}</td>
-                    <td> {{ data.porcentagem }}</td>
-                    <td [nzAlign]="'center'">
-                        <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar">Editar</button>
-                    </td>
-                </tr>
-            </tbody>
+            </nz-table>
+            <div class="paginacao">
+                <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+                    [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+                    (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+                </nz-pagination>
+            </div>
+        </nz-col>
+    </nz-row>
+</app-adm>
 
-        </nz-table>
-        <div class="paginacao">
-            <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
-                [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
-                (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
-            </nz-pagination>
-        </div>
-    </div>
-</nz-content>
+
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">
+        <span nz-icon nzType="search"></span>
+    </button>
+</ng-template>

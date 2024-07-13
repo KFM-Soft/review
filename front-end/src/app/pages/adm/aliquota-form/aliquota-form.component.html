@@ -27,7 +27,10 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Porcentagem</nz-form-label>
                 <nz-form-control>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="Porcentagem" [(ngModel)]="aliquota.porcentagem" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+                    <nz-input-number-group nzAddOnAfter="%">
+                        <nz-input-number [(ngModel)]="aliquota.porcentagem" [ngModelOptions]="{standalone: true}" ngDefaultControl
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                      </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>

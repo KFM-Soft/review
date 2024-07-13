@@ -18,4 +18,13 @@ export class ProdutoService {
     return this.http.get<Produto[]>(url);
   }
   
+  saveProduto(produto: Produto, id?: number): Observable<Produto> {
+    let url = this.apiUrl;
+    if(id){
+      url += 'id=' + id;
+      return this.http.put<Produto>(url, produto)
+    }
+    return this.http.post<Produto>(url, produto);
+  }
+  
 }

@@ -16,3 +16,27 @@ body {
     background-color: white;
     padding: 8px 16px;
 }
+
+.menu-adm {
+    height: 100%;
+}
+
+.container-acoes {
+    padding: 8px;
+    flex-wrap: wrap;
+}
+
+.inp-busca {
+    border-radius: 8px 0px 0px 8px;
+}
+
+.btn-inp-busca {
+    border-radius: 0px 8px 8px 0px !important;
+}
+
+.btn-novo {
+    color: white;
+    background-color: #00AA11;
+    width: 100%;
+    max-width: 100%;
+}

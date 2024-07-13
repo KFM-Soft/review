@@ -10,6 +10,9 @@ import { EstadoService } from '../../../services/estado.service';
 import { CommonModule } from '@angular/common';
 import { Aliquota } from '../../../models/Aliquota';
 import { FormsModule } from '@angular/forms';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aliquota-form',
@@ -21,6 +24,7 @@ import { FormsModule } from '@angular/forms';
     NzButtonModule,
     NzInputModule,
     NzSelectModule,
+    NzInputNumberModule,
     FormsModule,
   ],
   templateUrl: './aliquota-form.component.html',
@@ -34,6 +38,8 @@ export class AliquotaFormComponent implements OnInit{
   constructor(
     private service: AliquotaService,
     private estadoService: EstadoService,
+    private router: Router,
+    private route: ActivatedRoute,
    ) { }
 
   ngOnInit(): void {
@@ -46,7 +52,12 @@ export class AliquotaFormComponent implements OnInit{
 
   submit(): void {
     this.aliquota.porcentagem = +this.aliquota.porcentagem
-    this.service.postAliquota(this.aliquota).subscribe({})
+    this.service.postAliquota(this.aliquota).subscribe({
+      next: () => {
+        alert("Aliquota salva com sucesso!")
+        this.router.navigate(['../'], {relativeTo: this.route})
+      }
+    })
   }
 
 }

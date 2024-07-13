@@ -12,6 +12,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
 import { Aliquota } from '../../../models/Aliquota';
 import { AliquotaService } from '../../../services/aliquota.service';
+import { AdmComponent } from '../adm.component';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-aliquota',
@@ -24,10 +26,12 @@ import { AliquotaService } from '../../../services/aliquota.service';
     NzFlexModule,
     NzTableModule,
     NzButtonModule,
+    NzGridModule,
     NzPaginationModule,
     NzInputModule,
     FormsModule,
     RouterLink,
+    AdmComponent,
   ],
   templateUrl: './aliquota.component.html',
   styleUrl: './aliquota.component.scss'

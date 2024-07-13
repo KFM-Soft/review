@@ -10,6 +10,7 @@ import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 import { AdmComponent } from './pages/adm/adm.component';
+import { ProdutoFormComponent } from './pages/adm/produtos-form/produtos-form.component';
 
 export const routes: Routes = [
 
@@ -28,7 +29,10 @@ export const routes: Routes = [
       { path: '', component: AliquotaComponent },
       { path: 'form', component: AliquotaFormComponent }
     ]},
-    { path: 'produtos', component: ProdutoComponent },
+    { path: 'produtos', children: [
+      { path: '', component: ProdutoComponent },
+      { path: 'form', component: ProdutoFormComponent }
+    ]},
   ]}
 
 ];
