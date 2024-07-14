@@ -3,7 +3,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -14,6 +14,7 @@ import { Aliquota } from '../../../models/Aliquota';
 import { AliquotaService } from '../../../services/aliquota.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { StoragesService } from '../../../services/storages.service';
 
 @Component({
   selector: 'app-aliquota',
@@ -39,8 +40,11 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 export class AliquotaComponent implements OnInit {
   
   constructor(
+    private service: AliquotaService,
+    private storageService: StoragesService,
+    private router: Router,
+    private route: ActivatedRoute,
     private renderer: Renderer2,
-    private service: AliquotaService
   ) { }
 
   registros: Aliquota[] = [];
@@ -86,6 +90,11 @@ export class AliquotaComponent implements OnInit {
   tamanhoPagina(paginaTamanho: number): void {
     this.paginaTamanho = paginaTamanho;
     this.atualizarTabela();
+  }
+
+  editarItem(aliquota: Aliquota){
+    this.storageService.setSession('aliquota', aliquota);
+    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: aliquota.id}});
   }
 
 }

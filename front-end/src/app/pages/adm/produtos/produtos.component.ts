@@ -3,7 +3,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -14,6 +14,7 @@ import { Produto } from '../../../models/Produto';
 import { ProdutoService } from '../../../services/produtos.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { StoragesService } from '../../../services/storages.service';
 
 @Component({
   selector: 'app-Produto',
@@ -40,7 +41,10 @@ export class ProdutoComponent implements OnInit {
   
   constructor(
     private renderer: Renderer2,
-    private service: ProdutoService
+    private service: ProdutoService,
+    private storageService: StoragesService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   registros: Produto[] = [];
@@ -92,6 +96,11 @@ export class ProdutoComponent implements OnInit {
   tamanhoPagina(paginaTamanho: number): void {
     this.paginaTamanho = paginaTamanho;
     this.atualizarTabela();
+  }
+
+  editarItem(registro: Produto){
+    this.storageService.setSession('produto', registro);
+    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
   }
 
 }

@@ -32,7 +32,7 @@
                         <td> {{ data.porcentagem }}</td>
                         <td [nzAlign]="'center'">
                             <button nz-button [nzSize]="'large'" nzType="primary"
-                                class="botao botaoAdicionar">Editar</button>
+                                class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
                         </td>
                     </tr>
                 </tbody>

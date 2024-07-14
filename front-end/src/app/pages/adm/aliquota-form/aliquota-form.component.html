@@ -5,9 +5,10 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Origem</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="aliquota.origem" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="aliquota.origem" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
                         <nz-option *ngFor="let estado of estados" [nzLabel]="estado.uf" [nzValue]="estado"></nz-option>
                     </nz-select>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="aliquota.origem.uf" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
@@ -16,9 +17,10 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Destino</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Destino" [(ngModel)]="aliquota.destino" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Destino" [(ngModel)]="aliquota.destino" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
                         <nz-option *ngFor="let estado of estados" [nzLabel]="estado.uf" [nzValue]="estado"></nz-option>
                     </nz-select>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="aliquota.destino.uf" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
@@ -26,7 +28,7 @@
         <nz-col nzXs="24" nzLg="8">
             <nz-form-item>
                 <nz-form-label nzSpan="24">Porcentagem</nz-form-label>
-                <nz-form-control>
+                <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="aliquota.porcentagem" [ngModelOptions]="{standalone: true}" ngDefaultControl
                             [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>

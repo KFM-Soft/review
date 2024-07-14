@@ -1,18 +1,26 @@
 package com.review.service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
 import com.review.models.Aliquota;
+import com.review.models.Estado;
 import com.review.repository.AliquotaRepository;
+import com.review.repository.EstadoRepository;
 
 @Service
 public class AliquotaService {
 
     @Autowired
     private AliquotaRepository repository;
+    @Autowired
+    private EstadoRepository estadoRepository;
 
     public List<Aliquota> getAll() {
         return repository.findAll();
@@ -38,6 +46,21 @@ public class AliquotaService {
         return repository.findByOrigemDestino(origem, destino);
     }
 
-
+    // @EventListener(ApplicationReadyEvent.class)
+    public void geraAliquotasEntreEstados() {
+        List<Estado> estados = estadoRepository.findAll();
+        List<Aliquota> aliquotas = new ArrayList<Aliquota>();
+        for (Estado origem : estados) {
+            for(Estado destino : estados) {
+                Aliquota aliquota = new Aliquota();
+                System.out.println(aliquota);
+                aliquota.setOrigem(origem);
+                aliquota.setDestino(destino);
+                aliquota.setPorcentagem(new BigDecimal(0));
+                aliquotas.add(aliquota);
+            }
+        }
+        repository.saveAll(aliquotas);
+    }
 
 }

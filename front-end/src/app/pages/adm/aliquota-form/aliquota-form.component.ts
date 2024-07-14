@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { StoragesService } from '../../../services/storages.service';
 
 @Component({
   selector: 'app-aliquota-form',
@@ -34,10 +35,13 @@ export class AliquotaFormComponent implements OnInit{
 
   estados: Estado[] = []
   aliquota: Aliquota = <Aliquota>{};
+  id: string | null = null;
+  editavel: boolean = true;
 
   constructor(
     private service: AliquotaService,
     private estadoService: EstadoService,
+    private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
    ) { }
@@ -48,11 +52,18 @@ export class AliquotaFormComponent implements OnInit{
         this.estados = retorno
       }
     })
+    
+    this.id = this.route.snapshot.queryParamMap.get('id');
+    if (this.id) {
+      this.aliquota = this.storageService.getSession("aliquota");
+      this.editavel = false;
+    }
+
   }
 
   submit(): void {
     this.aliquota.porcentagem = +this.aliquota.porcentagem
-    this.service.postAliquota(this.aliquota).subscribe({
+    this.service.saveAliquota(this.aliquota).subscribe({
       next: () => {
         alert("Aliquota salva com sucesso!")
         this.router.navigate(['../'], {relativeTo: this.route})

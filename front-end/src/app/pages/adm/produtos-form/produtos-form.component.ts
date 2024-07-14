@@ -12,6 +12,7 @@ import { Produto } from '../../../models/Produto';
 import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StoragesService } from '../../../services/storages.service';
 
 @Component({
   selector: 'app-Produto-form',
@@ -33,10 +34,13 @@ export class ProdutoFormComponent implements OnInit{
 
   estados: Estado[] = []
   produto: Produto = <Produto>{};
+  id: string | null = null;
+  editavel: boolean = true;
 
   constructor(
     private service: ProdutoService,
     private estadoService: EstadoService,
+    private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
    ) { }
@@ -47,12 +51,18 @@ export class ProdutoFormComponent implements OnInit{
         this.estados = retorno
       }
     })
+    
+    this.id = this.route.snapshot.queryParamMap.get('id');
+    if (this.id) {
+      this.produto = this.storageService.getSession("produto");
+      this.editavel = false;
+    }
   }
 
   submit(): void {
     this.service.saveProduto(this.produto).subscribe({
       next: () => {
-        alert("Aliquota salva com sucesso!")
+        alert("Registro salvo com sucesso!")
         this.router.navigate(['../'], {relativeTo: this.route})
       }
     })

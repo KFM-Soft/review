@@ -18,8 +18,10 @@ export class AliquotaService {
     return this.http.get<Aliquota[]>(url);
   }
 
-  postAliquota(registro: Aliquota): Observable<Aliquota> {
+  saveAliquota(registro: Aliquota): Observable<Aliquota> {
     let url = this.apiUrl;
+    if(registro.id) 
+      return this.http.put<Aliquota>(url, registro)
     return this.http.post<Aliquota>(url, registro);
   }
   
