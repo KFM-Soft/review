@@ -17,7 +17,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-notas-carregar',
+  selector: 'app-icms-notas-carregar',
   standalone: true,
   imports: [
     NzCardModule, 
@@ -36,10 +36,10 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
 
   ],
-  templateUrl: './notas-carregar.component.html',
-  styleUrl: './notas-carregar.component.scss'
+  templateUrl: './icms-importar-notas.component.html',
+  styleUrl: './icms-importar-notas.component.scss'
 })
-export class NotasCarregarComponent {
+export class IcmsImportarNotasComponent {
 
 
   constructor(

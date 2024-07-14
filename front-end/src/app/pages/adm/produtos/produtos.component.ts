@@ -10,11 +10,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
-import { Aliquota } from '../../../models/Aliquota';
-import { AliquotaService } from '../../../services/aliquota.service';
+import { Produto } from '../../../models/Produto';
+import { ProdutoService } from '../../../services/produtos.service';
 
 @Component({
-  selector: 'app-aliquota',
+  selector: 'app-Produto',
   standalone: true,
   imports: [
     CommonModule,
@@ -29,44 +29,50 @@ import { AliquotaService } from '../../../services/aliquota.service';
     FormsModule,
     RouterLink,
   ],
-  templateUrl: './aliquota.component.html',
-  styleUrl: './aliquota.component.scss'
+  templateUrl: './produtos.component.html',
+  styleUrl: './produtos.component.scss'
 })
-export class AliquotaComponent implements OnInit {
+export class ProdutoComponent implements OnInit {
   
   constructor(
     private renderer: Renderer2,
-    private service: AliquotaService
+    private service: ProdutoService
   ) { }
 
-  registros: Aliquota[] = [];
-  aliquotas: Aliquota[] = [];
+  registros: Produto[] = [];
+  produtos: Produto[] = [];
   total: number = 0;
   paginaTamanho = 5;
   paginaIndex = 1;
   termoBusca: string = '';
 
   ngOnInit(): void {
-    this.service.getAliquotas().subscribe({
-      next: (retorno: Aliquota[]) => {
-        this.registros = retorno;
-        this.aliquotas = retorno;
+    this.service.getProdutos().subscribe({
+      next: (retorno: Produto[]) => {
+        this.registros = retorno
+        this.produtos = retorno
       },
       error: (error) => {
-        console.error('Erro ao carregar aliquotas:', error);
+        console.error('Erro ao carregar Produtos:', error);
       }
     })
   }
 
   atualizarTabela(): void {
-    let filtro = this.aliquotas;
+    let filtro = this.produtos;
+
     if (this.termoBusca) {
-      filtro = filtro.filter(aliquota => 
-        aliquota.origem.uf.toLowerCase().includes(this.termoBusca.toLowerCase()) 
+
+      filtro = filtro.filter(produto => 
+        produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
-          aliquota.destino.uf.toLowerCase().includes(this.termoBusca.toLowerCase())
+          produto.cest.toLowerCase().includes(this.termoBusca.toLowerCase())
+          || 
+          produto.cfop.toLowerCase().includes(this.termoBusca.toLowerCase())
+          || 
+          produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
       );
-    }
+    } 
 
     this.total = filtro.length;
     const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotasCarregarComponent } from './notas-carregar.component';
+import { AliquotaFormComponent } from './aliquota-form.component';
 
-describe('NotasCarregarComponent', () => {
-  let component: NotasCarregarComponent;
-  let fixture: ComponentFixture<NotasCarregarComponent>;
+describe('AliquotaFormComponent', () => {
+  let component: AliquotaFormComponent;
+  let fixture: ComponentFixture<AliquotaFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotasCarregarComponent]
+      imports: [AliquotaFormComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(NotasCarregarComponent);
+    fixture = TestBed.createComponent(AliquotaFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

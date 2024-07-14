@@ -45,7 +45,7 @@
         </td>
         <td [nzAlign]="'center'">
           <ng-container *ngIf="data.button">
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/notas-processadas" routerLinkActive="active">Gerenciar</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas" routerLinkActive="active">Gerenciar</button>
           </ng-container>
           <ng-container *ngIf="!data.button">
             <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
@@ -57,7 +57,7 @@
   </nz-table>
   <div class="paginacao">
     <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
-      (nzPageIndexChange)="atulizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+      (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
       [nzPageSizeOptions]=[5,10,20,30,40,50]>
     </nz-pagination>
   </div>

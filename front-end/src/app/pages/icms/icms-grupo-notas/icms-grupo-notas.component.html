@@ -2,7 +2,7 @@
 
     <h1>ICMS - Notas Processadas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active"  class="link-top">
+    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
@@ -14,15 +14,16 @@
                         </nz-flex>
                     </td>
 
-    
+
                     <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
                         <ng-container>
                             <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px" class="edit"></button>
+                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
+                                    class="edit"></button>
                         </ng-container>
                     </td>
                 </tr>
-    
+
                 <tr>
                     <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
@@ -56,17 +57,18 @@
                     </td>
                 </tr>
             </table>
-            
+
         </nz-card>
     </a>
 
 
-    <nz-table #headerTable [nzData]="empresas" [nzShowPagination]="false" class="table">
+    <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
         <thead>
             <tr>
                 <td nzWidth="5%" [nzAlign]="'right'" colspan="8" class="btt-add">
                     <ng-container>
-                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/notas-carregar" routerLinkActive="active">Adicionar Nota</button>
+                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar"
+                            routerLink="/icms/importar-nota" routerLinkActive="active">Adicionar Nota</button>
                     </ng-container>
                 </td>
             </tr>
@@ -75,42 +77,32 @@
             <tr>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Nº da Nota</h3>
+                        <h3>Nº Bloco de Processamento</h3>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Data de Processamento</h3>
+                        <h3>Data De Processamento</h3>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Fornecedor</h3>
+                        <h3>Valor Das Notas</h3>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>R$ Nota</h3>
+                        <h3>Imposto</h3>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Produtos Processados</h3>
+                        <h3>Notas Processadas</h3>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Diferença em R$</h3>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Origem e Destino</h3>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Ações</h3>
+                        <h3>Acões</h3>
                     </nz-flex>
                 </td>
             </tr>
@@ -127,34 +119,23 @@
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="dados">
-                        <p>Expira em {{ data.fornecedor }}</p>
+                        <p>Expira em {{ data.valor }}</p>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.valor }}</p>
+                        <p>{{ data.imposto }}</p>
                     </nz-flex>
                 </td>
                 <td>
                     <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.quantidadeP }}/{{ data.quantidadeT}}</p>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.diferenca }}</p>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.origem }} -> {{ data.destino }}</p>
+                        <p>{{ data.notasProcessadas }}</p>
                     </nz-flex>
                 </td>
                 <td [nzAlign]="'center'">
                     <ng-container *ngIf="data.button">
-                        <button nz-button [nzSize]="'large'" class="botao botaoDownload"><img
-                                src="../../../assets/svgs/download.svg" height="30px" width="30px"
-                                class="download"></button>
+                        <button nz-button [nzSize]="'large'" routerLink="./notas-processadas" routerLinkActive="active"
+                            class="botao botaoNotas">Notas</button>
                     </ng-container>
                 </td>
             </tr>
@@ -162,7 +143,7 @@
     </nz-table>
     <div class="paginacao">
         <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
-            (nzPageIndexChange)="atulizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+            (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
             [nzPageSizeOptions]=[5,10,20,30,40,50]>
         </nz-pagination>
     </div>

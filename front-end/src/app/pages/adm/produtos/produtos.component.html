@@ -1,7 +1,7 @@
 <nz-layout>
     <nz-layout>
         <nz-sider nzTheme="light">
-            <ul nz-menu [nzMode]="'vertical'" [nzTheme]="'light'" class="menu-adm">
+            <ul nz-menu [nzMode]="'vertical'" class="menu-adm">
                 <li nz-menu-item routerLink="/adm/produtos" routerLinkActive="active">
                     <span nz-icon nzType="credit-card" nzTheme="outline"></span>
                     Produtos
@@ -16,7 +16,7 @@
             <div class="content">
                 <div class="search">
                     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-                        <input type="text" nz-input placeholder="Buscar alíquotas" [(ngModel)]="termoBusca" (input)="atualizarTabela()" />
+                        <input type="text" nz-input placeholder="Buscar produto" [(ngModel)]="termoBusca" (input)="atualizarTabela()" />
                     </nz-input-group>
                     <ng-template #suffixIconButton>
                         <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()">
@@ -28,18 +28,20 @@
                     <thead>
                         <tr>
                             <th nzWidth="5%">Id</th>
-                            <th>Origem</th>
-                            <th>Destino</th>
-                            <th nzWidth="15%">Porcentagem</th>
-                            <th nzWidth="20%">Ações</th>
+                            <th>Descrição</th>
+                            <th nzWidth="15%">NCM</th>
+                            <th nzWidth="15%">CEST</th>
+                            <th nzWidth="15%">CFOP</th>
+                            <th nzWidth="15%">Açôes</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let data of headerTable.data">
                             <td [nzAlign]="'center'">{{ data.id }}</td>
-                            <td> {{ data.origem.uf }}</td>
-                            <td> {{ data.destino.uf }}</td>
-                            <td> {{ data.porcentagem }}</td>
+                            <td> {{ data.descricao }}</td>
+                            <td> {{ data.ncm }}</td>
+                            <td> {{ data.cest }}</td>
+                            <td> {{ data.cfop }}</td>
                             <td [nzAlign]="'center'">
                                 <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar">Editar</button>
                             </td>

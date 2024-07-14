@@ -11,7 +11,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
-interface Empresas {
+interface notasProcessadas {
   numero: Number;
   data_processamento: string;
   fornecedor: string;
@@ -25,14 +25,15 @@ interface Empresas {
 }
 
 @Component({
-  selector: 'app-notas-processadas',
+  selector: 'app-icms-notas-processadas',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
-  templateUrl: './notas-processadas.component.html',
-  styleUrl: './notas-processadas.component.scss'
+  templateUrl: './icms-notas-processadas.component.html',
+  styleUrl: './icms-notas-processadas.component.scss'
 })
-export class NotasProcessadasComponent {
-  empresas: Empresas[] = [
+export class IcmsNotasProcessadasComponent {
+  notasProcessadas: notasProcessadas[] = [
+    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
@@ -40,8 +41,8 @@ export class NotasProcessadasComponent {
     { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
   ];
 
-  registros: Empresas[] = [];
-  total = this.empresas.length;
+  registros: notasProcessadas[] = [];
+  total = this.notasProcessadas.length;
   paginaTamanho = 5;
   paginaIndex = 1;
   termoBusca: string = '';
@@ -49,18 +50,17 @@ export class NotasProcessadasComponent {
 
   ngOnInit(): void {
     this.atualizarTabela();
-  };
+  }
 
   atualizarTabela(): void {
-    let filtro = this.empresas;
-
+    let filtro = this.notasProcessadas;
     this.total = filtro.length;
     const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
     const endIndex = startIndex + this.paginaTamanho;
     this.registros = filtro.slice(startIndex, endIndex);
-  };
+  }
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }

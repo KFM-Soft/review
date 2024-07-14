@@ -25,13 +25,13 @@ interface Empresas {
 }
 
 @Component({
-  selector: 'app-regras-de-processamento',
+  selector: 'app-icms-regras-de-processamento',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
-  templateUrl: './regras-de-processamento.component.html',
-  styleUrl: './regras-de-processamento.component.scss'
+  templateUrl: './icms-regras-de-processamento.component.html',
+  styleUrl: './icms-regras-de-processamento.component.scss'
 })
-export class RegrasDeProcessamentoComponent {
+export class IcmsRegrasDeProcessamentoComponent {
   empresas: Empresas[] = [
     { item: 1.0, nome: 'Sandalias Havaianas Brasil FC Azul Natal', valor: '10.324,80', ncm_sh: 64022000, cest: 'Não tem', descricao: 'Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes', aliq_interestadual: 12, aliq_interna: 23, mva: 36.56, multiplicador: 11.22 },
     { item: 2.0, nome: 'Sandalias Havaianas Brasil FC Azul Natal', valor: '10.324,80', ncm_sh: 64022000, cest: 'Não tem', descricao: 'Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes', aliq_interestadual: 12, aliq_interna: 23, mva: 36.56, multiplicador: 11.22 },
@@ -58,7 +58,7 @@ export class RegrasDeProcessamentoComponent {
     this.registros = filtro.slice(startIndex, endIndex);
   };
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }
