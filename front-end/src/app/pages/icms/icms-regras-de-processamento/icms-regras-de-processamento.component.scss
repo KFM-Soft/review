@@ -37,6 +37,9 @@ nz-card{
 
   div.btt-add{
     margin-right: 1em;
+    display: flex;
+    justify-content: flex-end;
+
   }
 
   nz-card.empresa{
@@ -65,6 +68,12 @@ nz-card{
 
 
   .empresa-name{
+    margin: 0 0 1em 1em;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .detalhes-nota{
     margin: 0 0 1em 1em;
     display: block;
   }
@@ -100,6 +109,18 @@ nz-card{
     height: 2.5em;
 }
 
+.paginacao {
+  text-align: right;
+  margin: 20px 0;
+}
+
+h3.titulo{
+  font-size: 20px;
+}
+
+.titulo-desc{
+  font-size: 16px;
+}
 .scrollbar {
     overflow-y: auto;
     ::-webkit-scrollbar {

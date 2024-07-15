@@ -2,7 +2,7 @@
 
     <h1>ICMS - Notas Processadas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
+    <a routerLink="#" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
@@ -62,16 +62,21 @@
                 <div class="card ">
                           <div class="name">
                               <nz-flex [nzVertical]="false" class="detalhes-nota">
-                                  <h3>Arquivo XML:</h3>
-                                  <p>csosn101.xml</p>
+                                <h3 class="titulo">Arquivo XML:</h3>
+                                <select name="select">
+                                  <option value="1"class="titulo-desc">csosn101.xml</option>
+                                  <option value="2"class="titulo-desc">csosn102.xml</option>
+                                </select>
                               </nz-flex>
-                              <img src="../../../assets/svgs/download.svg" class="logo-empresa">
+                              <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
+                                src="../../../assets/svgs/download.svg" height="30px" width="30px"
+                                class="edit"></button>
                           </div>
                         <nz-flex [nzVertical]="false" class="detalhes-nota">
                             <h3>Informação Geral:</h3>
                         </nz-flex>
                       <div class="empresa-dados-maior">
-                        
+
                           <div class="empresa-dados">
                               <nz-flex  class="empresa-dados">
                                   <h3>Valor:</h3>
@@ -123,7 +128,7 @@
                         </div>
                         </div>
                         <nz-flex [nzVertical]="false" class="detalhes-nota">
-                            <h3>Produtos:</h3>
+                            <h3 class="titulo">Produtos:</h3>
                         </nz-flex>
                       <div class="empresa-dados-maior" *ngFor="let item of produtos">
                           <div class="empresa-dados">
@@ -181,7 +186,7 @@
                             </nz-flex>
                         </div>
                         </div>
-                        
+
                 </div>
                 <div class="paginacao">
                     <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
@@ -194,7 +199,7 @@
         </nz-card>
     </a>
 
-    
-    
+
+
 
 </div>

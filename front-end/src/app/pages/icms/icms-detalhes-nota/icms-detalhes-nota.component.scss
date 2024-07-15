@@ -103,7 +103,7 @@ nz-flex.empresa-dados{
   margin: 20px 0;
 }
 
-.bloco { 
+.bloco {
 margin: 2em;
 text-align: center;
 }
@@ -124,13 +124,16 @@ border-radius: 14px;
 
 nz-card.detalhes{
   max-height: 70vh;
+  margin-top: 3em;
   margin-bottom: 2em;
   padding: 0;
   max-width: 100em;
 }
 
 nz-card div.name{
-  display: flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .link-top{
@@ -146,6 +149,13 @@ nz-card div.name{
   margin: 0;
 }
 
+h3.titulo{
+  font-size: 20px;
+}
+
+.titulo-desc{
+  font-size: 16px;
+}
 
 .detalhes-nota{
   margin: 0 0 1em 1em;
