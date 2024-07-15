@@ -10,6 +10,7 @@ import { IcmsRegrasDeProcessamentoComponent } from './pages/icms/icms-regras-de-
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
+import { IcmsDetalhesNotas } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
 
 export const routes: Routes = [
 
@@ -24,6 +25,7 @@ export const routes: Routes = [
       { path: 'importar-nota', component: IcmsImportarNotasComponent },
       { path: 'empresa-form', component: IcmsEmpresaFormComponent},
       { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent},
+      { path: 'detalhes-nota', component: IcmsDetalhesNotas },
     ]
   },
   { path: 'teste', component: TesteComponent},
