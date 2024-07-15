@@ -49,19 +49,13 @@ nz-card{
     width: 3em;
   }
 
-  .botaoDownload {
+  .botaoNotas {
     padding: 0;
     background-color: #005CAA;
     height: 3em;
-    width: 3em;
+    width: 5em;
   }
-  
-  .botaoGerenciarTodos{
-    background-color: #005CAA;
-    width: 50%;
-    height: 3em;
-  }
-  
+
   tr nz-flex h3.header-table{
     margin-left: 5em;
   }
@@ -105,6 +99,13 @@ nz-card{
 
   nz-flex.empresa-dados{
     margin: 0 1em;
+  }
+
+  .dados p{
+    margin: auto;
+  }
+  .header-table h3{
+    margin: auto;
   }
 
   .paginacao {

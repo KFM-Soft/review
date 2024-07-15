@@ -2,88 +2,99 @@
 
     <h1>ICMS - Notas Processadas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active"  class="link-top">
-        <nz-card [nzHoverable]="true" class="empresa">
-                    <div>
+    <a routerLink="#" routerLinkActive="active"  class="link-top">
+        <nz-card [nzHoverable]="true" class="empresa scrollbar">
+          <div class="card ">
+                    <div class="name">
+                      <div class="empresa-name">
                         <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
                         <nz-flex  class="empresa-name">
                             <h3>Recol Distribuição e Comércio LdivA</h3>
                         </nz-flex>
-                        <nz-flex [nzVertical]="false" class="empresa-name">
-                            <h3>Arquivo XML:</h3>
-                            <p>csosn101.xml</p>
+                      </div>
+                        <nz-flex [nzVertical]="false" class="detalhes-nota">
+                          <h3 class="titulo">Arquivo XML:</h3>
+                          <select name="select">
+                            <option value="1"class="titulo-desc">csosn101.xml</option>
+                            <option value="2"class="titulo-desc">csosn102.xml</option>
+                          </select>
                         </nz-flex>
                     </div>
-                
-    
-                <div class="empresa-dados-maior">
+                <div class="empresa-dados-maior" *ngFor="let item of empresas">
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Item:</h3>
-                            <p>1.0</p>
+                            <p>{{ item.item }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Nome:</h3>
-                            <p>Sandalias Havaianas Brasil FC Azul Natal</p>
+                            <p>{{ item.nome }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex class="empresa-dados">
                             <h3>Valor:</h3>
-                            <p>R$ 10.324,80</p>
+                            <p>R$ {{ item.valor }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>NCM/SH:</h3>
-                            <p>64022000</p>
+                            <p>{{ item.ncm_sh }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Cest:</h3>
-                            <p>Não tem</p>
+                            <p>{{ item.cest }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Descrição:</h3>
-                            <p>Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes</p>
+                            <p>{{ item.descricao }}</p>
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Alíquota Interestadual:</h3>
-                            <input type="text" placeholder="12%">
+                            <input type="text" value="{{ item.aliq_interestadual}}" class="input">
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>Alíquota interna do emitente:</h3>
-                            <input type="text" placeholder="23%">
+                            <input type="text" value="{{ item.aliq_interna}}" class="input">
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex  class="empresa-dados">
                             <h3>MVA Original:</h3>
-                            <input type="text" placeholder="36,56%">
+                            <input type="text" value="{{ item.mva}}" class="input">
                         </nz-flex>
                     </div>
                     <div class="empresa-dados">
                         <nz-flex class="empresa-dados">
                             <h3>Multiplicador:</h3>
-                            <input type="text" placeholder="11,22%">
+                            <input type="text" value="{{ item.multiplicador}}" class="input">
                         </nz-flex>
                     </div>
-                </div>
+                  </div>
                     <div nzWidth="5%" class="btt-add">
                         <ng-container>
-                            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/notas-carregar" routerLinkActive="active">Adicionar Nota</button>
+                            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/regras-processamento" routerLinkActive="active">Cancelar</button>
+                            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="/icms/regras-processamento" routerLinkActive="active">Processar</button>
                         </ng-container>
                     </div>
-            
+          </div>
+          <div class="paginacao">
+            <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
+                (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+                [nzPageSizeOptions]=[5,10,20,30,40,50]>
+            </nz-pagination>
+        </div>
         </nz-card>
     </a>
 

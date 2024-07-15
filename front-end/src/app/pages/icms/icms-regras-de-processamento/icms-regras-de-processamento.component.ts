@@ -12,32 +12,30 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 interface Empresas {
-  numero: Number;
-  data_processamento: string;
-  fornecedor: string;
+  item: Number;
+  nome: string;
   valor: string;
-  quantidadeP: Number;
-  quantidadeT: Number;
-  diferenca: string;
-  origem: string;
-  destino: string;
-  button: boolean
+  ncm_sh: Number;
+  cest: String;
+  descricao: String;
+  aliq_interestadual: Number;
+  aliq_interna: Number;
+  mva: Number;
+  multiplicador: Number
 }
 
 @Component({
-  selector: 'app-notas-processadas',
+  selector: 'app-icms-regras-de-processamento',
   standalone: true,
   imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
-  templateUrl: './notas-processadas.component.html',
-  styleUrl: './notas-processadas.component.scss'
+  templateUrl: './icms-regras-de-processamento.component.html',
+  styleUrl: './icms-regras-de-processamento.component.scss'
 })
-export class NotasProcessadasComponent {
+export class IcmsRegrasDeProcessamentoComponent {
   empresas: Empresas[] = [
-    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
-    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
-    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
-    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
-    { numero: 1, data_processamento: '02/04/2024', fornecedor: 'Recol distribuição e Comércio LTDA', valor: '5.000,00', quantidadeP: 566, quantidadeT: 575, diferenca: '503,13', origem: 'SP', destino: 'AC', button: true},
+    { item: 1.0, nome: 'Sandalias Havaianas Brasil FC Azul Natal', valor: '10.324,80', ncm_sh: 64022000, cest: 'Não tem', descricao: 'Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes', aliq_interestadual: 12, aliq_interna: 23, mva: 36.56, multiplicador: 11.22 },
+    { item: 2.0, nome: 'Sandalias Havaianas Brasil FC Azul Natal', valor: '10.324,80', ncm_sh: 64022000, cest: 'Não tem', descricao: 'Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes', aliq_interestadual: 12, aliq_interna: 23, mva: 36.56, multiplicador: 11.22 },
+    { item: 3.0, nome: 'Sandalias Havaianas Brasil FC Azul Natal', valor: '10.324,80', ncm_sh: 64022000, cest: 'Não tem', descricao: 'Calçado com parte superior em tiras ou correias, fixados à sola por pregos, tachas, pinos e semelhantes', aliq_interestadual: 12, aliq_interna: 23, mva: 36.56, multiplicador: 11.22 },
   ];
 
   registros: Empresas[] = [];
@@ -60,7 +58,7 @@ export class NotasProcessadasComponent {
     this.registros = filtro.slice(startIndex, endIndex);
   };
 
-  atulizarPagina(paginaindex: number): void {
+  atualizarPagina(paginaindex: number): void {
     this.paginaIndex = paginaindex;
     this.atualizarTabela();
   }

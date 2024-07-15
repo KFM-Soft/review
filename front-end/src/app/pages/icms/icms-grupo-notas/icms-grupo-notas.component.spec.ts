@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmpresaFormComponent } from './empresa-form.component';
+import { IcmsGrupoNotasComponent } from './icms-grupo-notas.component';
 
-describe('EmpresaFormComponent', () => {
-  let component: EmpresaFormComponent;
-  let fixture: ComponentFixture<EmpresaFormComponent>;
+describe('IcmsGrupoNotasComponent', () => {
+  let component: IcmsGrupoNotasComponent;
+  let fixture: ComponentFixture<IcmsGrupoNotasComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmpresaFormComponent]
+      imports: [IcmsGrupoNotasComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EmpresaFormComponent);
+    fixture = TestBed.createComponent(IcmsGrupoNotasComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

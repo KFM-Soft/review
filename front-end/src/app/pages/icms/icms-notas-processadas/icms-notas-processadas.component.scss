@@ -30,7 +30,7 @@ nz-card{
   
   .botaoAdicionar {
     min-width: 150px;
-    background-color: #005CAA;
+    background-color: #00aa39;
     padding: 0;
     margin: 0.5em 1em 0 0;
   }
@@ -42,37 +42,34 @@ nz-card{
     width: 3em;
   }
   
-  .botaoGerenciar {
-    padding: 0;
+
+  .botaoRelatorioNota {
+    min-width: 100px;
     background-color: #005CAA;
-    height: 3em;
-    width: 3em;
+    padding: 0;
+    margin: 0.5em 1em 0 0;
   }
 
-  .botaoDownload {
+  .botaoRelatorioGeral {
+    min-width: 250px;
+    background-color: #005CAA;
     padding: 0;
-    background-color: #005CAA;
-    height: 3em;
-    width: 3em;
+    margin: 0.5em 1em 0 0;
   }
   
-  .botaoGerenciarTodos{
-    background-color: #005CAA;
-    width: 50%;
-    height: 3em;
-  }
-  
-  
-  .gerenciarTodos{
-    text-align: center;
+  tr nz-flex h3.header-table{
+    margin-left: 5em;
   }
   
   nz-card.empresa{
-    max-height: 90vh;
+    max-height: 14em;
     margin-bottom: 2em;
     padding: 0;
   }
 
+  .empresa table {
+    width: 100%;
+  }
 
   .link-top{
     padding: 0;
@@ -97,17 +94,30 @@ nz-card{
     border-right: 0;
   }
 
-  div.empresa-dados-maior{
-    display: flex;
-    
-  }
-
   nz-flex.empresa-dados{
     margin: 0 1em;
-    display: block;
   }
 
   .paginacao {
     text-align: right;
-    margin: 2em 0;
+    margin: 20px 0;
+}
+
+.bloco { 
+  margin: 2em;
+  text-align: center;
+}
+
+.dados p{
+  margin: auto;
+}
+.header-table h3{
+  margin: auto;
+}
+
+.bloco p{
+  font-size: larger;
+  width: 100%;
+  background-color: #E0EAF5;
+  border-radius: 14px;
 }
