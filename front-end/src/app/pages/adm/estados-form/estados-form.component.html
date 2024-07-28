@@ -1,0 +1,28 @@
+<form nz-form class="form-cadastrar">
+    <nz-row [nzGutter]="[24, 0]">
+
+        <nz-col nzXs="24" nzLg="12">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">Nome</nz-form-label>
+                <nz-form-control>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="Nome" [(ngModel)]="estado.nome" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        
+        <nz-col nzXs="24" nzLg="12">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">UF</nz-form-label>
+                <nz-form-control>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="UF" [(ngModel)]="estado.uf" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        
+        <nz-col nzSpan="24">
+            <nz-row nzJustify="end">
+                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar" (click)="submit()">Adicionar</button>
+            </nz-row>
+        </nz-col>
+    </nz-row>
+</form>

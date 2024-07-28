@@ -13,6 +13,10 @@ import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.c
 import { AdmComponent } from './pages/adm/adm.component';
 import { ProdutoFormComponent } from './pages/adm/produtos-form/produtos-form.component';
 import { IcmsDetalhesNotas } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
+import { EstadosComponent } from './pages/adm/estados/estados.component';
+import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.component';
+import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
+import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/multiplicadores-form.component';
 
 export const routes: Routes = [
 
@@ -40,6 +44,14 @@ export const routes: Routes = [
     { path: 'produtos', children: [
       { path: '', component: ProdutoComponent },
       { path: 'form', component: ProdutoFormComponent }
+    ]},
+    { path: 'estados', children: [
+      { path: '', component: EstadosComponent },
+      { path: 'form', component: EstadosFormComponent }
+    ]},
+    { path: 'multiplicadores', children: [
+      { path: '', component: MultiplicadoresComponent },
+      { path: 'form', component: MultiplicadoresFormComponent }
     ]},
   ]}
 

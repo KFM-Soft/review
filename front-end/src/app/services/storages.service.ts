@@ -5,12 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class StoragesService {
 
-  private localStorage: Storage;
-  private sessionStorage: Storage;
+  private localStorage: Storage | null = null;
+  private sessionStorage: Storage | null = null;
 
   constructor() { 
-    this.localStorage = window.localStorage;
-    this.sessionStorage = window.sessionStorage;
+    if(typeof window !== 'undefined') {
+      this.localStorage = window.localStorage;
+      this.sessionStorage = window.sessionStorage;
+    } else {
+
+    }
   }
 
   setLocal(key: string, value: any): boolean {

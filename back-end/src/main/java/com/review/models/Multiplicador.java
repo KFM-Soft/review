@@ -10,11 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "multiplicadores_produtos")
+@Table(name = "multiplicadores_produtos", uniqueConstraints = {@UniqueConstraint(columnNames = {"produto_id", "aliquota_id"})})
 @Getter
 @Setter
 public class Multiplicador implements Serializable{
@@ -28,6 +29,9 @@ public class Multiplicador implements Serializable{
 
     @ManyToOne(optional = false)
     private Aliquota aliquota;
+
+    @Column(name = "aliquota_interna_emitente", columnDefinition = "DECIMAL(5,2)")
+    private BigDecimal aliquotaInternaEmit;
 
     @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal mvaOriginal;

@@ -13,16 +13,21 @@ export class ProdutoService {
 
   apiUrl = environment.API_URL + '/produto/'
 
-  getProdutos(): Observable<Produto[]> {
+  get(): Observable<Produto[]> {
     let url = this.apiUrl;
     return this.http.get<Produto[]>(url);
   }
   
-  saveProduto(produto: Produto): Observable<Produto> {
+  save(produto: Produto): Observable<Produto> {
     let url = this.apiUrl;
     if(produto.id)
       return this.http.put<Produto>(url, produto)
     return this.http.post<Produto>(url, produto);
+  }
+
+  delete(registro: Produto): Observable<void> {
+    let url = this.apiUrl + "/" + registro.id;
+    return this.http.delete<void>(url);
   }
   
 }

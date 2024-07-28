@@ -13,16 +13,21 @@ export class AliquotaService {
 
   apiUrl = environment.API_URL + '/aliquota/'
 
-  getAliquotas(): Observable<Aliquota[]> {
+  get(): Observable<Aliquota[]> {
     let url = this.apiUrl;
     return this.http.get<Aliquota[]>(url);
   }
 
-  saveAliquota(registro: Aliquota): Observable<Aliquota> {
+  save(registro: Aliquota): Observable<Aliquota> {
     let url = this.apiUrl;
     if(registro.id) 
       return this.http.put<Aliquota>(url, registro)
     return this.http.post<Aliquota>(url, registro);
+  }
+
+  delete(registro: Aliquota): Observable<void> {
+    let url = this.apiUrl + registro.id;
+    return this.http.delete<void>(url);
   }
   
 }

@@ -46,7 +46,7 @@ export class ProdutoFormComponent implements OnInit{
    ) { }
 
   ngOnInit(): void {
-    this.estadoService.getEstados().subscribe({
+    this.estadoService.get().subscribe({
       next: (retorno: Estado[]) => {
         this.estados = retorno
       }
@@ -60,7 +60,7 @@ export class ProdutoFormComponent implements OnInit{
   }
 
   submit(): void {
-    this.service.saveProduto(this.produto).subscribe({
+    this.service.save(this.produto).subscribe({
       next: () => {
         alert("Registro salvo com sucesso!")
         this.router.navigate(['../'], {relativeTo: this.route})

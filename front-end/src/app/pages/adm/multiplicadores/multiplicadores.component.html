@@ -1,0 +1,103 @@
+<app-adm>
+    <nz-row class="content" conteudoCentral>
+        <nz-col nzSpan="24" class="container-acoes">
+            <nz-row [nzGutter]="[24, 8]">
+                <nz-col nzXs="24" nzMd="18" class="barra-busca">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
+                        <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
+                            (input)="atualizarTabela()" />
+                    </nz-input-group>
+                </nz-col>
+                <nz-col nzXs="24" nzMd="6">
+                    <button nz-button nzSize="large" class="btn-novo" routerLink="./form">Adicionar</button>
+                </nz-col>
+                <nz-col nzXs="24" nzMd="12" nzLg="9">
+                    <nz-form-item>
+                        <nz-form-label nzSpan="24">Produto</nz-form-label>
+                        <nz-form-control nzSpan="24">
+                            <nz-select nzShowSearch nzAllowClear 
+                                    nzPlaceHolder="Selecionar Produto (NCM -> CEST)" [(ngModel)]="produto" 
+                                    [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                                <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" 
+                                        [nzValue]="produto" [nzTitle]="produto.descricao"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzXs="24" nzMd="12" nzLg="9">
+                    <nz-form-item>
+                        <nz-form-label nzSpan="24" nz-tooltip 
+                                nzTooltipTitle="Aliquota está sendo tratado como o valor de aliquota entre dois estados (origem e destino)">
+                            Aliquota
+                        </nz-form-label>
+                        <nz-form-control nzSpan="24">
+                            <nz-select nzShowSearch nzAllowClear 
+                                    nzPlaceHolder="Selecionar Aliquota" [(ngModel)]="aliquota" 
+                                    [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                                <nz-option *ngFor="let aliquota of aliquotas" 
+                                        [nzLabel]="aliquota.origem.uf + ' -> ' + aliquota.destino.uf" 
+                                        [nzValue]="aliquota"></nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </nz-col>
+                <nz-col nzXs="24" nzMd="24" nzLg="6" class="container-btn-buscar">
+                    <button nz-button nzSize="large" nzType="primary" class="btn-buscar" (click)="buscar()">Buscar</button>   
+                </nz-col>
+            </nz-row>
+        </nz-col>
+        <nz-col nzSpan="24">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
+                <thead>
+                    <tr>
+                        <th nzWidth="5%" nzAlign="center">Id</th>
+                        <th nzWidth="15%" nzAlign="center">Produto</th>
+                        <th nzWidth="15%" nzAlign="center" nz-tooltip nzTooltipTitle="Aliquota está sendo tratado como o valor de aliquota entre dois estados (origem e destino)">Aliquota</th>
+                        <th nzWidth="15%" nzAlign="center" nz-tooltip nzTooltipTitle="Valor de aliquota interna do produto no estado emitente ">Aliquota Interna</th>
+                        <th nzAlign="center">MVA Original</th>
+                        <th nzAlign="center">MVA Ajustado</th>
+                        <th nzAlign="center">Multiplicador Original</th>
+                        <th nzAlign="center">Multiplicador Ajustado</th>
+                        <th nzWidth="20%" [nzAlign]="'center'">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of headerTable.data">
+                        <td [nzAlign]="'center'">{{ data.id }}</td>
+                        <td [nzAlign]="'center'"> {{ data.produto.descricao }}</td>
+                        <td [nzAlign]="'center'"> {{ data.aliquota.origem.uf }} -> {{ data.aliquota.destino.uf }}</td>
+                        <td [nzAlign]="'center'"> {{ data.mvaOriginal }}</td>
+                        <td [nzAlign]="'center'"> {{ data.mvaAjustada  ? data.mvaAjustada : "-"}}</td>
+                        <td [nzAlign]="'center'"> {{ data.multiplicadorOriginal  }}</td>
+                        <td [nzAlign]="'center'"> {{ data.multiplicadorAjustado ? data.multiplicadorAjustado : "-" }}</td>
+                        <td [nzAlign]="'center'">
+                            <nz-row [nzGutter]="[4, 4]" nzJustify="center">
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary"
+                                        class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
+                                </nz-col>
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" nzDanger
+                                        class="botao botaoExcluir" (click)="excluirItem(data)">Excluir</button>
+                                </nz-col>
+                            </nz-row>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </nz-table>
+            <div class="paginacao">
+                <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+                    [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+                    (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+                </nz-pagination>
+            </div>
+        </nz-col>
+    </nz-row>
+</app-adm>
+
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">
+        <span nz-icon nzType="search"></span>
+    </button>
+</ng-template>

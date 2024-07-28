@@ -116,7 +116,7 @@ public class ICMSController {
 							try {
 								BigDecimal aliquotaInterestadual = aliquotaService.getByOrigemDestino(ufEmit, ufDest).getPorcentagem();
 	
-								BigDecimal aliquotaInternaEmit = aliquotaService.getByOrigemDestino(ufEmit, ufEmit).getPorcentagem();
+								BigDecimal aliquotaInternaEmit = multiplicador.getAliquotaInternaEmit();
 		
 								returnString += "icms(" + aliquotaInterestadual.toString() + ")\n";
 		

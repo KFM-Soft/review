@@ -10,14 +10,14 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
-import { Produto } from '../../../models/Produto';
-import { ProdutoService } from '../../../services/produtos.service';
+import { Estado } from '../../../models/Estado';
+import { EstadoService } from '../../../services/estado.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 
 @Component({
-  selector: 'app-Produto',
+  selector: 'app-estado',
   standalone: true,
   imports: [
     CommonModule,
@@ -27,28 +27,28 @@ import { StoragesService } from '../../../services/storages.service';
     NzFlexModule,
     NzTableModule,
     NzButtonModule,
+    NzGridModule,
     NzPaginationModule,
     NzInputModule,
-    NzGridModule,
     FormsModule,
     RouterLink,
     AdmComponent,
   ],
-  templateUrl: './produtos.component.html',
-  styleUrl: './produtos.component.scss'
+  templateUrl: './estados.component.html',
+  styleUrl: './estados.component.scss'
 })
-export class ProdutoComponent implements OnInit {
+export class EstadosComponent implements OnInit {
   
   constructor(
-    private renderer: Renderer2,
-    private service: ProdutoService,
+    private service: EstadoService,
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
+    private renderer: Renderer2,
   ) { }
 
-  registros: Produto[] = [];
-  produtos: Produto[] = [];
+  registros: Estado[] = [];
+  estados: Estado[] = [];
   total: number = 0;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -56,31 +56,25 @@ export class ProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.get().subscribe({
-      next: (retorno: Produto[]) => {
-        this.registros = retorno
-        this.produtos = retorno
+      next: (retorno: Estado[]) => {
+        this.registros = retorno;
+        this.estados = retorno;
       },
       error: (error) => {
-        console.error('Erro ao carregar Produtos:', error);
+        console.error('Erro ao carregar estados:', error);
       }
     })
   }
 
   atualizarTabela(): void {
-    let filtro = this.produtos;
-
+    let filtro = this.estados;
     if (this.termoBusca) {
-
-      filtro = filtro.filter(produto => 
-        produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
+      filtro = filtro.filter(estado => 
+        estado.nome.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
-          produto.cest.toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          produto.cfop.toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
+          estado.uf.toLowerCase().includes(this.termoBusca.toLowerCase())
       );
-    } 
+    }
 
     this.total = filtro.length;
     const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
@@ -98,12 +92,12 @@ export class ProdutoComponent implements OnInit {
     this.atualizarTabela();
   }
 
-  editarItem(registro: Produto){
-    this.storageService.setSession('produto', registro);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
+  editarItem(estado: Estado){
+    this.storageService.setSession('estado', estado);
+    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: estado.id}});
   }
-  
-  excluirItem(registro: Produto){
+
+  excluirItem(registro: Estado){
     this.service.delete(registro).subscribe({
       complete: () => {
         alert("Registro excluido com sucesso.");

@@ -15,6 +15,7 @@ import { AliquotaService } from '../../../services/aliquota.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-aliquota',
@@ -55,7 +56,7 @@ export class AliquotaComponent implements OnInit {
   termoBusca: string = '';
 
   ngOnInit(): void {
-    this.service.getAliquotas().subscribe({
+    this.service.get().subscribe({
       next: (retorno: Aliquota[]) => {
         this.registros = retorno;
         this.aliquotas = retorno;
@@ -92,9 +93,20 @@ export class AliquotaComponent implements OnInit {
     this.atualizarTabela();
   }
 
-  editarItem(aliquota: Aliquota){
-    this.storageService.setSession('aliquota', aliquota);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: aliquota.id}});
+  editarItem(registro: Aliquota){
+    this.storageService.setSession('aliquota', registro);
+    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
+  }
+
+  excluirItem(registro: Aliquota){
+    this.service.delete(registro).subscribe({
+      complete: () => {
+        alert("Registro excluido com sucesso.");
+      }, error: (erro) => {
+        console.error("Erro ao excluir:", erro);
+        alert("Erro na exclusão!");
+      }
+    })
   }
 
 }

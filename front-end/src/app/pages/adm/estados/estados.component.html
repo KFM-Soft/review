@@ -17,21 +17,17 @@
             <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
                 <thead>
                     <tr>
-                        <th nzWidth="5%" [nzAlign]="'center'">Id</th>
-                        <th>Descrição</th>
-                        <th nzWidth="15%">NCM</th>
-                        <th nzWidth="15%">CEST</th>
-                        <th nzWidth="15%">CFOP</th>
-                        <th nzWidth="15%" [nzAlign]="'center'">Açôes</th>
+                        <th nzWidth="15%" [nzAlign]="'center'">Id</th>
+                        <th>Nome</th>
+                        <th>UF</th>
+                        <th nzWidth="20%" [nzAlign]="'center'">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let data of headerTable.data">
                         <td [nzAlign]="'center'">{{ data.id }}</td>
-                        <td> {{ data.descricao }}</td>
-                        <td> {{ data.ncm }}</td>
-                        <td> {{ data.cest }}</td>
-                        <td> {{ data.cfop }}</td>
+                        <td> {{ data.nome }}</td>
+                        <td> {{ data.uf }}</td>
                         <td [nzAlign]="'center'">
                             <nz-row [nzGutter]="[4, 4]" nzJustify="center">
                                 <nz-col>
@@ -57,7 +53,6 @@
         </nz-col>
     </nz-row>
 </app-adm>
-
 
 <ng-template #suffixIconButton>
     <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">

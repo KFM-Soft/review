@@ -14,25 +14,33 @@
             </nz-row>
         </nz-col>
         <nz-col nzSpan="24">
-            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
                 <thead>
                     <tr>
-                        <th nzWidth="5%">Id</th>
+                        <th nzWidth="5%" [nzAlign]="'center'">Id</th>
                         <th>Origem</th>
                         <th>Destino</th>
                         <th nzWidth="15%">Porcentagem</th>
-                        <th nzWidth="20%">Ações</th>
+                        <th nzWidth="20%" [nzAlign]="'center'">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let data of headerTable.data">
                         <td [nzAlign]="'center'">{{ data.id }}</td>
-                        <td> {{ data.origem.uf }}</td>
-                        <td> {{ data.destino.uf }}</td>
+                        <td> {{ data.origem.nome }} - {{ data.origem.uf }}</td>
+                        <td> {{ data.destino.nome }} - {{ data.destino.uf }}</td>
                         <td> {{ data.porcentagem }}</td>
                         <td [nzAlign]="'center'">
-                            <button nz-button [nzSize]="'large'" nzType="primary"
-                                class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
+                            <nz-row [nzGutter]="[4, 4]" nzJustify="center">
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary"
+                                        class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
+                                </nz-col>
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" nzDanger
+                                        class="botao botaoEditar" (click)="excluirItem(data)">Excluir</button>
+                                </nz-col>
+                            </nz-row>
                         </td>
                     </tr>
                 </tbody>

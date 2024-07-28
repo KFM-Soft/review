@@ -12,9 +12,22 @@ export class EstadoService {
 
   apiUrl = environment.API_URL + '/estado/'
 
-  getEstados(): Observable<Estado[]> {
+  get(): Observable<Estado[]> {
     let url = this.apiUrl;
     return this.http.get<Estado[]>(url);
   }
+
+  save(registro: Estado): Observable<Estado> {
+    let url = this.apiUrl;
+    if(registro.id) 
+      return this.http.put<Estado>(url, registro)
+    return this.http.post<Estado>(url, registro);
+  }
+
+  delete(registro: Estado): Observable<void> {
+    let url = this.apiUrl + "/" + registro.id;
+    return this.http.delete<void>(url);
+  }
+  
 
 }
