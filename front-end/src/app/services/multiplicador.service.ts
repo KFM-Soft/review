@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Multiplicador } from '../models/Multiplicador';
+import { Aliquota } from '../models/Aliquota';
+import { Produto } from '../models/Produto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,12 @@ export class MultiplicadorService {
 
   get(): Observable<Multiplicador[]> {
     let url = this.apiUrl;
+    return this.http.get<Multiplicador[]>(url);
+  }
+
+  getByAliquotaAndProduto(produto: Produto, aliquota: Aliquota, ): Observable<Multiplicador[]> { 
+    let url = this.apiUrl + 'getByProdutoAndAliquota/' + produto.id + '/' + aliquota.id;
+    console.log(url);
     return this.http.get<Multiplicador[]>(url);
   }
   

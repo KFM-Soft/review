@@ -69,6 +69,24 @@ export class MultiplicadoresComponent implements OnInit {
   termoBusca: string = '';
 
   ngOnInit(): void {
+    this.getAliquotas();
+    this.getProdutos();
+    this.getMultiplicadores();
+  }
+
+  getMultiplicadores() {
+    this.service.get().subscribe({
+      next: (retorno: Multiplicador[]) => {
+        this.registros = retorno
+        this.total = retorno.length;
+      },
+      error: (error) => {
+        console.error("Erro ao buscar multiplicadores: ", error);
+      }
+    })
+  }
+
+  getAliquotas() {
     this.aliquotaService.get().subscribe({
       next: (retorno: Aliquota[]) => {
         this.aliquotas = retorno;
@@ -77,6 +95,9 @@ export class MultiplicadoresComponent implements OnInit {
         console.error("Erro ao buscar aliquotas: ", error);
       }
     })
+  }
+
+  getProdutos() {
     this.produtoService.get().subscribe({
       next: (retorno: Produto[]) => {
         this.produtos = retorno;
@@ -88,19 +109,25 @@ export class MultiplicadoresComponent implements OnInit {
   }
 
   atualizarTabela(): void {
-    // let filtro = this.multiplicadores;
-    // if (this.termoBusca) {
-    //   filtro = filtro.filter(multiplicador => 
-    //     multiplicador.nome.toLowerCase().includes(this.termoBusca.toLowerCase()) 
-    //       || 
-    //       multiplicador.uf.toLowerCase().includes(this.termoBusca.toLowerCase())
-    //   );
-    // }
+    let filtro = this.multiplicadores;
+    if (this.termoBusca) {
+      filtro = filtro.filter(multiplicador => 
+        multiplicador.produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
+          || 
+          multiplicador.mvaOriginal.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
+          || 
+          multiplicador.mvaAjustada?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
+          || 
+          multiplicador.multiplicadorOriginal?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
+          || 
+          multiplicador.multiplicadorAjustado?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
+      );
+    }
 
-    // this.total = filtro.length;
-    // const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    // const endIndex = startIndex + this.paginaTamanho;
-    // this.registros = filtro.slice(startIndex, endIndex);
+    this.total = filtro.length;
+    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
+    const endIndex = startIndex + this.paginaTamanho;
+    this.registros = filtro.slice(startIndex, endIndex);
   }
 
   atualizarPagina(paginaindex: number): void {
@@ -114,18 +141,18 @@ export class MultiplicadoresComponent implements OnInit {
   }
 
   buscar() {
-    if(!(typeof this.aliquota) || !(typeof this.produto)) return false;
+    if(!(this.aliquota) || !(this.produto)) return false;
+    if(!(Object.keys(this.aliquota).length > 0 && Object.keys(this.produto).length > 0)) return false;
+    console.log(this.produto, this.aliquota)
+    console.log(this.produto.id, this.aliquota.id)
+    this.service.getByAliquotaAndProduto(this.produto, this.aliquota).subscribe({
+      next: (retorno: Multiplicador[]) => {
+        this.multiplicadores = retorno;
+        this.atualizarTabela();
+      }
+    })
 
-    console.log(typeof this.aliquota, typeof this.produto)
-    console.log(typeof this.aliquota == null, typeof this.produto == null)
-    console.log(this.aliquota, this.produto)
-    if(Object.keys(this.aliquota).length > 0 && Object.keys(this.produto).length > 0) {
-      console.log("DEU TUDO CERTO")
-    }
-    else {
-      console.log("DEU ALGO ERRADO")
-    }
-    return;
+    return true;
   }
 
   editarItem(multiplicador: Multiplicador){

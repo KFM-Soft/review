@@ -35,6 +35,12 @@ public class MultiplicadorController {
         Multiplicador registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
+    
+    @GetMapping("/getByProdutoAndAliquota/{produto_id}/{aliquota_id}")
+    public ResponseEntity<List<Multiplicador>> getMultiplicadorByProdutoIdAndAliquotaId(@PathVariable Long produto_id, @PathVariable Long aliquota_id ) {
+        List<Multiplicador> registro = service.getMultiplicadorByProdutoIdAndAliquotaId(produto_id, aliquota_id);
+        return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
 
     @PostMapping("/")
     public ResponseEntity<Multiplicador> createMultiplicador(@RequestBody Multiplicador multiplicador) {
