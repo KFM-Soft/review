@@ -75,10 +75,7 @@ public class ICMSController {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Integer contador = 0;
 			
-			
             if(xmls == null || xmls.isEmpty() || xmls.size() == 0) throw new RuntimeException("Nenhum xml passado");
-
-
 
 			for (MultipartFile file : xmls) {
 				
@@ -231,9 +228,13 @@ public class ICMSController {
 
 		JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 		HttpHeaders headers = new HttpHeaders();
+		byte[] response = JasperExportManager.exportReportToPdf(print);
+
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=teste.pdf");
 
-		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(JasperExportManager.exportReportToPdf(print));
+		return ResponseEntity.ok()
+				.headers(headers)
+				.contentType(MediaType.APPLICATION_PDF).body(response);
 	}
 
 
