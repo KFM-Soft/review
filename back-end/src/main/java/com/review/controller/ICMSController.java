@@ -17,7 +17,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +38,7 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRSaver;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -207,7 +207,7 @@ public class ICMSController {
 								BigDecimal resultadoIcmsSubstituicaoTributaria = valorAliquotaInterna.subtract(valorIcms);
 								returnString += "RESULTADO ICMS ST -- " + resultadoIcmsSubstituicaoTributaria.toString() + "\n\n";
 								System.out.println("RESULTADO ICMS ST: " + resultadoIcmsSubstituicaoTributaria);
-								icmsRelatorio.setResultadoIcms(resultadoIcmsSubstituicaoTributaria);
+								icmsRelatorio.setResultadoIcmsSubstituicaoTributaria(resultadoIcmsSubstituicaoTributaria);
 
 								icms.add(icmsRelatorio);
 
@@ -218,7 +218,8 @@ public class ICMSController {
 						}
 					}
 				}
-				parameters.put("icms", icms);
+				JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(icms);
+				parameters.put("icms", icmss);
 				returnString += "\n";
 			}
 			parameters.put("icms", icms);
@@ -227,9 +228,11 @@ public class ICMSController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=teste.pdf");
+
 		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(JasperExportManager.exportReportToPdf(print));
 	}
 

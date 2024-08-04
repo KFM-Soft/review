@@ -19,5 +19,5 @@ public class IcmsRelatorioDto {
     private BigDecimal mva;
     private BigDecimal vProdComMva;
     private BigDecimal baseST;
-    private BigDecimal resultadoIcms;
+    private BigDecimal resultadoIcmsSubstituicaoTributaria;
 }

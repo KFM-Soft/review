@@ -65,7 +65,7 @@
 			<element kind="rectangle" uuid="9ce76e90-6e17-4933-b88c-e23fa92dd44b" x="0" y="0" width="595" height="780" backcolor="#005CAA"/>
 			<element kind="component" uuid="d21c3b64-c458-4a25-8982-888170b96c9b" stretchType="ContainerHeight" x="30" y="120" width="520" height="630">
 				<component kind="table">
-					<datasetRun uuid="4ad28da0-2bb0-4656-ab4e-b08032cca2d2" subDataset="Dataset1">
+					<datasetRun uuid="4ad28da0-2bb0-4656-ab4e-b08032cca2d2" subDataset="icms">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<column kind="single" uuid="df42333b-bfe1-4d08-a51f-52bed23e3848" width="70">
@@ -193,7 +193,7 @@
 						</columnHeader>
 						<detailCell height="30" style="Table_TD">
 							<element kind="textField" uuid="e227848b-b0ce-4caf-9395-b432ccafde8d" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{resultadoICMSSt}]]></expression>
+								<expression><![CDATA[$F{resultadoIcmsSubstituicaoTributaria}]]></expression>
 							</element>
 						</detailCell>
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
