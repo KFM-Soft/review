@@ -215,11 +215,10 @@ public class ICMSController {
 						}
 					}
 				}
-				JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(icms);
-				parameters.put("icms", icmss);
+				JRBeanCollectionDataSource icmssDataSource = new JRBeanCollectionDataSource(icms);
+				parameters.put("icmsDataSet", icmssDataSource);
 				returnString += "\n";
 			}
-			parameters.put("icms", icms);
 			
 
 		} catch (Exception e) {

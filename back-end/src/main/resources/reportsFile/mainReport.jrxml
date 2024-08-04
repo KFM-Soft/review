@@ -9,7 +9,8 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
@@ -39,7 +40,8 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<dataset name="icms" uuid="706dbf5d-2d18-49f1-968e-ce4548bfe9e1">
+	<dataset name="icmsDataSet" uuid="73d7f496-4a27-4e29-a27f-15cf9590128a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
 		<query language="sql"><![CDATA[]]></query>
 		<field name="descricaoProduto" class="java.lang.String"/>
 		<field name="ncmCest" class="java.lang.String"/>
@@ -51,22 +53,21 @@
 		<field name="vProdComMva" class="java.math.BigDecimal"/>
 		<field name="baseST" class="java.math.BigDecimal"/>
 		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
-		<field name="data" class="java.util.Collection">
-			<description><![CDATA[data]]></description>
-		</field>
 	</dataset>
-	<field name="nomeEmpresa " class="java.lang.String"/>
-	<field name="numeroNota" class="java.lang.String"/>
-	<field name="nomeFornecedor" class="java.lang.String"/>
-	<field name="emitente" class="java.lang.String"/>
-	<field name="destinatário" class="java.lang.String"/>
+	<parameter name="icmsDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="nomeEmpresa" class="java.lang.String"/>
+	<parameter name="numeroNota" class="java.lang.String"/>
+	<parameter name="nomeFornecedor" class="java.lang.String"/>
+	<parameter name="emitente" class="java.lang.String"/>
+	<parameter name="destinatario" class="java.lang.String"/>
+	<query language="SQL"><![CDATA[]]></query>
 	<detail>
 		<band height="842">
 			<element kind="rectangle" uuid="9ce76e90-6e17-4933-b88c-e23fa92dd44b" x="0" y="0" width="595" height="780" backcolor="#005CAA"/>
-			<element kind="component" uuid="d21c3b64-c458-4a25-8982-888170b96c9b" stretchType="ContainerHeight" x="30" y="120" width="520" height="630">
+			<element kind="component" uuid="d21c3b64-c458-4a25-8982-888170b96c9b" stretchType="ContainerHeight" x="20" y="110" width="520" height="630">
 				<component kind="table">
-					<datasetRun uuid="4ad28da0-2bb0-4656-ab4e-b08032cca2d2" subDataset="icms">
-						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<datasetRun uuid="d2fbddd1-11e1-4b6a-8f3d-a2f70a461aab" subDataset="icmsDataSet">
+						<dataSourceExpression><![CDATA[$P{icmsDataSet}]]></dataSourceExpression>
 					</datasetRun>
 					<column kind="single" uuid="df42333b-bfe1-4d08-a51f-52bed23e3848" width="70">
 						<columnHeader height="30" rowSpan="1" style="Table_CH">
@@ -206,19 +207,19 @@
 			</element>
 			<element kind="rectangle" uuid="65667d2c-5085-4e70-8c3d-cbcc5388b98c" x="0" y="0" width="595" height="70"/>
 			<element kind="textField" uuid="3f75936c-fd00-442e-a9a0-b3146dd6b980" x="19" y="50" width="120" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["N° Nota: $F{numeroNota}"]]></expression>
+				<expression><![CDATA["N° Nota: " + $P{numeroNota}]]></expression>
 			</element>
 			<element kind="textField" uuid="1f3cabfe-924b-43a0-9d71-08595b5bb964" x="150" y="51" width="160" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Fornecedor: $F{nomeFornecedor}"]]></expression>
+				<expression><![CDATA["Fornecedor: " + $P{nomeFornecedor}]]></expression>
 			</element>
 			<element kind="textField" uuid="46c9205d-b244-4ba2-b09f-c9e1c2d2fa21" x="440" y="40" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Destinatário: $F{destinatário}"]]></expression>
+				<expression><![CDATA["UF Destinatário" + $P{destinatario}]]></expression>
 			</element>
 			<element kind="textField" uuid="21faea78-264b-43ae-9cfa-6831120a56f0" x="440" y="15" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Remetente: $F{emitente}"]]></expression>
+				<expression><![CDATA["UF Emitente: "+$P{emitente}]]></expression>
 			</element>
 			<element kind="textField" uuid="b9b875d2-bce2-4363-9e26-97d4d5a9321a" x="17" y="10" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Empresa: $F{nomeEmpresa }"]]></expression>
+				<expression><![CDATA["Empresa" + $P{nomeEmpresa}]]></expression>
 			</element>
 			<element kind="rectangle" uuid="5712d040-4613-4b72-92a9-eca5f63bde84" x="0" y="780" width="596" height="62"/>
 		</band>
