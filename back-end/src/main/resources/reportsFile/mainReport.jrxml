@@ -50,7 +50,7 @@
 		<field name="aliquotaInternaEmit" class="java.math.BigDecimal"/>
 		<field name="valorIcms" class="java.math.BigDecimal"/>
 		<field name="mva" class="java.math.BigDecimal"/>
-		<field name="vProdComMva" class="java.math.BigDecimal"/>
+		<field name="prodMva" class="java.math.BigDecimal"/>
 		<field name="baseST" class="java.math.BigDecimal"/>
 		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
 	</dataset>
@@ -168,7 +168,7 @@
 						</columnHeader>
 						<detailCell height="30" style="Table_TD">
 							<element kind="textField" uuid="56866b53-1459-407e-a75c-24613e54ee38" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{vProdComMva}]]></expression>
+								<expression><![CDATA[$F{prodMva}]]></expression>
 							</element>
 						</detailCell>
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
