@@ -47,8 +47,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/icms")
 public class ICMSController {
 
-
-    
     @Autowired
     private MultiplicadorService multService;
 
@@ -56,17 +54,18 @@ public class ICMSController {
     private AliquotaService aliquotaService;
 
 	
-
 	@PostMapping("/")
 	private ResponseEntity<byte[]> executarCalculo(@RequestBody List<MultipartFile> xmls)throws JRException, FileNotFoundException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		String returnString = "";
 
-		File pdf = ResourceUtils.getFile("classpath:reportsFile/mainReport.jrxml");
+		String reportName = "icmsReport";
+
+		File pdf = ResourceUtils.getFile("classpath:reportsFile/" + reportName + ".jrxml");
 		String path = pdf.getParent();
 
-		JasperReport jasperReport = JasperCompileManager.compileReport(path + "/mainReport.jrxml");
-		JRSaver.saveObject(jasperReport, path + "/mainReport.jasper");
+		JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + reportName + ".jrxml");
+		JRSaver.saveObject(jasperReport, path + "/" + reportName + ".jasper");
 
 		Map<String, Object> parameters = new HashMap<>();
 
@@ -192,7 +191,7 @@ public class ICMSController {
 								returnString += "VALOR PRODUTO COM MVA -- " + vProdComMva.toString() + "\n\n";
 								icmsRelatorio.setMva(multiplicador.getMvaOriginal());
 								System.out.println("VALOR PRODUTO COM MVA: " + vProdComMva);
-								icmsRelatorio.setVProdComMva(vProdComMva);
+								icmsRelatorio.setProdMva(vProdComMva);
 
 
 								BigDecimal baseST = vProdComMva.add(valorProduto);
@@ -215,13 +214,15 @@ public class ICMSController {
 						}
 					}
 				}
-				JRBeanCollectionDataSource icmssDataSource = new JRBeanCollectionDataSource(icms);
-				parameters.put("icmsDataSet", icmssDataSource);
+				
 				returnString += "\n";
 			}
+			JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(icms);
+			parameters.put("icmsDataSet", icmss);
 			
 
 		} catch (Exception e) {
+			returnString += e.getMessage() + "\n" + e.getStackTrace();
 			e.printStackTrace();
 		}
 

@@ -18,6 +18,6 @@ insert into review.aliquotas_interestaduais (origem_id, destino_id, porcentagem)
 (1, 1, 19.00),
 (9, 9, 17.00);
 
-insert into review.multiplicadores_produtos (aliquota_id, produto_id, aliquota_interna_emitente, mva_ajustada, multiplicador_original, multiplicador_ajustado, mva_original) VALUES
-(2, 1, 17.00, null, 12.65, null, 45.00),
-(2, 2, 17.00, null, 12.65, null, 45.00);
+insert into review.multiplicadores_produtos (aliquota_id, produto_id, aliquota_interna_emitente, mva_ajustada, multiplicador_original, multiplicador_ajustado, mva_original, aliquota_interestadual_emitente) VALUES
+(2, 1, 17.00, null, 12.65, null, 45.00, 12.00),
+(2, 2, 17.00, null, 12.65, null, 45.00, 12.00);
