@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class IcmsRelatorioDto {
+public class IcmsProdutoDto {
     private String descricaoProduto;
     private String ncmCest;
     private BigDecimal valorProduto;
