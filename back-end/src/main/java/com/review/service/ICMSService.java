@@ -104,6 +104,7 @@ public class ICMSService {
             String ufDest = destinatario.getElementsByTagName("UF").item(0).getTextContent();
             String nomeEmpresa = destinatario.getElementsByTagName("xNome").item(0).getTextContent();
 
+            notaDto.setNomeArquivo(file.getOriginalFilename());
             notaDto.setNumeroNota(numeroNota.getTextContent());
             notaDto.setUfEmitente(ufEmit);
             notaDto.setNomeFornecedor(nomeFornecedor);

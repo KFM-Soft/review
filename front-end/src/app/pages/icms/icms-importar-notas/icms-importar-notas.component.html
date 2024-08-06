@@ -2,7 +2,7 @@
 
     <h1>ICMS - Importar Notas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top" >
+    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
@@ -14,15 +14,16 @@
                         </nz-flex>
                     </td>
 
-    
+
                     <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
                         <ng-container>
                             <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px" class="edit"></button>
+                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
+                                    class="edit"></button>
                         </ng-container>
                     </td>
                 </tr>
-    
+
                 <tr>
                     <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
@@ -56,7 +57,7 @@
                     </td>
                 </tr>
             </table>
-            
+
         </nz-card>
     </a>
 
@@ -67,17 +68,11 @@
     </nz-radio-group>
 
     <nz-card [nzHoverable]="true" class="empresa">
-        <nz-upload
-            [nzBeforeUpload]="beforeUploadSupply"
-            [nzAccept]="'.xml'"
-            [(nzFileList)]="fileList"
-            nzType="drag"
-            [nzMultiple]="true"
-            nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            (nzChange)="handleChange($event)"
-        >
+        <nz-upload [nzBeforeUpload]="beforeUploadSupply" [nzAccept]="'.xml'" [(nzFileList)]="fileList" nzType="drag"
+            [nzMultiple]="true" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+            (nzChange)="handleChange($event)">
             <p class="ant-upload-drag-icon">
-            <span nz-icon nzType="inbox"></span>
+                <span nz-icon nzType="inbox"></span>
             </p>
             <p class="ant-upload-text">Selecione um arquivo ou arraste e solte aqui</p>
             <p class="ant-upload-hint">
@@ -85,16 +80,26 @@
             </p>
             <ng-container>
                 <div class="selecinar">
-                    <p >Selecionar</p>
-                </div>    
+                    <p>Selecionar</p>
+                </div>
             </ng-container>
         </nz-upload>
 
         <div class="containerButton">
             <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Enviar</button>
         </div>
-        
 
     </nz-card>
+</div>
 
-<div>
+<nz-modal [(nzVisible)]="modalVisivel" [nzTitle]="'Valores do cálculo'" [nzContent]="modalContent"
+    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <ng-template #modalContent>
+        
+    </ng-template>
+
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
+        <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Enviar</button>
+    </ng-template>
+</nz-modal>

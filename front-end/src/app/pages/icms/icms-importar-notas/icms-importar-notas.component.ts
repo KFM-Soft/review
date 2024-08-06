@@ -14,6 +14,7 @@ import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { IcmsService } from '../../../services/icms.service';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -33,8 +34,8 @@ import { FormsModule } from '@angular/forms';
     NzUploadModule,
     RouterLink,
     NzRadioModule,
+    NzModalModule,
     FormsModule,
-
   ],
   templateUrl: './icms-importar-notas.component.html',
   styleUrl: './icms-importar-notas.component.scss'
@@ -50,6 +51,8 @@ export class IcmsImportarNotasComponent {
   xmlFile: NzUploadFile = <NzUploadFile>{};
   fileList: NzUploadFile[] = [];
   reviewValue = 'Y';
+  modalVisivel = false;
+  isConfirmLoading = false;
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     
@@ -76,16 +79,34 @@ export class IcmsImportarNotasComponent {
   }
 
   enviar() {
+    this.modalVisivel = true;
     const files: File[] = this.convertNzUploadFileToFile(this.fileList);
 
-    this.service.passXmlsFiles(files).subscribe({
-      next: (response: any) => console.log(response.texto), 
+    this.service.getValoresCalculo(files).subscribe({
+      next: (response: any) => console.log(response), 
       error: (error: any) => {
         console.error('Erro no upload', error)
       }
     });
-
   }
+  
+
+  showModal(): void {
+    this.modalVisivel = true;
+  }
+
+  handleOk(): void {
+    this.isConfirmLoading = true;
+    setTimeout(() => {
+      this.modalVisivel = false;
+      this.isConfirmLoading = false;
+    }, 1000);
+  }
+
+  handleCancel(): void {
+    this.modalVisivel = false;
+  }
+
 
 }
 

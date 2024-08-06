@@ -11,11 +11,10 @@ export class IcmsService {
 
   apiUrl = environment.API_URL + '/icms/'
 
-  passXmlsFiles(files: File[]) {
-    let url = this.apiUrl;
+  getValoresCalculo(files: File[]) {
+    let url = this.apiUrl + 'calculo';
 
     const formData = new FormData();
-    
     files.forEach((file) => {
       formData.append(`xmls`, file);
     });

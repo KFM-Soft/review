@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IcmsNotaDto {
+    private String nomeArquivo;
     private String numeroNota;
     private String nomeFornecedor;
     private String nomeEmpresa;
