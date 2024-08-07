@@ -13,12 +13,15 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 import { IcmsNota } from '../../../models/IcmsNota';
-
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { FormsModule } from '@angular/forms';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   selector: 'app-icms-detalhes-nota',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink, NzGridModule],
+  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule, NzPaginationModule, RouterLink, NzGridModule, NzInputModule, FormsModule, NzInputNumberModule, NzDividerModule],
   templateUrl: './icms-detalhes-nota.component.html',
   styleUrl: './icms-detalhes-nota.component.scss'
 })
@@ -32,6 +35,7 @@ export class IcmsDetalhesNotas {
   
   notas: IcmsNota[] = [];
   registros: IcmsNota[] = [];
+  items_qtd: number[] = []
   total = this.notas.length;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -41,6 +45,8 @@ export class IcmsDetalhesNotas {
   ngOnInit(): void {
     this.notas = this.storageService.getSession('notasCalculadas')
     this.registros = this.storageService.getSession('notasCalculadas')
+    if(this.registros)
+      this.items_qtd =  this.registros.map((_, index) => index + 1);
   }
 
   atualizarTabela(): void {
@@ -60,4 +66,10 @@ export class IcmsDetalhesNotas {
     this.paginaTamanho = paginaTamanho;
     this.atualizarTabela();
   }
+
+  trackByFn(index: any, item: any) {
+    return index;
+  }
+
+
 }

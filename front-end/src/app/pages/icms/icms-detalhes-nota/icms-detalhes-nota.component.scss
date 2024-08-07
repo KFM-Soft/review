@@ -1,7 +1,31 @@
 nz-row {
   background-color: white;
+  padding: 8px;
 }
 
-nz-col {
-  margin-left: 30px;
+nz-row:nth-child(1) {
+  border-radius: 16px;
+}
+
+.teste {
+  border: 1px solid black;
+  filter: drop-shadow(50px);
+}
+
+.lbl-item, nz-form-label {
+  font-size: x-large;
+  margin-bottom: 0;
+}
+
+.valor-item {
+  background-color: #E0EAF5;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: x-large;
+  border-radius: 8px;
+  padding: 0px 8px;
+  cursor: not-allowed;
 }
