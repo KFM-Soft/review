@@ -91,15 +91,3 @@
 
     </nz-card>
 </div>
-
-<nz-modal [(nzVisible)]="modalVisivel" [nzTitle]="'Valores do cálculo'" [nzContent]="modalContent"
-    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
-    <ng-template #modalContent>
-        
-    </ng-template>
-
-    <ng-template #modalFooter>
-        <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
-        <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Enviar</button>
-    </ng-template>
-</nz-modal>

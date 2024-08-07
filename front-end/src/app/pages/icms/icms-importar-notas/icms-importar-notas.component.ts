@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -14,8 +14,9 @@ import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { IcmsService } from '../../../services/icms.service';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-import { NzModalModule } from 'ng-zorro-antd/modal';
 import { FormsModule } from '@angular/forms';
+import { IcmsNota } from '../../../models/IcmsNota';
+import { StoragesService } from '../../../services/storages.service';
 
 @Component({
   selector: 'app-icms-notas-carregar',
@@ -34,7 +35,6 @@ import { FormsModule } from '@angular/forms';
     NzUploadModule,
     RouterLink,
     NzRadioModule,
-    NzModalModule,
     FormsModule,
   ],
   templateUrl: './icms-importar-notas.component.html',
@@ -46,13 +46,15 @@ export class IcmsImportarNotasComponent {
   constructor(
     private msg: NzMessageService,
     private service: IcmsService,
+    private storageService: StoragesService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   xmlFile: NzUploadFile = <NzUploadFile>{};
+  notasCalculadas: IcmsNota[] = [];
   fileList: NzUploadFile[] = [];
   reviewValue = 'Y';
-  modalVisivel = false;
-  isConfirmLoading = false;
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     
@@ -79,34 +81,19 @@ export class IcmsImportarNotasComponent {
   }
 
   enviar() {
-    this.modalVisivel = true;
     const files: File[] = this.convertNzUploadFileToFile(this.fileList);
 
     this.service.getValoresCalculo(files).subscribe({
-      next: (response: any) => console.log(response), 
+      next: (response: IcmsNota[]) => {
+        this.notasCalculadas = response;
+        this.storageService.setSession('notasCalculadas', this.notasCalculadas);
+        this.router.navigate(['../detalhes-nota'], {relativeTo: this.route}, )
+      },
       error: (error: any) => {
         console.error('Erro no upload', error)
       }
     });
   }
-  
-
-  showModal(): void {
-    this.modalVisivel = true;
-  }
-
-  handleOk(): void {
-    this.isConfirmLoading = true;
-    setTimeout(() => {
-      this.modalVisivel = false;
-      this.isConfirmLoading = false;
-    }, 1000);
-  }
-
-  handleCancel(): void {
-    this.modalVisivel = false;
-  }
-
 
 }
 

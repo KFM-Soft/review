@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
+import { IcmsNota } from '../models/IcmsNota';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class IcmsService {
 
   apiUrl = environment.API_URL + '/icms/'
 
-  getValoresCalculo(files: File[]) {
+  getValoresCalculo(files: File[]): Observable<IcmsNota[]> {
     let url = this.apiUrl + 'calculo';
 
     const formData = new FormData();
@@ -19,6 +21,6 @@ export class IcmsService {
       formData.append(`xmls`, file);
     });
 
-    return this.http.post(url, formData);
+    return this.http.post<IcmsNota[]>(url, formData);
   }
 }
