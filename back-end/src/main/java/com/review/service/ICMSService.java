@@ -64,10 +64,18 @@ public class ICMSService {
     public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException {
 
         Map<String, Object> parametros = new HashMap<String, Object>();
+        for(IcmsNotaDto nota: notasDTOsList) {
+            JRBeanCollectionDataSource produtos = new JRBeanCollectionDataSource(nota.getProdutos());
+            
+        }
+        
         JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(notasDTOsList);
+        System.out.println("EUUUUUUUUu TOOOOOO AQUI");
+        System.out.println(icmss);
+        System.out.println(icmss.getData());
         parametros.put("icmsDataSet", icmss);
 
-        return renderizarRelatorio("icmsReport", parametros);
+        return renderizarRelatorio("mainReport", parametros);
 
     }
 
@@ -187,7 +195,6 @@ public class ICMSService {
                 }
 
             }
-
             notaDto.setProdutos(listaProdutosDTO);
             listaNotasDTO.add(notaDto);
 
