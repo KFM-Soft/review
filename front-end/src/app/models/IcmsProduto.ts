@@ -8,5 +8,5 @@ export type IcmsProduto = {
     mva: number;
     prodMva: number;
     baseST: number;
-    resultadoIcmsSubstituicaoTributaria: number;
+    resultadoIcmsST: number;
 }

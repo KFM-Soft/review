@@ -180,7 +180,7 @@ public class ICMSService {
                     produtoDTO.setMva(multiplicador.getMvaOriginal());
                     produtoDTO.setProdMva(vProdComMva);
                     produtoDTO.setBaseST(baseST);
-                    produtoDTO.setResultadoIcmsSubstituicaoTributaria(resultadoIcmsSubstituicaoTributaria);
+                    produtoDTO.setResultadoIcmsST(resultadoIcmsSubstituicaoTributaria);
 
                     listaProdutosDTO.add(produtoDTO);
 

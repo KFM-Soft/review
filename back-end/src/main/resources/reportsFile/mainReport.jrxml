@@ -62,7 +62,7 @@
 		<field name="mva" class="java.math.BigDecimal"/>
 		<field name="prodMva" class="java.math.BigDecimal"/>
 		<field name="baseST" class="java.math.BigDecimal"/>
-		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
+		<field name="resultadoIcmsST" class="java.math.BigDecimal"/>
 	</dataset>
 	<parameter name="icmsDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<query language="SQL"><![CDATA[]]></query>
@@ -75,13 +75,13 @@
 					</datasetRun>
 					<contents height="842" width="595">
 						<element kind="frame" uuid="bb8e408e-a5e7-4c70-889b-cff53846426c" mode="Opaque" x="0" y="0" width="595" height="110" backcolor="#005CAA">
-							<element kind="textField" uuid="3918cea0-469a-4c65-ad87-07fb99170c58" mode="Transparent" x="470" y="80" width="123" height="30" forecolor="#FFFFFF">
+							<element kind="textField" uuid="3918cea0-469a-4c65-ad87-07fb99170c58" mode="Transparent" x="471" y="70" width="123" height="30" forecolor="#FFFFFF">
 								<expression><![CDATA["UF DEstinatario: " + $F{ufDestinatario}]]></expression>
 							</element>
 							<element kind="textField" uuid="5afe70c7-9c0a-40fa-9fa0-7ad388bab1c5" mode="Transparent" x="10" y="80" width="140" height="30" forecolor="#FFFFFF">
 								<expression><![CDATA["Numero: " + $F{numeroNota}]]></expression>
 							</element>
-							<element kind="textField" uuid="559920e8-881f-4e70-8d99-78c80a2ea6bf" mode="Transparent" x="10" y="10" width="160" height="50" forecolor="#FFFFFF">
+							<element kind="textField" uuid="559920e8-881f-4e70-8d99-78c80a2ea6bf" mode="Transparent" x="10" y="10" width="399" height="50" forecolor="#FFFFFF" fontSize="12.0">
 								<expression><![CDATA["Empresa: " + $F{nomeEmpresa}]]></expression>
 							</element>
 							<element kind="textField" uuid="01a3793a-fdb3-4f3b-99c4-ebb9a41b13a9" mode="Transparent" x="160" y="80" width="260" height="30" forecolor="#FFFFFF">
@@ -91,137 +91,141 @@
 								<expression><![CDATA["UF Emitente: " + $F{ufEmitente}]]></expression>
 							</element>
 						</element>
-						<element kind="component" uuid="500597f0-320a-4367-97f8-36b5d663cb7e" stretchType="ContainerHeight" x="52" y="160" width="490" height="60">
+						<element kind="component" uuid="500597f0-320a-4367-97f8-36b5d663cb7e" stretchType="ContainerHeight" x="7" y="120" width="580" height="90">
 							<component kind="table">
 								<datasetRun uuid="0a96c134-572e-4868-9d5a-28b8773e88da" subDataset="produtosDataSet">
 									<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{produtos})]]></dataSourceExpression>
 								</datasetRun>
 								<column kind="single" uuid="7ee595cb-c768-4d7e-9ad1-cda593ad8591" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="07b5d1bc-bc79-4d53-abdc-dfdedb22b0ab" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="07b5d1bc-bc79-4d53-abdc-dfdedb22b0ab" stretchType="ContainerHeight" x="0" y="0" width="50" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Descrição Prod.]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="58628b1e-93fa-4237-8697-4b67dc56a487" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="58628b1e-93fa-4237-8697-4b67dc56a487" stretchType="ContainerHeight" x="0" y="0" width="50" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<expression><![CDATA[$F{descricaoProduto}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 								</column>
 								<column kind="single" uuid="078c5a89-9b6a-4899-9fb5-15b94bf973bb" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="b844b872-77ef-436e-af70-67f4956e22f4" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="b844b872-77ef-436e-af70-67f4956e22f4" stretchType="ContainerHeight" x="0" y="0" width="50" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[NCM/CEST]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="7756fee9-a1df-47ed-8609-fe957814fd81" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="7756fee9-a1df-47ed-8609-fe957814fd81" stretchType="ContainerHeight" x="0" y="0" width="50" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<expression><![CDATA[$F{ncmCest}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 								</column>
-								<column kind="single" uuid="e487bc35-9346-4c10-93ea-f2958287be38" width="40">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="b0b2d2cf-2ee4-4fb3-8aa5-e101ade8be5b" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="e487bc35-9346-4c10-93ea-f2958287be38" width="50">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="b0b2d2cf-2ee4-4fb3-8aa5-e101ade8be5b" stretchType="ContainerHeight" x="0" y="0" width="50" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Valor Prod.]]></text>
 										</element>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="0eece2b3-0e34-4be4-a534-8bbd323faab7" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{valorProduto}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="0eece2b3-0e34-4be4-a534-8bbd323faab7" stretchType="ContainerHeight" x="0" y="0" width="50" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA["R$ " + $F{valorProduto}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 								</column>
-								<column kind="single" uuid="1beadde7-7505-4a30-8f47-bd57a744ea6c" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="84592068-e8ac-46a9-92ee-586161704938" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="1beadde7-7505-4a30-8f47-bd57a744ea6c" width="45">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="84592068-e8ac-46a9-92ee-586161704938" stretchType="ContainerHeight" x="0" y="0" width="45" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Aliquota Interestadual]]></text>
 										</element>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="8480cf18-ca40-4781-a751-d935c1b3967f" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{aliquotaInterestadual}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="8480cf18-ca40-4781-a751-d935c1b3967f" stretchType="ContainerHeight" x="0" y="0" width="45" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA[$F{aliquotaInterestadual} + "%"]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 								</column>
-								<column kind="single" uuid="38b3575d-8420-4d4c-a049-38fd9811217a" width="60">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="1a6e726a-cfdd-44ce-bb5d-6f340d6545cb" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="38b3575d-8420-4d4c-a049-38fd9811217a" width="45">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="1a6e726a-cfdd-44ce-bb5d-6f340d6545cb" stretchType="ContainerHeight" x="0" y="0" width="45" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[aliquota Interna Emitente]]></text>
 										</element>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="a0ab1cfe-311f-4859-9acd-e31cffd3c24c" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{aliquotaInternaEmit}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="a0ab1cfe-311f-4859-9acd-e31cffd3c24c" stretchType="ContainerHeight" x="0" y="0" width="45" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA[$F{aliquotaInternaEmit} + "%"]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 								</column>
-								<column kind="single" uuid="627e23db-1cc7-431e-90e8-1b20db7cacf7" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="25d99126-aaf2-4cd3-84c8-4ac9abe3e09b" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<text><![CDATA[Valor ICMS]]></text>
+								<column kind="single" uuid="627e23db-1cc7-431e-90e8-1b20db7cacf7" width="45">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="25d99126-aaf2-4cd3-84c8-4ac9abe3e09b" stretchType="ContainerHeight" x="0" y="0" width="45" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<text><![CDATA[MVA]]></text>
 										</element>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="a338cccd-f1d3-45f8-bb01-7dcc6e42778d" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{valorIcms}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="a338cccd-f1d3-45f8-bb01-7dcc6e42778d" stretchType="ContainerHeight" x="0" y="0" width="45" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA[$F{mva} + "%"]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 								</column>
-								<column kind="single" uuid="6da54c86-1d97-47c2-bfbb-e5f1f45bd0cb" width="40">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="ae8f78b7-1af8-4eaa-9662-32c02cbb58b3" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<text><![CDATA[MVA]]></text>
+								<column kind="single" uuid="6da54c86-1d97-47c2-bfbb-e5f1f45bd0cb" width="60">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="ae8f78b7-1af8-4eaa-9662-32c02cbb58b3" stretchType="ContainerHeight" x="0" y="0" width="60" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<text><![CDATA[Valor ICMS]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="6d0416ce-c4b7-453e-85f7-2643258c35d4" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{mva}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="6d0416ce-c4b7-453e-85f7-2643258c35d4" stretchType="ContainerHeight" x="0" y="0" width="60" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA["R$ " + $F{valorIcms}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
 								</column>
-								<column kind="single" uuid="c68b28c1-4e7e-4cde-a2d1-0517a3aaf158" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="eccbcaf4-ecd1-4b6f-ae09-f61026c900f4" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="c68b28c1-4e7e-4cde-a2d1-0517a3aaf158" width="60">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="eccbcaf4-ecd1-4b6f-ae09-f61026c900f4" stretchType="ContainerHeight" x="0" y="0" width="60" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Prod Com MVA]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="ebe463f4-5e82-467b-83af-8cf4a79a6b96" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{prodMva}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="ebe463f4-5e82-467b-83af-8cf4a79a6b96" stretchType="ContainerHeight" x="0" y="0" width="60" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA["R$ " + $F{prodMva}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
 								</column>
-								<column kind="single" uuid="2a37d664-107f-4759-9e4b-d082723db4d2" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="c7c6c450-019d-44c7-b022-4be01aa7759f" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="2a37d664-107f-4759-9e4b-d082723db4d2" width="80">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="c7c6c450-019d-44c7-b022-4be01aa7759f" stretchType="ContainerHeight" x="0" y="0" width="80" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Base ST]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="04c16ca5-2ad6-4bf5-b2d8-6c6f43a1897c" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{baseST}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="04c16ca5-2ad6-4bf5-b2d8-6c6f43a1897c" stretchType="ContainerHeight" x="0" y="0" width="80" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA["R$ " + $F{baseST}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
 								</column>
-								<column kind="single" uuid="a3684234-231e-4a2b-987b-d0c15a70883f" width="50">
-									<columnHeader height="30" rowSpan="1" style="Table_CH">
-										<element kind="staticText" uuid="ed7d0bb8-dd22-4bc3-9704-2e2056986eda" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+								<column kind="single" uuid="a3684234-231e-4a2b-987b-d0c15a70883f" width="94">
+									<columnHeader height="40" rowSpan="1" style="Table_CH">
+										<element kind="staticText" uuid="ed7d0bb8-dd22-4bc3-9704-2e2056986eda" stretchType="ContainerHeight" x="0" y="0" width="94" height="40" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
 											<text><![CDATA[Resultado ICMS]]></text>
 										</element>
 									</columnHeader>
-									<detailCell height="30" style="Table_TD">
-										<element kind="textField" uuid="a98b5050-426b-46c6-a122-fb67e1687a88" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-											<expression><![CDATA[$F{resultadoIcmsSubstituicaoTributaria}]]></expression>
+									<detailCell height="50" style="Table_TD">
+										<element kind="textField" uuid="a98b5050-426b-46c6-a122-fb67e1687a88" stretchType="ContainerHeight" x="0" y="0" width="94" height="50" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
+											<expression><![CDATA["R$ " + $F{resultadoIcmsST}]]></expression>
 										</element>
 									</detailCell>
 									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
@@ -231,6 +235,7 @@
 							<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 							<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 							<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						</element>
 					</contents>
 				</component>
