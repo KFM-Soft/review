@@ -19,5 +19,6 @@ public class IcmsProdutoDto {
     private BigDecimal mva;
     private BigDecimal prodMva;
     private BigDecimal baseST;
-    private BigDecimal resultadoIcmsSubstituicaoTributaria;
+    private BigDecimal baseSTComAliquotaInterna;
+    private BigDecimal resultadoIcmsST;
 }

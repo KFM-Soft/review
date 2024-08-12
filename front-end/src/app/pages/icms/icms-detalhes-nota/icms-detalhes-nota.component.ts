@@ -17,6 +17,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { Produto } from '../../../models/Produto';
+import { IcmsProduto } from '../../../models/IcmsProduto';
 
 @Component({
   selector: 'app-icms-detalhes-nota',
@@ -71,5 +73,25 @@ export class IcmsDetalhesNotas {
     return index;
   }
 
+  mudancaAliquotaInterestadual(produto: IcmsProduto) {
+  produto.valorIcms = produto.valorProduto * (produto.aliquotaInterestadual / 100)
+  this.mudancaResultado(produto)
+  }
+
+  mudancaAliquotaInterna(produto: IcmsProduto) {
+    produto.baseSTComAliquotaInterna = produto.baseST * (produto.aliquotaInternaEmit / 100)
+    this.mudancaResultado(produto)
+  }
+
+  mudancaMVA(produto: IcmsProduto) {
+    produto.prodMva = produto.valorProduto * (produto.mva / 100)
+    produto.baseST = produto.valorProduto + produto.prodMva
+    produto.baseSTComAliquotaInterna = produto.baseST * (produto.aliquotaInternaEmit / 100)
+    this.mudancaResultado(produto)
+  }
+
+  mudancaResultado(produto: IcmsProduto) {
+    produto.resultadoIcmsST = produto.baseSTComAliquotaInterna - produto.valorIcms
+  }
 
 }

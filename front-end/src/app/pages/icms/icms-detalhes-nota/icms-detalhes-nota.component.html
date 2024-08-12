@@ -29,7 +29,7 @@
                             <nz-form-label nzSpan="24">Aliquota Interestadual</nz-form-label>
                             <nz-form-control nzSpan="24">
                                 <nz-input-number-group nzAddOnAfter="%">
-                                    <nz-input-number [(ngModel)]="produto.aliquotaInterestadual"
+                                    <nz-input-number [(ngModel)]="produto.aliquotaInterestadual" (ngModelChange)="mudancaAliquotaInterestadual(produto)"
                                         [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
                                         [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
                                 </nz-input-number-group>
@@ -42,7 +42,7 @@
                             <nz-form-label nzSpan="24">Aliquota Interna</nz-form-label>
                             <nz-form-control nzSpan="24">
                                 <nz-input-number-group nzAddOnAfter="%">
-                                    <nz-input-number [(ngModel)]="produto.aliquotaInternaEmit"
+                                    <nz-input-number [(ngModel)]="produto.aliquotaInternaEmit" (ngModelChange)="mudancaAliquotaInterna(produto)"
                                         [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
                                         [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
                                 </nz-input-number-group>
@@ -55,7 +55,7 @@
                             <nz-form-label nzSpan="24">Valor do MVA</nz-form-label>
                             <nz-form-control nzSpan="24">
                                 <nz-input-number-group nzAddOnAfter="%">
-                                    <nz-input-number [(ngModel)]="produto.mva"
+                                    <nz-input-number [(ngModel)]="produto.mva" (ngModelChange)="mudancaMVA(produto)"
                                         [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
                                         [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
                                 </nz-input-number-group>
@@ -77,7 +77,7 @@
                     </nz-col>
                     <nz-col nzXs="24" nzSm="12" nzMd="6">
                         <p class="lbl-item">Resultado ICMS-ST:</p>
-                        <div class="valor-item">{{ produto.resultadoIcmsSubstituicaoTributaria }}</div>
+                        <div class="valor-item">{{ produto.resultadoIcmsST }}</div>
                     </nz-col>
                 </ng-container>
             </nz-row>

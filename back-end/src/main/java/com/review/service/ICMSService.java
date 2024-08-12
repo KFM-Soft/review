@@ -164,10 +164,10 @@ public class ICMSService {
                             .multiply(multiplicador.getMvaOriginal().divide(convertPercent));
 
                     BigDecimal baseST = vProdComMva.add(valorProduto);
-                    BigDecimal valorAliquotaInterna = baseST
+                    BigDecimal baseSTComAliquotaInterna = baseST
                             .multiply(aliquotaInternaEmit.divide(convertPercent));
 
-                    BigDecimal resultadoIcmsSubstituicaoTributaria = valorAliquotaInterna.subtract(valorIcms);
+                    BigDecimal resultadoIcmsSubstituicaoTributaria = baseSTComAliquotaInterna.subtract(valorIcms);
 
                     produtoDTO.setDescricaoProduto(nomeProduto);
                     produtoDTO.setNcmCest(ncmCest);
@@ -178,7 +178,8 @@ public class ICMSService {
                     produtoDTO.setMva(multiplicador.getMvaOriginal());
                     produtoDTO.setProdMva(vProdComMva);
                     produtoDTO.setBaseST(baseST);
-                    produtoDTO.setResultadoIcmsSubstituicaoTributaria(resultadoIcmsSubstituicaoTributaria);
+                    produtoDTO.setBaseSTComAliquotaInterna(baseSTComAliquotaInterna);
+                    produtoDTO.setResultadoIcmsST(resultadoIcmsSubstituicaoTributaria);
 
                     listaProdutosDTO.add(produtoDTO);
 
