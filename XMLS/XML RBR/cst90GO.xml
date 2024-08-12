@@ -118,6 +118,60 @@
                     </COFINS>
                 </imposto>
             </det>
+            <det nItem="2">
+                <prod>
+                    <cProd>67</cProd>
+                    <cEAN>17897721410399</cEAN>
+                    <xProd>ESPAG SEM MADMAS 24X500G</xProd>
+                    <NCM>19021900</NCM>
+                    <CEST>1704904</CEST>
+                    <CFOP>6101</CFOP>
+                    <uCom>FD</uCom>
+                    <qCom>190.0000</qCom>
+                    <vUnCom>58.3100000000</vUnCom>
+                    <vProd>11078.90</vProd>
+                    <cEANTrib>7897721410392</cEANTrib>
+                    <uTrib>UN</uTrib>
+                    <qTrib>4560.0000</qTrib>
+                    <vUnTrib>2.4295833333</vUnTrib>
+                    <indTot>1</indTot>
+                    <xPed>37954</xPed>
+                </prod>
+                <imposto>
+                    <ICMS>
+                        <ICMS90>
+                            <orig>0</orig>
+                            <CST>90</CST>
+                            <modBC>3</modBC>
+                            <vBC>11078.90</vBC>
+                            <pRedBC>100.0000</pRedBC>
+                            <pICMS>12.0000</pICMS>
+                            <vICMS>1329.47</vICMS>
+                            <modBCST>0</modBCST>
+                            <pRedBCST>0.0000</pRedBCST>
+                            <vBCST>0.00</vBCST>
+                            <pICMSST>0.0000</pICMSST>
+                            <vICMSST>0.00</vICMSST>
+                        </ICMS90>
+                    </ICMS>
+                    <IPI>
+                        <cEnq>999</cEnq>
+                        <IPINT>
+                            <CST>51</CST>
+                        </IPINT>
+                    </IPI>
+                    <PIS>
+                        <PISNT>
+                            <CST>06</CST>
+                        </PISNT>
+                    </PIS>
+                    <COFINS>
+                        <COFINSNT>
+                            <CST>06</CST>
+                        </COFINSNT>
+                    </COFINS>
+                </imposto>
+            </det>
             <total>
                 <ICMSTot>
                     <vBC>11078.90</vBC>

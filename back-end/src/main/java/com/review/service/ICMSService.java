@@ -49,14 +49,24 @@ public class ICMSService {
 
     public byte[] renderizarRelatorio(String reportName, Map<String, Object> parametros)
             throws FileNotFoundException, JRException {
+        System.out.println("1");
         File pdf = ResourceUtils.getFile("classpath:reportsFile/" + reportName + ".jrxml");
+        System.out.println("2");
         String path = pdf.getParent();
-
+        System.out.println("3");
+        parametros.put("path", path);
+        System.out.println("4");
+        
         JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + reportName + ".jrxml");
+        System.out.println("5");
         JRSaver.saveObject(jasperReport, path + "/" + reportName + ".jasper");
-		
+        System.out.println("6");
+        
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
+        System.out.println("7");
+        
         byte[] response = JasperExportManager.exportReportToPdf(print);
+        System.out.println("8");
         
         return response;
     }
@@ -64,15 +74,8 @@ public class ICMSService {
     public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException {
 
         Map<String, Object> parametros = new HashMap<String, Object>();
-        for(IcmsNotaDto nota: notasDTOsList) {
-            JRBeanCollectionDataSource produtos = new JRBeanCollectionDataSource(nota.getProdutos());
-            
-        }
         
         JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(notasDTOsList);
-        System.out.println("EUUUUUUUUu TOOOOOO AQUI");
-        System.out.println(icmss);
-        System.out.println(icmss.getData());
         parametros.put("icmsDataSet", icmss);
 
         return renderizarRelatorio("mainReport", parametros);

@@ -1,0 +1,62 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="produtosTable" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9f2fd96b-9332-499d-976b-3121e359b886">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<dataset name="produtosDataSet" uuid="02112315-6fce-47ce-8170-0ffaf80515b1">
+		<query language="sql"><![CDATA[]]></query>
+		<field name="descricaoProduto" class="java.lang.String"/>
+		<field name="ncmCest" class="java.lang.String"/>
+		<field name="valorProduto" class="java.math.BigDecimal"/>
+		<field name="aliquotaInterestadual" class="java.math.BigDecimal"/>
+		<field name="aliquotaInternaEmit" class="java.math.BigDecimal"/>
+		<field name="valorIcms" class="java.math.BigDecimal"/>
+		<field name="mva" class="java.math.BigDecimal"/>
+		<field name="prodMva" class="java.math.BigDecimal"/>
+		<field name="baseST" class="java.math.BigDecimal"/>
+		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
+	</dataset>
+	<parameter name="produtosDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<query language="sql"><![CDATA[]]></query>
+	<detail>
+		<band height="153" splitType="Stretch">
+			<element kind="component" uuid="a9166701-581a-48d0-9807-afa04251e180" x="0" y="0" width="560" height="150">
+				<component kind="list">
+					<datasetRun uuid="27f77955-32fc-46c1-844b-fde4d2bbb470" subDataset="produtosDataSet">
+						<connectionExpression><![CDATA[$P{produtosDataSet}]]></connectionExpression>
+					</datasetRun>
+					<contents height="150" width="560">
+						<element kind="textField" uuid="900cdc7c-017a-47a7-920e-cf67240c5630" x="0" y="0" width="10" height="30">
+							<expression><![CDATA[$F{descricaoProduto}]]></expression>
+						</element>
+						<element kind="textField" uuid="e8814fb4-0df1-453a-a9c8-f5f7eba3314e" x="10" y="0" width="10" height="30">
+							<expression><![CDATA[$F{ncmCest}]]></expression>
+						</element>
+						<element kind="textField" uuid="10e3ef24-92bd-4bb2-91a2-e8ce78b0b99e" x="20" y="0" width="10" height="30">
+							<expression><![CDATA[$F{valorProduto}]]></expression>
+						</element>
+						<element kind="textField" uuid="5847c96d-7ca3-4aed-9d4b-793b95d34972" x="30" y="0" width="10" height="30">
+							<expression><![CDATA[$F{aliquotaInterestadual}]]></expression>
+						</element>
+						<element kind="textField" uuid="54dd1246-5e54-44ee-adc0-103d391e4441" x="40" y="0" width="10" height="30">
+							<expression><![CDATA[$F{aliquotaInternaEmit}]]></expression>
+						</element>
+						<element kind="textField" uuid="45f4b60a-855f-4f22-916c-253bb22e8a12" x="50" y="0" width="10" height="30">
+							<expression><![CDATA[$F{valorIcms}]]></expression>
+						</element>
+						<element kind="textField" uuid="c9bf91b6-a054-4690-8c6c-c6c8c376aa38" x="60" y="0" width="10" height="30">
+							<expression><![CDATA[$F{mva}]]></expression>
+						</element>
+						<element kind="textField" uuid="96407e04-bd13-4fa2-a331-27f9f2122c3e" x="70" y="0" width="10" height="30">
+							<expression><![CDATA[$F{prodMva}]]></expression>
+						</element>
+						<element kind="textField" uuid="b2977d51-60ee-4267-85a1-4c6e80212e0d" x="80" y="0" width="10" height="30">
+							<expression><![CDATA[$F{baseST}]]></expression>
+						</element>
+						<element kind="textField" uuid="b7b9c17c-cd8d-478f-b013-4cca5f11c922" x="90" y="0" width="10" height="30">
+							<expression><![CDATA[$F{resultadoIcmsSubstituicaoTributaria}]]></expression>
+						</element>
+					</contents>
+				</component>
+			</element>
+		</band>
+	</detail>
+</jasperReport>
