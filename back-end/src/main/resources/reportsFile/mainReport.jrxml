@@ -9,39 +9,22 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NO_DATA_ADAPTER"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
-	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
-	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
-		<box>
-			<pen lineWidth="0.5" lineColor="#000000"/>
-			<topPen lineWidth="0.5" lineColor="#000000"/>
-			<leftPen lineWidth="0.5" lineColor="#000000"/>
-			<bottomPen lineWidth="0.5" lineColor="#000000"/>
-			<rightPen lineWidth="0.5" lineColor="#000000"/>
-		</box>
-	</style>
 	<dataset name="icmsDataSet" uuid="73d7f496-4a27-4e29-a27f-15cf9590128a">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
+		<query language="sql"><![CDATA[]]></query>
+		<field name="nomeEmpresa" class="java.lang.String"/>
+		<field name="numeroNota" class="java.lang.String"/>
+		<field name="nomeFornecedor" class="java.lang.String"/>
+		<field name="ufEmitente" class="java.lang.String"/>
+		<field name="ufDestinatario" class="java.lang.String"/>
+		<field name="produtos" class="java.util.List"/>
+	</dataset>
+	<dataset name="produtosDataSet" uuid="1e12992b-a3bd-40a4-a09a-4600ff4b4767">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 		<query language="sql"><![CDATA[]]></query>
 		<field name="descricaoProduto" class="java.lang.String"/>
 		<field name="ncmCest" class="java.lang.String"/>
@@ -55,174 +38,45 @@
 		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
 	</dataset>
 	<parameter name="icmsDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
-	<parameter name="nomeEmpresa" class="java.lang.String"/>
-	<parameter name="numeroNota" class="java.lang.String"/>
-	<parameter name="nomeFornecedor" class="java.lang.String"/>
-	<parameter name="emitente" class="java.lang.String"/>
-	<parameter name="destinatario" class="java.lang.String"/>
 	<query language="SQL"><![CDATA[]]></query>
 	<detail>
-		<band height="842">
-			<element kind="rectangle" uuid="9ce76e90-6e17-4933-b88c-e23fa92dd44b" x="0" y="0" width="595" height="780" backcolor="#005CAA"/>
-			<element kind="component" uuid="d21c3b64-c458-4a25-8982-888170b96c9b" stretchType="ContainerHeight" x="20" y="110" width="520" height="630">
-				<component kind="table">
-					<datasetRun uuid="d2fbddd1-11e1-4b6a-8f3d-a2f70a461aab" subDataset="icmsDataSet">
+		<band height="792">
+			<element kind="component" uuid="76ce07e4-54aa-4ba7-95b1-aa0a1e477af9" stretchType="NoStretch" mode="Opaque" x="-10" y="0" width="595" height="792" backcolor="#F7F7F7" printWhenDetailOverflows="true">
+				<component kind="list">
+					<datasetRun uuid="4de2a512-1ce1-4644-9743-ef2578103e70" subDataset="icmsDataSet">
 						<dataSourceExpression><![CDATA[$P{icmsDataSet}]]></dataSourceExpression>
 					</datasetRun>
-					<column kind="single" uuid="df42333b-bfe1-4d08-a51f-52bed23e3848" width="70">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="f870f834-1f48-4d20-b787-d66ea0060296" stretchType="ContainerHeight" x="0" y="0" width="70" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Descrição Produto]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="201b5d96-1b65-48b9-9972-5fdba8dd450c" x="0" y="0" width="70" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{descricaoProduto}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
-					</column>
-					<column kind="single" uuid="e71a75f2-fcab-47a7-a0e9-e0d6e704024f" width="60">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="ecae3dee-8378-4ca1-8e85-f77a33e633dd" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[NCM/CEST]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="100176da-3d00-4909-b577-821f26ff2acd" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{ncmCest}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
-					</column>
-					<column kind="single" uuid="f9d83b06-e21b-40cc-a21d-98c8e47f6809" width="40">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="2385db9e-53da-493d-8752-4c5fff4bf069" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Val. Produto]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="10a69a5f-f0bf-433a-9879-6265248f7b88" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{valorProduto}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
-					</column>
-					<column kind="single" uuid="183b1143-419c-45f2-a712-bf7512c72b26" width="60">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="908cac9c-e375-45b3-8a38-aba62f0e5ee7" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Alíquota Interestadual]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="5bd175f6-2273-4e18-81e1-04ba4c117bf3" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{aliquotaInterestadual}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
-					</column>
-					<column kind="single" uuid="f7e22361-3b2d-43a3-a188-e960b8a19f28" width="60">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="61f531ec-7c13-43fb-a200-ffdbf60257f5" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Alíquota Interna Emitente]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="94644315-217b-48e4-9d44-7e981ad1778c" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{aliquotaInternaEmit}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
-					</column>
-					<column kind="single" uuid="ed499e6d-2de9-4cd6-b230-f2a8e035f315" width="40">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="7e877694-08b0-4a46-9749-93d2faf92bfc" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Valor ICMS]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="bef2363d-5304-424c-837e-cf094cb87916" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{valorIcms}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
-					</column>
-					<column kind="single" uuid="f432a576-49a3-4bdf-b1f2-ba2a062b0773" width="40">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="a2dd63e6-9a1e-4054-86f8-94172d68790b" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[MVA]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="88ca1f1c-f12b-4d12-8698-949dae980ae9" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{mva}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
-					</column>
-					<column kind="single" uuid="c7d4fd17-45b3-43c1-ad13-07ab08102477" width="60">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="5d128b60-1964-49e9-962d-1dfefe416a00" stretchType="ContainerHeight" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Produto Com MVA]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="56866b53-1459-407e-a75c-24613e54ee38" x="0" y="0" width="60" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{prodMva}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column8"/>
-					</column>
-					<column kind="single" uuid="9ebd0c5e-947e-4ecd-b4e0-659539fa7456" width="50">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="ac157e9f-ee14-4b62-ad7e-b921880e5d25" stretchType="ContainerHeight" x="0" y="0" width="50" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Base do Cálculo]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="8bb1c2bb-8395-4027-9199-f5dad25b88ea" x="0" y="0" width="50" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{baseST}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column9"/>
-					</column>
-					<column kind="single" uuid="b5cabe75-0597-470a-9ba4-22b27bce9fb0" width="40">
-						<columnHeader height="30" rowSpan="1" style="Table_CH">
-							<element kind="staticText" uuid="097de6a7-1393-4b26-82f0-70ad5967dca1" stretchType="ContainerHeight" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<text><![CDATA[Resultado ICMS ST]]></text>
-							</element>
-						</columnHeader>
-						<detailCell height="30" style="Table_TD">
-							<element kind="textField" uuid="e227848b-b0ce-4caf-9395-b432ccafde8d" x="0" y="0" width="40" height="30" fontName="SansSerif" fontSize="8.0" hTextAlign="Center" vTextAlign="Middle">
-								<expression><![CDATA[$F{resultadoIcmsSubstituicaoTributaria}]]></expression>
-							</element>
-						</detailCell>
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column10"/>
-					</column>
+					<contents height="792" width="595">
+						<element kind="textField" uuid="559920e8-881f-4e70-8d99-78c80a2ea6bf" x="10" y="10" width="100" height="30">
+							<expression><![CDATA[$F{nomeEmpresa}]]></expression>
+						</element>
+						<element kind="textField" uuid="5afe70c7-9c0a-40fa-9fa0-7ad388bab1c5" x="130" y="10" width="100" height="30">
+							<expression><![CDATA[$F{numeroNota}]]></expression>
+						</element>
+						<element kind="textField" uuid="152b61e3-8b79-407b-a0ba-cd69ba74e413" x="260" y="10" width="100" height="30">
+							<expression><![CDATA[$F{ufEmitente}]]></expression>
+						</element>
+						<element kind="textField" uuid="3918cea0-469a-4c65-ad87-07fb99170c58" x="380" y="10" width="100" height="30">
+							<expression><![CDATA[$F{ufDestinatario}]]></expression>
+						</element>
+						<element kind="component" uuid="03d54ab6-02d6-4ea3-adbe-a24a32f216ba" x="10" y="60" width="470" height="120">
+							<component kind="list">
+								<datasetRun uuid="613d0c83-bf65-4109-94fc-fdf03327c880" subDataset="produtosDataSet">
+									<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{produtos})]]></dataSourceExpression>
+								</datasetRun>
+								<contents height="120" width="470">
+									<element kind="textField" uuid="cd67aac3-84a7-44cd-b39b-7e511e407aae" x="18" y="17" width="100" height="30">
+										<expression><![CDATA[$F{descricaoProduto}]]></expression>
+									</element>
+									<element kind="textField" uuid="89d7001a-6da1-4a44-9e50-3a2eee003e2d" x="140" y="20" width="100" height="30">
+										<expression><![CDATA[$F{resultadoIcmsSubstituicaoTributaria}]]></expression>
+									</element>
+								</contents>
+							</component>
+						</element>
+					</contents>
 				</component>
-				<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
-				<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
-				<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
-				<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 			</element>
-			<element kind="rectangle" uuid="65667d2c-5085-4e70-8c3d-cbcc5388b98c" x="0" y="0" width="595" height="70"/>
-			<element kind="textField" uuid="3f75936c-fd00-442e-a9a0-b3146dd6b980" x="19" y="50" width="120" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["N° Nota: " + $P{numeroNota}]]></expression>
-			</element>
-			<element kind="textField" uuid="1f3cabfe-924b-43a0-9d71-08595b5bb964" x="150" y="51" width="160" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Fornecedor: " + $P{nomeFornecedor}]]></expression>
-			</element>
-			<element kind="textField" uuid="46c9205d-b244-4ba2-b09f-c9e1c2d2fa21" x="440" y="40" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["UF Destinatário" + $P{destinatario}]]></expression>
-			</element>
-			<element kind="textField" uuid="21faea78-264b-43ae-9cfa-6831120a56f0" x="440" y="15" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["UF Emitente: "+$P{emitente}]]></expression>
-			</element>
-			<element kind="textField" uuid="b9b875d2-bce2-4363-9e26-97d4d5a9321a" x="17" y="10" width="140" height="11" fontName="SansSerif" fontSize="8.0">
-				<expression><![CDATA["Empresa" + $P{nomeEmpresa}]]></expression>
-			</element>
-			<element kind="rectangle" uuid="5712d040-4613-4b72-92a9-eca5f63bde84" x="0" y="780" width="596" height="62"/>
 		</band>
-		<band/>
 	</detail>
 </jasperReport>

@@ -51,11 +51,12 @@ public class ICMSService {
             throws FileNotFoundException, JRException {
         File pdf = ResourceUtils.getFile("classpath:reportsFile/" + reportName + ".jrxml");
         String path = pdf.getParent();
-
+        
         JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + reportName + ".jrxml");
         JRSaver.saveObject(jasperReport, path + "/" + reportName + ".jasper");
-		
+        
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
+
         byte[] response = JasperExportManager.exportReportToPdf(print);
         
         return response;
@@ -64,10 +65,11 @@ public class ICMSService {
     public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException {
 
         Map<String, Object> parametros = new HashMap<String, Object>();
+        
         JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(notasDTOsList);
         parametros.put("icmsDataSet", icmss);
 
-        return renderizarRelatorio("icmsReport", parametros);
+        return renderizarRelatorio("mainReport", parametros);
 
     }
 
@@ -188,7 +190,6 @@ public class ICMSService {
                 }
 
             }
-
             notaDto.setProdutos(listaProdutosDTO);
             listaNotasDTO.add(notaDto);
 
