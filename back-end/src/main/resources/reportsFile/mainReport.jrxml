@@ -15,7 +15,6 @@
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
 	<dataset name="icmsDataSet" uuid="73d7f496-4a27-4e29-a27f-15cf9590128a">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Sample DB"/>
-		<parameter name="path" class="java.lang.String"/>
 		<query language="sql"><![CDATA[]]></query>
 		<field name="nomeEmpresa" class="java.lang.String"/>
 		<field name="numeroNota" class="java.lang.String"/>
@@ -38,7 +37,6 @@
 		<field name="baseST" class="java.math.BigDecimal"/>
 		<field name="resultadoIcmsSubstituicaoTributaria" class="java.math.BigDecimal"/>
 	</dataset>
-	<parameter name="path" class="java.lang.String"/>
 	<parameter name="icmsDataSet" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<query language="SQL"><![CDATA[]]></query>
 	<detail>
@@ -47,9 +45,6 @@
 				<component kind="list">
 					<datasetRun uuid="4de2a512-1ce1-4644-9743-ef2578103e70" subDataset="icmsDataSet">
 						<dataSourceExpression><![CDATA[$P{icmsDataSet}]]></dataSourceExpression>
-						<parameter name="path">
-							<expression><![CDATA[$P{path}]]></expression>
-						</parameter>
 					</datasetRun>
 					<contents height="792" width="595">
 						<element kind="textField" uuid="559920e8-881f-4e70-8d99-78c80a2ea6bf" x="10" y="10" width="100" height="30">
