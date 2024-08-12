@@ -1,205 +1,97 @@
-<div class="container">
+<nz-row [nzGutter]="[24, 0]" class="teste">
+    <ng-container *ngFor="let nota of notas">
+        <nz-col nzSpan="24">
+            <h1>Arquivo XML: {{ nota.nomeArquivo }}</h1>
+            <h2>N.º Nota: {{ nota.numeroNota }}</h2>
+        </nz-col>
+        <nz-col nzSpan="24">
+            <nz-row [nzGutter]="[16, 0]">
+                <ng-container *ngFor="let produto of nota.produtos; index as i; trackBy:trackByFn">
+                    <nz-col nzXs="24" nzSm="6" nzMd="2">
+                        <p class="lbl-item">Item:</p>
+                        <div class="valor-item">{{ i + 1 }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="18" nzMd="10">
+                        <p class="lbl-item">Descrição:</p>
+                        <div class="valor-item">{{ produto.descricaoProduto }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">NCM / CEST:</p>
+                        <div class="valor-item">{{ produto.ncmCest }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">Valor:</p>
+                        <div class="valor-item">R$ {{ produto.valorProduto }}</div>
+                    </nz-col>
+    
+                    <nz-col nzXs="24" nzSm="8">
+                        <nz-form-item>
+                            <nz-form-label nzSpan="24">Aliquota Interestadual</nz-form-label>
+                            <nz-form-control nzSpan="24">
+                                <nz-input-number-group nzAddOnAfter="%">
+                                    <nz-input-number [(ngModel)]="produto.aliquotaInterestadual" (ngModelChange)="mudancaAliquotaInterestadual(produto)"
+                                        [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
+                                        [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
+                                </nz-input-number-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </nz-col>
 
-    <h1>ICMS - Notas Processadas</h1>
+                    <nz-col nzXs="24" nzSm="8">
+                        <nz-form-item>
+                            <nz-form-label nzSpan="24">Aliquota Interna</nz-form-label>
+                            <nz-form-control nzSpan="24">
+                                <nz-input-number-group nzAddOnAfter="%">
+                                    <nz-input-number [(ngModel)]="produto.aliquotaInternaEmit" (ngModelChange)="mudancaAliquotaInterna(produto)"
+                                        [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
+                                        [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
+                                </nz-input-number-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </nz-col>
 
-    <a routerLink="#" routerLinkActive="active" class="link-top">
-        <nz-card [nzHoverable]="true" class="empresa">
-            <table>
-                <tr>
-                    <td [nzAlign]="'left'" colspan="2">
-                        <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
-                        <nz-flex [nzVertical]="true" class="empresa-name">
-                            <h3>Recol Distribuição e Comércio LTDA</h3>
-                            <p>Compra de licença dd-MM-yyyy</p>
-                        </nz-flex>
-                    </td>
+                    <nz-col nzXs="24" nzSm="8">
+                        <nz-form-item>
+                            <nz-form-label nzSpan="24">Valor do MVA</nz-form-label>
+                            <nz-form-control nzSpan="24">
+                                <nz-input-number-group nzAddOnAfter="%">
+                                    <nz-input-number [(ngModel)]="produto.mva" (ngModelChange)="mudancaMVA(produto)"
+                                        [ngModelOptions]="{standalone: true}" ngDefaultControl [nzStep]="1" [nzMax]="100"
+                                        [nzMin]="0" [nzInputMode]="'decimal'" nzSize="large"></nz-input-number>
+                                </nz-input-number-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </nz-col>
 
-
-                    <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
-                        <ng-container>
-                            <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
-                                    class="edit"></button>
-                        </ng-container>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="empresa-dados">
-                        <nz-flex [nzVertical]="true" class="empresa-dados">
-                            <h3>CNPJ:</h3>
-                            <p>24.745.870/0001-90</p>
-                        </nz-flex>
-                    </td>
-                    <td class="empresa-dados">
-                        <nz-flex [nzVertical]="true" class="empresa-dados">
-                            <h3>E-mail:</h3>
-                            <p>recolgmail.com</p>
-                        </nz-flex>
-                    </td>
-                    <td class="empresa-dados">
-                        <nz-flex [nzVertical]="true" class="empresa-dados">
-                            <h3>Telefone:</h3>
-                            <p>(68) 99999-9999</p>
-                        </nz-flex>
-                    </td>
-                    <td class="empresa-dados">
-                        <nz-flex [nzVertical]="true" class="empresa-dados">
-                            <h3>Cidade:</h3>
-                            <p>Rio Branco - AC</p>
-                        </nz-flex>
-                    </td>
-                    <td class="empresa-dados">
-                        <nz-flex [nzVertical]="true" class="empresa-dados">
-                            <h3>Endereço:</h3>
-                            <p>Rua Sete de Setembro, 458</p>
-                        </nz-flex>
-                    </td>
-                </tr>
-            </table>
-
-            <nz-card [nzHoverable]="true" class="detalhes scrollbar">
-                <div class="card ">
-                          <div class="name">
-                              <nz-flex [nzVertical]="false" class="detalhes-nota">
-                                <h3 class="titulo">Arquivo XML:</h3>
-                                <select name="select">
-                                  <option value="1"class="titulo-desc">csosn101.xml</option>
-                                  <option value="2"class="titulo-desc">csosn102.xml</option>
-                                </select>
-                              </nz-flex>
-                              <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                src="../../../assets/svgs/download.svg" height="30px" width="30px"
-                                class="edit"></button>
-                          </div>
-                        <nz-flex [nzVertical]="false" class="detalhes-nota">
-                            <h3>Informação Geral:</h3>
-                        </nz-flex>
-                      <div class="empresa-dados-maior">
-
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                  <h3>Valor:</h3>
-                                  <p>R$ 5542.00</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                  <h3>Depois do Cálculo:</h3>
-                                  <p>R$ 5137.00</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex class="empresa-dados">
-                                  <h3>Valor:</h3>
-                                  <p>R$ </p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                  <h3>Economia:</h3>
-                                  <p>R$ 405.00</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                  <h3>Economia:</h3>
-                                  <p>7,30%</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                  <h3>Fornecedor:</h3>
-                                  <p>Recol Distribuição e Comércio LTDA</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Origem e Destino:</h3>
-                                <p>São Paulo -> Acre</p>
-                            </nz-flex>
-                        </div>
-                        <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Produtos Processados
-                                    (Processadas/total):</h3>
-                                <p>566/675</p>
-                            </nz-flex>
-                        </div>
-                        </div>
-                        <nz-flex [nzVertical]="false" class="detalhes-nota">
-                            <h3 class="titulo">Produtos:</h3>
-                        </nz-flex>
-                      <div class="empresa-dados-maior" *ngFor="let item of produtos">
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                <h3>Item:</h3>
-                                <p>{{ item.item }}</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                <h3>Nome:</h3>
-                                <p>{{ item.nome }}</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                <h3>NCM/SH:</h3>
-                                <p>{{ item.ncm_sh }}</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                <h3>Cest:</h3>
-                                <p>{{ item.cest }}</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                              <nz-flex  class="empresa-dados">
-                                <h3>Descrição:</h3>
-                                <p>{{ item.descricao }}</p>
-                              </nz-flex>
-                          </div>
-                          <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Valor:</h3>
-                                <p>R$ {{ item.valor }}</p>
-                            </nz-flex>
-                        </div>
-                        <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Depois do Cálculo:</h3>
-                                <p>R$ {{ item.depois_calc}}</p>
-                            </nz-flex>
-                        </div>
-                        <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Economia:</h3>
-                                <p>R$ {{ item.economia}}</p>
-                            </nz-flex>
-                        </div>
-                        <div class="empresa-dados">
-                            <nz-flex  class="empresa-dados">
-                                <h3>Economia %:</h3>
-                                <p>{{ item.economia_porc}}%</p>
-                            </nz-flex>
-                        </div>
-                        </div>
-
-                </div>
-                <div class="paginacao">
-                    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
-                        (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
-                        [nzPageSizeOptions]=[5,10,20,30,40,50]>
-                    </nz-pagination>
-                </div>
-              </nz-card>
-
-        </nz-card>
-    </a>
-
-
-
-
-</div>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">Produto com MVA:</p>
+                        <div class="valor-item">{{ produto.prodMva }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">Valor com ICMS:</p>
+                        <div class="valor-item">{{ produto.valorIcms }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">Base ST:</p>
+                        <div class="valor-item">{{ produto.baseST }}</div>
+                    </nz-col>
+                    <nz-col nzXs="24" nzSm="12" nzMd="6">
+                        <p class="lbl-item">Resultado ICMS-ST:</p>
+                        <div class="valor-item">{{ produto.resultadoIcmsST }}</div>
+                    </nz-col>
+                </ng-container>
+            </nz-row>
+        </nz-col>
+        <nz-divider></nz-divider>
+    </ng-container>
+    <nz-col nzSpan="24">
+        <nz-row [nzJustify]="'end'" [nzGutter]="[16, 0]">
+            <nz-col>
+                <button nz-button nzSize="large">Cancelar</button>
+            </nz-col>
+            <nz-col>
+                <button nz-button nzSize="large" nzType="primary">Enviar</button>
+            </nz-col>
+        </nz-row>
+    </nz-col>
+</nz-row>
