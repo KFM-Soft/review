@@ -49,24 +49,15 @@ public class ICMSService {
 
     public byte[] renderizarRelatorio(String reportName, Map<String, Object> parametros)
             throws FileNotFoundException, JRException {
-        System.out.println("1");
         File pdf = ResourceUtils.getFile("classpath:reportsFile/" + reportName + ".jrxml");
-        System.out.println("2");
         String path = pdf.getParent();
-        System.out.println("3");
-        parametros.put("path", path);
-        System.out.println("4");
         
         JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + reportName + ".jrxml");
-        System.out.println("5");
         JRSaver.saveObject(jasperReport, path + "/" + reportName + ".jasper");
-        System.out.println("6");
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
-        System.out.println("7");
-        
+
         byte[] response = JasperExportManager.exportReportToPdf(print);
-        System.out.println("8");
         
         return response;
     }
