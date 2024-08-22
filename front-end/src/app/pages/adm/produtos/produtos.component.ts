@@ -74,7 +74,7 @@ export class ProdutoComponent implements OnInit {
       filtro = filtro.filter(produto => 
         produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
-          produto.cest.toLowerCase().includes(this.termoBusca.toLowerCase())
+          produto.cest?.toLowerCase().includes(this.termoBusca.toLowerCase())
           || 
           produto.cfop.toLowerCase().includes(this.termoBusca.toLowerCase())
           || 
@@ -107,9 +107,10 @@ export class ProdutoComponent implements OnInit {
     this.service.delete(registro).subscribe({
       complete: () => {
         alert("Registro excluido com sucesso.");
+        window.location.reload();
       }, error: (erro) => {
-        console.error("Erro ao excluir:", erro);
         alert("Erro na exclusão!");
+        window.location.reload();
       }
     })
   }

@@ -25,7 +25,7 @@ export class EstadoService {
   }
 
   delete(registro: Estado): Observable<void> {
-    let url = this.apiUrl + "/" + registro.id;
+    let url = this.apiUrl + registro.id;
     return this.http.delete<void>(url);
   }
   

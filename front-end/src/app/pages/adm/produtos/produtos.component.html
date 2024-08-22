@@ -30,7 +30,7 @@
                         <td [nzAlign]="'center'">{{ data.id }}</td>
                         <td> {{ data.descricao }}</td>
                         <td> {{ data.ncm }}</td>
-                        <td> {{ data.cest }}</td>
+                        <td> {{ data.cest ? data.cest : "-" }}</td>
                         <td> {{ data.cfop }}</td>
                         <td [nzAlign]="'center'">
                             <nz-row [nzGutter]="[4, 4]" nzJustify="center">

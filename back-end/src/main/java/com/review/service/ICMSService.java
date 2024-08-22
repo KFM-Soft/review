@@ -116,6 +116,7 @@ public class ICMSService {
             List<IcmsProdutoDto> listaProdutosDTO = new ArrayList<IcmsProdutoDto>();
 
             NodeList productsList = document.getElementsByTagName("det");
+
             for (int i = 0; i < productsList.getLength(); i++) {
 
                 Node product = productsList.item(i);
@@ -131,23 +132,27 @@ public class ICMSService {
                 String nomeProduto = eElement.getElementsByTagName("xProd").item(0).getTextContent();
 
                 String ncm = eElement.getElementsByTagName("NCM").item(0).getTextContent();
-                String cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();
-
+                System.out.println(ncm);
+                String cest = "";
+                try {
+                    cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+                
                 String ncmCest = (cest != null && !cest.isEmpty()) ? ncm + " / " + cest : ncm;
 
                 BigDecimal valorProduto = new BigDecimal(
-                        eElement.getElementsByTagName("vProd").item(0).getTextContent());
+                    eElement.getElementsByTagName("vProd").item(0).getTextContent());
 
                 Multiplicador multiplicador = new Multiplicador();
 
                 BigDecimal convertPercent = new BigDecimal(100);
 
-                try {
+                if(cest != "" && cest != null && !cest.isEmpty()){
                     multiplicador = multService.getByProductCest(cest);
-                } catch (NullPointerException cantFindCest) {
+                } else {
                     multiplicador = multService.getByProductNcm(ncm);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
 
                 if (multiplicador == null || multiplicador.equals(null)) {

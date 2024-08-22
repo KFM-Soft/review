@@ -23,4 +23,52 @@ export class IcmsService {
 
     return this.http.post<IcmsNota[]>(url, formData);
   }
+
+  generateReport(notas: IcmsNota[]) {
+    let url = this.apiUrl + 'relatorio';
+    window.open(`${url}`, '_blank');
+  }
+
+  // referencia: https://consolelog.com.br/utilizando-httpclient-angular-para-obter-pdf-api-visualizacao-download/
+  download(notas: IcmsNota[]) {
+    let url = this.apiUrl + 'relatorio';
+    const body = notas;
+    this.http
+      .post(url, body, {
+        responseType: "arraybuffer",
+      })
+      .subscribe((response) => {
+        // Cria um Blob representando o PDF
+        // a partir do response
+        const pdfBlob = new Blob([response], {
+          type: "application/pdf",
+        });
+  
+        // Cria uma URL temporária
+        // para o Blob usando createObjectURL
+        const temporaryUrl =
+          window.URL.createObjectURL(pdfBlob);
+  
+        // Torna a URL segura para uso
+        // no iframe utilizando DomSanitizer
+        // this.url =
+        //   this.sanitizer.bypassSecurityTrustResourceUrl(
+        //     temporaryUrl
+        //   );
+  
+        const temporaryAnchor = document.createElement("a");
+        temporaryAnchor.href = temporaryUrl;
+  
+        // temporaryAnchor.download = `arquivo-${Date.now()}.pdf`;
+  
+        // Se quiser abrir o conteúdo em uma nova aba, 
+        // comente a linha acima e descomente a linha 
+        // abaixo, caso prefira baixar faça ao contrário.
+        temporaryAnchor.target = "_blank";
+  
+        document.body.appendChild(temporaryAnchor);
+        temporaryAnchor.click();
+        temporaryAnchor.remove();
+      });
+  }
 }

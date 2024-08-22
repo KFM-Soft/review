@@ -1,5 +1,6 @@
 package com.review.controller;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,14 +29,24 @@ public class ICMSController {
 	@Autowired
 	private ICMSService service;
 
-	@PostMapping("/")
+	@PostMapping("relatorio")
+	private ResponseEntity<byte[]> relatorioPosCalculo(@RequestBody List<IcmsNotaDto> notas) throws FileNotFoundException, JRException {
+		byte[] response = service.gerarRelatorioICMSST(notas);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=teste.pdf");
+
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(response);
+	}
+
+	@PostMapping("relatorioPeloArquivo")
 	private ResponseEntity<byte[]> executarCalculo(@RequestBody List<MultipartFile> xmls)
 			throws JRException, ParserConfigurationException, IOException, SAXException {
 
 		byte[] response = service.teste(xmls);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=teste.pdf");
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=relatorio.pdf");
 
 		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(response);
 	}

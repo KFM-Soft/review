@@ -31,6 +31,10 @@ public class MultiplicadorService {
     }
 
     public Multiplicador getByProductNcm(String ncm) {
+        System.out.println("NCM AQUI PORRA" + ncm);
+        System.out.println("NCM AQUI PORRA" + ncm);
+        System.out.println("NCM AQUI PORRA" + ncm);
+        System.out.println("NCM AQUI PORRA" + ncm);
         return repository.getMultiplicadorByNCM(ncm);
     }
 

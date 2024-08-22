@@ -17,8 +17,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { Produto } from '../../../models/Produto';
 import { IcmsProduto } from '../../../models/IcmsProduto';
+import { IcmsService } from '../../../services/icms.service';
 
 @Component({
   selector: 'app-icms-detalhes-nota',
@@ -29,12 +29,13 @@ import { IcmsProduto } from '../../../models/IcmsProduto';
 })
 export class IcmsDetalhesNotas {
 
-  constructor ( 
+  constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private service: IcmsService,
     private storageService: StoragesService,
-  ) {}
-  
+  ) { }
+
   notas: IcmsNota[] = [];
   registros: IcmsNota[] = [];
   items_qtd: number[] = []
@@ -47,8 +48,8 @@ export class IcmsDetalhesNotas {
   ngOnInit(): void {
     this.notas = this.storageService.getSession('notasCalculadas')
     this.registros = this.storageService.getSession('notasCalculadas')
-    if(this.registros)
-      this.items_qtd =  this.registros.map((_, index) => index + 1);
+    if (this.registros)
+      this.items_qtd = this.registros.map((_, index) => index + 1);
   }
 
   atualizarTabela(): void {
@@ -74,8 +75,8 @@ export class IcmsDetalhesNotas {
   }
 
   mudancaAliquotaInterestadual(produto: IcmsProduto) {
-  produto.valorIcms = produto.valorProduto * (produto.aliquotaInterestadual / 100)
-  this.mudancaResultado(produto)
+    produto.valorIcms = produto.valorProduto * (produto.aliquotaInterestadual / 100)
+    this.mudancaResultado(produto)
   }
 
   mudancaAliquotaInterna(produto: IcmsProduto) {
@@ -92,6 +93,10 @@ export class IcmsDetalhesNotas {
 
   mudancaResultado(produto: IcmsProduto) {
     produto.resultadoIcmsST = produto.baseSTComAliquotaInterna - produto.valorIcms
+  }
+
+  gerarPDF() {
+    this.service.download(this.notas)
   }
 
 }

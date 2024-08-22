@@ -22,7 +22,6 @@ export class MultiplicadorService {
 
   getByAliquotaAndProduto(produto: Produto, aliquota: Aliquota, ): Observable<Multiplicador[]> { 
     let url = this.apiUrl + 'getByProdutoAndAliquota/' + produto.id + '/' + aliquota.id;
-    console.log(url);
     return this.http.get<Multiplicador[]>(url);
   }
   
@@ -34,7 +33,7 @@ export class MultiplicadorService {
   }
 
   delete(registro: Multiplicador): Observable<void> {
-    let url = this.apiUrl + "/" + registro.id;
+    let url = this.apiUrl + registro.id;
     return this.http.delete<void>(url);
   }
   

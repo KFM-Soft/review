@@ -6,7 +6,6 @@
                 <nz-form-label nzSpan="24">Produto</nz-form-label>
                 <nz-form-control>
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.produto" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option [nzLabel]="'Todos'" [nzValue]="1"></nz-option>
                         <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" [nzValue]="produto"></nz-option>
                     </nz-select>
                     <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.produto.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
@@ -19,7 +18,6 @@
                 <nz-form-label nzSpan="24">Aliquota</nz-form-label>
                 <nz-form-control>
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.aliquota" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option [nzLabel]="'Todos'" [nzValue]="1"></nz-option>
                         <nz-option *ngFor="let aliquota of aliquotas" [nzLabel]="aliquota.origem.uf + '->' + aliquota.destino.uf" [nzValue]="aliquota"></nz-option>
                     </nz-select>
                     <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.aliquota" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
@@ -89,7 +87,7 @@
         
         <nz-col nzSpan="24">
             <nz-row nzJustify="end">
-                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar" (click)="submit()">Adicionar</button>
+                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar" (click)="submit()">Salvar</button>
             </nz-row>
         </nz-col>
     </nz-row>

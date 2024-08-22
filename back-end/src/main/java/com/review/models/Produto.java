@@ -28,7 +28,7 @@ public class Produto implements Serializable {
     @Column(nullable = false)
     private String ncm;
 
-    @Column(nullable = false)
+    @Column()
     private String cest;
 
     @Column(nullable = false)
