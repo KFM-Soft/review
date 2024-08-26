@@ -34,5 +34,11 @@ public class Aliquota implements Serializable{
 
     @Column(nullable = false, columnDefinition = "DECIMAL(5,2)")
     private BigDecimal porcentagem;
+
+    @ManyToOne
+    private Empresa empresa;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(0) NOT NULL DEFAULT 0")
+    private boolean sistema = false;
     
 }

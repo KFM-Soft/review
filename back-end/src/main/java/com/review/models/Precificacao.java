@@ -13,24 +13,19 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="relatorios")
+@Table(name="precificacoes")
 @Getter
 @Setter
-public class Relatorio implements Serializable{
+public class Precificacao implements Serializable{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
-    private Long id;
-
+    @Column(columnDefinition = "TINYINT")
+    private Short id;
+ 
     @Column(nullable = false)
-    private String empresa;
+    private String opcao;
 
-    @Column(nullable = false)
-    private String arquivo;
-
-    @Column(nullable = false, columnDefinition = "DECIMAL(8,2)")
-    private BigDecimal valorTotal;
-
-    @Column(nullable = false, columnDefinition = "DECIMAL(8,2)")
-    private BigDecimal valorCalculado;
+    @Column(columnDefinition = "DECIMAL(7,2)")
+    private BigDecimal valor;
 }

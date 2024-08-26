@@ -2,8 +2,6 @@ package com.review.models;
 
 import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,33 +13,31 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="produtos")
+@Table(name = "empresas")
 @Getter
 @Setter
-public class Produto implements Serializable {
+public class Empresa implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(500)")
-    private String descricao;
+    @Column(nullable = false)    
+    private Usuario dono;
 
     @Column(nullable = false)
-    private String ncm;
-
-    @Column()
-    private String cest;
+    private String nome;
 
     @Column(nullable = false)
-    private String cfop;
+    private String nomeFantasia;
 
-    @ManyToOne
-    private Empresa empresa;
+    @Column(nullable = false, unique = true)
+    private String cnpj;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(0) NOT NULL DEFAULT 0")
-    @Value("false")
-    private boolean sistema = false;
+    @ManyToOne(optional = false)
+    private Precificacao preco;
 
+
+    
 }

@@ -44,4 +44,10 @@ public class Multiplicador implements Serializable{
 
     @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal multiplicadorAjustado;
+
+    @ManyToOne
+    private Empresa empresa;
+
+    @Column(nullable = false, columnDefinition = "TINYINT(0) NOT NULL DEFAULT 0")
+    private boolean sistema = false;
 }

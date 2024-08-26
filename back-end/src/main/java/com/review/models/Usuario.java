@@ -15,33 +15,32 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="produtos")
+@Table(name="usuarios")
 @Getter
 @Setter
-public class Produto implements Serializable {
-
+public class Usuario implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(500)")
-    private String descricao;
+    @Column(nullable = false)
+    private String nomeCompleto;
 
     @Column(nullable = false)
-    private String ncm;
-
-    @Column()
-    private String cest;
+    private String nomeUsuario;
 
     @Column(nullable = false)
-    private String cfop;
+    private String senha;
+
+    @Column(nullable = false)
+    private Short quantidadeDeEmpresas  = 0;
 
     @ManyToOne
-    private Empresa empresa;
+    private TipoUsuario tipoUsuario;
 
-    @Column(nullable = false, columnDefinition = "TINYINT(0) NOT NULL DEFAULT 0")
-    @Value("false")
-    private boolean sistema = false;
+    @Column(nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
+    @Value("true")
+    private boolean active = true;
 
 }
