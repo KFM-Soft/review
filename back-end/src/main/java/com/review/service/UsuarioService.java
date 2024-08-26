@@ -23,13 +23,16 @@ public class UsuarioService {
         return repository.findById(id).orElse(null);
     }
 
-
     public Usuario save(Usuario objeto) {
         if (objeto.getSenha() == null || objeto.getSenha().isBlank()) {
             Long id = objeto.getId();
-            Usuario usuario = getById(id);
-            if (usuario != null) {
-                objeto.setSenha(usuario.getSenha());
+            if (id != null) {
+
+                Usuario usuario = getById(id);
+                if (usuario != null) {
+                    objeto.setSenha(usuario.getSenha());
+                }
+                
             }
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

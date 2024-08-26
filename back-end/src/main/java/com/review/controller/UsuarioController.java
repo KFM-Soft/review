@@ -19,7 +19,7 @@ import com.review.service.UsuarioService;
 
 
 @RestController
-@RequestMapping("/Usuario")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
