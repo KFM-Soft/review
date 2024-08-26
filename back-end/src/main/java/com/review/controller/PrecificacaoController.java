@@ -25,31 +25,31 @@ public class PrecificacaoController {
     private PrecificacaoService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Precificacao>> getProdutos(){
+    public ResponseEntity<List<Precificacao>> getPrecificacaos(){
         List<Precificacao> registros = service.getAll();
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Precificacao> getProdutoById(@PathVariable Long id) {
+    public ResponseEntity<Precificacao> getPrecificacaoById(@PathVariable Long id) {
         Precificacao registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Precificacao> createProduto(@RequestBody Precificacao Precificacao) {
+    public ResponseEntity<Precificacao> createPrecificacao(@RequestBody Precificacao Precificacao) {
         Precificacao registro = service.save(Precificacao);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Precificacao>> createProdutos(@RequestBody List<Precificacao> produtos) {
-        List<Precificacao> registros = service.saveList(produtos);
+    public ResponseEntity<List<Precificacao>> createPrecificacaos(@RequestBody List<Precificacao> precificacaos) {
+        List<Precificacao> registros = service.saveList(precificacaos);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Precificacao> updateProduto(@RequestBody Precificacao Precificacao) {
+    public ResponseEntity<Precificacao> updatePrecificacao(@RequestBody Precificacao Precificacao) {
         Precificacao registro = service.save(Precificacao);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }

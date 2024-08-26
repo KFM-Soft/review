@@ -25,31 +25,31 @@ public class PermissaoController {
     private PermissaoService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Permissao>> getProdutos(){
+    public ResponseEntity<List<Permissao>> getPermissoes(){
         List<Permissao> registros = service.getAll();
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Permissao> getProdutoById(@PathVariable Long id) {
+    public ResponseEntity<Permissao> getPermissaoById(@PathVariable Long id) {
         Permissao registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Permissao> createProduto(@RequestBody Permissao Permissao) {
+    public ResponseEntity<Permissao> createPermissao(@RequestBody Permissao Permissao) {
         Permissao registro = service.save(Permissao);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Permissao>> createProdutos(@RequestBody List<Permissao> produtos) {
-        List<Permissao> registros = service.saveList(produtos);
+    public ResponseEntity<List<Permissao>> createPermissoes(@RequestBody List<Permissao> Permissaos) {
+        List<Permissao> registros = service.saveList(Permissaos);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Permissao> updateProduto(@RequestBody Permissao Permissao) {
+    public ResponseEntity<Permissao> updatePermissao(@RequestBody Permissao Permissao) {
         Permissao registro = service.save(Permissao);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }

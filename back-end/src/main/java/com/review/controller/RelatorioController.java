@@ -24,31 +24,31 @@ public class RelatorioController {
     private RelatorioService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Relatorio>> getProdutos(){
+    public ResponseEntity<List<Relatorio>> getRelatorios(){
         List<Relatorio> registros = service.getAll();
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Relatorio> getProdutoById(@PathVariable Long id) {
+    public ResponseEntity<Relatorio> getRelatorioById(@PathVariable Long id) {
         Relatorio registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Relatorio> createProduto(@RequestBody Relatorio Relatorio) {
+    public ResponseEntity<Relatorio> createRelatorio(@RequestBody Relatorio Relatorio) {
         Relatorio registro = service.save(Relatorio);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Relatorio>> createProdutos(@RequestBody List<Relatorio> produtos) {
-        List<Relatorio> registros = service.saveList(produtos);
+    public ResponseEntity<List<Relatorio>> createRelatorios(@RequestBody List<Relatorio> Relatorios) {
+        List<Relatorio> registros = service.saveList(Relatorios);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Relatorio> updateProduto(@RequestBody Relatorio Relatorio) {
+    public ResponseEntity<Relatorio> updateRelatorio(@RequestBody Relatorio Relatorio) {
         Relatorio registro = service.save(Relatorio);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }

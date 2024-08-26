@@ -33,4 +33,8 @@ public class UsuarioService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    public Usuario getByNomeUsuario(String nomeUsuario) {
+        return repository.findByNomeUsuario(nomeUsuario);
+    }
 }

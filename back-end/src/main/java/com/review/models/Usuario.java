@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,11 +38,12 @@ public class Usuario implements Serializable{
     @Column(nullable = false)
     private Short quantidadeDeEmpresas  = 0;
 
-    @ManyToOne
-    private TipoUsuario tipoUsuario;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Epapel papel;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
     @Value("true")
-    private boolean active = true;
+    private boolean ativo = true;
 
 }
