@@ -27,8 +27,8 @@ public class Seguranca {
     private final TokenFilter tokenFilter;
 
     public Seguranca(
-            PerfilUsuarioService perfilUsuarioService,
-            TokenFilter tokenFilter) {
+        PerfilUsuarioService perfilUsuarioService,
+        TokenFilter tokenFilter) {
         this.perfilUsuarioService = perfilUsuarioService;
         this.tokenFilter = tokenFilter;
     }

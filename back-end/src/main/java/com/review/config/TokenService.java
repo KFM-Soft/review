@@ -1,6 +1,7 @@
 package com.review.config;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -32,6 +33,7 @@ public class TokenService {
                           .withSubject(usuario.getNomeUsuario())
                           .withClaim("nomeCompleto", usuario.getNomeCompleto())
                           .withClaim("papel", usuario.getPapel().name())
+                          .withClaim("dataLimiteRenovacao", LocalDate.now().toString())
                           .withExpiresAt(generateExpirationDate())
                           .sign(alg);
         return token;
