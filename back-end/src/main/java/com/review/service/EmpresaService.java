@@ -22,6 +22,10 @@ public class EmpresaService {
         return repository.findById(id).orElse(null);
     }
 
+    public List<Empresa> getByDono(Long id){
+        return repository.findByDonoId(id);
+    }
+
     public Empresa save(Empresa objeto) {
         return repository.save(objeto);
     }

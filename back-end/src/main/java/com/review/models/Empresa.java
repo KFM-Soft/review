@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class Empresa implements Serializable{
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false)    
+    @ManyToOne 
     private Usuario dono;
 
     @Column(nullable = false)
@@ -35,7 +36,7 @@ public class Empresa implements Serializable{
     @Column(nullable = false, unique = true)
     private String cnpj;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Precificacao preco;
 
 

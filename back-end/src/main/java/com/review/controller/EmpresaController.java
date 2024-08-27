@@ -14,43 +14,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.review.models.Usuario;
-import com.review.service.UsuarioService;
+import com.review.models.Empresa;
+import com.review.service.EmpresaService;
 
 @RestController
 @RequestMapping("/empresa")
 public class EmpresaController {
 
     @Autowired
-    private UsuarioService service;
+    private EmpresaService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Usuario>> getEmpresas(){
-        List<Usuario> registros = service.getAll();
+    public ResponseEntity<List<Empresa>> getEmpresas(){
+        List<Empresa> registros = service.getAll();
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getEmpresaById(@PathVariable Long id) {
-        Usuario registro = service.getById(id);
+    public ResponseEntity<Empresa> getEmpresaById(@PathVariable Long id) {
+        Empresa registro = service.getById(id);
+        return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
+
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<List<Empresa>> getEmpresaByDonoId(@PathVariable Long id) {
+        List<Empresa> registro = service.getByDono(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Usuario> createEmpresa(@RequestBody Usuario Usuario) {
-        Usuario registro = service.save(Usuario);
+    public ResponseEntity<Empresa> createEmpresa(@RequestBody Empresa Empresa) {
+        Empresa registro = service.save(Empresa);
         return new ResponseEntity<>(registro, HttpStatus.CREATED);
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Usuario>> createEmpresas(@RequestBody List<Usuario> Empresas) {
-        List<Usuario> registros = service.saveList(Empresas);
+    public ResponseEntity<List<Empresa>> createEmpresas(@RequestBody List<Empresa> Empresas) {
+        List<Empresa> registros = service.saveList(Empresas);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Usuario> updateEmpresa(@RequestBody Usuario Usuario) {
-        Usuario registro = service.save(Usuario);
+    public ResponseEntity<Empresa> updateEmpresa(@RequestBody Empresa Empresa) {
+        Empresa registro = service.save(Empresa);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
