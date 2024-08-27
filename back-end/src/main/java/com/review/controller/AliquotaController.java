@@ -37,6 +37,13 @@ public class AliquotaController {
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
+    @GetMapping("/empresa/{id}")
+    public ResponseEntity<List<Aliquota>> getMethodName(@PathVariable Long id) {
+        List<Aliquota> registros = service.getByEmpresa(id);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+    
+
     @PostMapping("/")
     public ResponseEntity<Aliquota> createAliquota(@RequestBody Aliquota aliquota) {
         Aliquota registro = service.save(aliquota);
@@ -69,5 +76,12 @@ public class AliquotaController {
         Aliquota registro = service.getByOrigemDestino(origem, destino);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
+
+    @GetMapping("/config/{sistema}")
+    public ResponseEntity<List<Aliquota>> getAliquataSistema(@PathVariable boolean sistema) {
+        List<Aliquota> registros = service.getBySistema(sistema);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+    
 
 }

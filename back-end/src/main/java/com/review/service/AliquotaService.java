@@ -44,6 +44,14 @@ public class AliquotaService {
         return repository.findByOrigemDestino(origem, destino);
     }
 
+    public List<Aliquota> getByEmpresa(Long id){
+        return repository.findByEmpresaId(id);
+    }
+
+    public List<Aliquota> getBySistema(boolean sistema){
+        return repository.findBySistema(sistema);
+    }
+
     // @EventListener(ApplicationReadyEvent.class)
     public void geraAliquotasEntreEstados() {
         List<Estado> estados = estadoRepository.findAll();
