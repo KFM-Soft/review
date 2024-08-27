@@ -24,10 +24,6 @@ public class AliquotaService {
         return repository.findAll();
     }
 
-    public List<Aliquota> getAllSistema(boolean sistema) {
-        return repository.findBySistema(sistema);
-    }
-
     public Aliquota getById(Long id) {
         return repository.findById(id).orElse(null);
     }

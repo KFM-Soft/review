@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.review.models.Produto;
 import com.review.service.ProdutoService;
 
+
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
@@ -34,6 +35,18 @@ public class ProdutoController {
     public ResponseEntity<Produto> getProdutoById(@PathVariable Long id) {
         Produto registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);
+    }
+
+    @GetMapping("/sistema/{sistema}")
+    public ResponseEntity<List<Produto>> getBySistema(@PathVariable boolean sistema){
+        List<Produto> registros = service.getBySistema(sistema);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+
+    @GetMapping("/empresa/{empresa_id}")
+    public ResponseEntity<List<Produto>> getByEmpresaId(@PathVariable Long empresa_id){
+        List<Produto> registros = service.getByEmpresaId(empresa_id);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @PostMapping("/")

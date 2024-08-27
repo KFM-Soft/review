@@ -22,6 +22,14 @@ public class ProdutoService {
         return repository.findById(id).orElse(null);
     }
 
+    public List<Produto> getByEmpresaId(long id){
+        return repository.getByEmpresaId(id);
+    }
+
+    public List<Produto> getBySistema(boolean sistema){
+        return repository.findBySistema(sistema);
+    }
+
     public Produto save(Produto objeto) {
         return repository.save(objeto);
     }
