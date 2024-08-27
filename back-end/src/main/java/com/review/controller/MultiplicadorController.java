@@ -30,6 +30,18 @@ public class MultiplicadorController {
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
+    @GetMapping("/sistema/{sistema}")
+    public ResponseEntity<List<Multiplicador>> getMultiplicadoresBySistema(@PathVariable boolean sistema){
+        List<Multiplicador> registros = service.getBySistema(sistema);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+
+    @GetMapping("/empresa/{empresa_id}")
+    public ResponseEntity<List<Multiplicador>> getMultiplicadoresBySistema(@PathVariable Long empresa_id){
+        List<Multiplicador> registros = service.getByEmpresaId(empresa_id);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Multiplicador> getMultiplicadorById(@PathVariable Long id) {
         Multiplicador registro = service.getById(id);

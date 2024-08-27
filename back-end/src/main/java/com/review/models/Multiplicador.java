@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "multiplicadores_produtos", uniqueConstraints = {@UniqueConstraint(columnNames = {"produto_id", "aliquota_id"})})
+@Table(name = "multiplicadores_produtos", uniqueConstraints = {@UniqueConstraint(columnNames = {"produto_id", "aliquota_id", "empresa_id"})})
 @Getter
 @Setter
 public class Multiplicador implements Serializable{

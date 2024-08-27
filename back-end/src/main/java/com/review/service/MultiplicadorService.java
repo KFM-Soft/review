@@ -18,8 +18,16 @@ public class MultiplicadorService {
         return repository.findAll();
     }
 
+    public List<Multiplicador> getBySistema(boolean sistema) {
+        return repository.findBySistema(sistema);
+    }
+
     public Multiplicador getById(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    public List<Multiplicador> getByEmpresaId(Long id){
+        return repository.getByEmpresaId(id);
     }
 
     public List<Multiplicador> getMultiplicadorByProdutoIdAndAliquotaId(Long produto_id, Long aliquota_id) {
