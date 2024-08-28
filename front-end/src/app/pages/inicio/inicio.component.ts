@@ -1,5 +1,6 @@
+import { EmpresasService } from './../../services/empresas.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -9,6 +10,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { Observable } from 'rxjs';
+import { Empresa } from '../../models/Empresa';
 
 interface Empresas {
   nome: string;
@@ -23,12 +26,17 @@ interface Empresas {
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })
-export class InicioComponent {
-  empresas: Empresas[] = [
-    { nome: 'Indústria LTDA', data_expirar: '05/11/2024', button: true},
-    { nome: 'Indústria LTDA', data_expirar: '05/11/2024', button: true},
-    { nome: 'Indústria LTDA', data_expirar: '05/11/2024', button: true},
-    { nome: 'Indústria LTDA', data_expirar: '05/11/2024', button: true},
-    { nome: 'Licença de EPP Disponível', data_expirar: '05/11/2024', button: false},
-  ]
+
+export class InicioComponent implements OnInit {
+  empresas: Observable<Empresa[]> | undefined;
+
+  constructor(private empresasService: EmpresasService) {}
+
+  ngOnInit(): void {
+    this.getEmpresas();
+  }
+
+  getEmpresas(): void {
+    this.empresas = this.empresasService.get();
+  }
 }

@@ -17,13 +17,15 @@ import { EstadosComponent } from './pages/adm/estados/estados.component';
 import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.component';
 import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
 import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/multiplicadores-form.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
 
   { path: '',component: InicioComponent},
-  { 
+  { path: 'login', component: LoginComponent },
+  {
     path: 'icms', children: [
-      { path: '', component: IcmsHomeComponent }, 
+      { path: '', component: IcmsHomeComponent },
       { path: 'grupo-notas', children: [
         { path: '', component: IcmsGrupoNotasComponent},
         { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },

@@ -13,7 +13,7 @@
 
   <h1>ICMS</h1>
 
-  <nz-table #headerTable [nzData]="empresas" [nzShowPagination]="false" class="table">
+  <nz-table #headerTable [nzData]="(empresas | async) ?? []" [nzShowPagination]="false" class="table">
     <thead>
       <tr>
         <th nzWidth="5%"><h2>Empresas</h2></th>
@@ -29,14 +29,14 @@
         <td>
           <nz-flex [nzVertical]="true">
             <h3>{{ data.nome }}</h3>
-            <p>Expira em {{ data.data_expirar }}</p>
+            <!-- <p>Expira em {{ data.data_expirar }}</p> -->
           </nz-flex>
         </td>
         <td [nzAlign]="'center'">
-          <ng-container *ngIf="data.button">
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar"  routerLink="/icms/grupo-notas" routerLinkActive="active">Gerenciar</button>
+          <ng-container >
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas" routerLinkActive="active">Gerenciar</button>
           </ng-container>
-          <ng-container *ngIf="!data.button">
+          <ng-container >
             <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
           </ng-container>
         </td>
@@ -50,6 +50,7 @@
       </tr>
     </tbody>
   </nz-table>
+
 
 
   <h1>Serviços Futuros</h1>
