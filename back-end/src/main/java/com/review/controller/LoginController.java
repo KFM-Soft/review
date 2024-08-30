@@ -1,15 +1,19 @@
 package com.review.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.auth0.jwt.JWT;
@@ -22,6 +26,7 @@ import com.review.models.Usuario;
 import com.review.service.UsuarioService;
 
 @RestController
+@RequestMapping(produces = MediaType.TEXT_PLAIN_VALUE)
 public class LoginController {
 
     private final AuthenticationManager authManager;
@@ -37,11 +42,18 @@ public class LoginController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Usuario> login() {
+        Principal principal = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = usuarioService.getByNomeUsuario(principal.getName());
+        return ResponseEntity.ok(usuario);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Usuario usuario) {
 
         UsernamePasswordAuthenticationToken loginToken = new UsernamePasswordAuthenticationToken(
-            usuario.getNomeUsuario(), usuario.getSenha());
+                usuario.getNomeUsuario(), usuario.getSenha());
         Authentication auth = authManager.authenticate(loginToken);
         PerfilUsuario principal = (PerfilUsuario) auth.getPrincipal();
 
@@ -55,7 +67,7 @@ public class LoginController {
     @GetMapping("/refresh")
     public ResponseEntity<String> refresh(
             @RequestHeader("Authorization") String authHeader) {
-        
+
         String token = authHeader.replace("Bearer ", "");
         DecodedJWT tokenDecodificado = JWT.decode(token);
         Claim claimDataLimite = tokenDecodificado.getClaim("dataLimiteRenovacao");

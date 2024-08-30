@@ -23,8 +23,9 @@ public class Permissao implements Serializable{
     @Column(nullable = false, updatable = false)
     private Long id;
 
+    private String nome;
+
     @ManyToMany(mappedBy = "permissaos")
     private List<UsuarioCompartinhado> UsuarioCompartinhado; 
-
 
 }

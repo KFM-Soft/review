@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 
 import { routes } from './app.routes';
@@ -9,18 +9,40 @@ import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { BasicLoginService } from './services/login/basic-login.service';
+import { JwtLoginService } from './services/login/jwt-login.service';
+import { LoginService } from './services/login/i-login.service';
+import { authInterceptor } from './interceptor/auth.interceptor';
 
 registerLocaleData(pt);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), 
- 
+    provideRouter(routes,  withInMemoryScrolling({anchorScrolling: 'enabled'})), 
     provideNzIcons(), 
     provideNzI18n(pt_BR), 
     importProvidersFrom(FormsModule), 
     provideAnimationsAsync(), 
-    provideHttpClient()
+    provideHttpClient(),
+
+    provideHttpClient(withInterceptors([ authInterceptor ])),
+
+    { provide: LoginService, useFactory: loginServiceFactory }
   ]
 };
+
+export function loginServiceFactory() {
+
+  const authType = environment.AUTH_TYPE;
+
+  if (authType == 'basic') {
+    return new BasicLoginService();
+  } else if (authType == 'jwt') {
+    return new JwtLoginService();
+  } else {
+    throw new Error('Tipo de autenticação deve ser "basic" ou "jwt".');
+  }
+
+}

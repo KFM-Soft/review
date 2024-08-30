@@ -12,94 +12,24 @@ export class UsuarioService {
     private http: HttpClient
   ) { }
 
-  private url: string = environment.API_URL + '/user';
-  private type!: string;
-  private logged: boolean = false;
+  apiUrl: string = environment.API_URL + '/config/usuario/';
 
-  login(info: any): Observable<any> {
-    const body = {
-      email: info.email,
-      password: info.password
-    };
-
-    return this.http.post(this.url + '/login', body).pipe(
-      map((data: any) => {
-        if (data.token) {
-          this.type = data.type;
-          this.logged = true
-          return {
-            login: true,
-            token: data.token,
-            message: 'Login efetuado com sucesso!',
-            type: data.type
-          };
-        }
-
-        return {
-          login: false,
-          token: data.customMessage,
-          message: 'Erro no login!',
-          type: null
-        };
-      }),
-      catchError((error) => {
-        return of({
-          login: false,
-          token: null,
-          message: error.error ? error.error.customMessage : 'Erro desconhecido',
-          type: null
-        });
-      })
-    );
+  getById(id: number): Observable<Usuario> {
+    let url = this.apiUrl + id;
+    return this.http.get<Usuario>(url);
   }
 
-  isLogged(token: string): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        authorization: 'Bearer ' + `${token}`
-      })
-    };
-
-    return this.http.get(`${this.url}/logged`, httpOptions);
+  save(objeto: Usuario): Observable<Usuario> {
+    let url = this.apiUrl;
+    if (objeto.id) {
+      return this.http.put<Usuario>(url, objeto);
+    } else {
+      return this.http.post<Usuario>(url, objeto);
+    }
   }
 
-  getUserData(token: string): Observable<Usuario> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        authorization: 'Bearer ' + `${token}`
-      })
-    };
-    return this.http.get<Usuario>(`${this.url}/data`, httpOptions);
-  }
-
-  getAllUsers(token: string): Observable<Usuario[]> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        authorization: 'Bearer ' + `${token}`
-      })
-    };
-    return this.http.get<Usuario[]>(`${this.url}`, httpOptions);
-  }
-
-
-  insertUser(info: any): Observable<Usuario> {
-    const body = {
-      exibitionName: info.string,
-      userName: info.string,
-      password: info.string,
-      qtdEmpresas: info.number,
-    };
-
-    return this.http.post<Usuario>(`${this.url}`, body);
-  }
-
-  deleteUser(id: number, token: string): Observable<void> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        authorization: 'Bearer ' + `${token}`
-      })
-    };
-
-    return this.http.delete<void>(`${this.url}/${id}`, httpOptions);
+  delete(id: number): Observable<void> {
+    let url = this.apiUrl + id;
+    return this.http.delete<void>(url);
   }
 }

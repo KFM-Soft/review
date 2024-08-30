@@ -59,26 +59,25 @@ public class Seguranca {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        // http.httpBasic(withDefaults());
+        http.httpBasic(withDefaults());
         http.cors(withDefaults());
         http.csrf(csrf -> csrf.disable());
         http.authenticationProvider(authProvider());
         http.sessionManagement(
             session -> session.sessionCreationPolicy(
-                SessionCreationPolicy.STATELESS
+                SessionCreationPolicy.ALWAYS
             )
         );
 
         http.authorizeHttpRequests(
             authorize -> authorize
+            // .anyRequest().permitAll()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
                 .requestMatchers("/config/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
 
-        http.addFilterBefore(
-            tokenFilter,
-            UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(tokenFilter,UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
 
