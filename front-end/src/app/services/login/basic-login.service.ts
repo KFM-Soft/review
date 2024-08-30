@@ -11,9 +11,13 @@ import { environment } from '../../../environments/environment';
 export class BasicLoginService implements ILoginService {
 
   constructor() {
-    const userData = sessionStorage.getItem('usuario') || '{}';
-    const usuario = JSON.parse(userData);
-    this.usuarioAutenticado.next(usuario);
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const userData = sessionStorage.getItem('usuario') || '{}';
+      const usuario = JSON.parse(userData);
+      this.usuarioAutenticado.next(usuario);
+    } else {
+      this.usuarioAutenticado.next(<Usuario>{});
+    }
   }
 
   usuarioAutenticado: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(<Usuario>{});
