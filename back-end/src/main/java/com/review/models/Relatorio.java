@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +23,8 @@ public class Relatorio implements Serializable{
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String empresa;
+    @ManyToOne
+    private Empresa empresa;
 
     @Column(nullable = false)
     private String arquivo;

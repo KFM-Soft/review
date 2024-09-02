@@ -2,9 +2,12 @@ package com.review.service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +29,9 @@ import org.xml.sax.SAXException;
 
 import com.review.dto.IcmsNotaDto;
 import com.review.dto.IcmsProdutoDto;
+import com.review.models.Empresa;
 import com.review.models.Multiplicador;
+import com.review.models.Relatorio;
 
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -47,30 +52,69 @@ public class ICMSService {
     @Autowired
     private AliquotaService aliquotaService;
 
-    public byte[] renderizarRelatorio(String reportName, Map<String, Object> parametros)
-            throws FileNotFoundException, JRException {
-        File pdf = ResourceUtils.getFile("classpath:reportsFile/" + reportName + ".jrxml");
+    @Autowired
+    private RelatorioService relatorioService;
+
+    @Autowired
+    private EmpresaService empresaService;
+
+    public byte[] renderizarRelatorio( Map<String, Object> parametros) throws FileNotFoundException, JRException, IOException {
+
+        File pdf = ResourceUtils.getFile("classpath:reportsFile/" + "mainReport" + ".jrxml");
         String path = pdf.getParent();
         
-        JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + reportName + ".jrxml");
-        JRSaver.saveObject(jasperReport, path + "/" + reportName + ".jasper");
+        JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + "mainReport" + ".jrxml");
+        JRSaver.saveObject(jasperReport, path + "/" + "mainReport" + ".jasper");
         
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
 
-        byte[] response = JasperExportManager.exportReportToPdf(print);
-        
+        byte[] response = JasperExportManager.exportReportToPdf(print);    
+
         return response;
     }
 
-    public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException {
+public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTotal, BigDecimal valorCalculado) throws IOException {
+    Empresa empresa = empresaService.getById(empresa_id);
+    Relatorio relatorio = new Relatorio();
 
+    
+
+    String empresaNome = empresa.getNome();
+    String pathSalva = "src/main/resources/relatorios/icms/" + empresaNome;
+    
+
+    File directory = new File(pathSalva);
+    
+    if (!directory.exists()) {
+        directory.mkdirs(); 
+    }
+    
+    String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
+    String outputPath = pathSalva + "/" + timestamp + ".pdf";
+    
+    try (FileOutputStream fos = new FileOutputStream(outputPath)) {
+        fos.write(pdf);
+    }
+    
+    relatorio.setArquivo(outputPath);
+    relatorio.setEmpresa(empresa);
+    relatorio.setValorTotal(valorTotal);
+    relatorio.setValorCalculado(valorCalculado);
+
+    return relatorioService.save(relatorio);
+}
+
+    
+    
+
+
+
+    public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException, IOException {
         Map<String, Object> parametros = new HashMap<String, Object>();
-        
         JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(notasDTOsList);
         parametros.put("icmsDataSet", icmss);
-
-        return renderizarRelatorio("mainReport", parametros);
-
+    
+        return renderizarRelatorio(parametros);
     }
 
     // Essa função não apenas lê os documentos xml como indica o nome ela
