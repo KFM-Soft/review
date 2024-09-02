@@ -12,12 +12,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { Observable } from 'rxjs';
 import { Empresa } from '../../models/Empresa';
-
-interface Empresas {
-  nome: string;
-  data_expirar: string;
-  button: boolean
-}
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-inicio',
@@ -26,17 +22,30 @@ interface Empresas {
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss'
 })
-
 export class InicioComponent implements OnInit {
   empresas: Observable<Empresa[]> | undefined;
+  data: Empresa[] = Array<Empresa>();
 
-  constructor(private empresasService: EmpresasService) {}
+  private token: string | null = null;
+
+  constructor(
+    private empresasService: EmpresasService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
-    this.getEmpresas();
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = window.sessionStorage.getItem('token');
+      this.getEmpresas();
+    }
   }
 
   getEmpresas(): void {
-    this.empresas = this.empresasService.get();
+    if (this.token) {
+      this.empresasService.getAllEmpresas(this.token).subscribe({
+        next: (response: Empresa[]) => { this.data = response, console.log(this.data) }
+        
+      });
+    }
   }
 }

@@ -13,30 +13,33 @@
 
   <h1>ICMS</h1>
 
-  <nz-table #headerTable [nzData]="(empresas | async) ?? []" [nzShowPagination]="false" class="table">
+  <nz-table #headerTable [nzShowPagination]="false" class="table">
     <thead>
       <tr>
-        <th nzWidth="5%"><h2>Empresas</h2></th>
+        <th nzWidth="5%">
+          <h2>Empresas</h2>
+        </th>
         <th></th>
         <th nzWidth="20%"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of headerTable.data">
+      <tr *ngFor="let item of data">
         <td [nzAlign]="'center'">
           <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
         </td>
         <td>
           <nz-flex [nzVertical]="true">
-            <h3>{{ data.nome }}</h3>
-            <!-- <p>Expira em {{ data.data_expirar }}</p> -->
+            <h3>{{ item.nome }}</h3>
+            <p>Cnpj: {{ item.cnpj }}</p>
           </nz-flex>
         </td>
         <td [nzAlign]="'center'">
-          <ng-container >
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas" routerLinkActive="active">Gerenciar</button>
+          <ng-container>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas"
+              routerLinkActive="active">Gerenciar</button>
           </ng-container>
-          <ng-container >
+          <ng-container>
             <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
           </ng-container>
         </td>
@@ -44,7 +47,8 @@
       <tr>
         <td colspan="3" class="gerenciarTodos">
           <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos" routerLink="/icms" routerLinkActive="active">Gerenciar Todos</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos" routerLink="/icms"
+              routerLinkActive="active">Gerenciar Todos</button>
           </ng-container>
         </td>
       </tr>

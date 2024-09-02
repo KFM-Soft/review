@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment.development';
 import { Observable } from 'rxjs';
@@ -13,9 +13,13 @@ export class EmpresasService {
 
   apiUrl = environment.API_URL + '/empresa/'
 
-  get(): Observable<Empresa[]> {
-    let url = this.apiUrl;
-    return this.http.get<Empresa[]>(url);
-  }
+  getAllEmpresas(token: string): Observable<Empresa[]> {
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
   
+    return this.http.get<Empresa[]>(`${this.apiUrl}`, httpOptions);
+  }
 }

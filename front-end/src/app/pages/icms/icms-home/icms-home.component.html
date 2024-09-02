@@ -14,8 +14,9 @@
       </button>
     </ng-template>
 
-    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar tag" [(ngModel)]="selectTag" (ngModelChange)="atualizarTabela()">
-    
+    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar tag" [(ngModel)]="selectTag"
+      (ngModelChange)="atualizarTabela()">
+
       <nz-option nzLabel="Tecnologia" nzValue="tecnologia"></nz-option>
       <nz-option nzLabel="Agrícola" nzValue="agricola"></nz-option>
       <nz-option nzLabel="Mercado" nzValue="mercado"></nz-option>
@@ -40,15 +41,13 @@
         <td>
           <nz-flex [nzVertical]="true">
             <h3>{{ data.nome }}</h3>
-            <p>Expira em {{ data.data_expirar }}</p>
+            <p>Cnpj: {{ data.cnpj }}</p>
           </nz-flex>
         </td>
         <td [nzAlign]="'center'">
-          <ng-container *ngIf="data.button">
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas" routerLinkActive="active">Gerenciar</button>
-          </ng-container>
-          <ng-container *ngIf="!data.button">
-            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
+          <ng-container>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas"
+              routerLinkActive="active">Gerenciar</button>
           </ng-container>
         </td>
       </tr>

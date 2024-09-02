@@ -1,0 +1,103 @@
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.images {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5; 
+}
+
+.images img {
+    max-width: 100%;
+    margin-bottom: 20px; 
+}
+
+.container {
+    width: 50%;
+    background-color: #005CAA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 5em;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 30em;
+    margin-bottom: 20px;
+}
+
+.icons img {
+    width: 30%;
+    max-width: 5em; /* Ajuste o tamanho conforme necessário */
+}
+
+hr {
+    width: 100%;
+    max-width: 30em;
+    border: 1px solid #fff;
+    margin-bottom: 20px;
+}
+
+.formulario {
+    width: 30em; 
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario label {
+    margin-top: 5px;
+    color: #fff;
+}
+
+.formulario input {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.botao {
+    padding: 10px;
+    background-color: #fff;
+    color: #005CAA;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 20em;
+    align-self: center;
+    margin-bottom: 15px;
+}
+
+.botao:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.esqueceu-senha {
+    align-self: flex-end;
+    color: #fff;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
+.cadastre-se {
+    color: #fff;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}

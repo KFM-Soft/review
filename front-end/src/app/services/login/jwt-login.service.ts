@@ -53,6 +53,7 @@ export class JwtLoginService implements ILoginService {
     const url = environment.API_URL + '/login';
     this.http.post(url, usuario, { responseType: 'text' }).subscribe({
       next: (token: string) => {
+        console.log(token);
         this.configurarSessaoUsuario(token);
         this.agendarRenovacaoToken();
       },
