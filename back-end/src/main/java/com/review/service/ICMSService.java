@@ -1,6 +1,7 @@
 package com.review.service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -103,10 +105,26 @@ public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTot
 
     return relatorioService.save(relatorio);
 }
+    public InputStreamResource mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
 
-    
-    
+    // Caminho relativo ao arquivo PDF dentro do projeto
+    String caminhoArquivo = "src/main/resources/relatorios/icms/sdasd/2024-09-09T14-56-56.pdf";
 
+    // Abre um InputStream para o arquivo e cria um InputStreamResource
+    try {
+        File pdfFile = new File(caminhoArquivo);
+        if (!pdfFile.exists()) {
+            throw new FileNotFoundException("Arquivo não encontrado: " + pdfFile.getAbsolutePath());
+        }
+
+        InputStream inputStream = new FileInputStream(pdfFile);
+        return new InputStreamResource(inputStream);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        throw new FileNotFoundException("Erro ao ler o arquivo: " + e.getMessage());
+    }
+    }
 
 
     public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException, IOException {
