@@ -60,83 +60,81 @@ public class ICMSService {
     @Autowired
     private EmpresaService empresaService;
 
-    public byte[] renderizarRelatorio( Map<String, Object> parametros) throws FileNotFoundException, JRException, IOException {
+    public byte[] renderizarRelatorio(Map<String, Object> parametros)
+            throws FileNotFoundException, JRException, IOException {
 
         File pdf = ResourceUtils.getFile("classpath:reportsFile/" + "mainReport" + ".jrxml");
         String path = pdf.getParent();
-        
+
         JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + "mainReport" + ".jrxml");
         JRSaver.saveObject(jasperReport, path + "/" + "mainReport" + ".jasper");
-        
+
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
 
-        byte[] response = JasperExportManager.exportReportToPdf(print);    
+        byte[] response = JasperExportManager.exportReportToPdf(print);
 
         return response;
     }
 
-public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTotal, BigDecimal valorCalculado) throws IOException {
-    Empresa empresa = empresaService.getById(empresa_id);
-    Relatorio relatorio = new Relatorio();
+    public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTotal, BigDecimal valorCalculado)
+            throws IOException {
+        Empresa empresa = empresaService.getById(empresa_id);
+        Relatorio relatorio = new Relatorio();
 
-    
+        String empresaNome = empresa.getNome();
+        String pathSalva = "src/main/resources/relatorios/icms/" + empresaNome;
 
-    String empresaNome = empresa.getNome();
-    String pathSalva = "src/main/resources/relatorios/icms/" + empresaNome;
-    
+        File directory = new File(pathSalva);
 
-    File directory = new File(pathSalva);
-    
-    if (!directory.exists()) {
-        directory.mkdirs(); 
-    }
-    
-    String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
-    String outputPath = pathSalva + "/" + timestamp + ".pdf";
-    
-    try (FileOutputStream fos = new FileOutputStream(outputPath)) {
-        fos.write(pdf);
-    }
-    
-    relatorio.setArquivo(outputPath);
-    relatorio.setEmpresa(empresa);
-    relatorio.setValorTotal(valorTotal);
-    relatorio.setValorCalculado(valorCalculado);
-
-    return relatorioService.save(relatorio);
-}
-    public InputStreamResource mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
-
-    // Caminho relativo ao arquivo PDF dentro do projeto
-    String caminhoArquivo = "src/main/resources/relatorios/icms/sdasd/2024-09-09T14-56-56.pdf";
-
-    // Abre um InputStream para o arquivo e cria um InputStreamResource
-    try {
-        File pdfFile = new File(caminhoArquivo);
-        if (!pdfFile.exists()) {
-            throw new FileNotFoundException("Arquivo não encontrado: " + pdfFile.getAbsolutePath());
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
 
-        InputStream inputStream = new FileInputStream(pdfFile);
-        return new InputStreamResource(inputStream);
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH-mm-ss"));
+        String outputPath = pathSalva + "/" + timestamp + ".pdf";
 
-    } catch (IOException e) {
-        e.printStackTrace();
-        throw new FileNotFoundException("Erro ao ler o arquivo: " + e.getMessage());
+        try (FileOutputStream fos = new FileOutputStream(outputPath)) {
+            fos.write(pdf);
+        }
+
+        relatorio.setArquivo(outputPath);
+        relatorio.setEmpresa(empresa);
+        relatorio.setValorTotal(valorTotal);
+        relatorio.setValorCalculado(valorCalculado);
+
+        return relatorioService.save(relatorio);
     }
+
+    public InputStreamResource mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
+
+        String caminhoArquivo = "src/main/resources/relatorios/icms/sdasd/2024-09-09T14-56-56.pdf";
+
+        try {
+            File pdfFile = new File(caminhoArquivo);
+            if (!pdfFile.exists()) {
+                throw new FileNotFoundException("Arquivo não encontrado: " + pdfFile.getAbsolutePath());
+            }
+
+            InputStream inputStream = new FileInputStream(pdfFile);
+            return new InputStreamResource(inputStream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new FileNotFoundException("Erro ao ler o arquivo: " + e.getMessage());
+        }
     }
 
-
-    public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList) throws FileNotFoundException, JRException, IOException {
+    public byte[] gerarRelatorioICMSST(List<IcmsNotaDto> notasDTOsList)
+            throws FileNotFoundException, JRException, IOException {
         Map<String, Object> parametros = new HashMap<String, Object>();
         JRBeanCollectionDataSource icmss = new JRBeanCollectionDataSource(notasDTOsList);
         parametros.put("icmsDataSet", icmss);
-    
+
         return renderizarRelatorio(parametros);
     }
 
     // Essa função não apenas lê os documentos xml como indica o nome ela
-    // também captura os dados do "pré-cálculo" do banco e retorna eles 
+    // também captura os dados do "pré-cálculo" do banco e retorna eles
     // convertidos em uma lista de DTOs para serem enviado pro front e tratados
     public List<IcmsNotaDto> readXmlsDocuments(List<MultipartFile> xmls)
             throws ParserConfigurationException, IOException, SAXException {
@@ -201,17 +199,17 @@ public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTot
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
-                
+
                 String ncmCest = (cest != null && !cest.isEmpty()) ? ncm + " / " + cest : ncm;
 
                 BigDecimal valorProduto = new BigDecimal(
-                    eElement.getElementsByTagName("vProd").item(0).getTextContent());
+                        eElement.getElementsByTagName("vProd").item(0).getTextContent());
 
                 Multiplicador multiplicador = new Multiplicador();
 
                 BigDecimal convertPercent = new BigDecimal(100);
 
-                if(cest != "" && cest != null && !cest.isEmpty()){
+                if (cest != "" && cest != null && !cest.isEmpty()) {
                     multiplicador = multService.getByProductCest(cest);
                 } else {
                     multiplicador = multService.getByProductNcm(ncm);
@@ -264,7 +262,8 @@ public Relatorio salvaRelatorio(Long empresa_id, byte[] pdf, BigDecimal valorTot
         return listaNotasDTO;
     }
 
-    public byte[] teste(List<MultipartFile> xmls) throws ParserConfigurationException, IOException, SAXException, JRException {
+    public byte[] teste(List<MultipartFile> xmls)
+            throws ParserConfigurationException, IOException, SAXException, JRException {
         List<IcmsNotaDto> notasPreProcessadas = readXmlsDocuments(xmls);
         return gerarRelatorioICMSST(notasPreProcessadas);
     }

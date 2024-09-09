@@ -16,7 +16,7 @@ import lombok.Setter;
 
 // Essa classe trata das aliquotas interestaduais
 @Entity
-@Table(name = "aliquotas_interestaduais", uniqueConstraints = {@UniqueConstraint(columnNames = {"origem_id", "destino_id"})})
+@Table(name = "aliquotas_interestaduais", uniqueConstraints = {@UniqueConstraint(columnNames = {"origem_id", "destino_id", "empresa_id"})})
 @Getter
 @Setter
 public class Aliquota implements Serializable{
