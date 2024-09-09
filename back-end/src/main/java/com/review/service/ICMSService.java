@@ -106,8 +106,9 @@ public class ICMSService {
     }
 
     public InputStreamResource mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
-
-        String caminhoArquivo = "src/main/resources/relatorios/icms/sdasd/2024-09-09T14-56-56.pdf";
+        System.out.println(relatorio.getArquivo());
+        String caminhoArquivo = relatorio.getArquivo();
+        
 
         try {
             File pdfFile = new File(caminhoArquivo);

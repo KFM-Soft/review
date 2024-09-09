@@ -59,7 +59,7 @@ public class ICMSController {
 	}
 
 	@GetMapping("/mostrar")
-	public ResponseEntity<InputStreamResource> mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
+	public ResponseEntity<InputStreamResource> mostrarPdf(@RequestBody Relatorio relatorio) throws FileNotFoundException {
 		InputStreamResource pdfFile = service.mostrarPdf(relatorio);
 
 		HttpHeaders headers = new HttpHeaders();
