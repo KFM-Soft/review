@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -27,7 +27,24 @@ interface gruposNotas {
   templateUrl: './icms-grupo-notas.component.html',
   styleUrl: './icms-grupo-notas.component.scss'
 })
-export class IcmsGrupoNotasComponent {
+export class IcmsGrupoNotasComponent implements OnInit {
+
+  empresaId: number | null = null;
+
+  constructor(
+    private route: ActivatedRoute,
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.empresaId = +id;
+      }
+    });
+    this.atualizarTabela();
+  }
+
   gruposNotas: gruposNotas[] = [
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
     { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
@@ -43,10 +60,6 @@ export class IcmsGrupoNotasComponent {
   paginaIndex = 1;
   termoBusca: string = '';
   selectTag: string = '';
-
-  ngOnInit(): void {
-    this.atualizarTabela();
-  };
 
   atualizarTabela(): void {
     let filtro = this.gruposNotas;

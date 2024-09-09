@@ -4,7 +4,8 @@
       <div class="logo" routerLink="/" routerLinkActive="active">
         <img src="../assets/svgs/logoReview.svg" alt="logo da Review+">
       </div>
-      <div class="list">
+
+      <div class="list" *ngIf="isLoggedIn()">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
           <li nz-menu-item routerLink="/" routerLinkActive="active">Início</li>
           <li nz-menu-item routerLink="/icms" routerLinkActive="active">ICMS</li>
@@ -12,10 +13,12 @@
           <li nz-menu-item>Sobre</li>
         </ul>
       </div>
-      <div class="user-profile">
+
+      <div class="user-profile" *ngIf="isLoggedIn()">
         <img src="../assets/svgs/user.svg" alt="imagem de usuário">
       </div>
     </nz-header>
+
     <nz-content>
       <div class="inner-content" id="inner-content">
         <router-outlet></router-outlet>

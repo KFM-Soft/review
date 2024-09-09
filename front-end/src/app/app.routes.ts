@@ -20,41 +20,50 @@ import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/m
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
-
-  { path: '',component: InicioComponent},
   { path: 'login', component: LoginComponent },
+  { path: '', component: InicioComponent },
   {
     path: 'icms', children: [
       { path: '', component: IcmsHomeComponent },
-      { path: 'grupo-notas', children: [
-        { path: '', component: IcmsGrupoNotasComponent},
+      { path: 'grupo-notas/:id', children: [
+        { path: '', component: IcmsGrupoNotasComponent },
         { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
       ]},
       { path: 'importar-nota', component: IcmsImportarNotasComponent },
-      { path: 'empresa-form', component: IcmsEmpresaFormComponent},
-      { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent},
+      { path: 'empresa-form', component: IcmsEmpresaFormComponent },
+      { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
       { path: 'detalhes-nota', component: IcmsDetalhesNotas },
     ]
   },
-  { path: 'teste', component: TesteComponent},
-  { path: 'adm', children: [
-    { path: '', component: AdmComponent },
-    { path: 'aliquotas', children: [
-      { path: '', component: AliquotaComponent },
-      { path: 'form', component: AliquotaFormComponent }
-    ]},
-    { path: 'produtos', children: [
-      { path: '', component: ProdutoComponent },
-      { path: 'form', component: ProdutoFormComponent }
-    ]},
-    { path: 'estados', children: [
-      { path: '', component: EstadosComponent },
-      { path: 'form', component: EstadosFormComponent }
-    ]},
-    { path: 'multiplicadores', children: [
-      { path: '', component: MultiplicadoresComponent },
-      { path: 'form', component: MultiplicadoresFormComponent }
-    ]},
-  ]}
-
+  { path: 'teste', component: TesteComponent },
+  {
+    path: 'adm', children: [
+      { path: '', component: AdmComponent },
+      {
+        path: 'aliquotas', children: [
+          { path: '', component: AliquotaComponent },
+          { path: 'form', component: AliquotaFormComponent },
+        ]
+      },
+      {
+        path: 'produtos', children: [
+          { path: '', component: ProdutoComponent },
+          { path: 'form', component: ProdutoFormComponent },
+        ]
+      },
+      {
+        path: 'estados', children: [
+          { path: '', component: EstadosComponent },
+          { path: 'form', component: EstadosFormComponent },
+        ]
+      },
+      {
+        path: 'multiplicadores', children: [
+          { path: '', component: MultiplicadoresComponent },
+          { path: 'form', component: MultiplicadoresFormComponent },
+        ]
+      },
+    ]
+  }
 ];
+

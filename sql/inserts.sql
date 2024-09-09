@@ -21,3 +21,16 @@ insert into review.aliquotas_interestaduais (origem_id, destino_id, porcentagem)
 insert into review.multiplicadores_produtos (aliquota_id, produto_id, aliquota_interna_emitente, mva_ajustada, multiplicador_original, multiplicador_ajustado, mva_original, aliquota_interestadual_emitente) VALUES
 (2, 1, 17.00, null, 12.65, null, 45.00, 12.00),
 (2, 2, 17.00, null, 12.65, null, 45.00, 12.00);
+
+insert into review.precificacoes (id, opcao, valor) VALUES
+(1, "opcao 1", 1.5),
+(2, "opcao 2", 5.2);
+
+insert into review.usuarios (id, ativo, nome_completo, nome_usuario, papel, quantidade_de_empresas, senha) VALUES
+(1,true, "admin", "admin", "ROLE_ADMIN", 10, "$2a$12$k31VX0IuTi6caaqHrjs/ZOOy1xJsATBWoz8a0CQafuvDo/dC67n26");
+
+insert into review.empresas (id, cnpj, nome, nome_fantasia, dono_id, preco_id) VALUES
+(1, "12345678912", "Empresas Junior Acre Brasil", "Empre. Juju", 1,1),
+(2, "12345678913", "Consultoria Tech Junior", "Tech Juju", 1,2),
+(3, "12345678914", "Marketing Digital Junior", "Mkt Juju", 1,1),
+(4, "12345678915", "Engenharia Civil Junior", "Civil Juju", 1,2);
