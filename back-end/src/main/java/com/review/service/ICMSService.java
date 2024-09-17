@@ -105,8 +105,8 @@ public class ICMSService {
         return relatorioService.save(relatorio);
     }
 
-    public InputStreamResource mostrarPdf(Relatorio relatorio) throws FileNotFoundException {
-        System.out.println(relatorio.getArquivo());
+    public InputStreamResource mostrarPdf(Long relatorio_id) throws FileNotFoundException {
+        Relatorio relatorio = relatorioService.getById(relatorio_id);
         String caminhoArquivo = relatorio.getArquivo();
         
 

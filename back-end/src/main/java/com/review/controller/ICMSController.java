@@ -58,9 +58,9 @@ public class ICMSController {
 		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(response);
 	}
 
-	@GetMapping("/mostrar")
-	public ResponseEntity<InputStreamResource> mostrarPdf(@RequestBody Relatorio relatorio) throws FileNotFoundException {
-		InputStreamResource pdfFile = service.mostrarPdf(relatorio);
+	@GetMapping("/mostrar/{relatorio_id}")
+	public ResponseEntity<InputStreamResource> mostrarPdf(@PathVariable Long relatorio_id) throws FileNotFoundException {
+		InputStreamResource pdfFile = service.mostrarPdf(relatorio_id);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;" + "relatorio" + ".pdf");
