@@ -22,6 +22,10 @@ public class RelatorioService{
         return repository.findById(id).orElse(null);
     }
 
+    public List<Relatorio> getByEmpresaId(long empresa_id){
+        return repository.getByEmpresaId(empresa_id);
+    }
+
     public Relatorio save(Relatorio objeto) {
         return repository.save(objeto);
     }

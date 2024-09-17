@@ -35,6 +35,12 @@ public class RelatorioController {
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
+    @GetMapping("/empresa/{empresa_id}")
+    public ResponseEntity<List<Relatorio>> getByEmpresaId(@PathVariable Long empresa_id){
+        List<Relatorio> registros = service.getByEmpresaId(empresa_id);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+
     @PostMapping("/")
     public ResponseEntity<Relatorio> createRelatorio(@RequestBody Relatorio Relatorio) {
         Relatorio registro = service.save(Relatorio);
