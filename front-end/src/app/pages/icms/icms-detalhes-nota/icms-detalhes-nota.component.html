@@ -20,10 +20,10 @@
                         <div class="valor-item">{{ produto.ncmCest }}</div>
                     </nz-col>
                     <nz-col nzXs="24" nzSm="12" nzMd="6">
-                        <p class="lbl-item">Valor:</p>
+                        <p class="lbl-item">Valor do Produto:</p>
                         <div class="valor-item">R$ {{ produto.valorProduto }}</div>
                     </nz-col>
-    
+
                     <nz-col nzXs="24" nzSm="8">
                         <nz-form-item>
                             <nz-form-label nzSpan="24">Aliquota Interestadual</nz-form-label>
@@ -52,7 +52,8 @@
 
                     <nz-col nzXs="24" nzSm="8">
                         <nz-form-item>
-                            <nz-form-label nzSpan="24">Valor do MVA</nz-form-label>
+                            <nz-form-label nzSpan="24">
+                              MVA</nz-form-label>
                             <nz-form-control nzSpan="24">
                                 <nz-input-number-group nzAddOnAfter="%">
                                     <nz-input-number [(ngModel)]="produto.mva" (ngModelChange)="mudancaMVA(produto)"

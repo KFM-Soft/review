@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>ICMS - Importar Notas</h1>
+    <h1>Importação de Notas Fiscais</h1>
 
     <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
@@ -10,17 +10,7 @@
                         <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
                         <nz-flex [nzVertical]="true" class="empresa-name">
                             <h3>Recol Distribuição e Comércio LTDA</h3>
-                            <p>Compra de licença dd-MM-yyyy</p>
                         </nz-flex>
-                    </td>
-
-
-                    <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
-                        <ng-container>
-                            <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
-                                    class="edit"></button>
-                        </ng-container>
                     </td>
                 </tr>
 
@@ -86,7 +76,7 @@
         </nz-upload>
 
         <div class="containerButton">
-            <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Enviar</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoEnviar" (click)="enviar()">Processar</button>
         </div>
 
     </nz-card>

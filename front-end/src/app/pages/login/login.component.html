@@ -1,10 +1,10 @@
-<body>
+<body (submit)="submit(form)">
     <div class="images">
         <img src="../../../assets/images/ReviewMais 1.png" alt="logo" class="logo">
         <img src="../../../assets/images/login.png" alt="Imagem login" class="login-img">
     </div>
     <div class="container">
-        <form (submit)="submit(form)" #form="ngForm">
+        <form  #form="ngForm">
             <div class="icons">
                 <img src="../../../assets/svgs/google.svg" alt="Icone do google" class="icones">
                 <img src="../../../assets/svgs/meta.svg" alt="Icone da meta" class="icones">

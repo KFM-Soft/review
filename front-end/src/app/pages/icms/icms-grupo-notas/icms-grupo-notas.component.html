@@ -1,6 +1,6 @@
 <div class="container">
 
-    <h1>ICMS - Notas Processadas</h1>
+    <h1>Notas Processadas</h1>
 
     <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
         <nz-card [nzHoverable]="true" class="empresa">
@@ -10,17 +10,7 @@
                         <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
                         <nz-flex [nzVertical]="true" class="empresa-name">
                             <h3>Recol Distribuição e Comércio LTDA</h3>
-                            <p>Compra de licença dd-MM-yyyy</p>
                         </nz-flex>
-                    </td>
-
-
-                    <td [nzAlign]="'right'" colspan="4" class="empresa-buttom">
-                        <ng-container>
-                            <button nz-button [nzSize]="'large'" class="botao botaoEdit"><img
-                                    src="../../../assets/svgs/pencil.svg" height="30px" width="30px"
-                                    class="edit"></button>
-                        </ng-container>
                     </td>
                 </tr>
 
@@ -68,7 +58,7 @@
                 <td nzWidth="5%" [nzAlign]="'right'" colspan="8" class="btt-add">
                     <ng-container>
                         <button nz-button [nzSize]="'large'" class="botao botaoAdicionar"
-                            routerLink="/icms/importar-nota" routerLinkActive="active">Adicionar Nota</button>
+                            routerLink="/icms/importar-nota" routerLinkActive="active">Importar Notas</button>
                     </ng-container>
                 </td>
             </tr>
@@ -135,7 +125,7 @@
                 <td [nzAlign]="'center'">
                     <ng-container *ngIf="data.button">
                         <button nz-button [nzSize]="'large'" routerLink="./notas-processadas" routerLinkActive="active"
-                            class="botao botaoNotas">Notas</button>
+                            class="botao botaoNotas">Detalhes</button>
                     </ng-container>
                 </td>
             </tr>

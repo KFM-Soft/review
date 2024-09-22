@@ -1,3 +1,4 @@
+import { IcmsService } from './../../../services/icms.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
@@ -10,6 +11,8 @@ import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { IcmsNota } from '../../../models/IcmsNota';
+import { Empresa } from '../../../models/Empresa';
 
 interface gruposNotas {
   numero: Number;
@@ -29,10 +32,16 @@ interface gruposNotas {
 })
 export class IcmsGrupoNotasComponent implements OnInit {
 
+  data: Empresa[] = [];
+  relatorios: IcmsNota[] = [];
+
+  private token: string | null = null;
+
   empresaId: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
+    private icmsService: IcmsService,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +52,22 @@ export class IcmsGrupoNotasComponent implements OnInit {
       }
     });
     this.atualizarTabela();
+  }
+
+  getIcmsRelatorios(): void {
+    if (this.token) {
+      this.icmsService.getIcmsRelatorios(this.token).subscribe({
+        next: (response: IcmsNota[]) => {
+          this.relatorios = response;
+          this.atualizarTabela();
+        },
+        error: (err: any) => {
+          console.error('Erro ao buscar relatórios:', err);
+          this.data = [];
+          this.atualizarTabela();
+        }
+      });
+    }
   }
 
   gruposNotas: gruposNotas[] = [

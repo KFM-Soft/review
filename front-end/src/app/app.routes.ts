@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path: 'icms', children: [
       { path: '', component: IcmsHomeComponent },
-      { path: 'grupo-notas/:id', children: [
+      { path: 'grupo-notas', children: [
         { path: '', component: IcmsGrupoNotasComponent },
         { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
       ]},
