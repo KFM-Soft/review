@@ -1,123 +1,191 @@
-nz-card{
-    border-radius: 16px;
-    padding: 0;
-  }
-
-  a.link-top{
-    min-height: 15em;
-    padding: 0;
-  }
-  
-  img {
-    height: 5em;
-    margin: 0 auto;
-  }
-
-  img.download{
-    height: 2em;
-  }
-
-  button img.edit{
-    height: 2em;
-  }
-  
-  .botao {
-    color: white;
-    border-radius: 16px;
-    margin-right: 0;
-  }
-  
-  
-  .botaoAdicionar {
-    min-width: 150px;
-    background-color: #00aa39;
-    padding: 0;
-    margin: 0.5em 1em 0 0;
-  }
-
-  .botaoEdit {
-    padding: 0;
-    background-color: #005CAA;
-    height: 3em;
-    width: 3em;
-  }
-  
-
-  .botaoRelatorioNota {
-    min-width: 100px;
-    background-color: #005CAA;
-    padding: 0;
-    margin: 0.5em 1em 0 0;
-  }
-
-  .botaoRelatorioGeral {
-    min-width: 250px;
-    background-color: #005CAA;
-    padding: 0;
-    margin: 0.5em 1em 0 0;
-  }
-  
-  tr nz-flex h3.header-table{
-    margin-left: 5em;
-  }
-  
-  nz-card.empresa{
-    max-height: 14em;
-    margin-bottom: 2em;
-    padding: 0;
-  }
-
-  .empresa table {
-    width: 100%;
-  }
-
-  .link-top{
-    padding: 0;
-  }
-
-  .logo-empresa{
-    height: 3em;
-    margin: 2px 2px 15px 15px;
-  }
-
-  .empresa h3 , .empresa p{
-    margin: 0;
-  }
-  
-
-  .empresa-name{
-    margin-left: 1em;
-    display: inline-block;
-  }
-
-  td.empresa-buttom{
-    border-right: 0;
-  }
-
-  nz-flex.empresa-dados{
-    margin: 0 1em;
-  }
-
-  .paginacao {
-    text-align: right;
-    margin: 20px 0;
+nz-card {
+  border-radius: 16px;
+  padding: 0;
 }
 
-.bloco { 
+a.link-top {
+  min-height: 15em;
+  padding: 0;
+}
+
+img {
+  height: 5em;
+  margin: 0 auto;
+}
+
+img.download {
+  height: 2em;
+}
+
+button img.edit {
+  height: 2em;
+}
+
+.botao {
+  color: white;
+  border-radius: 16px;
+  margin-right: 0;
+}
+
+.botaoAdicionar {
+  min-width: 150px;
+  background-color: #00aa39;
+  padding: 0;
+  margin: 0.5em 1em 0 0;
+}
+
+.botaoEdit {
+  padding: 0;
+  background-color: #005CAA;
+  height: 3em;
+  width: 3em;
+}
+
+.botaoRelatorioNota {
+  min-width: 100px;
+  background-color: #005CAA;
+  padding: 0;
+  margin: 0.5em 1em 0 0;
+}
+
+.botaoRelatorioGeral {
+  min-width: 250px;
+  background-color: #005CAA;
+  padding: 0;
+  margin: 0.5em 1em 0 0;
+}
+
+tr nz-flex h3.header-table {
+  margin-left: 5em;
+}
+
+nz-card.empresa {
+  max-height: 14em;
+  margin-bottom: 2em;
+  padding: 0;
+}
+
+.empresa table {
+  width: 100%;
+}
+
+.link-top {
+  padding: 0;
+}
+
+.logo-empresa {
+  height: 3em;
+  margin: 2px 2px 15px 15px;
+}
+
+.empresa h3,
+.empresa p {
+  margin: 0;
+}
+
+.empresa-name {
+  margin-left: 1em;
+  display: inline-block;
+}
+
+td.empresa-buttom {
+  border-right: 0;
+}
+
+nz-flex.empresa-dados {
+  margin: 0 1em;
+}
+
+.paginacao {
+  text-align: right;
+  margin: 20px 0;
+}
+
+.bloco {
   margin: 2em;
   text-align: center;
 }
 
-.dados p{
-  margin: auto;
-}
-.header-table h3{
+.dados p {
   margin: auto;
 }
 
-.bloco p{
+.header-table h3 {
+  margin: auto;
+}
+
+.bloco p {
   font-size: larger;
   width: 100%;
   background-color: #E0EAF5;
   border-radius: 14px;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .empresa table,
+  .link-top {
+      padding: 0 1em;
+  }
+  .bloco {
+      margin: 1.5em;
+  }
+}
+
+@media (max-width: 992px) {
+  .empresa table {
+      width: 100%;
+  }
+  .empresa-name {
+      display: block;
+      margin-left: 0;
+      text-align: center;
+  }
+  td.empresa-buttom {
+      text-align: center;
+  }
+  .bloco {
+      margin: 1em;
+  }
+  .botaoRelatorioGeral {
+      width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-empresa {
+      height: 2.5em;
+  }
+  .botaoAdicionar,
+  .botaoRelatorioGeral {
+      width: 100%;
+  }
+  .botaoEdit {
+      height: 2.5em;
+      width: 2.5em;
+  }
+  .bloco {
+      margin: 0.5em;
+  }
+}
+
+@media (max-width: 576px) {
+  img {
+      height: 4em;
+  }
+  .botao {
+      font-size: 0.85rem;
+  }
+  .botaoAdicionar {
+      min-width: unset;
+  }
+  .header-table h3 {
+      font-size: 1rem;
+  }
+  .bloco p {
+      font-size: medium;
+  }
+  .bloco {
+      margin: 0.25em;
+  }
 }

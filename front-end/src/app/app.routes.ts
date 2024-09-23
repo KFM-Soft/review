@@ -18,9 +18,11 @@ import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.comp
 import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
 import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/multiplicadores-form.component';
 import { LoginComponent } from './pages/login/login.component';
+import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'cadastro', component: CadastroUsuarioComponent},
   { path: '', component: InicioComponent },
   {
     path: 'icms', children: [

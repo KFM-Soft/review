@@ -1,60 +1,129 @@
-nz-card{
-    width: 400px;
-    margin-top: 16px;
-    border-radius: 16px;
+nz-card {
+  width: 400px;
+  margin-top: 16px;
+  border-radius: 16px;
 }
 
 img {
-    height: 5em;
-    margin: 0 auto;
+  height: 5em;
+  margin: 0 auto;
 }
 
 .botao {
-    min-width: 150px;
-    color: white;
-    border-radius: 16px;
+  min-width: 150px;
+  color: white;
+  border-radius: 16px;
 }
 
-
-
-
 .botaoAdicionar {
-    background-color: green;
-    padding: 0;
-    margin: 0;
+  background-color: green;
+  padding: 0;
+  margin: 0;
 }
 
 .botaoGerenciar {
-    background-color: #005CAA;
-    padding: 0;
-    margin: 0;
+  background-color: #005CAA;
+  padding: 0;
+  margin: 0;
 }
 
-.botaoGerenciarTodos{
-    background-color: #005CAA;
-    width: 50%;
-    height: 3em;
+.botaoGerenciarTodos {
+  background-color: #005CAA;
+  width: 50%;
+  height: 3em;
+}
+
+.gerenciarTodos {
+  text-align: center;
+}
+
+.compartilhar {
+  max-height: 8em;
+  margin-bottom: 1em;
+}
+
+.compartilhar {
+  max-height: 8em;
+  margin-bottom: 2em;
+}
+
+.compartilhar img {
+  height: 5em;
+  margin: auto, 0;
 }
 
 
+@media (max-width: 1200px) {
+  nz-card {
+      width: 100%;
+  }
 
-.gerenciarTodos{
-    text-align: center;
+  img {
+      height: 4em;
+  }
+
+  .compartilhar {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+  }
+
+  .compartilhar img {
+      height: 4em;
+  }
+
+  .botaoGerenciarTodos {
+      width: 60%;
+  }
 }
 
-.compartilhar{
-    max-height: 8em;
-    margin-bottom: 1em;
+@media (max-width: 768px) {
+  nz-card {
+      width: 100%;
+  }
+
+  img {
+      height: 3em;
+  }
+
+  .compartilhar {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .botaoGerenciarTodos {
+      width: 80%;
+  }
+
+  .gerenciarTodos {
+      text-align: center;
+  }
+
+  .botao {
+      min-width: 100%;
+      margin-bottom: 10px;
+  }
 }
 
-.compartilhar{
-    max-height: 8em;
-    margin-bottom: 2em;
+@media (max-width: 576px) {
+  img {
+      height: 2.5em;
+  }
+
+  .botao {
+      width: 100%;
+      margin: 10px 0;
+  }
+
+  .botaoGerenciarTodos {
+      width: 100%;
+  }
+
+  .gerenciarTodos {
+      text-align: center;
+  }
+
+  .compartilhar img {
+      height: 3em;
+  }
 }
-.compartilhar img{
-    height: 5em;
-    margin: auto, 0;
-
-}
-
-
