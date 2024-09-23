@@ -11,9 +11,12 @@ import { environment } from '../../../environments/environment';
 })
 export class JwtLoginService implements ILoginService {
 
+  private sessionStorage: Storage | null = null;
+
   constructor() {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      const userData = sessionStorage.getItem('usuario') || '{}';
+    if (typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+      const userData = this.sessionStorage?.getItem('usuario') || '{}';
       const usuario = JSON.parse(userData);
       this.usuarioAutenticado.next(usuario);
     } else {
@@ -74,27 +77,27 @@ export class JwtLoginService implements ILoginService {
     usuario.nomeUsuario = conteudoToken.sub;
     usuario.papel = conteudoToken.papel;
 
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('usuario', JSON.stringify(usuario));
-    sessionStorage.setItem('tokenExp', tokenExp.toString());
+    this.sessionStorage?.setItem('token', token);
+    this.sessionStorage?.setItem('usuario', JSON.stringify(usuario));
+    this.sessionStorage?.setItem('tokenExp', tokenExp.toString());
 
     this.usuarioAutenticado.next(usuario);
   }
 
   logout(): void {
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('usuario');
-    sessionStorage.removeItem('tokenExp');
+    this.sessionStorage?.removeItem('token');
+    this.sessionStorage?.removeItem('usuario');
+    this.sessionStorage?.removeItem('tokenExp');
     clearInterval(this.intervaloRenovacao);
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
     
-    const token = sessionStorage.getItem('token');
+    const token = this.sessionStorage?.getItem('token');
     const tokenNaoNulo = token != null;
     
-    const tokenExp = sessionStorage.getItem('tokenExp');
+    const tokenExp = this.sessionStorage?.getItem('tokenExp');
     const tempoExpiracao = new Date(Number(tokenExp));
     const agora = new Date();
     const naoEstaExpirado = tempoExpiracao > agora;
@@ -106,7 +109,7 @@ export class JwtLoginService implements ILoginService {
   getHeaders(request: HttpRequest<any>): HttpRequest<any> {
     if (this.isLoggedIn()) {
       this.fezRequisicao = true;
-      const token = sessionStorage.getItem('token');
+      const token = this.sessionStorage?.getItem('token');
       return request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token)
       });

@@ -45,11 +45,16 @@ export class IcmsHomeComponent implements OnInit {
   data: Empresa[] = [];
 
   private token: string | null = null;
+  private sessionStorage: Storage | null = null;
 
   constructor(
     private empresasService: EmpresasService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    if(typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+    }
+  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

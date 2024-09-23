@@ -10,9 +10,12 @@ import { environment } from '../../../environments/environment';
 })
 export class BasicLoginService implements ILoginService {
 
+  private sessionStorage: Storage | null = null;
+
   constructor() {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      const userData = sessionStorage.getItem('usuario') || '{}';
+    if (typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+      const userData = this.sessionStorage.getItem('usuario') || '{}';
       const usuario = JSON.parse(userData);
       this.usuarioAutenticado.next(usuario);
     } else {
@@ -38,7 +41,7 @@ export class BasicLoginService implements ILoginService {
 
     this.http.get<Usuario>(url, opcoesHttp).subscribe({
       next: (usuario: Usuario) => {
-        sessionStorage.setItem('usuario', JSON.stringify(usuario));
+        this.sessionStorage?.setItem('usuario', JSON.stringify(usuario));
         this.usuarioAutenticado.next(usuario);
       },
       complete: () => {
@@ -49,12 +52,12 @@ export class BasicLoginService implements ILoginService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('usuario');
+    this.sessionStorage?.removeItem('usuario');
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    const userData = sessionStorage.getItem('usuario') || '{}';
+    const userData = this.sessionStorage?.getItem('usuario') || '{}';
     const usuario = JSON.parse(userData);
     return Object.keys(usuario).length > 0;
   }

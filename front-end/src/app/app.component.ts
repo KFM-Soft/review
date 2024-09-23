@@ -20,10 +20,16 @@ export class AppComponent {
 
   currentUrl = '';
   usuario: Usuario = <Usuario>{};
+  private sessionStorage: Storage | null = null;
 
   constructor(
-      router: Router,
-      @Inject(LoginService) private loginService: ILoginService) {
+    router: Router,
+    @Inject(LoginService) private loginService: ILoginService
+  ) {
+
+    if (typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+    }
 
     router.events.subscribe(evento => {
       if (evento instanceof NavigationEnd) {
