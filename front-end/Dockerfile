@@ -1,4 +1,4 @@
-FROM node:22-slim AS build
+FROM node:20-alpine AS build
 COPY . /home/app/
 RUN npm install -g @angular/cli@17
 WORKDIR /home/app/
