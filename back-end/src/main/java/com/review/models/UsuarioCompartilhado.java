@@ -13,10 +13,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 @Entity
-@Table(name="usuarios_compartinhados")
+@Table(name="usuarios_compartilhados")
 @Getter
 @Setter
-public class UsuarioCompartinhado {
+public class UsuarioCompartilhado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
