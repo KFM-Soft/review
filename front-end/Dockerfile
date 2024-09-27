@@ -3,7 +3,6 @@ COPY . /home/app/
 RUN npm install -g @angular/cli@17
 WORKDIR /home/app/
 RUN npm install && ng build
-RUN ls -lh /home/app/dist/front-end/assets/images/
 
 FROM nginx:stable-alpine-slim
 COPY --from=build /home/app/dist/front-end/browser/ /usr/share/nginx/html
