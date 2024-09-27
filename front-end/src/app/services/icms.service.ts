@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { IcmsNota } from '../models/IcmsNota';
 
@@ -13,15 +13,21 @@ export class IcmsService {
 
   apiUrl = environment.API_URL + '/icms/'
 
-  getValoresCalculo(files: File[]): Observable<IcmsNota[]> {
+  getValoresCalculo(files: File[], token: string): Observable<IcmsNota[]> {
     let url = this.apiUrl + 'calculo';
+
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
 
     const formData = new FormData();
     files.forEach((file) => {
       formData.append(`xmls`, file);
     });
 
-    return this.http.post<IcmsNota[]>(url, formData);
+    return this.http.post<IcmsNota[]>(url, formData, httpOptions);
   }
 
 

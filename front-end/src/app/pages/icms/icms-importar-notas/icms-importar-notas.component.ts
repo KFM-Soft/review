@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -17,7 +17,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
 import { IcmsNota } from '../../../models/IcmsNota';
 import { StoragesService } from '../../../services/storages.service';
-
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 @Component({
   selector: 'app-icms-notas-carregar',
   standalone: true,
@@ -40,8 +41,10 @@ import { StoragesService } from '../../../services/storages.service';
   templateUrl: './icms-importar-notas.component.html',
   styleUrl: './icms-importar-notas.component.scss'
 })
-export class IcmsImportarNotasComponent {
+export class IcmsImportarNotasComponent implements OnInit{
 
+  private token: string | null = null;
+  private sessionStorage: Storage | null = null;
 
   constructor(
     private msg: NzMessageService,
@@ -49,12 +52,23 @@ export class IcmsImportarNotasComponent {
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+    @Inject(PLATFORM_ID) private platformId: Object,
+  ) {
+    if(typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+    }
+  }
 
   xmlFile: NzUploadFile = <NzUploadFile>{};
   notasCalculadas: IcmsNota[] = [];
   fileList: NzUploadFile[] = [];
   reviewValue = 'Y';
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = window.sessionStorage?.getItem('token');
+    }
+  }
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     
@@ -82,17 +96,19 @@ export class IcmsImportarNotasComponent {
 
   enviar() {
     const files: File[] = this.convertNzUploadFileToFile(this.fileList);
+    if(this.token){
+      this.service.getValoresCalculo(files, this.token).subscribe({
+        next: (response: IcmsNota[]) => {
+          this.notasCalculadas = response;
+          this.storageService.setSession('notasCalculadas', this.notasCalculadas);
+          this.router.navigate(['../detalhes-nota'], {relativeTo: this.route}, )
+        },
+        error: (error: any) => {
+          console.error('Erro no upload', error)
+        }
+      });
+    }
 
-    this.service.getValoresCalculo(files).subscribe({
-      next: (response: IcmsNota[]) => {
-        this.notasCalculadas = response;
-        this.storageService.setSession('notasCalculadas', this.notasCalculadas);
-        this.router.navigate(['../detalhes-nota'], {relativeTo: this.route}, )
-      },
-      error: (error: any) => {
-        console.error('Erro no upload', error)
-      }
-    });
   }
 
 }
