@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -29,12 +29,21 @@ import { IcmsService } from '../../../services/icms.service';
 })
 export class IcmsDetalhesNotas {
 
+
+  private token: string | null = null;
+  private sessionStorage: Storage | null = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private service: IcmsService,
     private storageService: StoragesService,
-  ) { }
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { 
+    if(typeof window !== 'undefined') {
+      this.sessionStorage = window.sessionStorage;
+    }
+   }
 
   notas: IcmsNota[] = [];
   registros: IcmsNota[] = [];
@@ -50,6 +59,9 @@ export class IcmsDetalhesNotas {
     this.registros = this.storageService.getSession('notasCalculadas')
     if (this.registros)
       this.items_qtd = this.registros.map((_, index) => index + 1);
+    if (isPlatformBrowser(this.platformId)) {
+      this.token = window.sessionStorage?.getItem('token');
+    }
   }
 
   atualizarTabela(): void {
@@ -96,7 +108,10 @@ export class IcmsDetalhesNotas {
   }
 
   gerarPDF() {
-    this.service.download(this.notas)
+    if(this.token){
+      this.service.download(this.notas, this.token)
+    }
+   
   }
 
 }
