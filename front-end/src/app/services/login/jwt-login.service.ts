@@ -61,7 +61,7 @@ export class JwtLoginService implements ILoginService {
         this.agendarRenovacaoToken();
       },
       complete: () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/inicio']);
       }
     });
   }
@@ -93,10 +93,10 @@ export class JwtLoginService implements ILoginService {
   }
 
   isLoggedIn(): boolean {
-    
+
     const token = this.sessionStorage?.getItem('token');
     const tokenNaoNulo = token != null;
-    
+
     const tokenExp = this.sessionStorage?.getItem('tokenExp');
     const tempoExpiracao = new Date(Number(tokenExp));
     const agora = new Date();

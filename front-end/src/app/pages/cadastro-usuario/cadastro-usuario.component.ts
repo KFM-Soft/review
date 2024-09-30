@@ -3,11 +3,28 @@ import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service';
 import { StoragesService } from '../../services/storages.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro-usuario',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    NzFormModule,
+    NzGridModule,
+    NzButtonModule,
+    NzInputModule,
+    NzSelectModule,
+    NzInputNumberModule,
+    FormsModule,
+  ],
   templateUrl: './cadastro-usuario.component.html',
   styleUrl: './cadastro-usuario.component.scss'
 })
