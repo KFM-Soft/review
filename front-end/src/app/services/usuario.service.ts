@@ -19,6 +19,11 @@ export class UsuarioService {
     return this.http.get<Usuario>(url);
   }
 
+  get(): Observable<Usuario[]> {
+    let url = this.apiUrl;
+    return this.http.get<Usuario[]>(url);
+  }
+
   save(objeto: Usuario): Observable<Usuario> {
     let url = this.apiUrl;
     if (objeto.id) {
