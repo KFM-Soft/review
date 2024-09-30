@@ -21,21 +21,23 @@ import { LoginComponent } from './pages/login/login.component';
 import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
 import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao/cadastro-precificacao.component';
+import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'cadastro-usuario', component: CadastroUsuarioComponent},
-  { path: 'cadastro-empresa', component: CadastroEmpresaComponent},
-  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent},
   { path: 'inicio', component: InicioComponent },
+  { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
+  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
   {
     path: 'icms', children: [
       { path: '', component: IcmsHomeComponent },
-      { path: 'grupo-notas', children: [
-        { path: '', component: IcmsGrupoNotasComponent },
-        { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
-      ]},
+      {
+        path: 'grupo-notas', children: [
+          { path: '', component: IcmsGrupoNotasComponent },
+          { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
+        ]
+      },
       { path: 'importar-nota', component: IcmsImportarNotasComponent },
       { path: 'empresa-form', component: IcmsEmpresaFormComponent },
       { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
@@ -70,6 +72,13 @@ export const routes: Routes = [
           { path: 'form', component: MultiplicadoresFormComponent },
         ]
       },
+      {
+        path: 'usuarios', children: [
+          { path: '', component: UsuariosComponent },
+          { path: 'form', component: CadastroUsuarioComponent },
+        ]
+      },
+
     ]
   }
 ];

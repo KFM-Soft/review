@@ -1,8 +1,11 @@
+import { Precificacao } from "./Precificacao"
+import { Usuario } from "./Usuario"
+
 export type Empresa = {
   id: number,
-  id_dono: number,
+  dono: Usuario,
   nome: string,
   nomeFantasia: string,
   cnpj: string,
-  id_preco: number
+  preco: Precificacao
 }

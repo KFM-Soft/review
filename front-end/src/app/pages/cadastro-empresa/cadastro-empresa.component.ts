@@ -13,6 +13,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FormsModule } from '@angular/forms';
+import { Usuario } from '../../models/Usuario';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -32,12 +34,14 @@ import { FormsModule } from '@angular/forms';
 })
 export class CadastroEmpresaComponent {
   empresa: Empresa = <Empresa>{};
+  usuarios: Usuario[] = [];
   id: string | null = null;
   editavel: boolean = true;
-  preco: Precificacao[] = [];
+  precos: Precificacao[] = [];
 
   constructor (
     private service: EmpresasService,
+    private usuarioService: UsuarioService,
     private precificacao: PrecificacaoService,
     private storageService: StoragesService,
     private router: Router,
@@ -46,6 +50,7 @@ export class CadastroEmpresaComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
+    this.getUsuarios();
     if (this.id) {
       this.empresa = this.storageService.getSession("empresa");
       this.editavel = false;
@@ -54,10 +59,24 @@ export class CadastroEmpresaComponent {
     }
   }
 
+  getUsuarios() {
+    this.usuarioService.get().subscribe({
+      next: (retorno: Usuario[]) => {
+        this.usuarios = retorno
+      },
+      error: (error) => {
+        console.error("Erro ao buscar usuários: ", error);
+      }
+    })
+  }
+
   getPrecificacao() {
     this.precificacao.get().subscribe({
       next: (retorno: Precificacao[]) => {
-        this.preco = retorno
+        this.precos = retorno
+      },
+      error: (error) => {
+        console.error("Erro ao buscar precificações: ", error);
       }
     })
   }

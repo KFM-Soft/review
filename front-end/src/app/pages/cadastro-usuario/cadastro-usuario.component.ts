@@ -46,6 +46,10 @@ export class CadastroUsuarioComponent {
     if (this.id){
       this.usuario = this.storageService.getSession('Usuario');
       this.editavel = false;
+    } else {
+      this.usuario.active = true;
+      this.usuario.papel = "ROLE_CLIENTE";
+      this.usuario.qtdEmpresas = 0;
     }
 
   }

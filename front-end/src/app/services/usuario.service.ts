@@ -12,11 +12,16 @@ export class UsuarioService {
     private http: HttpClient
   ) { }
 
-  apiUrl: string = environment.API_URL + '/config/usuario/';
+  apiUrl: string = environment.API_URL + '/usuario/';
 
   getById(id: number): Observable<Usuario> {
     let url = this.apiUrl + id;
     return this.http.get<Usuario>(url);
+  }
+
+  get(): Observable<Usuario[]> {
+    let url = this.apiUrl;
+    return this.http.get<Usuario[]>(url);
   }
 
   save(objeto: Usuario): Observable<Usuario> {
