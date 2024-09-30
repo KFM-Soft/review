@@ -39,7 +39,7 @@ public class Usuario implements Serializable{
     private String senha;
 
     @Column(nullable = false)
-    private Short quantidadeDeEmpresas  = 0;
+    private Short quantidadeDeEmpresas = 0;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)

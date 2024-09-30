@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -37,7 +37,7 @@ import { Usuario } from '../../../models/Usuario';
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.scss'
 })
-export class UsuariosComponent {
+export class UsuariosComponent implements OnInit{
 
   constructor(
     private renderer: Renderer2,
@@ -46,6 +46,9 @@ export class UsuariosComponent {
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+  ngOnInit(): void {
+    this.getUsuarios();
+  }
 
   registros: Usuario[] = [];
   usuarios: Usuario[] = [];
@@ -61,7 +64,7 @@ export class UsuariosComponent {
         this.total = retorno.length;
       },
       error: (error) => {
-        console.error("Erro ao buscar multiplicadores: ", error);
+        console.error("Erro ao buscar usuários: ", error);
       }
     })
   }

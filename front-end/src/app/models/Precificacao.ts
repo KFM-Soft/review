@@ -1,5 +1,5 @@
 export type Precificacao = {
-  id: Number,
-  opcao: String,
-  valor: Number
+  id: number,
+  opcao: string,
+  valor: number
 }

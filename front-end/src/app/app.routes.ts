@@ -24,20 +24,20 @@ import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'inicio', component: InicioComponent },
-  { path: 'cadastro-usuario', component: CadastroUsuarioComponent},
-  { path: 'cadastro-empresa', component: CadastroEmpresaComponent},
-  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent},
-  { path: 'usuarios', component: UsuariosComponent},
+  { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
+  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
   {
     path: 'icms', children: [
       { path: '', component: IcmsHomeComponent },
-      { path: 'grupo-notas', children: [
-        { path: '', component: IcmsGrupoNotasComponent },
-        { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
-      ]},
+      {
+        path: 'grupo-notas', children: [
+          { path: '', component: IcmsGrupoNotasComponent },
+          { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
+        ]
+      },
       { path: 'importar-nota', component: IcmsImportarNotasComponent },
       { path: 'empresa-form', component: IcmsEmpresaFormComponent },
       { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
@@ -70,6 +70,12 @@ export const routes: Routes = [
         path: 'multiplicadores', children: [
           { path: '', component: MultiplicadoresComponent },
           { path: 'form', component: MultiplicadoresFormComponent },
+        ]
+      },
+      {
+        path: 'usuarios', children: [
+          { path: '', component: UsuariosComponent },
+          { path: 'form', component: CadastroUsuarioComponent },
         ]
       },
 
