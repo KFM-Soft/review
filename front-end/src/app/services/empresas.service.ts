@@ -14,12 +14,19 @@ export class EmpresasService {
   apiUrl = environment.API_URL + '/empresa/'
 
   getAllEmpresas(token: string): Observable<Empresa[]> {
-    const httpOptions = { 
+    const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-  
+
     return this.http.get<Empresa[]>(`${this.apiUrl}`, httpOptions);
+  }
+
+  save(empresa: Empresa): Observable<Empresa> {
+    let url = this.apiUrl;
+    if(empresa.id)
+      return this.http.put<Empresa>(url, empresa)
+    return this.http.post<Empresa>(url, empresa);
   }
 }

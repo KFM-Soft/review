@@ -1,24 +1,46 @@
-<body>
-  <div class="images">
-      <img src="../../../assets/images/ReviewMais 1.png" alt="logo" class="logo">
-      <img src="../../../assets/images/login.png" alt="Imagem cadastro" class="login-img">
-  </div>
-  <div class="container">
-      <form>
-          <div class="formulario">
-              <label for="nomeCompleto">Nome Completo</label>
-              <input type="text" name="nomeCompleto" id="nomeCompleto">
-              <label for="nomeUsuario">Usuário</label>
-              <input type="text" name="nomeUsuario" id="nomeUsuario" >
-              <label for="cpfCnpj">CPF/CNPJ</label>
-              <input type="text" name="cpfCnpj" id="cpfCnpj">
-              <label for="senha">Senha</label>
-              <input type="password" name="senha" id="senha" >
-              <label for="confirmarSenha">Confirmar Senha</label>
-              <input type="password" name="confirmarSenha" id="confirmarSenha">
-          </div>
-          <input type="submit" value="Cadastrar" class="botao">
-          <a href="#" class="login-link">Já tem uma conta? Faça login</a>
-      </form>
-  </div>
-</body>
+<form nz-form class="form-cadastrar">
+  <nz-row [nzGutter]="[24, 0]">
+
+      <nz-col nzXs="24" nzLg="12">
+          <nz-form-item>
+              <nz-form-label nzSpan="24">Nome Completo</nz-form-label>
+              <nz-form-control>
+                  <input nz-input nz-col nzSize="large" nzSpan="24"[(ngModel)]="usuario.nomeCompleto" [ngModelOptions]="{standalone: true}" />
+              </nz-form-control>
+          </nz-form-item>
+      </nz-col>
+
+      <nz-col nzXs="24" nzLg="12">
+        <nz-form-item>
+            <nz-form-label nzSpan="24">Usuário</nz-form-label>
+            <nz-form-control>
+                <input nz-input nz-col nzSize="large" nzSpan="24"[(ngModel)]="usuario.nomeUsuario" [ngModelOptions]="{standalone: true}" />
+            </nz-form-control>
+        </nz-form-item>
+    </nz-col>
+
+    <nz-col nzXs="24" nzLg="12">
+      <nz-form-item>
+          <nz-form-label nzSpan="24">Senha</nz-form-label>
+          <nz-form-control>
+              <input nz-input nz-col nzSize="large" nzSpan="24"[(ngModel)]="usuario.senha" [ngModelOptions]="{standalone: true}"/>
+          </nz-form-control>
+      </nz-form-item>
+  </nz-col>
+
+  <nz-col nzXs="24" nzLg="12">
+    <nz-form-item>
+        <nz-form-label nzSpan="24">Confirmar senha</nz-form-label>
+        <nz-form-control>
+            <input nz-input nz-col nzSize="large" nzSpan="24"/>
+        </nz-form-control>
+    </nz-form-item>
+</nz-col>
+
+      <nz-col nzSpan="24">
+          <nz-row nzJustify="end">
+              <button nz-button [nzSize]="'large'" nzType="primary" (click)="submit()">Cadastrar</button>
+          </nz-row>
+      </nz-col>
+  </nz-row>
+</form>

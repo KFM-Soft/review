@@ -1,0 +1,51 @@
+<form nz-form class="form-cadastrar">
+  <nz-row [nzGutter]="[24, 0]">
+  <nz-col nzXs="24" nzLg="12">
+    <nz-form-item>
+        <nz-form-label nzSpan="24">Nome da Empresa</nz-form-label>
+        <nz-form-control>
+            <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="empresa.nome" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+        </nz-form-control>
+    </nz-form-item>
+</nz-col>
+
+<nz-col nzXs="24" nzLg="12">
+  <nz-form-item>
+      <nz-form-label nzSpan="24">Nome Fantasia</nz-form-label>
+      <nz-form-control>
+          <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="empresa.nomeFantasia" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+      </nz-form-control>
+  </nz-form-item>
+</nz-col>
+
+<nz-col nzXs="24" nzLg="12">
+  <nz-form-item>
+      <nz-form-label nzSpan="24">CNPJ</nz-form-label>
+      <nz-form-control>
+          <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="empresa.cnpj" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+      </nz-form-control>
+  </nz-form-item>
+</nz-col>
+
+      <!-- <nz-col nzXs="24" nzMd="12" nzLg="8">
+          <nz-form-item>
+              <nz-form-label nzSpan="24">Nome da Empresa</nz-form-label>
+              <nz-form-control>
+                  <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="empresa.nome" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
+                      <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" [nzValue]="produto"></nz-option>
+                  </nz-select>
+                  <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.produto.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
+              </nz-form-control>
+          </nz-form-item>
+      </nz-col> -->
+
+
+
+
+      <nz-col nzSpan="24">
+          <nz-row nzJustify="end">
+              <button nz-button [nzSize]="'large'" nzType="primary" (click)="submit()">Cadastrar</button>
+          </nz-row>
+      </nz-col>
+  </nz-row>
+</form>

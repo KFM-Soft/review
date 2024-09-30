@@ -1,20 +1,20 @@
 <nz-layout class="app-layout">
   <nz-layout>
-    <nz-header nzTheme="light">
+    <nz-header nzTheme="light" *ngIf="isLoggedIn()">
       <div class="logo" routerLink="/" routerLinkActive="active">
         <img src="../assets/svgs/logoReview.svg" alt="logo da Review+">
       </div>
 
-      <div class="list" *ngIf="isLoggedIn()">
+      <div class="list">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
-          <li nz-menu-item routerLink="/" routerLinkActive="active">Início</li>
+          <li nz-menu-item routerLink="/inicio" routerLinkActive="active">Início</li>
           <li nz-menu-item routerLink="/icms" routerLinkActive="active">ICMS</li>
           <li nz-menu-item routerLink="/teste">Faturas</li>
           <li nz-menu-item>Sobre</li>
         </ul>
       </div>
 
-      <div class="user-profile" *ngIf="isLoggedIn()">
+      <div class="user-profile" (click)="logout()">
         <img src="../assets/svgs/user.svg" alt="imagem de usuário">
       </div>
     </nz-header>

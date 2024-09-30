@@ -20,7 +20,11 @@
           <h2>Empresas</h2>
         </th>
         <th></th>
-        <th nzWidth="20%"></th>
+        <th nzWidth="10%">
+          <ng-container>
+            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">Adicionar empresa</button>
+          </ng-container>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -39,9 +43,7 @@
             <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas"
               routerLinkActive="active">Gerenciar</button>
           </ng-container>
-          <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar">+</button>
-          </ng-container>
+
         </td>
       </tr>
       <tr>
@@ -54,9 +56,5 @@
       </tr>
     </tbody>
   </nz-table>
-
-
-
-  <h1>Serviços Futuros</h1>
 
 </div>
