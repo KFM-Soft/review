@@ -19,11 +19,16 @@ import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplica
 import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/multiplicadores-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
+import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
+import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao/cadastro-precificacao.component';
 
 export const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: 'login', component: LoginComponent },
-  { path: 'cadastro', component: CadastroUsuarioComponent},
-  { path: '', component: InicioComponent },
+  { path: 'cadastro-usuario', component: CadastroUsuarioComponent},
+  { path: 'cadastro-empresa', component: CadastroEmpresaComponent},
+  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent},
+  { path: 'inicio', component: InicioComponent },
   {
     path: 'icms', children: [
       { path: '', component: IcmsHomeComponent },
