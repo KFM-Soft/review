@@ -16,7 +16,7 @@ import lombok.Setter;
 @Table(name="usuarios_compartinhados")
 @Getter
 @Setter
-public class UsuarioCompartinhado {
+public class UsuarioCompartilhado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)

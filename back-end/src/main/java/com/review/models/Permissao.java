@@ -26,6 +26,6 @@ public class Permissao implements Serializable{
     private String nome;
 
     @ManyToMany(mappedBy = "permissaos")
-    private List<UsuarioCompartinhado> UsuarioCompartinhado; 
+    private List<UsuarioCompartilhado> UsuarioCompartinhado; 
 
 }

@@ -5,27 +5,27 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.review.models.UsuarioCompartinhado;
-import com.review.repository.UsuarioCompartinhadoRepository;
+import com.review.models.UsuarioCompartilhado;
+import com.review.repository.UsuarioCompartilhadoRepository;
 
 @Service
-public class UsuarioCompartinhadoService {
+public class UsuarioCompartilhadoService {
     @Autowired
-    private UsuarioCompartinhadoRepository repository;
+    private UsuarioCompartilhadoRepository repository;
 
-    public List<UsuarioCompartinhado> getAll() {
+    public List<UsuarioCompartilhado> getAll() {
         return repository.findAll();
     }
 
-    public UsuarioCompartinhado getById(Long id) {
+    public UsuarioCompartilhado getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public UsuarioCompartinhado save(UsuarioCompartinhado objeto) {
+    public UsuarioCompartilhado save(UsuarioCompartilhado objeto) {
         return repository.save(objeto);
     }
 
-    public List<UsuarioCompartinhado> saveList(List<UsuarioCompartinhado> Usuarios) {
+    public List<UsuarioCompartilhado> saveList(List<UsuarioCompartilhado> Usuarios) {
         return repository.saveAll(Usuarios);
     }
 
