@@ -10,7 +10,7 @@ import pt from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { environment } from '../environments/environment';
+import { environment } from './environments/environment';
 import { BasicLoginService } from './services/login/basic-login.service';
 import { JwtLoginService } from './services/login/jwt-login.service';
 import { LoginService } from './services/login/i-login.service';
