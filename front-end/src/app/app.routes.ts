@@ -22,10 +22,10 @@ import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usua
 import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao/cadastro-precificacao.component';
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  {path: '', canActivate: [authGuard], children: [
   { path: 'inicio', component: InicioComponent },
   { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
   { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
@@ -44,9 +44,8 @@ export const routes: Routes = [
       { path: 'detalhes-nota', component: IcmsDetalhesNotas },
     ]
   },
-  { path: 'teste', component: TesteComponent },
-  {
-    path: 'adm', children: [
+  // { path: 'teste', component: TesteComponent },
+  { path: 'adm',canActivate: [authGuard], data: { papel: 'ROLE_ADMIN' }, children: [
       { path: '', component: AdmComponent },
       {
         path: 'aliquotas', children: [
@@ -81,5 +80,9 @@ export const routes: Routes = [
 
     ]
   }
+]},
+{ path: 'login', component: LoginComponent },
+{ path: '**', redirectTo: '' }
+
 ];
 
