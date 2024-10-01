@@ -13,15 +13,21 @@ export class IcmsService {
 
   apiUrl = environment.API_URL + '/icms/'
 
-  getValoresCalculo(files: File[]): Observable<IcmsNota[]> {
+  getValoresCalculo(files: File[], token: string): Observable<IcmsNota[]> {
     let url = this.apiUrl + 'calculo';
+
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
 
     const formData = new FormData();
     files.forEach((file) => {
       formData.append(`xmls`, file);
     });
 
-    return this.http.post<IcmsNota[]>(url, formData);
+    return this.http.post<IcmsNota[]>(url, formData, httpOptions);
   }
 
 
@@ -38,25 +44,29 @@ export class IcmsService {
   }
 
   // referencia: https://consolelog.com.br/utilizando-httpclient-angular-para-obter-pdf-api-visualizacao-download/
-  download(notas: IcmsNota[]) {
+  download(notas: IcmsNota[], token: string) {
     let url = this.apiUrl + 'relatorio';
+
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      }),
+      responseType: 'arraybuffer' as 'json' // Tipagem correta
+    };
+    
     const body = notas;
+    
     this.http
-      .post(url, body, {
-        responseType: "arraybuffer",
-      })
-      .subscribe((response) => {
+      .post<ArrayBuffer>(url, body, httpOptions) // Tipar o retorno como ArrayBuffer
+      .subscribe((response: ArrayBuffer) => {
         // Cria um Blob representando o PDF
         // a partir do response
-        const pdfBlob = new Blob([response], {
-          type: "application/pdf",
-        });
-
+        const pdfBlob = new Blob([response], { type: 'application/pdf' });
+    
         // Cria uma URL temporária
         // para o Blob usando createObjectURL
-        const temporaryUrl =
-          window.URL.createObjectURL(pdfBlob);
-
+        const temporaryUrl = window.URL.createObjectURL(pdfBlob);
+    
         // Torna a URL segura para uso
         // no iframe utilizando DomSanitizer
         // this.url =
@@ -64,19 +74,20 @@ export class IcmsService {
         //     temporaryUrl
         //   );
 
-        const temporaryAnchor = document.createElement("a");
+        const temporaryAnchor = document.createElement('a');
         temporaryAnchor.href = temporaryUrl;
 
-        // temporaryAnchor.download = `arquivo-${Date.now()}.pdf`;
+        // temporaryAnchor.download = arquivo-${Date.now()}.pdf;
 
         // Se quiser abrir o conteúdo em uma nova aba,
         // comente a linha acima e descomente a linha
         // abaixo, caso prefira baixar faça ao contrário.
-        temporaryAnchor.target = "_blank";
-
+        temporaryAnchor.target = '_blank'; // Abrir em uma nova aba
+        
         document.body.appendChild(temporaryAnchor);
         temporaryAnchor.click();
         temporaryAnchor.remove();
       });
+    
   }
 }
