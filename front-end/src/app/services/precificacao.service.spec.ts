@@ -4,7 +4,6 @@ import { PrecificacaoService } from './precificacao.service';
 
 describe('PrecificacaoService', () => {
   let service: PrecificacaoService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(PrecificacaoService);
