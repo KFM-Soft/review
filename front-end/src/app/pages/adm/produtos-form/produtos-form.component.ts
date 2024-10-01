@@ -4,7 +4,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { ProdutoService } from '../../../services/produtos.service';
+import { ProdutosService } from '../../../services/produtos.service';
 import { Estado } from '../../../models/Estado';
 import { EstadoService } from '../../../services/estado.service';
 import { CommonModule } from '@angular/common';
@@ -38,7 +38,7 @@ export class ProdutoFormComponent implements OnInit{
   editavel: boolean = true;
 
   constructor(
-    private service: ProdutoService,
+    private service: ProdutosService,
     private estadoService: EstadoService,
     private storageService: StoragesService,
     private router: Router,

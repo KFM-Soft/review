@@ -19,7 +19,7 @@ import { Aliquota } from '../../../models/Aliquota';
 import { Produto } from '../../../models/Produto';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { AliquotaService } from '../../../services/aliquota.service';
-import { ProdutoService } from '../../../services/produtos.service';
+import { ProdutosService } from '../../../services/produtos.service';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
@@ -50,7 +50,7 @@ export class MultiplicadoresComponent implements OnInit {
   constructor(
     private service: MultiplicadorService,
     private aliquotaService: AliquotaService,
-    private produtoService: ProdutoService,
+    private produtosService: ProdutosService,
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
@@ -98,7 +98,7 @@ export class MultiplicadoresComponent implements OnInit {
   }
 
   getProdutos() {
-    this.produtoService.get().subscribe({
+    this.produtosService.get().subscribe({
       next: (retorno: Produto[]) => {
         this.produtos = retorno;
       },

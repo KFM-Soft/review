@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 import { StoragesService } from '../../../services/storages.service';
 import { Produto } from '../../../models/Produto';
 import { Aliquota } from '../../../models/Aliquota';
-import { ProdutoService } from '../../../services/produtos.service';
+import { ProdutosService } from '../../../services/produtos.service';
 import { AliquotaService } from '../../../services/aliquota.service';
 
 @Component({
@@ -43,7 +43,7 @@ export class MultiplicadoresFormComponent implements OnInit{
 
   constructor(
     private service: MultiplicadorService,
-    private produtoService: ProdutoService,
+    private produtosService: ProdutosService,
     private aliquotaService: AliquotaService,
     private storageService: StoragesService,
     private router: Router,
@@ -63,7 +63,7 @@ export class MultiplicadoresFormComponent implements OnInit{
   }
 
   getProdutos() {
-    this.produtoService.get().subscribe({
+    this.produtosService.get().subscribe({
       next: (retorno: Produto[]) => {
         this.produtos = retorno
       }

@@ -11,7 +11,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
 import { Produto } from '../../../models/Produto';
-import { ProdutoService } from '../../../services/produtos.service';
+import { ProdutosService } from '../../../services/produtos.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
@@ -41,7 +41,7 @@ export class ProdutoComponent implements OnInit {
   
   constructor(
     private renderer: Renderer2,
-    private service: ProdutoService,
+    private service: ProdutosService,
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
