@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { TesteComponent } from './pages/teste/teste.component';
 import { IcmsHomeComponent } from './pages/icms/icms-home/icms-home.component';
 import { IcmsGrupoNotasComponent } from './pages/icms/icms-grupo-notas/icms-grupo-notas.component';
 import { IcmsNotasProcessadasComponent } from './pages/icms/icms-notas-processadas/icms-notas-processadas.component';
