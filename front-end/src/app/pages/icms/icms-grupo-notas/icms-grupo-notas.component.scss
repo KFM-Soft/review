@@ -41,12 +41,23 @@ nz-card{
     height: 3em;
     width: 3em;
   }
-  
-  .botaoGerenciar {
+
+  .td-table{
+    text-align: center;
+  }
+  .th-importar{
+    
+    margin: 0 0 0 75%;
+  }
+
+  .text-table{
+    text-align: left;
+  }
+  .botaobaixa {
     padding: 0;
     background-color: #005CAA;
     height: 3em;
-    width: 3em;
+    width: 30%;
   }
 
   .botaoNotas {

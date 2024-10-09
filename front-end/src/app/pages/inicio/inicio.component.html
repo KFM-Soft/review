@@ -23,7 +23,7 @@
         <th></th>
         <th nzWidth="10%">
           <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="../cadastro-empresa">Adicionar empresa</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="../cadastro-empresa">Adicionar Empresa</button>
           </ng-container>
         </th>
       </tr>
@@ -41,20 +41,18 @@
         </td>
         <td [nzAlign]="'center'">
           <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" routerLink="/icms/grupo-notas"
-              routerLinkActive="active">Gerenciar</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" [routerLink]="['/icms/grupo-notas', item.id]" routerLinkActive="active">Gerenciar</button>
           </ng-container>
-
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td colspan="3" class="gerenciarTodos">
           <ng-container>
             <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos" routerLink="/icms"
               routerLinkActive="active">Gerenciar Todos</button>
           </ng-container>
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </nz-table>
 

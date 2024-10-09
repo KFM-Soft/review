@@ -13,6 +13,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { IcmsNota } from '../../../models/IcmsNota';
 import { Empresa } from '../../../models/Empresa';
+import { EmpresasService } from '../../../services/empresas.service';
+import { Relatorio } from '../../../models/Relatorio';
+import { RelatorioService } from '../../../services/relatorio.service';
 
 interface gruposNotas {
   numero: Number;
@@ -33,15 +36,19 @@ interface gruposNotas {
 export class IcmsGrupoNotasComponent implements OnInit {
 
   data: Empresa[] = [];
-  relatorios: IcmsNota[] = [];
+  notas: IcmsNota[] = [];
+  relatorios: Relatorio[] = [];
 
   private token: string | null = null;
 
   empresaId: number | null = null;
+  empresa: Empresa = <Empresa>{}
 
   constructor(
     private route: ActivatedRoute,
     private icmsService: IcmsService,
+    private empresaService: EmpresasService,
+    private relatorioService: RelatorioService
   ) {}
 
   ngOnInit(): void {
@@ -50,57 +57,33 @@ export class IcmsGrupoNotasComponent implements OnInit {
       if (id) {
         this.empresaId = +id;
       }
+      this.token = window.sessionStorage?.getItem('token');
+      this.getEmpresa()
+      this.getIcmsRelatorios()
+      console.log(this.relatorios)
     });
-    this.atualizarTabela();
+  }
+
+  getEmpresa(): void {
+    if(this.empresaId && this.token){
+      this.empresaService.getId( this.token, this.empresaId).subscribe({
+        next: (response: Empresa) => {
+          this.empresa = response;
+        },
+      });
+
+    }
   }
 
   getIcmsRelatorios(): void {
-    if (this.token) {
-      this.icmsService.getIcmsRelatorios(this.token).subscribe({
-        next: (response: IcmsNota[]) => {
+    if (this.empresaId) {
+      this.relatorioService.getRelatorioEmpresaId(this.empresaId).subscribe({
+        next: (response: Relatorio[]) => {
           this.relatorios = response;
-          this.atualizarTabela();
         },
-        error: (err: any) => {
-          console.error('Erro ao buscar relatórios:', err);
-          this.data = [];
-          this.atualizarTabela();
-        }
       });
     }
   }
 
-  gruposNotas: gruposNotas[] = [
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-    { numero: 1, data_processamento: '02/04/2024', valor: '5.000,00', imposto: '530,00', notasProcessadas: 575, button: true},
-  ];
 
-  registros: gruposNotas[] = [];
-  total = this.gruposNotas.length;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
-  selectTag: string = '';
-
-  atualizarTabela(): void {
-    let filtro = this.gruposNotas;
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  };
-
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
-
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
-}
+};
