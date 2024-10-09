@@ -43,6 +43,9 @@ public class AliquotaService {
     public Aliquota getByOrigemDestino(String origem, String destino) {
         return repository.findByOrigemDestino(origem, destino);
     }
+    public Aliquota getByOrigemDestinoEmpresa(String origem, String destino,Long empresa_id) {
+        return repository.findByOrigemDestinoEmpresa(origem, destino, empresa_id);
+    }
 
     public List<Aliquota> getByEmpresa(Long id){
         return repository.findByEmpresaId(id);

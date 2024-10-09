@@ -38,6 +38,10 @@ public class MultiplicadorService {
         return repository.getMultiplicadorByCest(id);
     }
 
+    public Multiplicador getByProductCestEmpresa(String cest, Long empresa_id) {
+        return repository.getMultiplicadorByCestAndEmpresa(cest, empresa_id);
+    }
+
     public Multiplicador getByProductNcm(String ncm) {
         return repository.getMultiplicadorByNCM(ncm);
     }

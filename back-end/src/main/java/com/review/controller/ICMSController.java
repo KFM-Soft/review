@@ -50,7 +50,7 @@ public class ICMSController {
 	private ResponseEntity<byte[]> executarCalculo(@RequestBody List<MultipartFile> xmls)
 			throws JRException, ParserConfigurationException, IOException, SAXException {
 
-		byte[] response = service.teste(xmls);
+		byte[] response = service.teste(xmls, null, true);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=relatorio.pdf");
@@ -69,7 +69,7 @@ public class ICMSController {
 
 	}
 
-	@PostMapping("/salva/{id}/{valorTotal}/{valorCalculado}")
+	@PostMapping("/salva/{empresa_id}/{valorTotal}/{valorCalculado}")
 	public ResponseEntity<Relatorio> salvaPdf(@PathVariable("id") Long empresa_id,
 			@PathVariable("valorTotal") BigDecimal valorTotal,
 			@PathVariable("valorCalculado") BigDecimal valorCalculado, @RequestBody List<IcmsNotaDto> notas)
@@ -81,9 +81,13 @@ public class ICMSController {
 	}
 
 	@PostMapping("calculo")
-	public ResponseEntity<List<IcmsNotaDto>> getValoresNota(@RequestBody List<MultipartFile> xmls)
-			throws ParserConfigurationException, IOException, SAXException {
-		return new ResponseEntity<>(service.readXmlsDocuments(xmls), HttpStatus.OK);
+	public ResponseEntity<List<IcmsNotaDto>> getValoresNota(@RequestBody List<MultipartFile> xmls)throws ParserConfigurationException, IOException, SAXException {
+		return new ResponseEntity<>(service.readXmlsDocuments(xmls, null, true), HttpStatus.OK);
+	}
+
+	@PostMapping("calculo/empresa/{empresa_id}")
+	public ResponseEntity<List<IcmsNotaDto>> getValoresNotaEmpresa(@RequestBody List<MultipartFile> xmls, @PathVariable Long empresa_id)throws ParserConfigurationException, IOException, SAXException {
+		return new ResponseEntity<>(service.readXmlsDocuments(xmls, null, true), HttpStatus.OK);
 	}
 
 }

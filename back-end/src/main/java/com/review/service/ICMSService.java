@@ -137,7 +137,7 @@ public class ICMSService {
     // Essa função não apenas lê os documentos xml como indica o nome ela
     // também captura os dados do "pré-cálculo" do banco e retorna eles
     // convertidos em uma lista de DTOs para serem enviado pro front e tratados
-    public List<IcmsNotaDto> readXmlsDocuments(List<MultipartFile> xmls)
+    public List<IcmsNotaDto> readXmlsDocuments(List<MultipartFile> xmls, Long empresa_id, Boolean sistema)
             throws ParserConfigurationException, IOException, SAXException {
 
         if (xmls == null || xmls.isEmpty() || xmls.size() == 0)
@@ -211,17 +211,23 @@ public class ICMSService {
                 BigDecimal convertPercent = new BigDecimal(100);
 
                 if (cest != "" && cest != null && !cest.isEmpty()) {
-                    multiplicador = multService.getByProductCest(cest);
+                    multiplicador = (sistema) 
+                    ? multService.getByProductCest(cest)
+                    : multService.getByProductCestEmpresa(cest, empresa_id);
                 } else {
-                    multiplicador = multService.getByProductNcm(ncm);
+                    multiplicador = (sistema) 
+                    ? multService.getByProductNcm(ncm)
+                    : multService.getByProductCestEmpresa(ncmCest, empresa_id);
                 }
 
                 if (multiplicador == null || multiplicador.equals(null)) {
                     break;
                 }
                 try {
-                    BigDecimal aliquotaInterestadual = aliquotaService.getByOrigemDestino(ufEmit, ufDest)
-                            .getPorcentagem();
+
+                    BigDecimal aliquotaInterestadual = (sistema) 
+                    ? aliquotaService.getByOrigemDestino(ufEmit, ufDest).getPorcentagem() 
+                    : aliquotaService.getByOrigemDestinoEmpresa(ufEmit, ufDest, empresa_id).getPorcentagem();
 
                     BigDecimal aliquotaInternaEmit = multiplicador.getAliquotaInternaEmit();
 
@@ -263,9 +269,9 @@ public class ICMSService {
         return listaNotasDTO;
     }
 
-    public byte[] teste(List<MultipartFile> xmls)
+    public byte[] teste(List<MultipartFile> xmls,Long empresa_id, boolean sistema)
             throws ParserConfigurationException, IOException, SAXException, JRException {
-        List<IcmsNotaDto> notasPreProcessadas = readXmlsDocuments(xmls);
+        List<IcmsNotaDto> notasPreProcessadas = readXmlsDocuments(xmls, empresa_id, sistema);
         return gerarRelatorioICMSST(notasPreProcessadas);
     }
 

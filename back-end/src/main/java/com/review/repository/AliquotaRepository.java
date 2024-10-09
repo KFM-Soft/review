@@ -13,6 +13,9 @@ public interface AliquotaRepository extends JpaRepository<Aliquota, Long>{
     @Query("SELECT a FROM Aliquota a WHERE a.origem.uf = ?1 AND a.destino.uf = ?2 AND a.sistema = true")
     public Aliquota findByOrigemDestino(String origem, String destino);
 
+    @Query("SELECT a FROM Aliquota a WHERE a.empresa.id = ?3 AND a.origem.uf = ?1 AND a.destino.uf = ?2 AND a.sistema = false " )
+    public Aliquota findByOrigemDestinoEmpresa(String origem, String destino, Long empresa_id);
+
     @Query("SELECT a FROM Aliquota a WHERE a.empresa.id = ?1 AND a.sistema = false")
     public List<Aliquota> findByEmpresaId(Long empresa);
 
