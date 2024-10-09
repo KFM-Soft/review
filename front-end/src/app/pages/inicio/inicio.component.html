@@ -1,5 +1,6 @@
 <div class="container">
-  <a href="/">
+  <!-- removido temporariamente o compartilhamento de contas  -->
+  <a href="/" *ngif="false"> 
     <nz-card [nzHoverable]="true" class="compartilhar">
       <div nz-flex [nzGap]="20">
         <img src="../../../assets/svgs/compartilhar.svg">
@@ -13,7 +14,7 @@
 
   <h1>ICMS</h1>
 
-  <nz-table #headerTable [nzShowPagination]="false" class="table">
+  <nz-table #headerTable [nzData]="data.length ? data : []" [nzShowPagination]="false" class="table">
     <thead>
       <tr>
         <th nzWidth="5%">
