@@ -1,3 +1,12 @@
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 nz-card {
   width: 400px;
   margin-top: 16px;
@@ -16,9 +25,10 @@ img {
 }
 
 .botaoAdicionar {
-  background-color: green;
+  min-width: 150px;
+  background-color: #005CAA;
   padding: 0;
-  margin: 0;
+  margin: 0.5em 1em 0 0;
 }
 
 .botaoGerenciar {
