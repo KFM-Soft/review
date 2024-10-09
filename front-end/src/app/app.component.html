@@ -8,9 +8,10 @@
       <div class="list">
         <ul nz-menu nzTheme="light" nzMode="horizontal">
           <li nz-menu-item routerLink="/inicio" routerLinkActive="active">Início</li>
-          <li nz-menu-item routerLink="/icms" routerLinkActive="active">ICMS</li>
+          <!-- <li nz-menu-item routerLink="/icms" routerLinkActive="active">ICMS</li>
           <li nz-menu-item routerLink="/teste">Faturas</li>
-          <li nz-menu-item>Sobre</li>
+          <li nz-menu-item>Sobre</li> -->
+          <li nz-menu-item routerLink="/adm" routerLinkActive="active" *ngIf="isAdmin()">administrar</li>
         </ul>
       </div>
 
@@ -20,10 +21,7 @@
     </nz-header>
 
     <nz-content>
-      <div class="inner-content" id="inner-content" *ngIf="isLoggedIn()">
-        <router-outlet></router-outlet>
-      </div>
-      <div *ngIf="!isLoggedIn()">
+      <div>
         <router-outlet></router-outlet>
       </div>
     </nz-content>

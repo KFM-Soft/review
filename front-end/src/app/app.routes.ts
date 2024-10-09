@@ -11,7 +11,6 @@ import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 import { AdmComponent } from './pages/adm/adm.component';
 import { ProdutoFormComponent } from './pages/adm/produtos-form/produtos-form.component';
-import { IcmsDetalhesNotas } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
 import { EstadosComponent } from './pages/adm/estados/estados.component';
 import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.component';
 import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
@@ -30,9 +29,9 @@ export const routes: Routes = [
     { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
     {
       path: 'icms', children: [
-        { path: '', component: IcmsHomeComponent },
+        // { path: '', component: IcmsHomeComponent }, 
         {
-          path: 'grupo-notas', children: [
+          path: 'grupo-notas/:id', children: [
             { path: '', component: IcmsGrupoNotasComponent },
             { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
           ]
@@ -40,7 +39,6 @@ export const routes: Routes = [
         { path: 'importar-nota', component: IcmsImportarNotasComponent },
         { path: 'empresa-form', component: IcmsEmpresaFormComponent },
         { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
-        { path: 'detalhes-nota', component: IcmsDetalhesNotas },
       ]
     },
     // { path: 'teste', component: TesteComponent },

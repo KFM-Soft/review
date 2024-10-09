@@ -2,14 +2,16 @@
 
     <h1>Notas Processadas</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
+    <a class="link-top">
+        <!-- link para modificar dados da empresa -->
+        <!-- <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top"> -->
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
                     <td [nzAlign]="'left'" colspan="2">
                         <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
                         <nz-flex [nzVertical]="true" class="empresa-name">
-                            <h3>Recol Distribuição e Comércio LTDA</h3>
+                            <h3>{{ empresa.nome }}</h3>
                         </nz-flex>
                     </td>
                 </tr>
@@ -18,10 +20,10 @@
                     <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
                             <h3>CNPJ:</h3>
-                            <p>24.745.870/0001-90</p>
+                            <p>{{ empresa.cnpj }}</p>
                         </nz-flex>
                     </td>
-                    <td class="empresa-dados">
+                    <!-- <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
                             <h3>E-mail:</h3>
                             <p>recolgmail.com</p>
@@ -44,7 +46,7 @@
                             <h3>Endereço:</h3>
                             <p>Rua Sete de Setembro, 458</p>
                         </nz-flex>
-                    </td>
+                    </td> -->
                 </tr>
             </table>
 
@@ -52,90 +54,66 @@
     </a>
 
 
-    <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table">
+    <nz-table #headerTable [nzData]="data.length ? data : []" [nzShowPagination]="false" class="table">
         <thead>
             <tr>
-                <td nzWidth="5%" [nzAlign]="'right'" colspan="8" class="btt-add">
-                    <ng-container>
-                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar"
+                <th colspan="2">
+                    <h2 class="text-table">Relatorios</h2>
+                </th>
+                <th colspan="2" class="th-importar">
+                    <ng-container class="th-importar">
+                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar th-importar"
                             routerLink="/icms/importar-nota" routerLinkActive="active">Importar Notas</button>
                     </ng-container>
-                </td>
+                </th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Nº Bloco de Processamento</h3>
-                    </nz-flex>
+                <td class="td-table">
+                    <p>ID</p>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Data De Processamento</h3>
-                    </nz-flex>
+                <td class="td-table">
+                    <p>Valor Total</p>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Valor Das Notas</h3>
-                    </nz-flex>
+                <td class="td-table">
+                    <p>Valor Calculado</p>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Imposto</h3>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Notas Processadas</h3>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="header-table">
-                        <h3>Acões</h3>
-                    </nz-flex>
+                <td class="td-table">
+                    <p>Ação</p>
                 </td>
             </tr>
-            <tr *ngFor="let data of headerTable.data">
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.numero }}</p>
+            <tr *ngFor="let item of relatorios">
+                <td class="td-table">
+                    <nz-flex [nzVertical]="true">
+                        <p>{{ item.id }}</p>
                     </nz-flex>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.data_processamento }}</p>
+                <td class="td-table">
+                    <nz-flex [nzVertical]="true">
+                        <p>{{ item.valorTotal }}</p>
                     </nz-flex>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>Expira em {{ data.valor }}</p>
+                <td class="td-table">
+                    <nz-flex [nzVertical]="true">
+                        <p>{{ item.valorCalculado }}</p>
                     </nz-flex>
                 </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.imposto }}</p>
-                    </nz-flex>
-                </td>
-                <td>
-                    <nz-flex [nzVertical]="false" class="dados">
-                        <p>{{ data.notasProcessadas }}</p>
-                    </nz-flex>
-                </td>
-                <td [nzAlign]="'center'">
-                    <ng-container *ngIf="data.button">
-                        <button nz-button [nzSize]="'large'" routerLink="./notas-processadas" routerLinkActive="active"
-                            class="botao botaoNotas">Detalhes</button>
+                <td [nzAlign]="'center'" class="td-table">
+                    <ng-container>
+                        <button nz-button [nzSize]="'large'" class="botao botaobaixa">Baixa PDF</button>
                     </ng-container>
                 </td>
             </tr>
+            <!-- <tr>
+            <td colspan="3" class="gerenciarTodos">
+              <ng-container>
+                <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos" routerLink="/icms"
+                  routerLinkActive="active">Gerenciar Todos</button>
+              </ng-container>
+            </td>
+          </tr> -->
         </tbody>
     </nz-table>
-    <div class="paginacao">
-        <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
-            (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
-            [nzPageSizeOptions]=[5,10,20,30,40,50]>
-        </nz-pagination>
-    </div>
 
 </div>
