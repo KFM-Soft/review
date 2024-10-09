@@ -16,6 +16,8 @@ import { Empresa } from '../../../models/Empresa';
 import { EmpresasService } from '../../../services/empresas.service';
 import { Relatorio } from '../../../models/Relatorio';
 import { RelatorioService } from '../../../services/relatorio.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { response } from 'express';
 
 interface gruposNotas {
   numero: Number;
@@ -40,6 +42,7 @@ export class IcmsGrupoNotasComponent implements OnInit {
   relatorios: Relatorio[] = [];
 
   private token: string | null = null;
+  url: SafeUrl | null = null;
 
   empresaId: number | null = null;
   empresa: Empresa = <Empresa>{}
@@ -85,5 +88,9 @@ export class IcmsGrupoNotasComponent implements OnInit {
     }
   }
 
+  getPDF(relatorio_id: number): void{
+    if(this.token)
+      this.icmsService.getDownloadPDF(relatorio_id, this.token);
+  }
 
 };

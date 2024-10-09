@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { IcmsNota } from '../models/IcmsNota';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -90,4 +91,38 @@ export class IcmsService {
       });
     
   }
+  getDownloadPDF(relatorio_id: number, token: string) {
+    let url = this.apiUrl + 'mostrar/' + relatorio_id;
+  
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      }),
+      responseType: 'arraybuffer' as 'json' // Mantém a tipagem correta
+    };
+  
+    this.http
+      .get<ArrayBuffer>(url, httpOptions) // Aqui, usamos GET ao invés de POST
+      .subscribe((response) => {
+        // Cria um Blob representando o PDF
+        const pdfBlob = new Blob([response], {
+          type: "application/pdf",
+        });
+  
+        // Cria uma URL temporária para o Blob usando createObjectURL
+        const temporaryUrl = window.URL.createObjectURL(pdfBlob);
+  
+        // Cria um link temporário e aciona o download
+        const temporaryAnchor = document.createElement('a');
+        temporaryAnchor.href = temporaryUrl;
+
+        temporaryAnchor.target = '_blank'; // Abrir em uma nova aba
+  
+        // Anexa o link ao DOM, aciona o clique e depois remove o link
+        document.body.appendChild(temporaryAnchor);
+        temporaryAnchor.click();
+        document.body.removeChild(temporaryAnchor);
+      });
+  }
+  
 }

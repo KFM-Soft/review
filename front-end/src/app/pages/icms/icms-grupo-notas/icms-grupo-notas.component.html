@@ -54,7 +54,7 @@
     </a>
 
 
-    <nz-table #headerTable [nzData]="data.length ? data : []" [nzShowPagination]="false" class="table">
+    <nz-table #headerTable [nzData]="relatorios.length ? relatorios : []" [nzShowPagination]="false" class="table">
         <thead>
             <tr>
                 <th colspan="2">
@@ -101,7 +101,7 @@
                 </td>
                 <td [nzAlign]="'center'" class="td-table">
                     <ng-container>
-                        <button nz-button [nzSize]="'large'" class="botao botaobaixa">Baixa PDF</button>
+                        <button nz-button [nzSize]="'large'" class="botao botaobaixa" (click)="getPDF(item.id)">Mostrar Relatorio</button>
                     </ng-container>
                 </td>
             </tr>

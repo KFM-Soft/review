@@ -21,10 +21,11 @@ import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empr
 import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao/cadastro-precificacao.component';
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 import { authGuard } from './services/auth.guard';
+import { IcmsDetalhesNotaComponent } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
-    { path: 'inicio', component: InicioComponent },
+    { path: '', component: InicioComponent },
     { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
     { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
     {
@@ -39,6 +40,7 @@ export const routes: Routes = [
         { path: 'importar-nota', component: IcmsImportarNotasComponent },
         { path: 'empresa-form', component: IcmsEmpresaFormComponent },
         { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
+        { path: 'detalhes-nota', component: IcmsDetalhesNotaComponent },
       ]
     },
     // { path: 'teste', component: TesteComponent },
