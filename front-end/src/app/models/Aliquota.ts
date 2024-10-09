@@ -1,3 +1,4 @@
+import { Empresa } from "./Empresa";
 import { Estado } from "./Estado";
 
 export type Aliquota = {
@@ -5,4 +6,6 @@ export type Aliquota = {
     origem: Estado;
     destino: Estado;
     porcentagem: number;
+    empresa: Empresa;
+    sistema: boolean;
 }

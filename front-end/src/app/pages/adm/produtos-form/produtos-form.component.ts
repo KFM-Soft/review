@@ -60,6 +60,7 @@ export class ProdutoFormComponent implements OnInit{
   }
 
   submit(): void {
+    this.produto.sistema = true
     this.service.save(this.produto).subscribe({
       next: () => {
         alert("Registro salvo com sucesso!")

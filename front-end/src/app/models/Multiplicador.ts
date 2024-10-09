@@ -1,4 +1,5 @@
 import { Aliquota } from "./Aliquota";
+import { Empresa } from "./Empresa";
 import { Produto } from "./Produto";
 
 export type Multiplicador = {
@@ -10,4 +11,6 @@ export type Multiplicador = {
     multiplicadorOriginal: number;
     mvaAjustada: number | null;
     multiplicadorAjustado: number | null;
+    empresa: Empresa;
+    sistema: boolean;
 }

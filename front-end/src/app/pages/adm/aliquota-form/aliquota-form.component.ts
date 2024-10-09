@@ -62,7 +62,8 @@ export class AliquotaFormComponent implements OnInit{
   }
 
   submit(): void {
-    this.aliquota.porcentagem = +this.aliquota.porcentagem
+    this.aliquota.porcentagem =+ this.aliquota.porcentagem
+    this.aliquota.sistema = true
     this.service.save(this.aliquota).subscribe({
       next: () => {
         alert("Registro salvo com sucesso!")

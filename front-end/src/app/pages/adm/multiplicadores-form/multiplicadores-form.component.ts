@@ -79,6 +79,7 @@ export class MultiplicadoresFormComponent implements OnInit{
   }
 
   submit(): void {
+    this.multiplicador.sistema = true
     this.service.save(this.multiplicador).subscribe({
       next: () => {
         alert("Registro salvo com sucesso!")
