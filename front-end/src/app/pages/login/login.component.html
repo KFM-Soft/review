@@ -4,13 +4,10 @@
         <img src="../../../assets/images/login.png" alt="Imagem login" class="login-img">
     </div>
     <div class="container">
-        <form  #form="ngForm">
-            <div class="icons">
-                <img src="../../../assets/svgs/google.svg" alt="Icone do google" class="icones">
-                <img src="../../../assets/svgs/meta.svg" alt="Icone da meta" class="icones">
-                <img src="../../../assets/svgs/apple.svg" alt="Icone da apple" class="icones">
-            </div>
-            <hr>
+        <div class="images-review">
+            <img src="../../../assets/images/ReviewMais-Negativo.png" alt="logo" class="logo">
+        </div>
+        <form #form="ngForm" class="form">
             <div class="formulario">
                 <label for="nomeUsuario">Usuário</label>
                 <input type="text" name="nomeUsuario" id="nomeUsuario" [(ngModel)]="usuario.nomeUsuario">
