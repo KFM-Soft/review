@@ -73,6 +73,7 @@ export class JwtLoginService implements ILoginService {
     const tokenExp = conteudoToken.exp * 1000;
 
     const usuario = <Usuario>{};
+    usuario.id = conteudoToken.id
     usuario.nomeCompleto = conteudoToken.nomeCompleto;
     usuario.nomeUsuario = conteudoToken.sub;
     usuario.papel = conteudoToken.papel;

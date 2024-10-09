@@ -23,6 +23,18 @@ export class EmpresasService {
     return this.http.get<Empresa[]>(`${this.apiUrl}`, httpOptions);
   }
 
+  getEmpresasIdUsuario(token: string, id_usuario: number): Observable<Empresa[]> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+    
+    let url = this.apiUrl + 'usuario/' +  id_usuario
+
+    return this.http.get<Empresa[]>(`${url}`, httpOptions);
+  }
+
   save(empresa: Empresa): Observable<Empresa> {
     let url = this.apiUrl;
     if(empresa.id)

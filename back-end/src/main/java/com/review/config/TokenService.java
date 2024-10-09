@@ -31,6 +31,7 @@ public class TokenService {
         String token = JWT.create()
                           .withIssuer("Review")
                           .withSubject(usuario.getNomeUsuario())
+                          .withClaim("id", usuario.getId())
                           .withClaim("nomeCompleto", usuario.getNomeCompleto())
                           .withClaim("papel", usuario.getPapel().name())
                           .withClaim("dataLimiteRenovacao", LocalDate.now().toString())

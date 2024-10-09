@@ -25,60 +25,60 @@ import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
-  { path: 'inicio', component: InicioComponent },
-  { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
-  { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
-  {
-    path: 'icms', children: [
-      { path: '', component: IcmsHomeComponent },
-      {
-        path: 'grupo-notas', children: [
-          { path: '', component: IcmsGrupoNotasComponent },
-          { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
-        ]
-      },
-      { path: 'importar-nota', component: IcmsImportarNotasComponent },
-      { path: 'empresa-form', component: IcmsEmpresaFormComponent },
-      { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
-      { path: 'detalhes-nota', component: IcmsDetalhesNotas },
-    ]
-  },
-  // { path: 'teste', component: TesteComponent },
-  { path: 'adm',canActivate: [authGuard], data: { papel: 'ROLE_ADMIN' }, children: [
-      { path: '', component: AdmComponent },
-      {
-        path: 'aliquotas', children: [
-          { path: '', component: AliquotaComponent },
-          { path: 'form', component: AliquotaFormComponent },
-        ]
-      },
-      {
-        path: 'produtos', children: [
-          { path: '', component: ProdutoComponent },
-          { path: 'form', component: ProdutoFormComponent },
-        ]
-      },
-      {
-        path: 'estados', children: [
-          { path: '', component: EstadosComponent },
-          { path: 'form', component: EstadosFormComponent },
-        ]
-      },
-      {
-        path: 'multiplicadores', children: [
-          { path: '', component: MultiplicadoresComponent },
-          { path: 'form', component: MultiplicadoresFormComponent },
-        ]
-      },
-      {
-        path: 'usuarios', children: [
-          { path: '', component: UsuariosComponent },
-          { path: 'form', component: CadastroUsuarioComponent },
-        ]
-      },
+    { path: 'inicio', component: InicioComponent },
+    { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
+    { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
+    {
+      path: 'icms', children: [
+        { path: '', component: IcmsHomeComponent },
+        {
+          path: 'grupo-notas', children: [
+            { path: '', component: IcmsGrupoNotasComponent },
+            { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
+          ]
+        },
+        { path: 'importar-nota', component: IcmsImportarNotasComponent },
+        { path: 'empresa-form', component: IcmsEmpresaFormComponent },
+        { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
+        { path: 'detalhes-nota', component: IcmsDetalhesNotas },
+      ]
+    },
+    // { path: 'teste', component: TesteComponent },
+    { path: 'adm',canActivate: [authGuard], data: { papel: 'ROLE_ADMIN' }, children: [
+        { path: '', component: AdmComponent },
+        {
+          path: 'aliquotas', children: [
+            { path: '', component: AliquotaComponent },
+            { path: 'form', component: AliquotaFormComponent },
+          ]
+        },
+        {
+          path: 'produtos', children: [
+            { path: '', component: ProdutoComponent },
+            { path: 'form', component: ProdutoFormComponent },
+          ]
+        },
+        {
+          path: 'estados', children: [
+            { path: '', component: EstadosComponent },
+            { path: 'form', component: EstadosFormComponent },
+          ]
+        },
+        {
+          path: 'multiplicadores', children: [
+            { path: '', component: MultiplicadoresComponent },
+            { path: 'form', component: MultiplicadoresFormComponent },
+          ]
+        },
+        {
+          path: 'usuarios', children: [
+            { path: '', component: UsuariosComponent },
+            { path: 'form', component: CadastroUsuarioComponent },
+          ]
+        },
 
-    ]
-  }
+      ]
+    }
 ]},
 { path: 'login', component: LoginComponent },
 { path: '**', redirectTo: '' }

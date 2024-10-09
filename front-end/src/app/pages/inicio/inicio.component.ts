@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { Empresa } from '../../models/Empresa';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { Usuario } from '../../models/Usuario';
 
 @Component({
   selector: 'app-inicio',
@@ -46,9 +47,12 @@ export class InicioComponent implements OnInit {
   }
 
   getEmpresas(): void {
+
+    const userData = this.sessionStorage?.getItem('usuario') || '{}';
+    const usuario:Usuario = JSON.parse(userData);
     if (this.token) {
-      this.empresasService.getAllEmpresas(this.token).subscribe({
-        next: (response: Empresa[]) => { this.data = response, console.log(this.data) }
+      this.empresasService.getEmpresasIdUsuario(this.token, usuario.id) .subscribe({
+        next: (response: Empresa[]) => { this.data = response }
         
       });
     }
