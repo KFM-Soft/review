@@ -1,4 +1,3 @@
-<p>icms-detalhes-nota works!</p>
 <nz-row [nzGutter]="[24, 0]" class="teste">
     <ng-container *ngFor="let nota of notas">
         <nz-col nzSpan="24">
@@ -85,10 +84,10 @@
     <nz-col nzSpan="24">
         <nz-row [nzJustify]="'end'" [nzGutter]="[16, 0]">
             <nz-col>
-                <button nz-button nzSize="large">Cancelar</button>
+                <button nz-button nzSize="large" routerLink="../" routerLinkActive="active">Cancelar</button>
             </nz-col>
             <nz-col>
-                <button nz-button nzSize="large" nzType="primary" (click)="gerarPDF()">Enviar</button>
+                <button nz-button nzSize="large" nzType="primary" (click)="gerarRelatorio()">Enviar</button>
             </nz-col>
         </nz-row>
     </nz-col>

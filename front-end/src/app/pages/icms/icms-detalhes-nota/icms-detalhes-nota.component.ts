@@ -43,6 +43,7 @@ export class IcmsDetalhesNotaComponent{
   notas: IcmsNota[] = [];
   registros: IcmsNota[] = [];
   items_qtd: number[] = []
+  empresaId: number | null = null;
   total = this.notas.length;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -56,6 +57,12 @@ export class IcmsDetalhesNotaComponent{
     if (isPlatformBrowser(this.platformId)) {
       this.token = window.sessionStorage?.getItem('token');
     }
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.empresaId = +id;
+      }
+    });
   }
   atualizarTabela(): void {
     let filtro = this.notas;
@@ -92,10 +99,12 @@ export class IcmsDetalhesNotaComponent{
   mudancaResultado(produto: IcmsProduto) {
     produto.resultadoIcmsST = produto.baseSTComAliquotaInterna - produto.valorIcms
   }
-  gerarPDF() {
-    if(this.token){
+  gerarRelatorio() {
+    if(this.token && this.empresaId){
+      this.service.salvarPDF(this.notas, this.token, this.empresaId);
       this.service.download(this.notas, this.token)
     }
    
   }
+
 }
