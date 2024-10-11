@@ -27,6 +27,8 @@ export class InicioComponent implements OnInit {
   empresas: Observable<Empresa[]> | undefined;
   data: Empresa[] = Array<Empresa>();
 
+  t = false;
+
   private token: string | null = null;
   private sessionStorage: Storage | null = null;
 
@@ -51,7 +53,7 @@ export class InicioComponent implements OnInit {
     const userData = this.sessionStorage?.getItem('usuario') || '{}';
     const usuario:Usuario = JSON.parse(userData);
     if (this.token) {
-      this.empresasService.getEmpresasIdUsuario(this.token, usuario.id) .subscribe({
+      this.empresasService.getEmpresasIdUsuario(this.token, usuario.id).subscribe({
         next: (response: Empresa[]) => { this.data = response }
         
       });

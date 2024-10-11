@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { IcmsNota } from '../models/IcmsNota';
 import { DomSanitizer} from '@angular/platform-browser';
+import { Relatorio } from '../models/Relatorio';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,8 @@ export class IcmsService {
 
   apiUrl = environment.API_URL + '/icms/'
 
-  getValoresCalculo(files: File[], token: string): Observable<IcmsNota[]> {
-    let url = this.apiUrl + 'calculo';
+  getValoresCalculo(files: File[], token:string, reviewValue: string, empresaId: number): Observable<IcmsNota[]> {
+    let url = this.apiUrl + 'calculo/';
 
     const httpOptions = { 
       headers: new HttpHeaders({
@@ -28,7 +29,16 @@ export class IcmsService {
       formData.append(`xmls`, file);
     });
 
-    return this.http.post<IcmsNota[]>(url, formData, httpOptions);
+    if(reviewValue=== 'true'){
+      return this.http.post<IcmsNota[]>(url, formData, httpOptions);
+
+    }
+    else{
+      url += '?empresa_id=' + empresaId;
+      return this.http.post<IcmsNota[]>(url, formData, httpOptions);
+
+    }
+
   }
 
 
@@ -44,10 +54,34 @@ export class IcmsService {
     return this.http.get<IcmsNota[]>(url);
   }
 
+  salvarPDF(notas: IcmsNota[], token: string, empresa_id: number) {
+    let url = this.apiUrl + 'salva/';
+
+    const httpOptions = { 
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      }),
+    };
+    
+    const valor_total = notas.reduce((acumulador, nota) => {
+      const totalPorNota = nota.produtos.reduce((acumuladorProduto, produto) => acumuladorProduto + produto.valorProduto, 0);
+      return acumulador + totalPorNota;
+    }, 0);
+
+    const valor_icms = notas.reduce((acumulador, nota) => {
+      const totalPorNota = nota.produtos.reduce((acumuladorProduto, produto) => acumuladorProduto + produto.resultadoIcmsST, 0);
+      return acumulador + totalPorNota;
+    }, 0);
+
+
+    url += empresa_id + '/' + valor_total + '/' + valor_icms;
+    this.http.post<Relatorio>(url, notas, httpOptions).subscribe();
+  }
+
   // referencia: https://consolelog.com.br/utilizando-httpclient-angular-para-obter-pdf-api-visualizacao-download/
   download(notas: IcmsNota[], token: string) {
-    let url = this.apiUrl + 'relatorio';
 
+    const url = this.apiUrl + 'relatorio';
     const httpOptions = { 
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -56,6 +90,7 @@ export class IcmsService {
     };
     
     const body = notas;
+
     
     this.http
       .post<ArrayBuffer>(url, body, httpOptions) // Tipar o retorno como ArrayBuffer
