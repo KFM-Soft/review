@@ -34,13 +34,18 @@ export const routes: Routes = [
         {
           path: 'grupo-notas/:id', children: [
             { path: '', component: IcmsGrupoNotasComponent },
-            { path: 'notas-processadas', component: IcmsNotasProcessadasComponent },
+            { path: 'importar-nota', children:[
+              { path: '', component:IcmsImportarNotasComponent},
+              { path: 'detalhes-nota', component: IcmsDetalhesNotaComponent},
+
+            ]},
+            
+
           ]
         },
-        { path: 'importar-nota', component: IcmsImportarNotasComponent },
+        
         { path: 'empresa-form', component: IcmsEmpresaFormComponent },
         { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
-        { path: 'detalhes-nota', component: IcmsDetalhesNotaComponent },
       ]
     },
     // { path: 'teste', component: TesteComponent },

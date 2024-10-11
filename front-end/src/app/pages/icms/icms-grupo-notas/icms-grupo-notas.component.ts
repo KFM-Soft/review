@@ -42,7 +42,6 @@ export class IcmsGrupoNotasComponent implements OnInit {
   relatorios: Relatorio[] = [];
 
   private token: string | null = null;
-  url: SafeUrl | null = null;
 
   empresaId: number | null = null;
   empresa: Empresa = <Empresa>{}
@@ -59,11 +58,10 @@ export class IcmsGrupoNotasComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.empresaId = +id;
+        this.getIcmsRelatorios()
       }
       this.token = window.sessionStorage?.getItem('token');
       this.getEmpresa()
-      this.getIcmsRelatorios()
-      console.log(this.relatorios)
     });
   }
 
