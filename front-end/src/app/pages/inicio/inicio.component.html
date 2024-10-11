@@ -14,7 +14,7 @@
 
   <h1>ICMS</h1>
 
-  <nz-table #headerTable [nzData]="data.length ? data : []" [nzShowPagination]="false" class="table">
+  <nz-table #headerTable [nzData]="data" [nzShowPagination]="false" class="table">
     <thead>
       <tr>
         <th nzWidth="5%">
@@ -30,19 +30,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of data">
+      <tr *ngFor="let data of headerTable.data">
         <td [nzAlign]="'center'">
           <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
         </td>
         <td>
           <nz-flex [nzVertical]="true">
-            <h3>{{ item.nome }}</h3>
-            <p>Cnpj: {{ item.cnpj }}</p>
+            <h3>{{ data.nome }}</h3>
+            <p>Cnpj: {{ data.cnpj }}</p>
           </nz-flex>
         </td>
         <td [nzAlign]="'center'">
           <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" [routerLink]="['/icms/grupo-notas', item.id]" routerLinkActive="active">Gerenciar</button>
+            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" [routerLink]="['/icms/grupo-notas', data.id]" routerLinkActive="active">Gerenciar</button>
           </ng-container>
         </td>
       </tr>

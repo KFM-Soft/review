@@ -101,7 +101,7 @@ export class EmpresaComponent {
   }
 
   editarItem(registro: Empresa){
-    this.storageService.setSession('aliquota', registro);
+    this.storageService.setSession('empresa', registro);
     this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
   }
 
