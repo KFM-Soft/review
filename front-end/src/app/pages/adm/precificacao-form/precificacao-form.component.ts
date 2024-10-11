@@ -11,10 +11,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-
-
 @Component({
-  selector: 'app-cadastro-precificacao',
+  selector: 'app-precificacao-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -26,10 +24,10 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
     NzInputNumberModule,
     FormsModule,
   ],
-  templateUrl: './cadastro-precificacao.component.html',
-  styleUrl: './cadastro-precificacao.component.scss'
+  templateUrl: './precificacao-form.component.html',
+  styleUrl: './precificacao-form.component.scss'
 })
-export class CadastroPrecificacaoComponent {
+export class PrecificacaoFormComponent {
   precificacao: Precificacao = <Precificacao>{};
   id: string | null = null;
   editavel: boolean = true;

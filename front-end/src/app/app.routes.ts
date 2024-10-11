@@ -17,18 +17,18 @@ import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/m
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
 import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
-import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao/cadastro-precificacao.component';
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 import { authGuard } from './services/auth.guard';
 import { IcmsDetalhesNotaComponent } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
 import { EmpresaComponent } from './pages/adm/empresa/empresa.component';
 import { EmpresaFormComponent } from './pages/adm/empresa-form/empresa-form.component';
+import { PrecificacaoFormComponent } from './pages/adm/precificacao-form/precificacao-form.component';
+import { PrecificacaoComponent } from './pages/adm/precificacao/precificacao.component';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
     { path: '', component: InicioComponent },
-    { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
-    { path: 'cadastro-preco', component: CadastroPrecificacaoComponent },
+    // { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
     {
       path: 'icms', children: [
         // { path: '', component: IcmsHomeComponent }, 
@@ -85,6 +85,12 @@ export const routes: Routes = [
           path: 'empresas', children: [
             { path: '', component: EmpresaComponent },
             { path: 'form', component: EmpresaFormComponent },
+          ]
+        },
+        {
+          path: 'precos', children: [
+            { path: '', component: PrecificacaoComponent },
+            { path: 'form', component: PrecificacaoFormComponent },
           ]
         },
 
