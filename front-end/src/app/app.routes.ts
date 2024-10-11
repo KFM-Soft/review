@@ -5,7 +5,6 @@ import { IcmsGrupoNotasComponent } from './pages/icms/icms-grupo-notas/icms-grup
 import { IcmsNotasProcessadasComponent } from './pages/icms/icms-notas-processadas/icms-notas-processadas.component';
 import { IcmsImportarNotasComponent } from './pages/icms/icms-importar-notas/icms-importar-notas.component'
 import { IcmsEmpresaFormComponent } from './pages/icms/icms-empresa-form/icms-empresa-form.component';
-import { IcmsRegrasDeProcessamentoComponent } from './pages/icms/icms-regras-de-processamento/icms-regras-de-processamento.component';
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
@@ -22,6 +21,8 @@ import { CadastroPrecificacaoComponent } from './pages/adm/cadastro-precificacao
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 import { authGuard } from './services/auth.guard';
 import { IcmsDetalhesNotaComponent } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
+import { EmpresaComponent } from './pages/adm/empresa/empresa.component';
+import { EmpresaFormComponent } from './pages/adm/empresa-form/empresa-form.component';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
@@ -44,8 +45,7 @@ export const routes: Routes = [
           ]
         },
         
-        { path: 'empresa-form', component: IcmsEmpresaFormComponent },
-        { path: 'regras-processamento', component: IcmsRegrasDeProcessamentoComponent },
+        // { path: 'empresa-form', component: IcmsEmpresaFormComponent },
       ]
     },
     // { path: 'teste', component: TesteComponent },
@@ -79,6 +79,12 @@ export const routes: Routes = [
           path: 'usuarios', children: [
             { path: '', component: UsuariosComponent },
             { path: 'form', component: CadastroUsuarioComponent },
+          ]
+        },
+        {
+          path: 'empresas', children: [
+            { path: '', component: EmpresaComponent },
+            { path: 'form', component: EmpresaFormComponent },
           ]
         },
 
