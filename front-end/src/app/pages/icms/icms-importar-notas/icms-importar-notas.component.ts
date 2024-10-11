@@ -19,6 +19,8 @@ import { IcmsNota } from '../../../models/IcmsNota';
 import { StoragesService } from '../../../services/storages.service';
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
+import { Empresa } from '../../../models/Empresa';
+import { EmpresasService } from '../../../services/empresas.service';
 @Component({
   selector: 'app-icms-notas-carregar',
   standalone: true,
@@ -49,6 +51,7 @@ export class IcmsImportarNotasComponent implements OnInit{
   constructor(
     private msg: NzMessageService,
     private service: IcmsService,
+    private empresaService: EmpresasService,
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
@@ -59,23 +62,39 @@ export class IcmsImportarNotasComponent implements OnInit{
     }
   }
 
+  empresaId: number | null = null;
+  empresa: Empresa = <Empresa>{}
+
   xmlFile: NzUploadFile = <NzUploadFile>{};
   notasCalculadas: IcmsNota[] = [];
   fileList: NzUploadFile[] = [];
-  reviewValue = 'Y';
+  reviewValue = "true";
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.empresaId = +id;
+      }
       this.token = window.sessionStorage?.getItem('token');
+      this.getEmpresa()
+    });
+  }
+
+  getEmpresa(): void {
+    if(this.empresaId && this.token){
+      this.empresaService.getId( this.token, this.empresaId).subscribe({
+        next: (response: Empresa) => {
+          this.empresa = response;
+        },
+      });
+
     }
   }
 
   handleChange({ file, fileList }: NzUploadChangeParam): void {
     
     const status = file.status;
-    if (status !== 'uploading') {
-      console.log(file, fileList);
-    }
     if (status === 'done') {
       this.msg.success(`${file.name} file uploaded successfully.`);
     } else if (status === 'error') {
@@ -96,12 +115,12 @@ export class IcmsImportarNotasComponent implements OnInit{
 
   enviar() {
     const files: File[] = this.convertNzUploadFileToFile(this.fileList);
-    if(this.token){
-      this.service.getValoresCalculo(files, this.token).subscribe({
+    if(this.token && this.empresaId){
+      this.service.getValoresCalculo(files, this.token, this.reviewValue, this.empresaId).subscribe({
         next: (response: IcmsNota[]) => {
           this.notasCalculadas = response;
           this.storageService.setSession('notasCalculadas', this.notasCalculadas);
-          this.router.navigate(['../detalhes-nota'], {relativeTo: this.route}, )
+          this.router.navigate(['./detalhes-nota'], {relativeTo: this.route}, )
         },
         error: (error: any) => {
           console.error('Erro no upload', error)

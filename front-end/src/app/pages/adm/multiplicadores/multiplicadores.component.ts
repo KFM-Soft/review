@@ -143,8 +143,6 @@ export class MultiplicadoresComponent implements OnInit {
   buscar() {
     if(!(this.aliquota) || !(this.produto)) return false;
     if(!(Object.keys(this.aliquota).length > 0 && Object.keys(this.produto).length > 0)) return false;
-    console.log(this.produto, this.aliquota)
-    console.log(this.produto.id, this.aliquota.id)
     this.service.getByAliquotaAndProduto(this.produto, this.aliquota).subscribe({
       next: (retorno: Multiplicador[]) => {
         this.multiplicadores = retorno;

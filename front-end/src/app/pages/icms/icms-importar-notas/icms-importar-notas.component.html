@@ -2,14 +2,16 @@
 
     <h1>Importação de Notas Fiscais</h1>
 
-    <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top">
+    <a class="link-top">
+        <!-- link para modificar dados da empresa -->
+        <!-- <a routerLink="/icms/empresa-form" routerLinkActive="active" class="link-top"> -->
         <nz-card [nzHoverable]="true" class="empresa">
             <table>
                 <tr>
                     <td [nzAlign]="'left'" colspan="2">
                         <img src="../../../assets/svgs/empresa.svg" class="logo-empresa">
                         <nz-flex [nzVertical]="true" class="empresa-name">
-                            <h3>Recol Distribuição e Comércio LTDA</h3>
+                            <h3>{{ empresa.nome }}</h3>
                         </nz-flex>
                     </td>
                 </tr>
@@ -18,10 +20,10 @@
                     <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
                             <h3>CNPJ:</h3>
-                            <p>24.745.870/0001-90</p>
+                            <p>{{ empresa.cnpj }}</p>
                         </nz-flex>
                     </td>
-                    <td class="empresa-dados">
+                    <!-- <td class="empresa-dados">
                         <nz-flex [nzVertical]="true" class="empresa-dados">
                             <h3>E-mail:</h3>
                             <p>recolgmail.com</p>
@@ -44,17 +46,16 @@
                             <h3>Endereço:</h3>
                             <p>Rua Sete de Setembro, 458</p>
                         </nz-flex>
-                    </td>
+                    </td> -->
                 </tr>
             </table>
 
         </nz-card>
     </a>
-
     <h3>Usar valores cadastrados pela Review+</h3>
     <nz-radio-group [(ngModel)]="reviewValue" nzButtonStyle="solid">
-        <label nz-radio-button nzValue="Y">Usar</label>
-        <label nz-radio-button nzValue="N">Não Usar</label>
+        <label nz-radio-button nzValue=true>Usar</label>
+        <label nz-radio-button nzValue=false>Não Usar</label>
     </nz-radio-group>
 
     <nz-card [nzHoverable]="true" class="empresa">
