@@ -209,25 +209,32 @@ public class ICMSService {
                 Multiplicador multiplicador = new Multiplicador();
 
                 BigDecimal convertPercent = new BigDecimal(100);
-
+                
                 if (cest != "" && cest != null && !cest.isEmpty()) {
+                    
                     multiplicador = (sistema) 
-                    ? multService.getByProductCest(cest)
-                    : multService.getByProductCestEmpresa(cest, empresa_id);
+                        ? 
+                        multService.getByProductCest(cest)
+                            : 
+                            multService.getByProductCestEmpresa(cest, empresa_id);
+                    
                 } else {
                     multiplicador = (sistema) 
-                    ? multService.getByProductNcm(ncm)
-                    : multService.getByProductCestEmpresa(ncmCest, empresa_id);
+                        ? 
+                        multService.getByProductNcm(ncm)
+                            : 
+                            multService.getByProductCestEmpresa(ncmCest, empresa_id);
                 }
 
                 if (multiplicador == null || multiplicador.equals(null)) {
                     break;
                 }
                 try {
-
                     BigDecimal aliquotaInterestadual = (sistema) 
-                    ? aliquotaService.getByOrigemDestino(ufEmit, ufDest).getPorcentagem() 
-                    : aliquotaService.getByOrigemDestinoEmpresa(ufEmit, ufDest, empresa_id).getPorcentagem();
+                        ? 
+                        aliquotaService.getByOrigemDestino(ufEmit, ufDest).getPorcentagem() 
+                            : 
+                            aliquotaService.getByOrigemDestinoEmpresa(ufEmit, ufDest, empresa_id).getPorcentagem();
 
                     BigDecimal aliquotaInternaEmit = multiplicador.getAliquotaInternaEmit();
 

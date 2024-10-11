@@ -23,10 +23,10 @@ public interface MultiplicadorRepository extends JpaRepository<Multiplicador, Lo
     @Query("SELECT multi FROM Multiplicador multi WHERE empresa.id = ?1")
     public List<Multiplicador> getByEmpresaId(Long empresa_id);
 
-    @Query("SELECT multi FROM Multiplicador multi WHERE produto.cest = ?1 AND empresa.id = ?2AND sistema = false")
+    @Query("SELECT multi FROM Multiplicador multi WHERE produto.cest = ?1 AND empresa.id = ?2 AND sistema = false")
     public Multiplicador getMultiplicadorByCestAndEmpresa(String cest, Long empresa_id);
 
-    @Query("SELECT multi FROM Multiplicador multi WHERE produto.ncm LIKE ?1 AND empresa.id = ?2AND sistema = false")
+    @Query("SELECT multi FROM Multiplicador multi WHERE produto.ncm LIKE ?1 AND empresa.id = ?2 AND sistema = false")
     public Multiplicador getMultiplicadorByNCMAndEmpresa(String ncm, Long empresa_id);
 
     @Query("SELECT multi FROM Multiplicador multi WHERE produto.id = ?1 AND aliquota.id = ?2 and empresa.id = ?3AND sistema = false")
