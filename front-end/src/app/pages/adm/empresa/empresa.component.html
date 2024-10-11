@@ -1,0 +1,69 @@
+<app-adm>
+    <nz-row class="content" conteudoCentral>
+        <nz-col nzSpan="24" class="container-acoes">
+            <nz-row [nzGutter]="[24, 8]">
+                <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
+                        <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
+                            (input)="atualizarTabela()" />
+                    </nz-input-group>
+                </nz-col>
+                <nz-col nzXs="24" nzSm="24" nzMd="6">
+                    <button nz-button nzSize="large" class="btn-novo" routerLink="./form">Adicionar</button>
+                </nz-col>
+            </nz-row>
+        </nz-col>
+        <nz-col nzSpan="24">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
+                <thead>
+                    <tr>
+                        <th nzWidth="5%" [nzAlign]="'center'">Id</th>
+                        <th>Nome Da Empresa</th>
+                        <th>NomeFantasia</th>
+                        <th>Dono</th>
+                        <th nzWidth="15%">CNPJ</th>
+                        <th nzWidth="15%">Preço</th>
+                        <th nzWidth="20%" [nzAlign]="'center'">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of headerTable.data">
+                        <td [nzAlign]="'center'">{{ data.id }}</td>
+                        <td> {{ data.nome }}</td>
+                        <td> {{ data.nomeFantasia }}</td>
+                        <td> {{ data.dono.nomeCompleto }}</td>
+                        <td> {{ data.cnpj }}</td>
+                        <td> {{ data.preco.valor }}</td>
+
+                        <td [nzAlign]="'center'">
+                            <nz-row [nzGutter]="[4, 4]" nzJustify="center">
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary"
+                                        class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
+                                </nz-col>
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" nzDanger
+                                        class="botao botaoEditar" (click)="excluirItem(data)">Excluir</button>
+                                </nz-col>
+                            </nz-row>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </nz-table>
+            <div class="paginacao">
+                <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+                    [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+                    (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+                </nz-pagination>
+            </div>
+        </nz-col>
+    </nz-row>
+</app-adm>
+
+
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">
+        <span nz-icon nzType="search"></span>
+    </button>
+</ng-template>

@@ -2,6 +2,10 @@
     <nz-layout>
         <nz-sider nzTheme="light" class="ant-menu-vertical">
             <ul nz-menu [nzMode]="'vertical'" [nzTheme]="'light'" class="menu-adm">
+                <li nz-menu-item routerLink="/adm/empresas" routerLinkActive="active">
+                    <span nz-icon nzType="credit-card" nzTheme="outline"></span>
+                    Empresas
+                </li>
                 <li nz-menu-item routerLink="/adm/produtos" routerLinkActive="active">
                     <span nz-icon nzType="credit-card" nzTheme="outline"></span>
                     Produtos
@@ -21,7 +25,7 @@
                 <li nz-menu-item routerLink="/adm/usuarios" routerLinkActive="active">
                   <span nz-icon nzType="credit-card" nzTheme="outline"></span>
                   Usuários
-              </li>
+                </li>
             </ul>
         </nz-sider>
         <nz-content class="content">

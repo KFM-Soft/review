@@ -66,7 +66,7 @@ export class IcmsHomeComponent implements OnInit {
 
   getEmpresas(): void {
     if (this.token) {
-      this.empresasService.getAllEmpresas(this.token).subscribe({
+      this.empresasService.get(this.token).subscribe({
         next: (response: Empresa[]) => {
           this.data = response;
           this.empresas = response;  

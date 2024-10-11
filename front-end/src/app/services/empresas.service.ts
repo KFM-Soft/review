@@ -23,14 +23,14 @@ export class EmpresasService {
     return this.http.get<Empresa>(`${url}`, httpOptions);
   }
 
-  getAllEmpresas(token: string): Observable<Empresa[]> {
+  get(token: string): Observable<Empresa[]> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
-
-    return this.http.get<Empresa[]>(`${this.apiUrl}`, httpOptions);
+    let url = this.apiUrl;
+    return this.http.get<Empresa[]>(url, httpOptions);
   }
 
   getEmpresasIdUsuario(token: string, id_usuario: number): Observable<Empresa[]> {
@@ -50,5 +50,10 @@ export class EmpresasService {
     if(empresa.id)
       return this.http.put<Empresa>(url, empresa)
     return this.http.post<Empresa>(url, empresa);
+  }
+
+  delete(registro: Empresa): Observable<void> {
+    let url = this.apiUrl + registro.id;
+    return this.http.delete<void>(url);
   }
 }
