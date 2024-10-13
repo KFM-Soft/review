@@ -1,5 +1,5 @@
-<app-adm>
-    <nz-row class="content" conteudoCentral>
+<app-adm class="content" >
+    <nz-row  conteudoCentral>
         <nz-col nzSpan="24" class="container-acoes">
             <nz-row [nzGutter]="[24, 8]">
                 <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let data of headerTable.data">
+                    <tr *ngFor="let data of headerTable.data" >
                         <td [nzAlign]="'center'">{{ data.id }}</td>
                         <td> {{ data.nome }}</td>
                         <td> {{ data.nomeFantasia }}</td>

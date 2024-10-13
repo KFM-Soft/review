@@ -15,17 +15,19 @@ import { BasicLoginService } from './services/login/basic-login.service';
 import { JwtLoginService } from './services/login/jwt-login.service';
 import { LoginService } from './services/login/i-login.service';
 import { authInterceptor } from './interceptor/auth.interceptor';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 registerLocaleData(pt);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes,  withInMemoryScrolling({anchorScrolling: 'enabled'})), 
-    provideNzIcons(), 
-    provideNzI18n(pt_BR), 
-    importProvidersFrom(FormsModule), 
-    provideAnimationsAsync(), 
+    provideRouter(routes,  withInMemoryScrolling({anchorScrolling: 'enabled'})),
+    provideNzIcons(),
+    provideNzI18n(pt_BR),
+    importProvidersFrom(FormsModule),
+    provideAnimationsAsync(),
     provideHttpClient(),
+    provideEnvironmentNgxMask(),
 
     provideHttpClient(withInterceptors([ authInterceptor ])),
 

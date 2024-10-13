@@ -15,6 +15,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FormsModule } from '@angular/forms';
 import { Usuario } from '../../models/Usuario';
 import { UsuarioService } from '../../services/usuario.service';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-cadastro-empresa',
@@ -28,6 +29,8 @@ import { UsuarioService } from '../../services/usuario.service';
     NzSelectModule,
     NzInputNumberModule,
     FormsModule,
+    NgxMaskDirective,
+    NgxMaskPipe
   ],
   templateUrl: './cadastro-empresa.component.html',
   styleUrl: './cadastro-empresa.component.scss'
@@ -59,6 +62,8 @@ export class CadastroEmpresaComponent {
     }
   }
 
+
+
   getUsuarios() {
     this.usuarioService.get().subscribe({
       next: (retorno: Usuario[]) => {
@@ -89,4 +94,5 @@ export class CadastroEmpresaComponent {
       }
     })
   }
+
 }

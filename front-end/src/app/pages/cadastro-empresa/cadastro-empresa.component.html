@@ -36,7 +36,7 @@
                 <nz-form-label nzSpan="24">CNPJ</nz-form-label>
                 <nz-form-control>
                     <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="empresa.cnpj"
-                        [ngModelOptions]="{standalone: true}" ngDefaultControl />
+                        [ngModelOptions]="{standalone: true}" ngDefaultControl  type="text" mask="CPF_CNPJ"/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>

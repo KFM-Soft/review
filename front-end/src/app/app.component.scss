@@ -53,3 +53,28 @@ nz-header {
 .ant-menu {
   height: 64px;
 }
+
+.sair {
+  margin-top: 0.5em;
+  border-radius: 10px;
+  height: 3em;
+  text-decoration: none;
+  color: #FFF;
+  background-color: #FF4D4F;
+  display: flex;
+  align-items: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  .sair-text {
+    margin: 0 8px 0 18px;
+  }
+  .sair-img {
+    width: 28px;
+    height: 38px;
+    margin-right: 18px;
+  }
+}
+
+.sair:hover {
+  transform: scale(1.01);
+}
