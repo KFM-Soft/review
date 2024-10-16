@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.XorCsrfTokenRequestAttributeHandler;
 
 
 @Configuration
@@ -68,6 +70,15 @@ public class Seguranca {
                 SessionCreationPolicy.ALWAYS
             )
         );
+        
+        // XorCsrfTokenRequestAttributeHandler gerenciadorCsrf = new XorCsrfTokenRequestAttributeHandler();
+        // gerenciadorCsrf.setCsrfRequestAttributeName(null);
+        // http.csrf(
+        //     csrf -> csrf
+        //         .ignoringRequestMatchers("/login")
+        //         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+        //         .csrfTokenRequestHandler(gerenciadorCsrf::handle)
+        // );
 
         http.authorizeHttpRequests(
             authorize -> authorize
