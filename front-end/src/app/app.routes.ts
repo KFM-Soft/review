@@ -24,6 +24,7 @@ import { EmpresaComponent } from './pages/adm/empresa/empresa.component';
 import { EmpresaFormComponent } from './pages/adm/empresa-form/empresa-form.component';
 import { PrecificacaoFormComponent } from './pages/adm/precificacao-form/precificacao-form.component';
 import { PrecificacaoComponent } from './pages/adm/precificacao/precificacao.component';
+import { loggedInGuard } from './services/logged-in.guard';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
@@ -97,7 +98,7 @@ export const routes: Routes = [
       ]
     }
 ]},
-{ path: 'login', component: LoginComponent },
+{ path: 'login', canActivate: [loggedInGuard], component: LoginComponent },
 { path: '**', redirectTo: '' }
 
 ];
