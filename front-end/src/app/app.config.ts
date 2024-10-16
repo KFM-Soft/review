@@ -9,12 +9,13 @@ import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HttpClientXsrfModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { BasicLoginService } from './services/login/basic-login.service';
 import { JwtLoginService } from './services/login/jwt-login.service';
 import { LoginService } from './services/login/i-login.service';
 import { authInterceptor } from './interceptor/auth.interceptor';
+import { erroInterceptor } from './interceptor/erro.interceptor';
 
 registerLocaleData(pt);
 
@@ -23,11 +24,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes,  withInMemoryScrolling({anchorScrolling: 'enabled'})), 
     provideNzIcons(), 
     provideNzI18n(pt_BR), 
-    importProvidersFrom(FormsModule), 
+    importProvidersFrom(FormsModule,HttpClientXsrfModule), 
     provideAnimationsAsync(), 
     provideHttpClient(),
 
-    provideHttpClient(withInterceptors([ authInterceptor ])),
+    provideHttpClient(withInterceptors([ authInterceptor, erroInterceptor ])),
 
     { provide: LoginService, useFactory: loginServiceFactory }
   ]

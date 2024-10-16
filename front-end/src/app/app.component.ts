@@ -6,11 +6,12 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Usuario } from './models/Usuario';
 import { ILoginService, LoginService } from './services/login/i-login.service';
+import { AlertaComponent } from './pages/alerta/alerta.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, RouterLink],
+  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, RouterLink, AlertaComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
