@@ -54,14 +54,10 @@ export class IcmsService {
     return this.http.get<IcmsNota[]>(url);
   }
 
-  salvarPDF(notas: IcmsNota[], token: string, empresa_id: number) {
+  salvarPDF(notas: IcmsNota[], empresa_id: number) {
     let url = this.apiUrl + 'salva/';
 
-    const httpOptions = { 
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      }),
-    };
+
     
     const valor_total = notas.reduce((acumulador, nota) => {
       const totalPorNota = nota.produtos.reduce((acumuladorProduto, produto) => acumuladorProduto + produto.valorProduto, 0);
@@ -75,17 +71,14 @@ export class IcmsService {
 
 
     url += empresa_id + '/' + valor_total + '/' + valor_icms;
-    this.http.post<Relatorio>(url, notas, httpOptions).subscribe();
+    this.http.post<Relatorio>(url, notas).subscribe();
   }
 
   // referencia: https://consolelog.com.br/utilizando-httpclient-angular-para-obter-pdf-api-visualizacao-download/
-  download(notas: IcmsNota[], token: string) {
+  download(notas: IcmsNota[]) {
 
     const url = this.apiUrl + 'relatorio';
     const httpOptions = { 
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      }),
       responseType: 'arraybuffer' as 'json' // Tipagem correta
     };
     
@@ -126,13 +119,10 @@ export class IcmsService {
       });
     
   }
-  getDownloadPDF(relatorio_id: number, token: string) {
+  getDownloadPDF(relatorio_id: number) {
     let url = this.apiUrl + 'mostrar/' + relatorio_id;
   
     const httpOptions = { 
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      }),
       responseType: 'arraybuffer' as 'json' // Mantém a tipagem correta
     };
   

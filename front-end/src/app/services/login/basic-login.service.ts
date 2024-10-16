@@ -17,9 +17,7 @@ export class BasicLoginService implements ILoginService {
       this.sessionStorage = window.sessionStorage;
       const userData = this.sessionStorage.getItem('usuario') || '{}';
       const usuario = JSON.parse(userData);
-      this.usuarioAutenticado.next(usuario);
-    } else {
-      this.usuarioAutenticado.next(<Usuario>{});
+      this.usuarioAutenticado.next(usuario)
     }
   }
 
@@ -53,6 +51,7 @@ export class BasicLoginService implements ILoginService {
 
   logout(): void {
     this.sessionStorage?.removeItem('usuario');
+    document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     this.router.navigate(['/login']);
   }
 

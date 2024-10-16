@@ -21,7 +21,7 @@ export class AliquotaService {
   save(registro: Aliquota): Observable<Aliquota> {
     let url = this.apiUrl;
     if(registro.id) 
-      return this.http.put<Aliquota>(url, registro)
+      return this.http.put<Aliquota>(url, registro);
     return this.http.post<Aliquota>(url, registro);
   }
 

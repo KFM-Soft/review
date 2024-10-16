@@ -60,7 +60,7 @@ export class JwtLoginService implements ILoginService {
         this.agendarRenovacaoToken();
       },
       complete: () => {
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -88,6 +88,7 @@ export class JwtLoginService implements ILoginService {
     this.sessionStorage?.removeItem('token');
     this.sessionStorage?.removeItem('usuario');
     this.sessionStorage?.removeItem('tokenExp');
+    document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     clearInterval(this.intervaloRenovacao);
     this.router.navigate(['/login']);
   }
@@ -95,14 +96,19 @@ export class JwtLoginService implements ILoginService {
   isLoggedIn(): boolean {
 
     const token = this.sessionStorage?.getItem('token');
-    const tokenNaoNulo = token != null;
+    if (token == null) {
+      return false;
+    }
 
     const tokenExp = this.sessionStorage?.getItem('tokenExp');
     const tempoExpiracao = new Date(Number(tokenExp));
     const agora = new Date();
-    const naoEstaExpirado = tempoExpiracao > agora;
+    const estaExpirado = tempoExpiracao < agora;
+    if (estaExpirado) {
+      this.logout();
+    }
 
-    return tokenNaoNulo && naoEstaExpirado;
+    return !estaExpirado;
 
   }
 

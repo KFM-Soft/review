@@ -24,13 +24,8 @@ export class RelatorioService {
   apiUrl = environment.API_URL + '/relatorio/'
 
   getRelatorioEmpresaId(empresa_id: number): Observable<Relatorio[]> {
-    this.token = window.sessionStorage?.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${this.token}`
-      })
-    };
+
     let url = this.apiUrl + 'empresa/' + empresa_id;
-    return this.http.get<Relatorio[]>(url, httpOptions);
+    return this.http.get<Relatorio[]>(url);
   }
 }
