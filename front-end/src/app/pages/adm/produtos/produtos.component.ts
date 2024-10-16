@@ -15,6 +15,8 @@ import { ProdutosService } from '../../../services/produtos.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-Produto',
@@ -43,6 +45,7 @@ export class ProdutoComponent implements OnInit {
     private renderer: Renderer2,
     private service: ProdutosService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
@@ -55,6 +58,10 @@ export class ProdutoComponent implements OnInit {
   termoBusca: string = '';
 
   ngOnInit(): void {
+    this.get()
+  }
+
+  get(): void{
     this.service.get().subscribe({
       next: (retorno: Produto[]) => {
         this.registros = retorno
@@ -106,13 +113,13 @@ export class ProdutoComponent implements OnInit {
   excluirItem(registro: Produto){
     this.service.delete(registro).subscribe({
       complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
+        this.get();
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Produto foi excluído com sucesso!"
+        })
       }
-    })
+    });
   }
 
 }

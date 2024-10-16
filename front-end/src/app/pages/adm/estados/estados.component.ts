@@ -15,6 +15,8 @@ import { EstadoService } from '../../../services/estado.service';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-estado',
@@ -42,6 +44,7 @@ export class EstadosComponent implements OnInit {
   constructor(
     private service: EstadoService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
@@ -55,6 +58,10 @@ export class EstadosComponent implements OnInit {
   termoBusca: string = '';
 
   ngOnInit(): void {
+    this.get()
+  }
+
+  get(): void{
     this.service.get().subscribe({
       next: (retorno: Estado[]) => {
         this.registros = retorno;
@@ -100,13 +107,13 @@ export class EstadosComponent implements OnInit {
   excluirItem(registro: Estado){
     this.service.delete(registro).subscribe({
       complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
+        this.get();
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Estado foi excluído com sucesso!"
+        })
       }
-    })
+    });
   }
 
 }

@@ -16,6 +16,8 @@ import { Produto } from '../../../models/Produto';
 import { Aliquota } from '../../../models/Aliquota';
 import { ProdutosService } from '../../../services/produtos.service';
 import { AliquotaService } from '../../../services/aliquota.service';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-multiplicador-form',
@@ -46,6 +48,7 @@ export class MultiplicadoresFormComponent implements OnInit{
     private produtosService: ProdutosService,
     private aliquotaService: AliquotaService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
    ) { }
@@ -81,9 +84,12 @@ export class MultiplicadoresFormComponent implements OnInit{
   submit(): void {
     this.multiplicador.sistema = true
     this.service.save(this.multiplicador).subscribe({
-      next: () => {
-        alert("Registro salvo com sucesso!")
-        this.router.navigate(['../'], {relativeTo: this.route})
+      complete: () => {
+        this.router.navigate(['../'])
+        this.alertaService.enviarAlerta({
+          tipo: ETipoAlerta.SUCESSO,
+          mensagem: "Multiplicador cadastrado com sucesso!"
+        })
       }
     })
   }

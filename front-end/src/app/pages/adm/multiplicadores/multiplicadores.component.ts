@@ -21,6 +21,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { AliquotaService } from '../../../services/aliquota.service';
 import { ProdutosService } from '../../../services/produtos.service';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-multiplicador',
@@ -52,6 +54,7 @@ export class MultiplicadoresComponent implements OnInit {
     private aliquotaService: AliquotaService,
     private produtosService: ProdutosService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
@@ -161,13 +164,15 @@ export class MultiplicadoresComponent implements OnInit {
   excluirItem(registro: Multiplicador){
     this.service.delete(registro).subscribe({
       complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
+        this.getAliquotas();
+        this.getProdutos();
+        this.getMultiplicadores();
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Multiplicador foi excluído com sucesso!"
+        })
       }
-    })
+    });
   }
 
 }

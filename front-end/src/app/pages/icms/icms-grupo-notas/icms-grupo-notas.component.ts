@@ -88,7 +88,7 @@ export class IcmsGrupoNotasComponent implements OnInit {
 
   getPDF(relatorio_id: number): void{
     if(this.token)
-      this.icmsService.getDownloadPDF(relatorio_id, this.token);
+      this.icmsService.getDownloadPDF(relatorio_id);
   }
 
 };

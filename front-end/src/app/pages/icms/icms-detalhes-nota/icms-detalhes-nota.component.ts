@@ -101,8 +101,8 @@ export class IcmsDetalhesNotaComponent{
   }
   gerarRelatorio() {
     if(this.token && this.empresaId){
-      this.service.salvarPDF(this.notas, this.token, this.empresaId);
-      this.service.download(this.notas, this.token)
+      this.service.salvarPDF(this.notas,this.empresaId);
+      this.service.download(this.notas,)
     }
    
   }

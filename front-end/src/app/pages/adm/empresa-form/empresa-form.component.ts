@@ -15,6 +15,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FormsModule } from '@angular/forms';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-empresa-form',
@@ -45,7 +47,8 @@ export class EmpresaFormComponent {
     private precificacao: PrecificacaoService,
     private storageService: StoragesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertaService: AlertaService
   ) {}
 
   ngOnInit(): void {
@@ -83,9 +86,12 @@ export class EmpresaFormComponent {
 
   submit(): void {
     this.service.save(this.empresa).subscribe({
-      next: () => {
-        alert("Empresa Cadastrada com Sucesso!")
-        this.router.navigate(['../'], {relativeTo: this.route})
+      complete: () => {
+        this.router.navigate(['../'])
+        this.alertaService.enviarAlerta({
+          tipo: ETipoAlerta.SUCESSO,
+          mensagem: "Empresa cadastrada com sucesso!"
+        })
       }
     })
   }

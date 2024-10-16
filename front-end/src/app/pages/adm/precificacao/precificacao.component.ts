@@ -15,6 +15,8 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { AdmComponent } from '../adm.component';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { AlertaService } from '../../../services/alerta.service';
 
 @Component({
   selector: 'app-precificacao',
@@ -41,6 +43,7 @@ export class PrecificacaoComponent {
   constructor(
     private service: PrecificacaoService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
@@ -54,6 +57,10 @@ export class PrecificacaoComponent {
   termoBusca: string = '';
 
   ngOnInit(): void {
+    this.get()
+  }
+
+  get(): void{
     this.service.get().subscribe({
       next: (retorno: Precificacao[]) => {
         this.registros = retorno;
@@ -97,12 +104,12 @@ export class PrecificacaoComponent {
   excluirItem(registro: Precificacao){
     this.service.delete(registro).subscribe({
       complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
+        this.get();
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Precificação foi excluída com sucesso!"
+        })
       }
-    })
+    });
   }
 }

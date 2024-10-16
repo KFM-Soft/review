@@ -15,6 +15,8 @@ import { AdmComponent } from '../adm.component';
 import { UsuarioService } from '../../../services/usuario.service';
 import { StoragesService } from '../../../services/storages.service';
 import { Usuario } from '../../../models/Usuario';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { AlertaService } from '../../../services/alerta.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -42,6 +44,7 @@ export class UsuariosComponent implements OnInit{
   constructor(
     private renderer: Renderer2,
     private service: UsuarioService,
+    private alertaService: AlertaService,
     private storageService: StoragesService,
     private router: Router,
     private route: ActivatedRoute,
@@ -58,6 +61,10 @@ export class UsuariosComponent implements OnInit{
   termoBusca: string = '';
 
   getUsuarios() {
+    this.get()
+  }
+
+  get(): void{
     this.service.get().subscribe({
       next: (retorno: Usuario[]) => {
         this.registros = retorno
@@ -102,16 +109,16 @@ export class UsuariosComponent implements OnInit{
     this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
   }
 
-  // excluirItem(registro: Usuario){
-  //   this.service.delete(registro).subscribe({
-  //     complete: () => {
-  //       alert("Registro excluido com sucesso.");
-  //       window.location.reload();
-  //     }, error: (erro) => {
-  //       alert("Erro na exclusão!");
-  //       window.location.reload();
-  //     }
-  //   })
-  // }
+  excluirItem(registro: Usuario){
+    this.service.delete(registro.id).subscribe({
+      complete: () => {
+        this.get();
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Usuário foi excluído com sucesso!"
+        })
+      }
+    });
+  }
 
 }

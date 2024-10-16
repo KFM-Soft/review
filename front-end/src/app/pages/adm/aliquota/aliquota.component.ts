@@ -16,6 +16,8 @@ import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 import { error } from 'console';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 
 @Component({
   selector: 'app-aliquota',
@@ -46,6 +48,7 @@ export class AliquotaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
+    private alertaService: AlertaService
   ) { }
 
   registros: Aliquota[] = [];
@@ -56,6 +59,10 @@ export class AliquotaComponent implements OnInit {
   termoBusca: string = '';
 
   ngOnInit(): void {
+    this.get()
+  }
+
+  get(): void {
     this.service.get().subscribe({
       next: (retorno: Aliquota[]) => {
         this.registros = retorno;
@@ -99,15 +106,18 @@ export class AliquotaComponent implements OnInit {
   }
 
   excluirItem(registro: Aliquota){
-    this.service.delete(registro).subscribe({
-      complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
-      }
-    })
+    if(confirm('Deseja excluir essa aliquota?')){
+      this.service.delete(registro).subscribe({
+        complete: () => {
+          this.get()
+          this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "Aliquota excluida com sucesso",
+          })
+        }
+      })
+    }
+
   }
 
 }

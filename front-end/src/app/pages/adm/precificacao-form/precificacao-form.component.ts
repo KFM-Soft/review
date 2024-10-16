@@ -11,6 +11,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { AlertaService } from '../../../services/alerta.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 @Component({
   selector: 'app-precificacao-form',
   standalone: true,
@@ -35,6 +37,7 @@ export class PrecificacaoFormComponent {
   constructor(
     private service: PrecificacaoService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
    ) { }
@@ -50,9 +53,12 @@ export class PrecificacaoFormComponent {
 
   submit(): void {
     this.service.save(this.precificacao).subscribe({
-      next: () => {
-        alert("Registro salvo com sucesso!")
-        this.router.navigate(['../'], {relativeTo: this.route})
+      complete: () => {
+        this.router.navigate(['../'])
+        this.alertaService.enviarAlerta({
+          tipo: ETipoAlerta.SUCESSO,
+          mensagem: "Precificação cadastrada com sucesso!"
+        })
       }
     })
   }
