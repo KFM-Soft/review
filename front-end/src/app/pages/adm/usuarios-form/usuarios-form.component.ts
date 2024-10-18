@@ -1,8 +1,10 @@
-import { Usuario } from './../../models/Usuario';
-import { Component } from '@angular/core';
-import { UsuarioService } from '../../services/usuario.service';
-import { StoragesService } from '../../services/storages.service';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../../../models/Usuario';
+import { UsuarioService } from '../../../services/usuario.service';
+import { StoragesService } from '../../../services/storages.service';
+import { AlertaService } from '../../../services/alerta.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { CommonModule } from '@angular/common';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzGridModule } from 'ng-zorro-antd/grid';
@@ -13,7 +15,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-cadastro-usuario',
+  selector: 'app-usuarios-form',
   standalone: true,
   imports: [
     CommonModule,
@@ -25,10 +27,10 @@ import { FormsModule } from '@angular/forms';
     NzInputNumberModule,
     FormsModule,
   ],
-  templateUrl: './cadastro-usuario.component.html',
-  styleUrl: './cadastro-usuario.component.scss'
+  templateUrl: './usuarios-form.component.html',
+  styleUrl: './usuarios-form.component.scss'
 })
-export class CadastroUsuarioComponent {
+export class UsuariosFormComponent implements OnInit{
 
   usuario: Usuario = <Usuario>{};
   id: string | null = null;
@@ -37,29 +39,28 @@ export class CadastroUsuarioComponent {
   constructor(
     private service: UsuarioService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+   ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
-    if (this.id){
-      this.usuario = this.storageService.getSession('Usuario');
-      this.editavel = false;
-    } else {
-      this.usuario.active = true;
-      this.usuario.papel = "ROLE_CLIENTE";
-      this.usuario.qtdEmpresas = 0;
+    if (this.id) {
+      this.usuario = this.storageService.getSession("Usuario");
     }
 
   }
+
   submit(): void {
     this.service.save(this.usuario).subscribe({
-      next: () => {
-        alert("Registro salvo com sucesso!")
+      complete: () => {
         this.router.navigate(['../'], {relativeTo: this.route})
+        this.alertaService.enviarAlerta({
+          tipo: ETipoAlerta.SUCESSO,
+          mensagem: "Usuario cadastrado com sucesso!"
+        })
       }
     })
   }
-
 }

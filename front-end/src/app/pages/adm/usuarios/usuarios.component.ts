@@ -105,7 +105,7 @@ export class UsuariosComponent implements OnInit{
   }
 
   editarItem(registro: Usuario){
-    this.storageService.setSession('usuario', registro);
+    this.storageService.setSession('Usuario', registro);
     this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
   }
 

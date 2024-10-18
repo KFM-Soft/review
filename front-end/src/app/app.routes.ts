@@ -15,8 +15,6 @@ import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.comp
 import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
 import { MultiplicadoresFormComponent } from './pages/adm/multiplicadores-form/multiplicadores-form.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usuario.component';
-import { CadastroEmpresaComponent } from './pages/cadastro-empresa/cadastro-empresa.component';
 import { UsuariosComponent } from './pages/adm/usuarios/usuarios.component';
 import { authGuard } from './services/auth.guard';
 import { IcmsDetalhesNotaComponent } from './pages/icms/icms-detalhes-nota/icms-detalhes-nota.component';
@@ -25,6 +23,7 @@ import { EmpresaFormComponent } from './pages/adm/empresa-form/empresa-form.comp
 import { PrecificacaoFormComponent } from './pages/adm/precificacao-form/precificacao-form.component';
 import { PrecificacaoComponent } from './pages/adm/precificacao/precificacao.component';
 import { loggedInGuard } from './services/logged-in.guard';
+import { UsuariosFormComponent } from './pages/adm/usuarios-form/usuarios-form.component';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
@@ -79,7 +78,7 @@ export const routes: Routes = [
         {
           path: 'usuarios', children: [
             { path: '', component: UsuariosComponent },
-            { path: 'form', component: CadastroUsuarioComponent },
+            { path: 'form', component: UsuariosFormComponent},
           ]
         },
         {
