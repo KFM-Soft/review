@@ -31,7 +31,7 @@ export class InicioComponent implements OnInit {
   t = false;
 
   constructor(
-    private storegeService: StoragesService, 
+    private storageService: StoragesService, 
     private empresasService: EmpresasService,
   ) {
   }
@@ -42,8 +42,8 @@ export class InicioComponent implements OnInit {
 
   getEmpresas(): void {
 
-    const userData = this.storegeService.getSession('usuario') || '{}';
-    const token = this.storegeService.getSession('token') || '{}';
+    const userData = this.storageService.getSession('usuario') || '{}';
+    const token = this.storageService.getSession('token') || '{}';
     const usuario:Usuario = JSON.parse(userData);
 
     this.empresasService.getEmpresasIdUsuario(token, usuario.id).subscribe({

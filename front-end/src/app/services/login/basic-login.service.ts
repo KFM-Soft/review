@@ -12,10 +12,10 @@ import { StoragesService } from '../storages.service';
 export class BasicLoginService implements ILoginService {
 
   constructor(
-    private storegeService: StoragesService
+    private storageService: StoragesService
   ) {
 
-    const userData = this.storegeService.getUser() || '{}';
+    const userData = this.storageService.getUser() || '{}';
     const usuario = JSON.parse(userData);
     this.usuarioAutenticado.next(usuario)
     
@@ -39,7 +39,7 @@ export class BasicLoginService implements ILoginService {
 
     this.http.get<Usuario>(url, opcoesHttp).subscribe({
       next: (usuario: Usuario) => {
-        this.storegeService.setSession('usuario', JSON.stringify(usuario));
+        this.storageService.setSession('usuario', JSON.stringify(usuario));
         this.usuarioAutenticado.next(usuario);
       },
       complete: () => {
@@ -50,13 +50,13 @@ export class BasicLoginService implements ILoginService {
   }
 
   logout(): void {
-    this.storegeService.removeSession('usuario');
+    this.storageService.removeSession('usuario');
     document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    const userData = this.storegeService.getSession('usuario') || '{}';
+    const userData = this.storageService.getSession('usuario') || '{}';
     const usuario = JSON.parse(userData);
     return Object.keys(usuario).length > 0;
   }

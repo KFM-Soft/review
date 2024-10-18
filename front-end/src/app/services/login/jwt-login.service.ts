@@ -13,9 +13,9 @@ import { StoragesService } from '../storages.service';
 export class JwtLoginService implements ILoginService {
 
   constructor(
-    private storegeService: StoragesService
+    private storageService: StoragesService
   ) {
-    const userData = this.storegeService.getUser() || '{}';
+    const userData = this.storageService.getUser() || '{}';
     const usuario = JSON.parse(userData);
     this.usuarioAutenticado.next(usuario);
 
@@ -74,16 +74,16 @@ export class JwtLoginService implements ILoginService {
     usuario.nomeUsuario = conteudoToken.sub;
     usuario.papel = conteudoToken.papel;
 
-    this.storegeService.setSession('token', token);
-    this.storegeService.setSession('usuario', JSON.stringify(usuario));
-    this.storegeService.setSession('tokenExp', tokenExp.toString());
+    this.storageService.setSession('token', token);
+    this.storageService.setSession('usuario', JSON.stringify(usuario));
+    this.storageService.setSession('tokenExp', tokenExp.toString());
     this.usuarioAutenticado.next(usuario);
   }
 
   logout(): void {
-    this.storegeService.removeSession('token');
-    this.storegeService.removeSession('usuario');
-    this.storegeService.removeSession('tokenExp');
+    this.storageService.removeSession('token');
+    this.storageService.removeSession('usuario');
+    this.storageService.removeSession('tokenExp');
     document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     clearInterval(this.intervaloRenovacao);
     this.router.navigate(['/login']);
@@ -91,12 +91,12 @@ export class JwtLoginService implements ILoginService {
 
   isLoggedIn(): boolean {
 
-    const token = this.storegeService.getSession('token');
+    const token = this.storageService.getSession('token');
     if (token == null) {
       return false;
     }
 
-    const tokenExp = this.storegeService.getSession('tokenExp');
+    const tokenExp = this.storageService.getSession('tokenExp');
     const tempoExpiracao = new Date(Number(tokenExp));
     const agora = new Date();
     const estaExpirado = tempoExpiracao < agora;
@@ -111,7 +111,7 @@ export class JwtLoginService implements ILoginService {
   getHeaders(request: HttpRequest<any>): HttpRequest<any> {
     if (this.isLoggedIn()) {
       this.fezRequisicao = true;
-      const token = this.storegeService.getSession('token');
+      const token = this.storageService.getSession('token');
       return request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token)
       });

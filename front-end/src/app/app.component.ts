@@ -1,12 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { Usuario } from './models/Usuario';
 import { ILoginService, LoginService } from './services/login/i-login.service';
 import { AlertaComponent } from './pages/alerta/alerta.component';
+import { StoragesService } from './services/storages.service';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +25,22 @@ export class AppComponent {
 
   constructor(
     router: Router,
-    @Inject(LoginService) private loginService: ILoginService
+    @Inject(LoginService) private loginService: ILoginService,
+    private storageService: StoragesService
   ) {
 
-    router.events.subscribe(evento => {
-      if (evento instanceof NavigationEnd) {
-        this.currentUrl = evento.url;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (event.url != '') {
+          this.currentUrl = event.url;
+        } else {
+          this.currentUrl = '';
+        }
+      } else if (event instanceof NavigationStart) {
+        const userData = this.storageService.getUser() || '{}';
+        const usuario = JSON.parse(userData);
+        this.usuario = usuario
+        
       }
     });
 
