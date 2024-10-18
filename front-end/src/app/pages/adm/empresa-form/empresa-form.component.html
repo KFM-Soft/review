@@ -24,8 +24,8 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Dono da empresa</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Dono" [(ngModel)]="empresa.dono" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option *ngFor="let usuario of usuarios" [nzLabel]="usuario.nomeCompleto" [nzValue]="usuario"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Dono" [(ngModel)]="empresa.dono.id" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                        <nz-option *ngFor="let usuario of usuarios" [nzLabel]="usuario.nomeCompleto" [nzValue]="usuario.id"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>
@@ -45,8 +45,8 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Precificação</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar preço" [(ngModel)]="empresa.preco" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option *ngFor="let preco of precos" [nzLabel]="preco.opcao + ': R$ ' + preco.valor" [nzValue]="preco"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar preço" [(ngModel)]="empresa.preco.id" [ngModelOptions]="{standalone: true}" ngDefaultControl>
+                        <nz-option *ngFor="let preco of precos" [nzLabel]="preco.opcao + ': R$ ' + preco.valor" [nzValue]="preco.id"></nz-option>
                     </nz-select>
                 </nz-form-control>
             </nz-form-item>

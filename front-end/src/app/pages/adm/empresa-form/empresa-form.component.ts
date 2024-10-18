@@ -54,11 +54,9 @@ export class EmpresaFormComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.queryParamMap.get('id');
     this.getUsuarios();
+    this.getPrecificacao();
     if (this.id) {
       this.empresa = this.storageService.getSession("empresa");
-      this.editavel = false;
-    } else {
-      this.getPrecificacao();
     }
   }
 
@@ -87,7 +85,7 @@ export class EmpresaFormComponent {
   submit(): void {
     this.service.save(this.empresa).subscribe({
       complete: () => {
-        this.router.navigate(['../'])
+        this.router.navigate(['../'], {relativeTo: this.route})
         this.alertaService.enviarAlerta({
           tipo: ETipoAlerta.SUCESSO,
           mensagem: "Empresa cadastrada com sucesso!"

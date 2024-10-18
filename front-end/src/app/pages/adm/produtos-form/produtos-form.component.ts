@@ -66,10 +66,10 @@ export class ProdutoFormComponent implements OnInit{
     this.produto.sistema = true
     this.service.save(this.produto).subscribe({
       complete: () => {
-        this.router.navigate(['../'])
+        this.router.navigate(['../'], {relativeTo: this.route})
         this.alertaService.enviarAlerta({
           tipo: ETipoAlerta.SUCESSO,
-          mensagem: "Empresa cadastrada com sucesso!"
+          mensagem: "Produto cadastrado com sucesso!"
         })
       }
     })

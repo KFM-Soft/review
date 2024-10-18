@@ -54,7 +54,7 @@ export class PrecificacaoFormComponent {
   submit(): void {
     this.service.save(this.precificacao).subscribe({
       complete: () => {
-        this.router.navigate(['../'])
+        this.router.navigate(['../'], {relativeTo: this.route})
         this.alertaService.enviarAlerta({
           tipo: ETipoAlerta.SUCESSO,
           mensagem: "Precificação cadastrada com sucesso!"

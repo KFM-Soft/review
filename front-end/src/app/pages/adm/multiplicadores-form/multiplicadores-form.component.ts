@@ -85,7 +85,7 @@ export class MultiplicadoresFormComponent implements OnInit{
     this.multiplicador.sistema = true
     this.service.save(this.multiplicador).subscribe({
       complete: () => {
-        this.router.navigate(['../'])
+        this.router.navigate(['../'], {relativeTo: this.route})
         this.alertaService.enviarAlerta({
           tipo: ETipoAlerta.SUCESSO,
           mensagem: "Multiplicador cadastrado com sucesso!"

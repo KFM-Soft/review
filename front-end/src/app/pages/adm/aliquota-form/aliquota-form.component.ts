@@ -14,6 +14,8 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { StoragesService } from '../../../services/storages.service';
+import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { AlertaService } from '../../../services/alerta.service';
 
 @Component({
   selector: 'app-aliquota-form',
@@ -42,6 +44,7 @@ export class AliquotaFormComponent implements OnInit{
     private service: AliquotaService,
     private estadoService: EstadoService,
     private storageService: StoragesService,
+    private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
    ) { }
@@ -65,11 +68,14 @@ export class AliquotaFormComponent implements OnInit{
     this.aliquota.porcentagem =+ this.aliquota.porcentagem
     this.aliquota.sistema = true
     this.service.save(this.aliquota).subscribe({
-      next: () => {
-        alert("Registro salvo com sucesso!")
+      complete: () => {
         this.router.navigate(['../'], {relativeTo: this.route})
+        this.alertaService.enviarAlerta({
+          tipo: ETipoAlerta.SUCESSO,
+          mensagem: "Aliquota cadastrada com sucesso!"
+        })
       }
     })
-  }
 
+  }
 }

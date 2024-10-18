@@ -57,7 +57,7 @@ export class EstadosFormComponent implements OnInit{
   submit(): void {
     this.service.save(this.estado).subscribe({
       complete: () => {
-        this.router.navigate(['../'])
+        this.router.navigate(['../'], {relativeTo: this.route})
         this.alertaService.enviarAlerta({
           tipo: ETipoAlerta.SUCESSO,
           mensagem: "Estado cadastrado com sucesso!"
