@@ -11,14 +11,8 @@ export class RelatorioService {
 
   constructor(private http: HttpClient) {
 
-    if(typeof window !== 'undefined') {
-      this.sessionStorage = window.sessionStorage;
-    }
 
-   }
-
-  private sessionStorage: Storage | null = null;
-  private token: string | null = null;
+  }
 
 
   apiUrl = environment.API_URL + '/relatorio/'

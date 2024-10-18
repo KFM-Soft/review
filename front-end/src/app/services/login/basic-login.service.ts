@@ -5,20 +5,20 @@ import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
 import { ILoginService } from './i-login.service';
 import { environment } from '../../../environments/environment';
+import { StoragesService } from '../storages.service';
 @Injectable({
   providedIn: 'root'
 })
 export class BasicLoginService implements ILoginService {
 
-  private sessionStorage: Storage | null = null;
+  constructor(
+    private storegeService: StoragesService
+  ) {
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      this.sessionStorage = window.sessionStorage;
-      const userData = this.sessionStorage.getItem('usuario') || '{}';
-      const usuario = JSON.parse(userData);
-      this.usuarioAutenticado.next(usuario)
-    }
+    const userData = this.storegeService.getUser() || '{}';
+    const usuario = JSON.parse(userData);
+    this.usuarioAutenticado.next(usuario)
+    
   }
 
   usuarioAutenticado: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>(<Usuario>{});
@@ -39,7 +39,7 @@ export class BasicLoginService implements ILoginService {
 
     this.http.get<Usuario>(url, opcoesHttp).subscribe({
       next: (usuario: Usuario) => {
-        this.sessionStorage?.setItem('usuario', JSON.stringify(usuario));
+        this.storegeService.setSession('usuario', JSON.stringify(usuario));
         this.usuarioAutenticado.next(usuario);
       },
       complete: () => {
@@ -50,13 +50,13 @@ export class BasicLoginService implements ILoginService {
   }
 
   logout(): void {
-    this.sessionStorage?.removeItem('usuario');
+    this.storegeService.removeSession('usuario');
     document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    const userData = this.sessionStorage?.getItem('usuario') || '{}';
+    const userData = this.storegeService.getSession('usuario') || '{}';
     const usuario = JSON.parse(userData);
     return Object.keys(usuario).length > 0;
   }

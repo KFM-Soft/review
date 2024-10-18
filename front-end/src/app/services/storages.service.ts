@@ -58,13 +58,15 @@ export class StoragesService {
 
   getSession(key: string): any {
     if (this.sessionStorage) {
-      return JSON.parse(this.sessionStorage.getItem(key) || '{}');
+      if(this.sessionStorage.getItem(key)){
+        return JSON.parse(this.sessionStorage.getItem(key) || '{}');
+      }
     }
     return null;
   }
 
   getUser() {
-    return this.getSession("USER")
+    return this.getSession("usuario")
   }
 
   removeSession(key: string): boolean {

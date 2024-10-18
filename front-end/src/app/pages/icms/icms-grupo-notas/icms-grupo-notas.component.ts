@@ -18,6 +18,7 @@ import { Relatorio } from '../../../models/Relatorio';
 import { RelatorioService } from '../../../services/relatorio.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { response } from 'express';
+import { StoragesService } from '../../../services/storages.service';
 
 interface gruposNotas {
   numero: Number;
@@ -50,7 +51,9 @@ export class IcmsGrupoNotasComponent implements OnInit {
     private route: ActivatedRoute,
     private icmsService: IcmsService,
     private empresaService: EmpresasService,
-    private relatorioService: RelatorioService
+    private relatorioService: RelatorioService,
+    private storageService: StoragesService,
+
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class IcmsGrupoNotasComponent implements OnInit {
         this.empresaId = +id;
         this.getIcmsRelatorios()
       }
-      this.token = window.sessionStorage?.getItem('token');
+      this.token = this.storageService.getSession('token');
       this.getEmpresa()
     });
   }

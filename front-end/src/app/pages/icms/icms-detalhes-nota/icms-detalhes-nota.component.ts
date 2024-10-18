@@ -27,19 +27,15 @@ import { IcmsService } from '../../../services/icms.service';
   styleUrl: './icms-detalhes-nota.component.scss'
 })
 export class IcmsDetalhesNotaComponent{
-  private token: string | null = null;
-  private sessionStorage: Storage | null = null;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private service: IcmsService,
     private storageService: StoragesService,
-    @Inject(PLATFORM_ID) private platformId: Object
   ) { 
-    if(typeof window !== 'undefined') {
-      this.sessionStorage = window.sessionStorage;
-    }
-   }
+
+  }
   notas: IcmsNota[] = [];
   registros: IcmsNota[] = [];
   items_qtd: number[] = []
@@ -54,9 +50,6 @@ export class IcmsDetalhesNotaComponent{
     this.registros = this.storageService.getSession('notasCalculadas')
     if (this.registros)
       this.items_qtd = this.registros.map((_, index) => index + 1);
-    if (isPlatformBrowser(this.platformId)) {
-      this.token = window.sessionStorage?.getItem('token');
-    }
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -100,7 +93,7 @@ export class IcmsDetalhesNotaComponent{
     produto.resultadoIcmsST = produto.baseSTComAliquotaInterna - produto.valorIcms
   }
   gerarRelatorio() {
-    if(this.token && this.empresaId){
+    if(this.empresaId){
       this.service.salvarPDF(this.notas,this.empresaId);
       this.service.download(this.notas,)
     }

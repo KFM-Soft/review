@@ -44,7 +44,6 @@ export class EmpresaComponent {
     private router: Router,
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   registros: Empresa[] = [];
@@ -56,9 +55,9 @@ export class EmpresaComponent {
   private token: string | null = null;
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.token = window.sessionStorage.getItem('token');
-    }
+
+    this.token = this.storageService.getSession('token');
+
     if(this.token)
     this.service.get(this.token).subscribe({
       next: (retorno: Empresa[]) => {

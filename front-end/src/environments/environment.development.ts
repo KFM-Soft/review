@@ -1,4 +1,4 @@
 export const environment = {
     API_URL: 'http://localhost:9000',
-    AUTH_TYPE: 'basic'
+    AUTH_TYPE: 'jwt'
 };

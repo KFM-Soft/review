@@ -46,7 +46,6 @@ import { EmpresasService } from '../../../services/empresas.service';
 export class IcmsImportarNotasComponent implements OnInit{
 
   private token: string | null = null;
-  private sessionStorage: Storage | null = null;
 
   constructor(
     private msg: NzMessageService,
@@ -57,9 +56,7 @@ export class IcmsImportarNotasComponent implements OnInit{
     private route: ActivatedRoute,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
-    if(typeof window !== 'undefined') {
-      this.sessionStorage = window.sessionStorage;
-    }
+    
   }
 
   empresaId: number | null = null;
@@ -76,7 +73,7 @@ export class IcmsImportarNotasComponent implements OnInit{
       if (id) {
         this.empresaId = +id;
       }
-      this.token = window.sessionStorage?.getItem('token');
+      this.token = this.storageService.getSession('token');
       this.getEmpresa()
     });
   }

@@ -5,23 +5,20 @@ import { BehaviorSubject } from 'rxjs';
 import { Usuario } from '../../models/Usuario';
 import { ILoginService } from './i-login.service';
 import { environment } from '../../../environments/environment';
+import { StoragesService } from '../storages.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JwtLoginService implements ILoginService {
 
-  private sessionStorage: Storage | null = null;
+  constructor(
+    private storegeService: StoragesService
+  ) {
+    const userData = this.storegeService.getUser() || '{}';
+    const usuario = JSON.parse(userData);
+    this.usuarioAutenticado.next(usuario);
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      this.sessionStorage = window.sessionStorage;
-      const userData = this.sessionStorage?.getItem('usuario') || '{}';
-      const usuario = JSON.parse(userData);
-      this.usuarioAutenticado.next(usuario);
-    } else {
-      this.usuarioAutenticado.next(<Usuario>{});
-    }
     if (this.isLoggedIn()) {
       this.agendarRenovacaoToken();
     }
@@ -77,17 +74,16 @@ export class JwtLoginService implements ILoginService {
     usuario.nomeUsuario = conteudoToken.sub;
     usuario.papel = conteudoToken.papel;
 
-    this.sessionStorage?.setItem('token', token);
-    this.sessionStorage?.setItem('usuario', JSON.stringify(usuario));
-    this.sessionStorage?.setItem('tokenExp', tokenExp.toString());
-
+    this.storegeService.setSession('token', token);
+    this.storegeService.setSession('usuario', JSON.stringify(usuario));
+    this.storegeService.setSession('tokenExp', tokenExp.toString());
     this.usuarioAutenticado.next(usuario);
   }
 
   logout(): void {
-    this.sessionStorage?.removeItem('token');
-    this.sessionStorage?.removeItem('usuario');
-    this.sessionStorage?.removeItem('tokenExp');
+    this.storegeService.removeSession('token');
+    this.storegeService.removeSession('usuario');
+    this.storegeService.removeSession('tokenExp');
     document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
     clearInterval(this.intervaloRenovacao);
     this.router.navigate(['/login']);
@@ -95,12 +91,12 @@ export class JwtLoginService implements ILoginService {
 
   isLoggedIn(): boolean {
 
-    const token = this.sessionStorage?.getItem('token');
+    const token = this.storegeService.getSession('token');
     if (token == null) {
       return false;
     }
 
-    const tokenExp = this.sessionStorage?.getItem('tokenExp');
+    const tokenExp = this.storegeService.getSession('tokenExp');
     const tempoExpiracao = new Date(Number(tokenExp));
     const agora = new Date();
     const estaExpirado = tempoExpiracao < agora;
@@ -115,7 +111,7 @@ export class JwtLoginService implements ILoginService {
   getHeaders(request: HttpRequest<any>): HttpRequest<any> {
     if (this.isLoggedIn()) {
       this.fezRequisicao = true;
-      const token = this.sessionStorage?.getItem('token');
+      const token = this.storegeService.getSession('token');
       return request.clone({
         headers: request.headers.set('Authorization', 'Bearer ' + token)
       });

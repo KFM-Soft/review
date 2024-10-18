@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 
@@ -17,6 +17,7 @@ import { LoginService } from './services/login/i-login.service';
 import { authInterceptor } from './interceptor/auth.interceptor';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { erroInterceptor } from './interceptor/erro.interceptor';
+import { StoragesService } from './services/storages.service';
 
 registerLocaleData(pt);
 
@@ -37,15 +38,14 @@ export const appConfig: ApplicationConfig = {
 };
 
 export function loginServiceFactory() {
-
   const authType = environment.AUTH_TYPE;
+  const storagesService = inject(StoragesService);
 
   if (authType == 'basic') {
-    return new BasicLoginService();
+    return new BasicLoginService(storagesService); // Passa storagesService
   } else if (authType == 'jwt') {
-    return new JwtLoginService();
+    return new JwtLoginService(storagesService); // Passa storagesService
   } else {
     throw new Error('Tipo de autenticação deve ser "basic" ou "jwt".');
   }
-
 }
