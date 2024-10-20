@@ -1,14 +1,16 @@
 .container {
-  height: 50vh;
+  height: 80vh;
   margin: 5em;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.1); /* Borda suave */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sombra leve para contraste */
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
   height: 100%;
   background-color: white;
+  padding: 1em; /* Espaçamento interno para o conteúdo */
 }
-  

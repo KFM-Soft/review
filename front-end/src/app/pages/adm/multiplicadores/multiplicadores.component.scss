@@ -13,8 +13,10 @@ nz-select {
     border-radius: 10px;
 }
 
-tbody {
-  height: 50vh;
+.content {
+  max-height: 100%;
+  overflow-y: auto; /* Adiciona a scrollbar vertical */
+  overflow-x: hidden;
 }
 
 .btn-novo {

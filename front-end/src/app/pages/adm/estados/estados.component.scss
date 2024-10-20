@@ -1,5 +1,7 @@
-tbody {
-  height: 50vh;
+.content {
+  max-height: 100%;
+  overflow-y: auto; /* Adiciona a scrollbar vertical */
+  overflow-x: hidden;
 }
 
 .btn-novo {
