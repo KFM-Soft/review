@@ -17,6 +17,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { FormsModule } from '@angular/forms';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { Utils } from '../../../utils/utils';
 
 @Component({
   selector: 'app-empresa-form',
@@ -40,6 +41,8 @@ export class EmpresaFormComponent {
   id: string | null = null;
   editavel: boolean = true;
   precos: Precificacao[] = [];
+  
+  compareById = Utils.compareById;
 
   constructor (
     private service: EmpresasService,
