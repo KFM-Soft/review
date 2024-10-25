@@ -1,0 +1,33 @@
+name: "Deploy para VPS"
+on:
+  workflow_dispatch:
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Baixar código"
+        uses: actions/checkout@v4
+
+      - name: "Enviando arquivos para VPS"
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "."
+          target: "/sistema"
+
+      - name: "Rodar Docker no VPS"
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /sistema/back-end/dockerFile/dockerFileProd
+            docker-compose down
+            docker-compose up -d --build
+            cd ../../
+            
