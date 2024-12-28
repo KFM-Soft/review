@@ -1,4 +1,4 @@
 export const environment = {
-    API_URL: 'https://review-8vux.onrender.com',
+    API_URL: 'http://85.31.231.173:9000',
     AUTH_TYPE: 'jwt'
 };

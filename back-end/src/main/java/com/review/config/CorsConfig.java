@@ -15,7 +15,12 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfig = new CorsConfiguration();
         corsConfig.setAllowCredentials(true);
-        corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:4200","https://localhost:4200", "https://review-app-hjwa.onrender.com"));
+        corsConfig.setAllowedOrigins(Arrays.asList(
+        "http://localhost:4200",
+            "https://localhost:4200", 
+            "https://review-app-hjwa.onrender.com",
+            "http://85.31.231.173"
+        ));
         corsConfig.setAllowedMethods(Arrays.asList("*"));
         corsConfig.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();

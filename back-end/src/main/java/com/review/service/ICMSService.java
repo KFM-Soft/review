@@ -1,5 +1,8 @@
 package com.review.service;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +37,9 @@ import com.review.dto.IcmsProdutoDto;
 import com.review.models.Empresa;
 import com.review.models.Multiplicador;
 import com.review.models.Relatorio;
+import com.review.utils.Util;
 
+import net.sf.jasperreports.engine.fill.JRFillField;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -43,6 +48,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.engine.util.JRSaver;
 
 @Service
@@ -62,15 +68,18 @@ public class ICMSService {
 
     public byte[] renderizarRelatorio(Map<String, Object> parametros)
             throws FileNotFoundException, JRException, IOException {
+        String reportJrxml = Util.getPath("mainReport" + ".jrxml");
+        String reportJasper = Util.getPath("mainReport" + ".jasper");
+        Path jasperFilePath = Paths.get(reportJasper);
 
-        File pdf = ResourceUtils.getFile("classpath:reportsFile/" + "mainReport" + ".jrxml");
-        String path = pdf.getParent();
-
-        JasperReport jasperReport = JasperCompileManager.compileReport(path + "/" + "mainReport" + ".jrxml");
-        JRSaver.saveObject(jasperReport, path + "/" + "mainReport" + ".jasper");
-
+        JasperReport jasperReport;
+        if (!Files.exists(jasperFilePath)){
+            jasperReport = JasperCompileManager.compileReport(reportJrxml);
+            JRSaver.saveObject(jasperReport, reportJasper);
+        } else {
+            jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportJasper);
+        }
         JasperPrint print = JasperFillManager.fillReport(jasperReport, parametros, new JREmptyDataSource());
-
         byte[] response = JasperExportManager.exportReportToPdf(print);
 
         return response;
