@@ -4,7 +4,7 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">CEST</nz-form-label>
                 <nz-form-control>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="CEST" [(ngModel)]="produto.cest" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="CEST" [(ngModel)]="NCM.cest" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
@@ -14,21 +14,13 @@
             <nz-form-control>
               <nz-select
               nzSize="large"
-              [(ngModel)]="produto.ncm"
+              [(ngModel)]="NCM.ncm"
               [ngModelOptions]="{ standalone: true }"
               nzMode="tags">
-                <nz-option *ngFor="let produto of produtos" [nzValue]="produto.ncm" [nzLabel]="produto.ncm"></nz-option>
+                <nz-option *ngFor="let NCM of NCMs" [nzValue]="NCM.ncm" [nzLabel]="NCM.ncm"></nz-option>
             </nz-select>
             </nz-form-control>
         </nz-form-item>
-        </nz-col>
-        <nz-col nzXs="24" nzLg="12">
-            <nz-form-item>
-                <nz-form-label nzSpan="24">CFOP</nz-form-label>
-                <nz-form-control>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="CFOP" [(ngModel)]="produto.cfop" [ngModelOptions]="{standalone: true}" ngDefaultControl/>
-                </nz-form-control>
-            </nz-form-item>
         </nz-col>
 
         <nz-col nzXs="24" nzLg="12">
@@ -36,16 +28,16 @@
                 <nz-form-label nzSpan="24">Descrição:</nz-form-label>
                 <nz-form-control>
                     <nz-input-group [nzSuffix]="textAreaClearTpl" class="ant-input-affix-wrapper-textarea-with-clear-btn">
-                        <textarea nz-input [(ngModel)]="produto.descricao" placeholder="Descrição do produto" [ngModelOptions]="{standalone: true}" ngDefaultControl></textarea>
+                        <textarea nz-input [(ngModel)]="NCM.descricao" placeholder="Descrição do NCM" [ngModelOptions]="{standalone: true}" ngDefaultControl></textarea>
                       </nz-input-group>
                       <ng-template #textAreaClearTpl>
-                        @if (produto.descricao) {
+                        @if (NCM.descricao) {
                           <span
                             nz-icon
                             class="ant-input-clear-icon"
                             nzTheme="fill"
                             nzType="close-circle"
-                            (click)="produto.descricao = ''"
+                            (click)="NCM.descricao = ''"
                           ></span>
                         }
                       </ng-template>

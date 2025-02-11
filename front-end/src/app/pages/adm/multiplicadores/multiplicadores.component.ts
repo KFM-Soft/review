@@ -16,13 +16,13 @@ import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 import { Aliquota } from '../../../models/Aliquota';
-import { Produto } from '../../../models/Produto';
+import { NCM } from '../../../models/NCM';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { AliquotaService } from '../../../services/aliquota.service';
-import { ProdutosService } from '../../../services/produtos.service';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { NcmService } from '../../../services/ncm.service';
 
 @Component({
   selector: 'app-multiplicador',
@@ -52,7 +52,7 @@ export class MultiplicadoresComponent implements OnInit {
   constructor(
     private service: MultiplicadorService,
     private aliquotaService: AliquotaService,
-    private produtosService: ProdutosService,
+    private ncmService: NcmService,
     private storageService: StoragesService,
     private alertaService: AlertaService,
     private router: Router,
@@ -64,8 +64,8 @@ export class MultiplicadoresComponent implements OnInit {
   multiplicadores: Multiplicador[] = [];
   aliquota: Aliquota = <Aliquota>{};
   aliquotas: Aliquota[] = [];
-  produto: Produto = <Produto>{};
-  produtos: Produto[] = [];
+  produto: NCM = <NCM>{};
+  produtos: NCM[] = [];
   total: number = 0;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -101,8 +101,8 @@ export class MultiplicadoresComponent implements OnInit {
   }
 
   getProdutos() {
-    this.produtosService.get().subscribe({
-      next: (retorno: Produto[]) => {
+    this.ncmService.get().subscribe({
+      next: (retorno: NCM[]) => {
         this.produtos = retorno;
       },
       error: (error) => {
@@ -115,7 +115,7 @@ export class MultiplicadoresComponent implements OnInit {
     let filtro = this.multiplicadores;
     if (this.termoBusca) {
       filtro = filtro.filter(multiplicador => 
-        multiplicador.produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
+        multiplicador.ncm.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
           multiplicador.mvaOriginal.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
           || 

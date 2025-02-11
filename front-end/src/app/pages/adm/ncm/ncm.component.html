@@ -21,7 +21,6 @@
                         <th>Descrição</th>
                         <th nzWidth="15%">NCM</th>
                         <th nzWidth="15%">CEST</th>
-                        <th nzWidth="15%">CFOP</th>
                         <th nzWidth="15%" [nzAlign]="'center'">Açôes</th>
                     </tr>
                 </thead>
@@ -31,7 +30,6 @@
                         <td> {{ data.descricao }}</td>
                         <td> {{ data.ncm }}</td>
                         <td> {{ data.cest ? data.cest : "-" }}</td>
-                        <td> {{ data.cfop }}</td>
                         <td [nzAlign]="'center'">
                             <nz-row [nzGutter]="[4, 4]" nzJustify="center">
                                 <nz-col>

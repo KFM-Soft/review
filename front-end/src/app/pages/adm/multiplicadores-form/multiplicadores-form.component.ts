@@ -12,12 +12,12 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { StoragesService } from '../../../services/storages.service';
-import { Produto } from '../../../models/Produto';
+import { NCM } from '../../../models/NCM';
 import { Aliquota } from '../../../models/Aliquota';
-import { ProdutosService } from '../../../services/produtos.service';
 import { AliquotaService } from '../../../services/aliquota.service';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { NcmService } from '../../../services/ncm.service';
 
 @Component({
   selector: 'app-multiplicador-form',
@@ -38,14 +38,14 @@ import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 export class MultiplicadoresFormComponent implements OnInit{
 
   multiplicador: Multiplicador = <Multiplicador>{};
-  produtos: Produto[] = [];
+  ncms: NCM[] = [];
   aliquotas: Aliquota[] = [];
   id: string | null = null;
   editavel: boolean = true;
 
   constructor(
     private service: MultiplicadorService,
-    private produtosService: ProdutosService,
+    private ncmService: NcmService,
     private aliquotaService: AliquotaService,
     private storageService: StoragesService,
     private alertaService: AlertaService,
@@ -66,11 +66,11 @@ export class MultiplicadoresFormComponent implements OnInit{
   }
 
   getProdutos() {
-    this.produtosService.get().subscribe({
-      next: (retorno: Produto[]) => {
-        this.produtos = retorno
+    this.ncmService.get().subscribe({
+      next: (retorno: NCM[]) => {
+        this.ncms = retorno
       }
-    })
+    }) 
   }
 
   getAliquotas() {

@@ -6,10 +6,8 @@ import { IcmsNotasProcessadasComponent } from './pages/icms/icms-notas-processad
 import { IcmsImportarNotasComponent } from './pages/icms/icms-importar-notas/icms-importar-notas.component'
 import { IcmsEmpresaFormComponent } from './pages/icms/icms-empresa-form/icms-empresa-form.component';
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
-import { ProdutoComponent } from './pages/adm/produtos/produtos.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 import { AdmComponent } from './pages/adm/adm.component';
-import { ProdutoFormComponent } from './pages/adm/produtos-form/produtos-form.component';
 import { EstadosComponent } from './pages/adm/estados/estados.component';
 import { EstadosFormComponent } from './pages/adm/estados-form/estados-form.component';
 import { MultiplicadoresComponent } from './pages/adm/multiplicadores/multiplicadores.component';
@@ -24,6 +22,8 @@ import { PrecificacaoFormComponent } from './pages/adm/precificacao-form/precifi
 import { PrecificacaoComponent } from './pages/adm/precificacao/precificacao.component';
 import { loggedInGuard } from './services/logged-in.guard';
 import { UsuariosFormComponent } from './pages/adm/usuarios-form/usuarios-form.component';
+import { NcmComponent } from './pages/adm/ncm/ncm.component';
+import { NcmFormComponent } from './pages/adm/ncm-form/ncm-form.component';
 
 export const routes: Routes = [
   {path: '', canActivate: [authGuard], children: [
@@ -58,9 +58,9 @@ export const routes: Routes = [
           ]
         },
         {
-          path: 'produtos', children: [
-            { path: '', component: ProdutoComponent },
-            { path: 'form', component: ProdutoFormComponent },
+          path: 'ncms', children: [
+            { path: '', component: NcmComponent },
+            { path: 'form', component: NcmFormComponent },
           ]
         },
         {

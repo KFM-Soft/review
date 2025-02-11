@@ -5,37 +5,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.review.models.Produto;
-import com.review.repository.ProdutoRepository;
+import com.review.models.NCM;
+import com.review.repository.NCMRepository;
 
 @Service
-public class ProdutoService {
+public class NCMService {
 
     @Autowired
-    private ProdutoRepository repository;
+    private NCMRepository repository;
 
-    public List<Produto> getAll() {
+    public List<NCM> getAll() {
         return repository.findAll();
     }
 
-    public Produto getById(Long id) {
+    public NCM getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Produto> getByEmpresaId(long id){
+    public List<NCM> getByEmpresaId(long id){
         return repository.getByEmpresaId(id);
     }
 
-    public List<Produto> getBySistema(boolean sistema){
+    public List<NCM> getBySistema(boolean sistema){
         return repository.findBySistema(sistema);
     }
 
-    public Produto save(Produto objeto) {
+    public NCM save(NCM objeto) {
         return repository.save(objeto);
     }
 
-    public List<Produto> saveList(List<Produto> produtos) {
-        return repository.saveAll(produtos);
+    public List<NCM> saveList(List<NCM> ncms) {
+        return repository.saveAll(ncms);
     }
 
     public void deleteById(Long id) {

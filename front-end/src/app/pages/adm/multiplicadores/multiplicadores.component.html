@@ -64,7 +64,7 @@
                 <tbody>
                     <tr *ngFor="let data of headerTable.data">
                         <td [nzAlign]="'center'">{{ data.id }}</td>
-                        <td [nzAlign]="'center'"> {{ data.produto.descricao }}</td>
+                        <td [nzAlign]="'center'"> {{ data.ncm.descricao }}</td>
                         <td [nzAlign]="'center'"> {{ data.aliquota.origem.uf }} -> {{ data.aliquota.destino.uf }}</td>
                         <td [nzAlign]="'center'"> {{ data.aliquotaInternaEmit }}</td>
                         <td [nzAlign]="'center'"> {{ data.mvaOriginal }}</td>

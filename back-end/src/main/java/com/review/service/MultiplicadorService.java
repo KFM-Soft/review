@@ -30,8 +30,8 @@ public class MultiplicadorService {
         return repository.getByEmpresaId(id);
     }
 
-    public List<Multiplicador> getMultiplicadorByProdutoIdAndAliquotaId(Long produto_id, Long aliquota_id) {
-        return repository.getMultiplicadorByProdutoIdAndAliquotaId(produto_id, aliquota_id);
+    public List<Multiplicador> getMultiplicadorByNcmIdAndAliquotaId(Long ncm_id, Long aliquota_id) {
+        return repository.getMultiplicadorByNcmIdAndAliquotaId(ncm_id, aliquota_id);
     }
 
     public Multiplicador getByProductCest(String id) {

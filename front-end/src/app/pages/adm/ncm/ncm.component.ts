@@ -10,16 +10,16 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { CommonModule } from '@angular/common';
-import { Produto } from '../../../models/Produto';
-import { ProdutosService } from '../../../services/produtos.service';
+import { NCM } from '../../../models/NCM';
 import { AdmComponent } from '../adm.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { NcmService } from '../../../services/ncm.service';
 
 @Component({
-  selector: 'app-Produto',
+  selector: 'app-Ncm',
   standalone: true,
   imports: [
     CommonModule,
@@ -36,22 +36,22 @@ import { ETipoAlerta } from '../../../models/e-tipo-alerta';
     RouterLink,
     AdmComponent,
   ],
-  templateUrl: './produtos.component.html',
-  styleUrl: './produtos.component.scss'
+  templateUrl: './ncm.component.html',
+  styleUrl: './ncm.component.scss'
 })
-export class ProdutoComponent implements OnInit {
+export class NcmComponent implements OnInit {
   
   constructor(
     private renderer: Renderer2,
-    private service: ProdutosService,
+    private service: NcmService,
     private storageService: StoragesService,
     private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
-  registros: Produto[] = [];
-  produtos: Produto[] = [];
+  registros: NCM[] = [];
+  produtos: NCM[] = [];
   total: number = 0;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -63,12 +63,17 @@ export class ProdutoComponent implements OnInit {
 
   get(): void{
     this.service.get().subscribe({
-      next: (retorno: Produto[]) => {
+      next: (retorno: NCM[]) => {
         this.registros = retorno
         this.produtos = retorno
+      }, complete: () => {
+        this.alertaService.enviarAlerta({
+            tipo: ETipoAlerta.SUCESSO,
+            mensagem: "NCM foi excluído com sucesso!"
+        })
       },
       error: (error) => {
-        console.error('Erro ao carregar Produtos:', error);
+        console.error('Erro ao carregar NCMs:', error);
       }
     })
   }
@@ -82,8 +87,6 @@ export class ProdutoComponent implements OnInit {
         produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
           produto.cest?.toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          produto.cfop.toLowerCase().includes(this.termoBusca.toLowerCase())
           || 
           produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
       );
@@ -105,19 +108,15 @@ export class ProdutoComponent implements OnInit {
     this.atualizarTabela();
   }
 
-  editarItem(registro: Produto){
-    this.storageService.setSession('produto', registro);
+  editarItem(registro: NCM){
+    this.storageService.setSession('ncm', registro);
     this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
   }
   
-  excluirItem(registro: Produto){
+  excluirItem(registro: NCM){
     this.service.delete(registro).subscribe({
       complete: () => {
         this.get();
-        this.alertaService.enviarAlerta({
-            tipo: ETipoAlerta.SUCESSO,
-            mensagem: "Produto foi excluído com sucesso!"
-        })
       }
     });
   }

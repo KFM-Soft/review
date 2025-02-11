@@ -1,11 +1,10 @@
 import { Empresa } from "./Empresa";
 
-export type Produto = {
+export type NCM = {
     id: number;
     descricao: string;
     ncm: string;
     cest: string | null;
-    cfop: string;
     empresa: Empresa;
     sistema: boolean;
 }

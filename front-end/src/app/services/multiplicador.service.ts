@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Multiplicador } from '../models/Multiplicador';
 import { Aliquota } from '../models/Aliquota';
-import { Produto } from '../models/Produto';
+import { NCM } from '../models/NCM';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class MultiplicadorService {
     return this.http.get<Multiplicador[]>(url);
   }
 
-  getByAliquotaAndProduto(produto: Produto, aliquota: Aliquota, ): Observable<Multiplicador[]> { 
+  getByAliquotaAndProduto(produto: NCM, aliquota: Aliquota, ): Observable<Multiplicador[]> { 
     let url = this.apiUrl + 'getByProdutoAndAliquota/' + produto.id + '/' + aliquota.id;
     return this.http.get<Multiplicador[]>(url);
   }

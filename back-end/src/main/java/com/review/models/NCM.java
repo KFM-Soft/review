@@ -15,10 +15,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="produtos")
+@Table(name="NCMs")
 @Getter
 @Setter
-public class Produto implements Serializable {
+public class NCM implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

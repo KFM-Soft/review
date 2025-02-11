@@ -5,10 +5,10 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Produto</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.produto" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" [nzValue]="produto"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
+                        <nz-option *ngFor="let ncm of ncms" [nzLabel]="ncm.ncm" [nzValue]="ncm"></nz-option>
                     </nz-select>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.produto.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.ncm.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
