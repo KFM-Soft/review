@@ -17,7 +17,7 @@ export class ProdutosService {
     let url = this.apiUrl;
     return this.http.get<Produto[]>(url);
   }
-  
+
   save(produto: Produto): Observable<Produto> {
     let url = this.apiUrl;
     if(produto.id)
@@ -29,5 +29,6 @@ export class ProdutosService {
     let url = this.apiUrl + registro.id;
     return this.http.delete<void>(url);
   }
-  
+
+
 }

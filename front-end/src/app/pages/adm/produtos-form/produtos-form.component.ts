@@ -36,13 +36,16 @@ export class ProdutoFormComponent implements OnInit{
 
   estados: Estado[] = []
   produto: Produto = <Produto>{};
+  produtos: Produto[] = [];
   id: string | null = null;
   editavel: boolean = true;
+  ncms: string[] = [];
 
   constructor(
     private service: ProdutosService,
     private estadoService: EstadoService,
     private storageService: StoragesService,
+    private produtoService: ProdutosService,
     private alertaService: AlertaService,
     private router: Router,
     private route: ActivatedRoute,
@@ -54,13 +57,27 @@ export class ProdutoFormComponent implements OnInit{
         this.estados = retorno
       }
     })
-    
+
     this.id = this.route.snapshot.queryParamMap.get('id');
     if (this.id) {
       this.produto = this.storageService.getSession("produto");
       this.editavel = false;
     }
+
+    this.getProdutos();
   }
+
+  getProdutos() {
+    this.produtoService.get().subscribe({
+      next: (retorno: Produto[]) => {
+        this.produtos = retorno
+      },
+      error: (error) => {
+        console.error("Erro ao buscar NCM: ", error);
+      }
+    })
+  }
+
 
   submit(): void {
     this.produto.sistema = true
@@ -74,5 +91,6 @@ export class ProdutoFormComponent implements OnInit{
       }
     })
   }
+
 
 }

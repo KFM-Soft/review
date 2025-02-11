@@ -27,7 +27,7 @@
 
         <nz-col nzXs="24" nzLg="8">
             <nz-form-item>
-                <nz-form-label nzSpan="24">Porcentagem</nz-form-label>
+                <nz-form-label nzSpan="24">Alíquota Interestadual</nz-form-label>
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="aliquota.porcentagem" [ngModelOptions]="{standalone: true}" ngDefaultControl
@@ -36,7 +36,7 @@
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
-        
+
         <nz-col nzSpan="24">
             <nz-row nzJustify="end">
                 <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar" (click)="submit()">Salvar</button>
