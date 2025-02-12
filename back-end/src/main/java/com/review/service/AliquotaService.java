@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.review.models.Aliquota;
@@ -20,8 +22,11 @@ public class AliquotaService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public List<Aliquota> getAll() {
-        return repository.findAll();
+    public Page<Aliquota> getAll(String termoBusca, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.busca(termoBusca, page);
+        }
+        return repository.findAll(page);
     }
 
     public Aliquota getById(Long id) {
@@ -47,12 +52,20 @@ public class AliquotaService {
         return repository.findByOrigemDestinoEmpresa(origem, destino, empresa_id);
     }
 
-    public List<Aliquota> getByEmpresa(Long id){
-        return repository.findByEmpresaId(id);
+    public Page<Aliquota> getByEmpresa(String termoBusca, Long id, Pageable page){
+        if (termoBusca == null || termoBusca.isEmpty()) {
+            return repository.findByEmpresaId(id, page);
+            
+        }
+        return repository.buscaEmpresa(termoBusca, id, page);
     }
 
-    public List<Aliquota> getBySistema(boolean sistema){
-        return repository.findBySistema(sistema);
+    public Page<Aliquota> getBySistema(String termoBusca, Pageable page){
+        if (termoBusca == null || termoBusca.isEmpty()) {
+            return repository.findBySistema(page);
+            
+        }
+        return repository.buscaSistema(termoBusca, page);
     }
 
     // @EventListener(ApplicationReadyEvent.class)

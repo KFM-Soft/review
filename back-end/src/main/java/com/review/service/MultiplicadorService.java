@@ -3,6 +3,8 @@ package com.review.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.review.models.Multiplicador;
@@ -18,20 +20,20 @@ public class MultiplicadorService {
         return repository.findAll();
     }
 
-    public List<Multiplicador> getBySistema(boolean sistema) {
-        return repository.findBySistema(sistema);
+    public Page<Multiplicador> getBySistema(boolean sistema, Pageable page) {
+        return repository.findBySistema(sistema, page);
     }
 
     public Multiplicador getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Multiplicador> getByEmpresaId(Long id){
-        return repository.getByEmpresaId(id);
+    public Page<Multiplicador> getByEmpresaId(Long id, Pageable page) {
+        return repository.getByEmpresaId(id, page);
     }
 
-    public List<Multiplicador> getMultiplicadorByNcmIdAndAliquotaId(Long ncm_id, Long aliquota_id) {
-        return repository.getMultiplicadorByNcmIdAndAliquotaId(ncm_id, aliquota_id);
+    public Page<Multiplicador> getMultiplicadorByNcmIdAndAliquotaId(Long ncm_id, Long aliquota_id, Pageable page ) {
+        return repository.getMultiplicadorByNcmIdAndAliquotaId(ncm_id, aliquota_id, page);
     }
 
     public Multiplicador getByProductCest(String id) {

@@ -3,6 +3,10 @@ package com.review.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,14 +42,22 @@ public class NCMController {
     }
 
     @GetMapping("/sistema/{sistema}")
-    public ResponseEntity<List<NCM>> getBySistema(@PathVariable boolean sistema){
-        List<NCM> registros = service.getBySistema(sistema);
+    public ResponseEntity<Page<NCM>> getBySistema(@PathVariable boolean sistema, 
+    @SortDefaults({
+        @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ){
+        Page<NCM> registros = service.getBySistema(sistema, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/empresa/{empresa_id}")
-    public ResponseEntity<List<NCM>> getByEmpresaId(@PathVariable Long empresa_id){
-        List<NCM> registros = service.getByEmpresaId(empresa_id);
+    public ResponseEntity<Page<NCM>> getByEmpresaId(@PathVariable Long empresa_id,
+    @SortDefaults({
+        @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ){
+        Page<NCM> registros = service.getByEmpresaId(empresa_id, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 

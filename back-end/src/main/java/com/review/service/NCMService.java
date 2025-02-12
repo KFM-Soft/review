@@ -3,6 +3,8 @@ package com.review.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.review.models.NCM;
@@ -22,12 +24,12 @@ public class NCMService {
         return repository.findById(id).orElse(null);
     }
 
-    public List<NCM> getByEmpresaId(long id){
-        return repository.getByEmpresaId(id);
+    public Page<NCM> getByEmpresaId(long id, Pageable page) {
+        return repository.getByEmpresaId(id, page);
     }
 
-    public List<NCM> getBySistema(boolean sistema){
-        return repository.findBySistema(sistema);
+    public Page<NCM> getBySistema(boolean sistema, Pageable page) {
+        return repository.findBySistema(sistema, page);
     }
 
     public NCM save(NCM objeto) {

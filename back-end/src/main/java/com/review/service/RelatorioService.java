@@ -3,6 +3,8 @@ package com.review.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.review.models.Relatorio;
@@ -22,8 +24,8 @@ public class RelatorioService{
         return repository.findById(id).orElse(null);
     }
 
-    public List<Relatorio> getByEmpresaId(long empresa_id){
-        return repository.getByEmpresaId(empresa_id);
+    public Page<Relatorio> getByEmpresaId(long empresa_id, Pageable page){
+        return repository.getByEmpresaId(empresa_id, page);
     }
 
     public Relatorio save(Relatorio objeto) {

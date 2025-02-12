@@ -2,6 +2,12 @@ package com.review.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +32,13 @@ public class AliquotaController {
     private AliquotaService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Aliquota>> getAliquotas(){
-        List<Aliquota> registros = service.getAll();
+    public ResponseEntity<Page<Aliquota>> getAliquotas( @RequestParam(required = false) String termoBusca, 
+    @SortDefaults({
+        @SortDefault(sort = "origem.nome", direction = Sort.Direction.ASC),
+        @SortDefault(sort = "destino.nome", direction = Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Aliquota> registros = service.getAll(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
@@ -38,8 +49,13 @@ public class AliquotaController {
     }
 
     @GetMapping("/empresa/{id}")
-    public ResponseEntity<List<Aliquota>> getMethodName(@PathVariable Long id) {
-        List<Aliquota> registros = service.getByEmpresa(id);
+    public ResponseEntity<Page<Aliquota>> getMethodName( @RequestParam(required = false) String termoBusca, @PathVariable Long id,             
+    @SortDefaults({
+        @SortDefault(sort = "origem.nome", direction = Sort.Direction.ASC),
+        @SortDefault(sort = "destino.nome", direction = Sort.Direction.ASC)
+    }) Pageable page) {
+
+        Page<Aliquota> registros = service.getByEmpresa(termoBusca, id, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
     
@@ -77,9 +93,14 @@ public class AliquotaController {
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
-    @GetMapping("/config/{sistema}")
-    public ResponseEntity<List<Aliquota>> getAliquataSistema(@PathVariable boolean sistema) {
-        List<Aliquota> registros = service.getBySistema(sistema);
+    @GetMapping("/config/")
+    public ResponseEntity<Page<Aliquota>> getAliquataSistema(@RequestParam(required = false) String termoBusca,
+    @SortDefaults({
+        @SortDefault(sort = "origem.nome", direction = Sort.Direction.ASC),
+        @SortDefault(sort = "destino.nome", direction = Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Aliquota> registros = service.getBySistema(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
     

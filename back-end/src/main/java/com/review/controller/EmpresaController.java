@@ -3,6 +3,10 @@ package com.review.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,8 +41,12 @@ public class EmpresaController {
     }
 
     @GetMapping("/usuario/{id}")
-    public ResponseEntity<List<Empresa>> getEmpresaByDonoId(@PathVariable Long id) {
-        List<Empresa> registro = service.getByDono(id);
+    public ResponseEntity<Page<Empresa>> getEmpresaByDonoId(@PathVariable Long id,
+    @SortDefaults({
+        @SortDefault(sort = "nome", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Empresa> registro = service.getByDono(id, page);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 
