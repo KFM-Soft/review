@@ -36,7 +36,7 @@ public class Multiplicador implements Serializable{
     @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal mvaOriginal;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(5,2)")
+    @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal multiplicadorOriginal;
 
     @Column(columnDefinition = "DECIMAL(5,2)")

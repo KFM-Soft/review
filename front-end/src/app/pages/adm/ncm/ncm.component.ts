@@ -19,106 +19,108 @@ import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
 
 @Component({
-  selector: 'app-Ncm',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NzMenuModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzFlexModule,
-    NzTableModule,
-    NzButtonModule,
-    NzPaginationModule,
-    NzInputModule,
-    NzGridModule,
-    FormsModule,
-    RouterLink,
-    AdmComponent,
-  ],
-  templateUrl: './ncm.component.html',
-  styleUrl: './ncm.component.scss'
+    selector: 'app-Ncm',
+    standalone: true,
+    imports: [
+        CommonModule,
+        NzMenuModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzFlexModule,
+        NzTableModule,
+        NzButtonModule,
+        NzPaginationModule,
+        NzInputModule,
+        NzGridModule,
+        FormsModule,
+        RouterLink,
+        AdmComponent,
+    ],
+    templateUrl: './ncm.component.html',
+    styleUrl: './ncm.component.scss'
 })
 export class NcmComponent implements OnInit {
-  
-  constructor(
-    private renderer: Renderer2,
-    private service: NcmService,
-    private storageService: StoragesService,
-    private alertaService: AlertaService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) { }
 
-  registros: NCM[] = [];
-  produtos: NCM[] = [];
-  total: number = 0;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
+    constructor(
+        private renderer: Renderer2,
+        private service: NcmService,
+        private storageService: StoragesService,
+        private alertaService: AlertaService,
+        private router: Router,
+        private route: ActivatedRoute,
+    ) { }
 
-  ngOnInit(): void {
-    this.get()
-  }
+    registros: NCM[] = [];
+    produtos: NCM[] = [];
+    total: number = 0;
+    paginaTamanho = 5;
+    paginaIndex = 1;
+    termoBusca: string = '';
 
-  get(): void{
-    this.service.get().subscribe({
-      next: (retorno: NCM[]) => {
-        this.registros = retorno
-        this.produtos = retorno
-      }, complete: () => {
-        this.alertaService.enviarAlerta({
-            tipo: ETipoAlerta.SUCESSO,
-            mensagem: "NCM foi excluído com sucesso!"
+    ngOnInit(): void {
+        this.get()
+    }
+
+    get(): void {
+        this.service.get().subscribe({
+            next: (retorno: NCM[]) => {
+                this.registros = retorno
+                this.produtos = retorno
+            },
+            error: (error) => {
+                console.error('Erro ao carregar NCMs:', error);
+            }
         })
-      },
-      error: (error) => {
-        console.error('Erro ao carregar NCMs:', error);
-      }
-    })
-  }
+    }
 
-  atualizarTabela(): void {
-    let filtro = this.produtos;
+    atualizarTabela(): void {
+        let filtro = this.produtos;
 
-    if (this.termoBusca) {
+        if (this.termoBusca) {
 
-      filtro = filtro.filter(produto => 
-        produto.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
-          || 
-          produto.cest?.toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
-      );
-    } 
+            filtro = filtro.filter(produto =>
+                produto.descricao?.toLowerCase().includes(this.termoBusca.toLowerCase())
+                ||
+                produto.cest?.toLowerCase().includes(this.termoBusca.toLowerCase())
+                ||
+                produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
+            );
+        }
 
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  }
+        this.total = filtro.length;
+        const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
+        const endIndex = startIndex + this.paginaTamanho;
+        this.registros = filtro.slice(startIndex, endIndex);
+    }
 
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
+    atualizarPagina(paginaindex: number): void {
+        this.paginaIndex = paginaindex;
+        this.atualizarTabela();
+    }
 
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
+    tamanhoPagina(paginaTamanho: number): void {
+        this.paginaTamanho = paginaTamanho;
+        this.atualizarTabela();
+    }
 
-  editarItem(registro: NCM){
-    this.storageService.setSession('ncm', registro);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
-  }
-  
-  excluirItem(registro: NCM){
-    this.service.delete(registro).subscribe({
-      complete: () => {
-        this.get();
-      }
-    });
-  }
+    editarItem(registro: NCM) {
+        console.log("Estou fazendo o set session", registro)
+        this.storageService.setSession('ncm', registro);
+        this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: registro.id } });
+    }
+
+    excluirItem(registro: NCM) {
+        this.service.delete(registro).subscribe({
+            next: () => {
+                this.get()
+            },
+            complete: () => {
+                this.alertaService.enviarAlerta({
+                    tipo: ETipoAlerta.SUCESSO,
+                    mensagem: "NCM foi excluído com sucesso!"
+                })
+            }
+        });
+    }
 
 }

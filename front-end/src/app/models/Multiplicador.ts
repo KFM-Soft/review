@@ -7,8 +7,8 @@ export type Multiplicador = {
     ncm: NCM;
     aliquota: Aliquota;
     aliquotaInternaEmit: number;
-    mvaOriginal: number;
-    multiplicadorOriginal: number;
+    mvaOriginal: number | null;
+    multiplicadorOriginal: number | null;
     mvaAjustada: number | null;
     multiplicadorAjustado: number | null;
     empresa: Empresa;

@@ -64,8 +64,8 @@ export class MultiplicadoresComponent implements OnInit {
   multiplicadores: Multiplicador[] = [];
   aliquota: Aliquota = <Aliquota>{};
   aliquotas: Aliquota[] = [];
-  produto: NCM = <NCM>{};
-  produtos: NCM[] = [];
+  ncm: NCM = <NCM>{};
+  lista_ncms: NCM[] = [];
   total: number = 0;
   paginaTamanho = 5;
   paginaIndex = 1;
@@ -73,7 +73,7 @@ export class MultiplicadoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAliquotas();
-    this.getProdutos();
+    this.getNcms();
     this.getMultiplicadores();
   }
 
@@ -100,13 +100,13 @@ export class MultiplicadoresComponent implements OnInit {
     })
   }
 
-  getProdutos() {
+  getNcms() {
     this.ncmService.get().subscribe({
       next: (retorno: NCM[]) => {
-        this.produtos = retorno;
+        this.lista_ncms = retorno;
       },
       error: (error) => {
-        console.error("Erro ao buscar produtos: ", error);
+        console.error("Erro ao buscar ncms: ", error);
       }
     })
   }
@@ -115,9 +115,9 @@ export class MultiplicadoresComponent implements OnInit {
     let filtro = this.multiplicadores;
     if (this.termoBusca) {
       filtro = filtro.filter(multiplicador => 
-        multiplicador.ncm.descricao.toLowerCase().includes(this.termoBusca.toLowerCase()) 
+        multiplicador.ncm.descricao?.toLowerCase().includes(this.termoBusca.toLowerCase()) 
           || 
-          multiplicador.mvaOriginal.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
+          multiplicador.mvaOriginal?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
           || 
           multiplicador.mvaAjustada?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
           || 
@@ -144,9 +144,9 @@ export class MultiplicadoresComponent implements OnInit {
   }
 
   buscar() {
-    if(!(this.aliquota) || !(this.produto)) return false;
-    if(!(Object.keys(this.aliquota).length > 0 && Object.keys(this.produto).length > 0)) return false;
-    this.service.getByAliquotaAndProduto(this.produto, this.aliquota).subscribe({
+    if(!(this.aliquota) || !(this.ncm)) return false;
+    if(!(Object.keys(this.aliquota).length > 0 && Object.keys(this.ncm).length > 0)) return false;
+    this.service.getByAliquotaAndProduto(this.ncm, this.aliquota).subscribe({
       next: (retorno: Multiplicador[]) => {
         this.multiplicadores = retorno;
         this.atualizarTabela();
@@ -165,7 +165,7 @@ export class MultiplicadoresComponent implements OnInit {
     this.service.delete(registro).subscribe({
       complete: () => {
         this.getAliquotas();
-        this.getProdutos();
+        this.getNcms();
         this.getMultiplicadores();
         this.alertaService.enviarAlerta({
             tipo: ETipoAlerta.SUCESSO,

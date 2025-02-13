@@ -11,18 +11,18 @@ export class NcmService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = environment.API_URL + '/produto/'
+  apiUrl = environment.API_URL + '/ncm/'
 
   get(): Observable<NCM[]> {
     let url = this.apiUrl;
     return this.http.get<NCM[]>(url);
   }
 
-  save(produto: NCM): Observable<NCM> {
+  save(ncm: NCM): Observable<NCM> {
     let url = this.apiUrl;
-    if(produto.id)
-      return this.http.put<NCM>(url, produto)
-    return this.http.post<NCM>(url, produto);
+    if(ncm.id)
+      return this.http.put<NCM>(url, ncm)
+    return this.http.post<NCM>(url, ncm);
   }
 
   delete(registro: NCM): Observable<void> {

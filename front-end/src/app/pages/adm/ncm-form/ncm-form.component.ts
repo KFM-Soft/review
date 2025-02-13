@@ -59,7 +59,10 @@ export class NcmFormComponent implements OnInit{
   
       this.id = this.route.snapshot.queryParamMap.get('id');
       if (this.id) {
-        this.NCM = this.storageService.getSession("NCM");
+        this.NCM = this.storageService.getSession("ncm");
+        console.log(this.NCM)
+        if(this.NCM.cest == null) this.NCM.cest = "";
+        if(this.NCM.descricao == null) this.NCM.descricao = "";
         this.editavel = false;
       }
   
@@ -80,12 +83,13 @@ export class NcmFormComponent implements OnInit{
   
     submit(): void {
       this.NCM.sistema = true
+      this.NCM.ncm = this.NCM.ncm.replace(/\D/g, '');
       this.service.save(this.NCM).subscribe({
         complete: () => {
           this.router.navigate(['../'], {relativeTo: this.route})
           this.alertaService.enviarAlerta({
             tipo: ETipoAlerta.SUCESSO,
-            mensagem: "NCM cadastrado com sucesso!"
+            mensagem: "NCM salvo com sucesso!"
           })
         }
       })

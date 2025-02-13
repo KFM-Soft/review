@@ -205,7 +205,7 @@ public class ICMSService {
                 try {
                     cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();
                 } catch (Exception e) {
-                    // TODO: handle exception
+                    continue;
                 }
 
                 String ncmCest = (cest != null && !cest.isEmpty()) ? ncm + " / " + cest : ncm;

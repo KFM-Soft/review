@@ -13,13 +13,13 @@
                 </nz-col>
                 <nz-col nzXs="24" nzMd="12" nzLg="9">
                     <nz-form-item>
-                        <nz-form-label nzSpan="24">Produto</nz-form-label>
+                        <nz-form-label nzSpan="24">NCM</nz-form-label>
                         <nz-form-control nzSpan="24">
                             <nz-select nzShowSearch nzAllowClear 
-                                    nzPlaceHolder="Selecionar Produto (NCM -> CEST)" [(ngModel)]="produto" 
+                                    nzPlaceHolder="Selecionar NCM (NCM -> CEST)" [(ngModel)]="ncm" 
                                     [ngModelOptions]="{standalone: true}" ngDefaultControl>
-                                <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" 
-                                        [nzValue]="produto" [nzTitle]="produto.descricao"></nz-option>
+                                <nz-option *ngFor="let ncm of lista_ncms" [nzLabel]="ncm.ncm" 
+                                        [nzValue]="ncm" [nzTitle]="ncm.descricao"></nz-option>
                             </nz-select>
                         </nz-form-control>
                     </nz-form-item>

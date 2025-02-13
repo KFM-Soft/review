@@ -34,9 +34,6 @@ public class NCM implements Serializable {
     @Column()
     private String cest;
 
-    @Column(nullable = false)
-    private String cfop;
-
     @ManyToOne
     private Empresa empresa;
 

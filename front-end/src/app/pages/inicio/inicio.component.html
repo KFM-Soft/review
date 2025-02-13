@@ -1,6 +1,6 @@
 <div class="container">
   <!-- removido temporariamente o compartilhamento de contas  -->
-  <a href="/" *ngif="t">
+  <a href="/" *ngIf="t">
     <nz-card [nzHoverable]="true" class="compartilhar">
       <div nz-flex [nzGap]="20">
         <img src="../../../assets/svgs/compartilhar.svg">
@@ -20,7 +20,7 @@
         </th>
         <th></th>
         <th nzWidth="10%">
-          <ng-container *ngif="t">
+          <ng-container *ngIf="t">
             <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="../cadastro-empresa">Adicionar
               Empresa</button>
           </ng-container>
