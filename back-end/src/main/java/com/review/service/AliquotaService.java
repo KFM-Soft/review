@@ -2,6 +2,7 @@ package com.review.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,13 @@ public class AliquotaService {
     private AliquotaRepository repository;
     @Autowired
     private EstadoRepository estadoRepository;
+
+    // Quando não precisamos de paginação fiz so quando presisamos de todos os registro entao falta quando é so empresa ou so sistema
+    public List<Aliquota> get(String termoBusca) {
+        List<Aliquota> registros = this.getAll(termoBusca, Pageable.unpaged()).getContent();
+        List<Aliquota> registrosOrdenados = registros.stream().sorted(Comparator.comparing(a -> a.getOrigem().getNome())).toList();
+        return registrosOrdenados;
+    }
 
     public Page<Aliquota> getAll(String termoBusca, Pageable page) {
         if (termoBusca != null && !termoBusca.isBlank()) {
@@ -53,19 +61,18 @@ public class AliquotaService {
     }
 
     public Page<Aliquota> getByEmpresa(String termoBusca, Long id, Pageable page){
-        if (termoBusca == null || termoBusca.isEmpty()) {
-            return repository.findByEmpresaId(id, page);
-            
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaByEmpresaId(termoBusca, id, page);
         }
-        return repository.buscaEmpresa(termoBusca, id, page);
+        return repository.findByEmpresaId(id, page);
     }
 
     public Page<Aliquota> getBySistema(String termoBusca, Pageable page){
-        if (termoBusca == null || termoBusca.isEmpty()) {
-            return repository.findBySistema(page);
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaBySistema(termoBusca, page);
             
         }
-        return repository.buscaSistema(termoBusca, page);
+        return repository.findBySistema(page);
     }
 
     // @EventListener(ApplicationReadyEvent.class)

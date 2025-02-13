@@ -16,20 +16,33 @@ public class NCMService {
     @Autowired
     private NCMRepository repository;
 
-    public List<NCM> getAll() {
-        return repository.findAll();
+    public List<NCM> get(String termoBusca, Pageable page) {
+        List<NCM> registros = this.getAll(termoBusca, page).getContent();
+        return registros;
+    }
+
+    public Page<NCM> getAll(String termoBusca, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.busca(termoBusca, page);
+            
+        }
+        return repository.findAll(page);
     }
 
     public NCM getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public Page<NCM> getByEmpresaId(long id, Pageable page) {
+    public Page<NCM> getByEmpresaId(String termoBusca, long id, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaByEmpresaId(termoBusca, id, page);
+            
+        }
         return repository.getByEmpresaId(id, page);
     }
 
     public Page<NCM> getBySistema(boolean sistema, Pageable page) {
-        return repository.findBySistema(sistema, page);
+        return repository.findBySistema(page);
     }
 
     public NCM save(NCM objeto) {

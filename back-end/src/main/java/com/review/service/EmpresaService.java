@@ -1,5 +1,6 @@
 package com.review.service;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,27 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository repository;
 
-    public List<Empresa> getAll() {
-        return repository.findAll();
+    public List<Empresa> get(String termoBusca) {
+        List<Empresa> registros = this.getAll(termoBusca, Pageable.unpaged()).getContent();
+        List<Empresa> registrosOrdenados = registros.stream().sorted(Comparator.comparing(Empresa::getNome)).toList();
+        return registrosOrdenados;
+    }
+
+    public Page<Empresa> getAll(String termoBusca, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.busca(termoBusca, page);
+        }
+        return repository.findAll(page);
     }
 
     public Empresa getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    public Page<Empresa> getByDono(Long id, Pageable page) {
+    public Page<Empresa> getByDono(String termoBusca, Long id, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaByDonoId(termoBusca, id, page);
+        }
         return repository.findByDonoId(id, page);
     }
 

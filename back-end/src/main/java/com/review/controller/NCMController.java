@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.review.models.NCM;
@@ -30,8 +31,8 @@ public class NCMController {
     private NCMService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<NCM>> getNCMs(){
-        List<NCM> registros = service.getAll();
+    public ResponseEntity<Page<NCM>> getNCMs(@RequestParam(required = false) String termoBusca, Pageable page) {
+        Page<NCM> registros = service.getAll(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
@@ -52,12 +53,13 @@ public class NCMController {
     }
 
     @GetMapping("/empresa/{empresa_id}")
-    public ResponseEntity<Page<NCM>> getByEmpresaId(@PathVariable Long empresa_id,
+    public ResponseEntity<Page<NCM>> getByEmpresaId(@RequestParam(required = false) String termoBuca,
+    @PathVariable Long empresa_id,
     @SortDefaults({
         @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
     }) Pageable page
     ){
-        Page<NCM> registros = service.getByEmpresaId(empresa_id, page);
+        Page<NCM> registros = service.getByEmpresaId(termoBuca, empresa_id, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 

@@ -46,7 +46,7 @@ public interface AliquotaRepository extends JpaRepository<Aliquota, Long>{
         OR e2.nome LIKE %?1%
         OR CAST(a.porcentagem AS string) LIKE %?1%)
         """)
-    public Page<Aliquota> buscaEmpresa(String termoBusca, Long empresa, Pageable page);
+    public Page<Aliquota> buscaByEmpresaId(String termoBusca, Long empresa, Pageable page);
 
     @Query("""
         SELECT a FROM Aliquota a 
@@ -65,7 +65,7 @@ public interface AliquotaRepository extends JpaRepository<Aliquota, Long>{
         OR e2.nome LIKE %?1%
         OR CAST(a.porcentagem AS string) LIKE %?1%)
         """)
-    public Page<Aliquota> buscaSistema(String termoBusca, Pageable page);
+    public Page<Aliquota> buscaBySistema(String termoBusca, Pageable page);
 
 
     
