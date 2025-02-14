@@ -200,7 +200,6 @@ public class ICMSService {
                 String nomeProduto = eElement.getElementsByTagName("xProd").item(0).getTextContent();
 
                 String ncm = eElement.getElementsByTagName("NCM").item(0).getTextContent();
-                System.out.println(ncm);
                 String cest = "";
                 try {
                     cest = eElement.getElementsByTagName("CEST").item(0).getTextContent();

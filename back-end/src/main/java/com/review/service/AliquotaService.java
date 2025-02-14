@@ -82,7 +82,6 @@ public class AliquotaService {
         for (Estado origem : estados) {
             for(Estado destino : estados) {
                 Aliquota aliquota = new Aliquota();
-                System.out.println(aliquota);
                 aliquota.setOrigem(origem);
                 aliquota.setDestino(destino);
                 aliquota.setPorcentagem(new BigDecimal(0));
