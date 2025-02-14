@@ -36,7 +36,7 @@ public class NCMController {
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/busca-id/{id}")
     public ResponseEntity<NCM> getNCMById(@PathVariable Long id) {
         NCM registro = service.getById(id);
         return new ResponseEntity<>(registro, HttpStatus.OK);

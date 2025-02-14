@@ -84,7 +84,9 @@ export class JwtLoginService implements ILoginService {
     this.storageService.removeSession('token');
     this.storageService.removeSession('usuario');
     this.storageService.removeSession('tokenExp');
-    document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
+    if(typeof document !== "undefined"){
+        document.cookie = 'XSRF-TOKEN=; Max-Age=0; path=/';
+    }
     clearInterval(this.intervaloRenovacao);
     this.router.navigate(['/login']);
   }

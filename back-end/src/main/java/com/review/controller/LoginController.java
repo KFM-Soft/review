@@ -57,7 +57,9 @@ public class LoginController {
         Authentication auth = authManager.authenticate(loginToken);
         PerfilUsuario principal = (PerfilUsuario) auth.getPrincipal();
 
+        System.out.println("\n\n\n\n\n  ATÉ AQUI EU TO SAFE");
         Usuario usuarioAutenticado = usuarioService.getByNomeUsuario(principal.getUsername());
+        System.out.println("\n\n\n\n\n  ATÉ AQUI EU TO SAFE");
         String token = tokenService.generateToken(usuarioAutenticado);
 
         return ResponseEntity.ok(token);

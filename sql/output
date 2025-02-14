@@ -1323,6 +1323,6 @@ insert into review.ncms (ncm, descricao) values
 ('1212.9', '- Outros:'),
 ('1212.91.00', '-- Beterraba sacarina'),
 ('1212.92.00', '-- Alfarroba'),
-('1212.93.00', '-- Cana-de-a��car'),
-('1212.94.00', '-- Ra�zes de chic�ria'),
+('1212.93.00', '-- Cana-de-açucar'),
+('1212.94.00', '-- Raízes de chicória'),
 ('1212.99', '-- Outros');

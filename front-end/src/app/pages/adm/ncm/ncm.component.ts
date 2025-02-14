@@ -18,6 +18,7 @@ import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
 import { RespostaPaginada } from '../../../models/resposta-paginada';
+import { RequisicaoPagina } from '../../../models/requisicao-paginada';
 
 @Component({
     selector: 'app-Ncm',
@@ -52,25 +53,26 @@ export class NcmComponent implements OnInit {
     ) { }
 
     respostaPaginada: RespostaPaginada<NCM> = <RespostaPaginada<NCM>>{}
+    requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
     registros: NCM[] = [];
     ncms: NCM[] = [];
     total: number = 0;
-    paginaTamanho = 5;
+    paginaTamanho = 10;
     paginaIndex = 1;
     termoBusca: string = '';
+    erroBusca: boolean = false;
 
     ngOnInit(): void {
         this.get()
     }
 
     get(): void {
-        this.service.get().subscribe({
+        this.service.get(this.termoBusca, this.requisicaoPaginada).subscribe({
             next: (retorno: RespostaPaginada<NCM>) => {
-                console.log("Retorno -> ", retorno)
+                console.log(retorno)
                 this.registros = retorno.content;
                 this.ncms = retorno.content;
-                console.log(this.registros)
-                console.log(this.ncms)
+                this.total = retorno.totalElements;
             },
             error: (error) => {
                 console.error('Erro ao carregar NCMs:', error);
@@ -78,38 +80,30 @@ export class NcmComponent implements OnInit {
         })
     }
 
-    atualizarTabela(): void {
-        let filtro = this.ncms;
-
-        if (this.termoBusca) {
-
-            filtro = filtro.filter(produto =>
-                produto.descricao?.toLowerCase().includes(this.termoBusca.toLowerCase())
-                ||
-                produto.cest?.toLowerCase().includes(this.termoBusca.toLowerCase())
-                ||
-                produto.ncm.toLowerCase().includes(this.termoBusca.toLowerCase())
-            );
-        }
-
-        this.total = filtro.length;
-        const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-        const endIndex = startIndex + this.paginaTamanho;
-        this.registros = filtro.slice(startIndex, endIndex);
-    }
-
     atualizarPagina(paginaindex: number): void {
         this.paginaIndex = paginaindex;
-        this.atualizarTabela();
+        this.requisicaoPaginada.page = paginaindex - 1;
+        this.get();
     }
 
-    tamanhoPagina(paginaTamanho: number): void {
-        this.paginaTamanho = paginaTamanho;
-        this.atualizarTabela();
+    tamanhoPagina(novoTamanho: number): void {
+        this.paginaTamanho = novoTamanho;          // Atualiza a variável vinculada ao nz-pagination
+        this.requisicaoPaginada.size = novoTamanho;  // Atualiza a requisição para o backend
+        this.requisicaoPaginada.page = 0;            // Opcional: reinicia para a primeira página
+        this.get();
+    }
+
+
+    buscar(): void {
+        if (this.termoBusca.length < 3 && this.termoBusca.length != 0) {
+            this.erroBusca = true;
+            return;
+        }
+        this.erroBusca = false;
+        this.get();
     }
 
     editarItem(registro: NCM) {
-        console.log("Estou fazendo o set session", registro)
         this.storageService.setSession('ncm', registro);
         this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: registro.id } });
     }
