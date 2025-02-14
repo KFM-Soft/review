@@ -18,6 +18,7 @@ import { AliquotaService } from '../../../services/aliquota.service';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
 
 @Component({
   selector: 'app-multiplicador-form',
@@ -67,8 +68,8 @@ export class MultiplicadoresFormComponent implements OnInit{
 
   getProdutos() {
     this.ncmService.get().subscribe({
-      next: (retorno: NCM[]) => {
-        this.ncms = retorno
+      next: (retorno: RespostaPaginada<NCM>) => {
+        this.ncms = retorno.content
       }
     }) 
   }

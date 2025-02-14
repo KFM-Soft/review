@@ -23,6 +23,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
 
 @Component({
   selector: 'app-multiplicador',
@@ -102,8 +103,8 @@ export class MultiplicadoresComponent implements OnInit {
 
   getNcms() {
     this.ncmService.get().subscribe({
-      next: (retorno: NCM[]) => {
-        this.lista_ncms = retorno;
+      next: (retorno: RespostaPaginada<NCM>) => {
+        this.lista_ncms = retorno.content;
       },
       error: (error) => {
         console.error("Erro ao buscar ncms: ", error);

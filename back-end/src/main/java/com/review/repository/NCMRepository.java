@@ -14,7 +14,6 @@ public interface NCMRepository extends JpaRepository<NCM, Long>{
         SELECT ncm FROM NCM ncm 
         WHERE ncm.ncm LIKE %?1%
         OR ncm.cest LIKE %?1%
-        OR ncm.cfop LIKE %?1%
         OR ncm.descricao LIKE %?1%
         """)
     public Page<NCM> busca (String TermoBusca, Pageable page);
@@ -29,7 +28,6 @@ public interface NCMRepository extends JpaRepository<NCM, Long>{
         WHERE ncm.sistema = true
         AND (ncm.ncm LIKE %?1%
         OR ncm.cest LIKE %?1%
-        OR ncm.cfop LIKE %?1%
         OR ncm.descricao LIKE %?1%)
         """)
     public Page<NCM> BuscaBySistema(String termobusca, Pageable page);
@@ -42,7 +40,6 @@ public interface NCMRepository extends JpaRepository<NCM, Long>{
         WHERE ncm.empresa.id = ?2
         AND (ncm.ncm LIKE %?1%
         OR ncm.cest LIKE %?1%
-        OR ncm.cfop LIKE %?1%
         OR ncm.descricao LIKE %?1%)
         """)
     public Page<NCM> buscaByEmpresaId(String termobusca, Long empresa_id, Pageable page);

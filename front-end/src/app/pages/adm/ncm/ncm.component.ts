@@ -17,6 +17,7 @@ import { StoragesService } from '../../../services/storages.service';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
 
 @Component({
     selector: 'app-Ncm',
@@ -50,8 +51,9 @@ export class NcmComponent implements OnInit {
         private route: ActivatedRoute,
     ) { }
 
+    respostaPaginada: RespostaPaginada<NCM> = <RespostaPaginada<NCM>>{}
     registros: NCM[] = [];
-    produtos: NCM[] = [];
+    ncms: NCM[] = [];
     total: number = 0;
     paginaTamanho = 5;
     paginaIndex = 1;
@@ -63,9 +65,12 @@ export class NcmComponent implements OnInit {
 
     get(): void {
         this.service.get().subscribe({
-            next: (retorno: NCM[]) => {
-                this.registros = retorno
-                this.produtos = retorno
+            next: (retorno: RespostaPaginada<NCM>) => {
+                console.log("Retorno -> ", retorno)
+                this.registros = retorno.content;
+                this.ncms = retorno.content;
+                console.log(this.registros)
+                console.log(this.ncms)
             },
             error: (error) => {
                 console.error('Erro ao carregar NCMs:', error);
@@ -74,7 +79,7 @@ export class NcmComponent implements OnInit {
     }
 
     atualizarTabela(): void {
-        let filtro = this.produtos;
+        let filtro = this.ncms;
 
         if (this.termoBusca) {
 

@@ -3,6 +3,7 @@ import { NCM } from '../models/NCM';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { RespostaPaginada } from '../models/resposta-paginada';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class NcmService {
 
   apiUrl = environment.API_URL + '/ncm/'
 
-  get(): Observable<NCM[]> {
+  get(): Observable<RespostaPaginada<NCM>> {
     let url = this.apiUrl;
-    return this.http.get<NCM[]>(url);
+    return this.http.get<RespostaPaginada<NCM>>(url);
   }
 
   save(ncm: NCM): Observable<NCM> {

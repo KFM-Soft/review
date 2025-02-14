@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="NCMs")
+@Table(name="ncms")
 @Getter
 @Setter
 public class NCM implements Serializable {
@@ -25,7 +25,7 @@ public class NCM implements Serializable {
     @Column(nullable = false, updatable = false)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(500)")
+    @Column(columnDefinition = "TEXT")
     private String descricao;
 
     @Column(nullable = false)

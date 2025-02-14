@@ -6,25 +6,25 @@ import { JwtLoginService } from '../../services/login/jwt-login.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    standalone: true,
+    imports: [FormsModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 
-  constructor(
-    @Inject(JwtLoginService) private servico: ILoginService,
-    private route: Router
-  ) {}
+    constructor(
+        @Inject(JwtLoginService) private servico: ILoginService,
+        private route: Router
+    ) { }
 
-  usuario: Usuario = <Usuario>{};
+    usuario: Usuario = <Usuario>{};
 
-  submit(form: NgForm): void {
-    this.servico.login(this.usuario);
-    this.route.navigate(['/inicio']);
-    form.resetForm();
-  }
+    submit(form: NgForm): void {
+        this.servico.login(this.usuario);
+        this.route.navigate(['/inicio']);
+        form.resetForm();
+    }
 
 }

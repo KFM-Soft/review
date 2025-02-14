@@ -36,7 +36,6 @@ export class NcmFormComponent implements OnInit{
 
     estados: Estado[] = []
     NCM: NCM = <NCM>{};
-    NCMs: NCM[] = [];
     id: string | null = null;
     editavel: boolean = true;
     ncms: string[] = [];
@@ -65,21 +64,7 @@ export class NcmFormComponent implements OnInit{
         if(this.NCM.descricao == null) this.NCM.descricao = "";
         this.editavel = false;
       }
-  
-      this.getNCMs();
     }
-  
-    getNCMs() {
-      this.service.get().subscribe({
-        next: (retorno: NCM[]) => {
-          this.NCMs = retorno
-        },
-        error: (error: any) => {
-          console.error("Erro ao buscar NCM: ", error);
-        }
-      })
-    }
-  
   
     submit(): void {
       this.NCM.sistema = true
