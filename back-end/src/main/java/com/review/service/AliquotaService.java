@@ -25,12 +25,12 @@ public class AliquotaService {
 
     // Quando não precisamos de paginação fiz so quando presisamos de todos os registro entao falta quando é so empresa ou so sistema
     public List<Aliquota> get(String termoBusca) {
-        List<Aliquota> registros = this.getAll(termoBusca, Pageable.unpaged()).getContent();
+        List<Aliquota> registros = this.getPaginado(termoBusca, Pageable.unpaged()).getContent();
         List<Aliquota> registrosOrdenados = registros.stream().sorted(Comparator.comparing(a -> a.getOrigem().getNome())).toList();
         return registrosOrdenados;
     }
 
-    public Page<Aliquota> getAll(String termoBusca, Pageable page) {
+    public Page<Aliquota> getPaginado(String termoBusca, Pageable page) {
         if (termoBusca != null && !termoBusca.isBlank()) {
             return repository.busca(termoBusca, page);
         }

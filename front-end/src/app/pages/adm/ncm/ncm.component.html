@@ -62,8 +62,9 @@
 </ng-template>
 
 <ng-template #paginacao>
-    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
-        [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
-        (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
+        (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+        [nzPageSizeOptions]=[5,10,20,30,40,50] [nzShowTotal]="totalTemplate">
     </nz-pagination>
+    <ng-template #totalTemplate let-total>Total: {{ total }} Registros</ng-template>
 </ng-template>

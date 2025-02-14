@@ -18,12 +18,16 @@ public class EstadoService {
     private EstadoRepository repository;
 
     public List<Estado> get(String termoBusca) {
-        List<Estado> registros = this.getAll(termoBusca, Pageable.unpaged()).getContent();
+        List<Estado> registros = this.getPaginado(termoBusca, Pageable.unpaged()).getContent();
         List<Estado> registrosOrdenados = registros.stream().sorted(Comparator.comparing(Estado::getNome)).toList();
         return registrosOrdenados;
     }
 
-    public Page<Estado> getAll(String termoBusca, org.springframework.data.domain.Pageable page) {
+    public List<Estado> getTodos() {
+        return repository.findAll();
+    }
+    
+    public Page<Estado> getPaginado(String termoBusca, org.springframework.data.domain.Pageable page) {
         if (termoBusca != null && !termoBusca.isBlank()) {
             return repository.busca(termoBusca, page);
             

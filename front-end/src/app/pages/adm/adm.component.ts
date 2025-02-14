@@ -26,7 +26,6 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     FormsModule,
     RouterLink,
-    RouterOutlet
   ],
   templateUrl: './adm.component.html',
   styleUrl: './adm.component.scss'

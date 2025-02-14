@@ -29,13 +29,19 @@ public class EstadoController {
     @Autowired
     private EstadoService service;
 
+    @GetMapping("/busca-todos")
+    public ResponseEntity<List<Estado>> getTodosEstados(){
+        List<Estado> registros = service.getTodos();
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
+
     @GetMapping("/")
     public ResponseEntity<Page<Estado>> getEstados(@RequestParam(required = false) String termoBusca, 
     @SortDefaults({
         @SortDefault(sort = "nome", direction = org.springframework.data.domain.Sort.Direction.ASC)
     })
     Pageable page){
-        Page<Estado> registros = service.getAll(termoBusca, page);
+        Page<Estado> registros = service.getPaginado(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 

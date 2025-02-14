@@ -1,10 +1,7 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
-import { IcmsHomeComponent } from './pages/icms/icms-home/icms-home.component';
 import { IcmsGrupoNotasComponent } from './pages/icms/icms-grupo-notas/icms-grupo-notas.component';
-import { IcmsNotasProcessadasComponent } from './pages/icms/icms-notas-processadas/icms-notas-processadas.component';
 import { IcmsImportarNotasComponent } from './pages/icms/icms-importar-notas/icms-importar-notas.component'
-import { IcmsEmpresaFormComponent } from './pages/icms/icms-empresa-form/icms-empresa-form.component';
 import { AliquotaComponent } from './pages/adm/aliquota/aliquota.component';
 import { AliquotaFormComponent } from './pages/adm/aliquota-form/aliquota-form.component';
 import { AdmComponent } from './pages/adm/adm.component';
@@ -26,79 +23,79 @@ import { NcmComponent } from './pages/adm/ncm/ncm.component';
 import { NcmFormComponent } from './pages/adm/ncm-form/ncm-form.component';
 
 export const routes: Routes = [
-  {path: '', canActivate: [authGuard], children: [
-    { path: '', component: InicioComponent },
-    // { path: 'cadastro-empresa', component: CadastroEmpresaComponent },
     {
-      path: 'icms', children: [
-        // { path: '', component: IcmsHomeComponent }, 
-        {
-          path: 'grupo-notas/:id', children: [
-            { path: '', component: IcmsGrupoNotasComponent },
-            { path: 'importar-nota', children:[
-              { path: '', component:IcmsImportarNotasComponent},
-              { path: 'detalhes-nota', component: IcmsDetalhesNotaComponent},
+        path: '', canActivate: [authGuard], children: [
+            { path: '', component: InicioComponent },
+            {
+                path: 'icms', children: [
+                    {
+                        path: 'grupo-notas/:id', children: [
+                            { path: '', component: IcmsGrupoNotasComponent },
+                            {
+                                path: 'importar-nota', children: [
+                                    { path: '', component: IcmsImportarNotasComponent },
+                                    { path: 'detalhes-nota', component: IcmsDetalhesNotaComponent },
 
-            ]},
-            
+                                ]
+                            },
 
-          ]
-        },
-        
-        // { path: 'empresa-form', component: IcmsEmpresaFormComponent },
-      ]
+
+                        ]
+                    },
+                ]
+            },
+            {
+                path: 'adm', canActivate: [authGuard], data: { papel: 'ROLE_ADMIN' }, children: [
+                    { path: '', component: AdmComponent },
+                    {
+                        path: 'aliquotas', children: [
+                            { path: '', component: AliquotaComponent },
+                            { path: 'form', component: AliquotaFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'ncms', children: [
+                            { path: '', component: NcmComponent },
+                            { path: 'form', component: NcmFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'estados', children: [
+                            { path: '', component: EstadosComponent },
+                            { path: 'form', component: EstadosFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'multiplicadores', children: [
+                            { path: '', component: MultiplicadoresComponent },
+                            { path: 'form', component: MultiplicadoresFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'usuarios', children: [
+                            { path: '', component: UsuariosComponent },
+                            { path: 'form', component: UsuariosFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'empresas', children: [
+                            { path: '', component: EmpresaComponent },
+                            { path: 'form', component: EmpresaFormComponent },
+                        ]
+                    },
+                    {
+                        path: 'precos', children: [
+                            { path: '', component: PrecificacaoComponent },
+                            { path: 'form', component: PrecificacaoFormComponent },
+                        ]
+                    },
+
+                ]
+            }
+        ]
     },
-    // { path: 'teste', component: TesteComponent },
-    { path: 'adm',canActivate: [authGuard], data: { papel: 'ROLE_ADMIN' }, children: [
-        { path: '', component: AdmComponent },
-        {
-          path: 'aliquotas', children: [
-            { path: '', component: AliquotaComponent },
-            { path: 'form', component: AliquotaFormComponent },
-          ]
-        },
-        {
-          path: 'ncms', children: [
-            { path: '', component: NcmComponent },
-            { path: 'form', component: NcmFormComponent },
-          ]
-        },
-        {
-          path: 'estados', children: [
-            { path: '', component: EstadosComponent },
-            { path: 'form', component: EstadosFormComponent },
-          ]
-        },
-        {
-          path: 'multiplicadores', children: [
-            { path: '', component: MultiplicadoresComponent },
-            { path: 'form', component: MultiplicadoresFormComponent },
-          ]
-        },
-        {
-          path: 'usuarios', children: [
-            { path: '', component: UsuariosComponent },
-            { path: 'form', component: UsuariosFormComponent},
-          ]
-        },
-        {
-          path: 'empresas', children: [
-            { path: '', component: EmpresaComponent },
-            { path: 'form', component: EmpresaFormComponent },
-          ]
-        },
-        {
-          path: 'precos', children: [
-            { path: '', component: PrecificacaoComponent },
-            { path: 'form', component: PrecificacaoFormComponent },
-          ]
-        },
-
-      ]
-    }
-]},
-{ path: 'login', canActivate: [loggedInGuard], component: LoginComponent },
-{ path: '**', redirectTo: '' }
+    { path: 'login', canActivate: [loggedInGuard], component: LoginComponent },
+    { path: '**', redirectTo: '' }
 
 ];
 

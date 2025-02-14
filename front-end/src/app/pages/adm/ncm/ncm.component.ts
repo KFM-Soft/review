@@ -55,7 +55,7 @@ export class NcmComponent implements OnInit {
     respostaPaginada: RespostaPaginada<NCM> = <RespostaPaginada<NCM>>{}
     requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
     registros: NCM[] = [];
-    ncms: NCM[] = [];
+    lista_ncms: NCM[] = [];
     total: number = 0;
     paginaTamanho = 10;
     paginaIndex = 1;
@@ -69,9 +69,8 @@ export class NcmComponent implements OnInit {
     get(): void {
         this.service.get(this.termoBusca, this.requisicaoPaginada).subscribe({
             next: (retorno: RespostaPaginada<NCM>) => {
-                console.log(retorno)
                 this.registros = retorno.content;
-                this.ncms = retorno.content;
+                this.lista_ncms = retorno.content;
                 this.total = retorno.totalElements;
             },
             error: (error) => {
@@ -87,9 +86,9 @@ export class NcmComponent implements OnInit {
     }
 
     tamanhoPagina(novoTamanho: number): void {
-        this.paginaTamanho = novoTamanho;          // Atualiza a variável vinculada ao nz-pagination
-        this.requisicaoPaginada.size = novoTamanho;  // Atualiza a requisição para o backend
-        this.requisicaoPaginada.page = 0;            // Opcional: reinicia para a primeira página
+        this.paginaTamanho = novoTamanho;
+        this.requisicaoPaginada.size = novoTamanho;
+        this.requisicaoPaginada.page = 0;
         this.get();
     }
 

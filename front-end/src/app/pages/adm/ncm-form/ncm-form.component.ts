@@ -50,7 +50,7 @@ export class NcmFormComponent implements OnInit{
      ) { }
   
     ngOnInit(): void {
-      this.estadoService.get().subscribe({
+      this.estadoService.getTodos().subscribe({
         next: (retorno: Estado[]) => {
           this.estados = retorno
         }
@@ -59,7 +59,6 @@ export class NcmFormComponent implements OnInit{
       this.id = this.route.snapshot.queryParamMap.get('id');
       if (this.id) {
         this.NCM = this.storageService.getSession("ncm");
-        console.log(this.NCM)
         if(this.NCM.cest == null) this.NCM.cest = "";
         if(this.NCM.descricao == null) this.NCM.descricao = "";
         this.editavel = false;

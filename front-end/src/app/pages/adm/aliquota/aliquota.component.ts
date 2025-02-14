@@ -18,106 +18,111 @@ import { StoragesService } from '../../../services/storages.service';
 import { error } from 'console';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { NCM } from '../../../models/NCM';
+import { RequisicaoPagina } from '../../../models/requisicao-paginada';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
 
 @Component({
-  selector: 'app-aliquota',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NzMenuModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzFlexModule,
-    NzTableModule,
-    NzButtonModule,
-    NzGridModule,
-    NzPaginationModule,
-    NzInputModule,
-    FormsModule,
-    RouterLink,
-    AdmComponent,
-  ],
-  templateUrl: './aliquota.component.html',
-  styleUrl: './aliquota.component.scss'
+    selector: 'app-aliquota',
+    standalone: true,
+    imports: [
+        CommonModule,
+        NzMenuModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzFlexModule,
+        NzTableModule,
+        NzButtonModule,
+        NzGridModule,
+        NzPaginationModule,
+        NzInputModule,
+        FormsModule,
+        RouterLink,
+        AdmComponent,
+    ],
+    templateUrl: './aliquota.component.html',
+    styleUrl: './aliquota.component.scss'
 })
 export class AliquotaComponent implements OnInit {
-  
-  constructor(
-    private service: AliquotaService,
-    private storageService: StoragesService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-    private alertaService: AlertaService
-  ) { }
 
-  registros: Aliquota[] = [];
-  aliquotas: Aliquota[] = [];
-  total: number = 0;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
+    constructor(
+        private service: AliquotaService,
+        private storageService: StoragesService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private renderer: Renderer2,
+        private alertaService: AlertaService
+    ) { }
 
-  ngOnInit(): void {
-    this.get()
-  }
+    respostaPaginada: RespostaPaginada<NCM> = <RespostaPaginada<NCM>>{}
+    requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
+    registros: Aliquota[] = [];
+    aliquotas: Aliquota[] = [];
+    total: number = 0;
+    paginaTamanho = 10;
+    paginaIndex = 1;
+    termoBusca: string = '';
+    erroBusca: boolean = false;
 
-  get(): void {
-    this.service.get().subscribe({
-      next: (retorno: Aliquota[]) => {
-        this.registros = retorno;
-        this.aliquotas = retorno;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar aliquotas:', error);
-      }
-    })
-  }
-
-  atualizarTabela(): void {
-    let filtro = this.aliquotas;
-    if (this.termoBusca) {
-      filtro = filtro.filter(aliquota => 
-        aliquota.origem.uf.toLowerCase().includes(this.termoBusca.toLowerCase()) 
-          || 
-          aliquota.destino.uf.toLowerCase().includes(this.termoBusca.toLowerCase())
-      );
+    ngOnInit(): void {
+        this.get()
     }
 
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  }
+    get(): void {
+        this.service.get(this.termoBusca, this.requisicaoPaginada).subscribe({
+            next: (retorno: RespostaPaginada<Aliquota>) => {
+                this.registros = retorno.content;
+                this.aliquotas = retorno.content;
+                this.total = retorno.totalElements;
+            },
+            error: (error) => {
+                console.error('Erro ao carregar aliquotas:', error);
+            }
+        })
+    }
 
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
 
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
+    atualizarPagina(paginaindex: number): void {
+        this.paginaIndex = paginaindex;
+        this.requisicaoPaginada.page = paginaindex - 1;
+        this.get();
+    }
 
-  editarItem(registro: Aliquota){
-    this.storageService.setSession('aliquota', registro);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
-  }
+    tamanhoPagina(novoTamanho: number): void {
+        this.paginaTamanho = novoTamanho;
+        this.requisicaoPaginada.size = novoTamanho;
+        this.requisicaoPaginada.page = 0;
+        this.get();
+    }
 
-  excluirItem(registro: Aliquota){
-    if(confirm('Deseja excluir essa aliquota?')){
-      this.service.delete(registro).subscribe({
-        complete: () => {
-          this.get()
-          this.alertaService.enviarAlerta({
-            tipo: ETipoAlerta.SUCESSO,
-            mensagem: "Aliquota excluida com sucesso",
-          })
+
+    buscar(): void {
+        if (this.termoBusca.length < 3 && this.termoBusca.length != 0) {
+            this.erroBusca = true;
+            return;
         }
-      })
+        this.erroBusca = false;
+        this.get();
     }
 
-  }
+    editarItem(registro: Aliquota) {
+        this.storageService.setSession('aliquota', registro);
+        this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: registro.id } });
+    }
+
+    excluirItem(registro: Aliquota) {
+        if (confirm('Deseja excluir essa aliquota?')) {
+            this.service.delete(registro).subscribe({
+                complete: () => {
+                    this.get()
+                    this.alertaService.enviarAlerta({
+                        tipo: ETipoAlerta.SUCESSO,
+                        mensagem: "Aliquota excluida com sucesso",
+                    })
+                }
+            })
+        }
+
+    }
 
 }

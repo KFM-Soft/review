@@ -31,6 +31,11 @@ public class AliquotaController {
     @Autowired
     private AliquotaService service;
 
+    @GetMapping("/busca-todos")
+    public ResponseEntity<List<Aliquota>> getTodos(@RequestParam(required = false) String termoBusca) {
+        List<Aliquota> registros = service.get(termoBusca);
+        return new ResponseEntity<>(registros, HttpStatus.OK);
+    }
     @GetMapping("/")
     public ResponseEntity<Page<Aliquota>> getAliquotas( @RequestParam(required = false) String termoBusca, 
     @SortDefaults({
@@ -38,7 +43,7 @@ public class AliquotaController {
         @SortDefault(sort = "destino.nome", direction = Sort.Direction.ASC)
     }) Pageable page
     ) {
-        Page<Aliquota> registros = service.getAll(termoBusca, page);
+        Page<Aliquota> registros = service.getPaginado(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 

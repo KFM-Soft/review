@@ -24,156 +24,142 @@ import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
 import { NcmService } from '../../../services/ncm.service';
 import { RespostaPaginada } from '../../../models/resposta-paginada';
+import { RequisicaoPagina } from '../../../models/requisicao-paginada';
 
 @Component({
-  selector: 'app-multiplicador',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NzMenuModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzFlexModule,
-    NzTableModule,
-    NzButtonModule,
-    NzGridModule,
-    NzPaginationModule,
-    NzInputModule,
-    FormsModule,
-    RouterLink,
-    AdmComponent,
-    NzSelectModule,
-    NzToolTipModule,
-  ],
-  templateUrl: './multiplicadores.component.html',
-  styleUrl: './multiplicadores.component.scss'
+    selector: 'app-multiplicador',
+    standalone: true,
+    imports: [
+        CommonModule,
+        NzMenuModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzFlexModule,
+        NzTableModule,
+        NzButtonModule,
+        NzGridModule,
+        NzPaginationModule,
+        NzInputModule,
+        FormsModule,
+        RouterLink,
+        AdmComponent,
+        NzSelectModule,
+        NzToolTipModule,
+    ],
+    templateUrl: './multiplicadores.component.html',
+    styleUrl: './multiplicadores.component.scss'
 })
 export class MultiplicadoresComponent implements OnInit {
-  
-  constructor(
-    private service: MultiplicadorService,
-    private aliquotaService: AliquotaService,
-    private ncmService: NcmService,
-    private storageService: StoragesService,
-    private alertaService: AlertaService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-  ) { }
 
-  registros: Multiplicador[] = [];
-  multiplicadores: Multiplicador[] = [];
-  aliquota: Aliquota = <Aliquota>{};
-  aliquotas: Aliquota[] = [];
-  ncm: NCM = <NCM>{};
-  lista_ncms: NCM[] = [];
-  total: number = 0;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
+    constructor(
+        private service: MultiplicadorService,
+        private aliquotaService: AliquotaService,
+        private ncmService: NcmService,
+        private storageService: StoragesService,
+        private alertaService: AlertaService,
+        private router: Router,
+        private route: ActivatedRoute,
+    ) { }
 
-  ngOnInit(): void {
-    this.getAliquotas();
-    this.getNcms();
-    this.getMultiplicadores();
-  }
+    respostaPaginada: RespostaPaginada<NCM> = <RespostaPaginada<NCM>>{}
+    requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
+    registros: Multiplicador[] = [];
+    multiplicadores: Multiplicador[] = [];
+    aliquota: Aliquota = <Aliquota>{};
+    aliquotas: Aliquota[] = [];
+    ncm: NCM = <NCM>{};
+    lista_ncms: NCM[] = [];
+    total: number = 0;
+    paginaTamanho = 10;
+    paginaIndex = 1;
+    termoBusca: string = '';
+    erroBusca: boolean = false;
 
-  getMultiplicadores() {
-    this.service.get().subscribe({
-      next: (retorno: Multiplicador[]) => {
-        this.registros = retorno
-        this.total = retorno.length;
-      },
-      error: (error) => {
-        console.error("Erro ao buscar multiplicadores: ", error);
-      }
-    })
-  }
-
-  getAliquotas() {
-    this.aliquotaService.get().subscribe({
-      next: (retorno: Aliquota[]) => {
-        this.aliquotas = retorno;
-      },
-      error: (error) => {
-        console.error("Erro ao buscar aliquotas: ", error);
-      }
-    })
-  }
-
-  getNcms() {
-    this.ncmService.get().subscribe({
-      next: (retorno: RespostaPaginada<NCM>) => {
-        this.lista_ncms = retorno.content;
-      },
-      error: (error) => {
-        console.error("Erro ao buscar ncms: ", error);
-      }
-    })
-  }
-
-  atualizarTabela(): void {
-    let filtro = this.multiplicadores;
-    if (this.termoBusca) {
-      filtro = filtro.filter(multiplicador => 
-        multiplicador.ncm.descricao?.toLowerCase().includes(this.termoBusca.toLowerCase()) 
-          || 
-          multiplicador.mvaOriginal?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          multiplicador.mvaAjustada?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          multiplicador.multiplicadorOriginal?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
-          || 
-          multiplicador.multiplicadorAjustado?.toString().toLowerCase().includes(this.termoBusca.toLowerCase())
-      );
-    }
-
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  }
-
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
-
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
-
-  buscar() {
-    if(!(this.aliquota) || !(this.ncm)) return false;
-    if(!(Object.keys(this.aliquota).length > 0 && Object.keys(this.ncm).length > 0)) return false;
-    this.service.getByAliquotaAndProduto(this.ncm, this.aliquota).subscribe({
-      next: (retorno: Multiplicador[]) => {
-        this.multiplicadores = retorno;
-        this.atualizarTabela();
-      }
-    })
-
-    return true;
-  }
-
-  editarItem(multiplicador: Multiplicador){
-    this.storageService.setSession('multiplicador', multiplicador);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: multiplicador.id}});
-  }
-
-  excluirItem(registro: Multiplicador){
-    this.service.delete(registro).subscribe({
-      complete: () => {
+    ngOnInit(): void {
         this.getAliquotas();
         this.getNcms();
         this.getMultiplicadores();
-        this.alertaService.enviarAlerta({
-            tipo: ETipoAlerta.SUCESSO,
-            mensagem: "Multiplicador foi excluído com sucesso!"
+    }
+
+    getMultiplicadores() {
+        this.service.getDoSistema().subscribe({
+            next: (retorno: RespostaPaginada<Multiplicador>) => {
+                this.registros = retorno.content;
+                this.multiplicadores = retorno.content;
+                this.total = retorno.totalElements;
+            },
+            error: (error) => {
+                console.error("Erro ao buscar multiplicadores: ", error);
+            }
         })
-      }
-    });
-  }
+    }
+
+    getAliquotas() {
+        this.aliquotaService.getTodos().subscribe({
+            next: (retorno: Aliquota[]) => {
+                this.aliquotas = retorno;
+            },
+            error: (error) => {
+                console.error("Erro ao buscar aliquotas: ", error);
+            }
+        })
+    }
+
+    getNcms() {
+        this.ncmService.get().subscribe({
+            next: (retorno: RespostaPaginada<NCM>) => {
+                this.lista_ncms = retorno.content;
+            },
+            error: (error) => {
+                console.error("Erro ao buscar ncms: ", error);
+            }
+        })
+    }
+
+
+    atualizarPagina(paginaindex: number): void {
+        this.paginaIndex = paginaindex;
+        this.requisicaoPaginada.page = paginaindex - 1;
+        this.getMultiplicadores();
+    }
+
+    tamanhoPagina(novoTamanho: number): void {
+        this.paginaTamanho = novoTamanho;
+        this.requisicaoPaginada.size = novoTamanho;
+        this.requisicaoPaginada.page = 0;
+        this.getMultiplicadores();
+    }
+
+    buscar() {
+        if (!(this.aliquota) || !(this.ncm)) return false;
+        if (!(Object.keys(this.aliquota).length > 0 && Object.keys(this.ncm).length > 0)) return false;
+        this.service.getByAliquotaAndProduto(this.ncm, this.aliquota).subscribe({
+            next: (retorno: Multiplicador[]) => {
+                this.multiplicadores = retorno;
+                // this.atualizarTabela();
+            }
+        })
+
+        return true;
+    }
+
+    editarItem(multiplicador: Multiplicador) {
+        this.storageService.setSession('multiplicador', multiplicador);
+        this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: multiplicador.id } });
+    }
+
+    excluirItem(registro: Multiplicador) {
+        this.service.delete(registro).subscribe({
+            complete: () => {
+                this.getAliquotas();
+                this.getNcms();
+                this.getMultiplicadores();
+                this.alertaService.enviarAlerta({
+                    tipo: ETipoAlerta.SUCESSO,
+                    mensagem: "Multiplicador foi excluído com sucesso!"
+                })
+            }
+        });
+    }
 
 }
