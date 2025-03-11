@@ -43,7 +43,7 @@ public class Usuario implements Serializable{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Epapel papel;
+    private Epapel papel = Epapel.ROLE_CLIENTE;
 
     @Column(nullable = false, columnDefinition = "TINYINT(1) NOT NULL DEFAULT 1")
     @Value("true")
