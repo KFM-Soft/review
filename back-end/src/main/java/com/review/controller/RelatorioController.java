@@ -42,7 +42,7 @@ public class RelatorioController {
     @GetMapping("/empresa/{empresa_id}")
     public ResponseEntity<Page<Relatorio>> getByEmpresaId(@PathVariable Long empresa_id,
     @SortDefaults({
-        @SortDefault(sort = "data", direction = org.springframework.data.domain.Sort.Direction.ASC)
+        @SortDefault(sort = "id", direction = org.springframework.data.domain.Sort.Direction.DESC)
     }) Pageable page
     ){
         Page<Relatorio> registros = service.getByEmpresaId(empresa_id, page);
