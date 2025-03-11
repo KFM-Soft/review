@@ -1,0 +1,70 @@
+<app-adm>
+    <nz-row class="content" conteudoCentral>
+        <nz-col nzSpan="24" class="container-acoes">
+            <nz-row [nzGutter]="[24, 8]">
+                <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
+                    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
+                        <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
+                            (input)="buscar()" />
+                    </nz-input-group>
+                    @if (erroBusca) {
+                    <span style="color: red; font-size: small;">Deve ter 3 ou mais dígitos</span>
+                    }
+                </nz-col>
+                <nz-col nzXs="24" nzSm="24" nzMd="6">
+                    <button nz-button nzSize="large" class="btn-novo" routerLink="./form">Adicionar</button>
+                </nz-col>
+            </nz-row>
+        </nz-col>
+        <nz-col nzSpan="24">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table" [nzTotal]="total"
+                [nzFrontPagination]="false" [nzFooter]="paginacao">
+                <thead>
+                    <tr>
+                        <th nzWidth="5%" [nzAlign]="'center'">Id</th>
+                        <th>Descrição</th>
+                        <th nzWidth="15%">NCM</th>
+                        <th nzWidth="15%">CEST</th>
+                        <th nzWidth="15%" [nzAlign]="'center'">Açôes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of headerTable.data">
+                        <td [nzAlign]="'center'">{{ data.id }}</td>
+                        <td> {{ data.descricao }}</td>
+                        <td> {{ data.ncm }}</td>
+                        <td> {{ data.cest ? data.cest : "-" }}</td>
+                        <td [nzAlign]="'center'">
+                            <nz-row [nzGutter]="[4, 4]" nzJustify="center">
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoEditar"
+                                        (click)="editarItem(data)">Editar</button>
+                                </nz-col>
+                                <nz-col>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" nzDanger
+                                        class="botao botaoEditar" (click)="excluirItem(data)">Excluir</button>
+                                </nz-col>
+                            </nz-row>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </nz-table>
+        </nz-col>
+    </nz-row>
+</app-adm>
+
+
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="buscar()" class="btn-inp-busca">
+        <span nz-icon nzType="search"></span>
+    </button>
+</ng-template>
+
+<ng-template #paginacao>
+    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
+        (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+        [nzPageSizeOptions]=[5,10,20,30,40,50] [nzShowTotal]="totalTemplate">
+    </nz-pagination>
+    <ng-template #totalTemplate let-total>Total: {{ total }} Registros</ng-template>
+</ng-template>

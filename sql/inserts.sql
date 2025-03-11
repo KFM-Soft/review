@@ -7,9 +7,9 @@ insert into review.estados (id, uf, nome) values
 (15, "PB", "Paraíba"), (16, "PR", "Paraná"), (17, "PE", "Pernambuco"), (18,  "PI", "Piauí"), (19, "RN", "Rio Grande do Norte"), (20, "RS", "Rio Grande do Sul"), (21, "RJ", "Rio de Janeiro"), 
 (22, "RO", "Rondônia"), (23, "RR", "Roraima"), (24, "SC", "Santa Catarina"), (25, "SP", "São Paulo"), (26, "SE", "Sergipe"), (27, "TO", "Tocantins");
 
-insert into review.produtos (ncm, cest, cfop, descricao) values 
-(19023000, 1704701, 6102, "Massas alimentícias tipo instantânea, exceto as descritas no CEST 17047.01."),
-(19021900, 1704904, 6101, "Massas alimentícias do tipo sêmola, não cozidas, nem recheadas, nem preparadas de outro modo, que não contenham ovos, derivadas de farinha de trigo, exceto as descritas no CEST 17.049.09");
+insert into review.ncms (ncm, cest, descricao) values 
+(19023000, 1704701, "Massas alimentícias tipo instantânea, exceto as descritas no CEST 17047.01."),
+(19021900, 1704904, "Massas alimentícias do tipo sêmola, não cozidas, nem recheadas, nem preparadas de outro modo, que não contenham ovos, derivadas de farinha de trigo, exceto as descritas no CEST 17.049.09");
 
 
 insert into review.aliquotas_interestaduais (origem_id, destino_id, porcentagem) values 

@@ -5,8 +5,11 @@
                 <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
                     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
                         <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
-                            (input)="atualizarTabela()" />
+                            (input)="buscar()" />
                     </nz-input-group>
+                    @if (erroBusca) {
+                    <span style="color: red; font-size: small;">Deve ter 3 ou mais dígitos</span>
+                    }
                 </nz-col>
                 <nz-col nzXs="24" nzSm="24" nzMd="6">
                     <button nz-button nzSize="large" class="btn-novo" routerLink="./form">Adicionar</button>
@@ -14,7 +17,8 @@
             </nz-row>
         </nz-col>
         <nz-col nzSpan="24">
-            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table" [nzTotal]="total"
+                [nzFrontPagination]="false" [nzFooter]="paginacao">
                 <thead>
                     <tr>
                         <th nzWidth="15%" [nzAlign]="'center'">Id</th>
@@ -31,8 +35,8 @@
                         <td [nzAlign]="'center'">
                             <nz-row [nzGutter]="[4, 4]" nzJustify="center">
                                 <nz-col>
-                                    <button nz-button [nzSize]="'large'" nzType="primary"
-                                        class="botao botaoEditar" (click)="editarItem(data)">Editar</button>
+                                    <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoEditar"
+                                        (click)="editarItem(data)">Editar</button>
                                 </nz-col>
                                 <nz-col>
                                     <button nz-button [nzSize]="'large'" nzType="primary" nzDanger
@@ -44,18 +48,20 @@
                 </tbody>
 
             </nz-table>
-            <div class="paginacao">
-                <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
-                    [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
-                    (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
-                </nz-pagination>
-            </div>
         </nz-col>
     </nz-row>
 </app-adm>
 
 <ng-template #suffixIconButton>
-    <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">
+    <button nz-button nzType="primary" nzSearch (click)="buscar()" class="btn-inp-busca">
         <span nz-icon nzType="search"></span>
     </button>
+</ng-template>
+
+<ng-template #paginacao>
+    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
+        (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+        [nzPageSizeOptions]=[5,10,20,30,40,50] [nzShowTotal]="totalTemplate">
+    </nz-pagination>
+    <ng-template #totalTemplate let-total>Total: {{ total }} Registros</ng-template>
 </ng-template>

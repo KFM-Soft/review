@@ -1,7 +1,7 @@
 import { IcmsService } from './../../../services/icms.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
+import { RouterLink, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -16,8 +16,6 @@ import { Empresa } from '../../../models/Empresa';
 import { EmpresasService } from '../../../services/empresas.service';
 import { Relatorio } from '../../../models/Relatorio';
 import { RelatorioService } from '../../../services/relatorio.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { response } from 'express';
 import { StoragesService } from '../../../services/storages.service';
 
 interface gruposNotas {
@@ -32,7 +30,7 @@ interface gruposNotas {
 @Component({
   selector: 'app-icms-grupo-notas',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
+  imports: [CommonModule, NzIconModule, NzLayoutModule, NzMenuModule, NzBreadCrumbModule, NzCardModule, NzFlexModule, NzTableModule, NzFlexModule, NzButtonModule,NzPaginationModule, RouterLink,],
   templateUrl: './icms-grupo-notas.component.html',
   styleUrl: './icms-grupo-notas.component.scss'
 })

@@ -1,58 +1,86 @@
 <div class="container">
-  <!-- removido temporariamente o compartilhamento de contas  -->
-  <a href="/" *ngif="t">
-    <nz-card [nzHoverable]="true" class="compartilhar">
-      <div nz-flex [nzGap]="20">
-        <img src="../../../assets/svgs/compartilhar.svg">
-        <div>
-          <h4>Compartilhamento de conta</h4>
-          <p>Acesse facilmente as contas que você gerencia</p>
-        </div>
-      </div>
-    </nz-card>
-  </a>
+    <!-- removido temporariamente o compartilhamento de contas  -->
+    @if (t) {
+    <a href="/">
+        <nz-card [nzHoverable]="true" class="compartilhar">
+            <div nz-flex [nzGap]="20">
+                <img src="../../../assets/svgs/compartilhar.svg">
+                <div>
+                    <h4>Compartilhamento de conta</h4>
+                    <p>Acesse facilmente as contas que você gerencia</p>
+                </div>
+            </div>
+        </nz-card>
+    </a>
+    }
 
-  <nz-table #headerTable [nzData]="data" [nzShowPagination]="false" class="table">
-    <thead>
-      <tr>
-        <th nzWidth="5%">
-          <h2>Empresas</h2>
-        </th>
-        <th></th>
-        <th nzWidth="10%">
-          <ng-container *ngif="t">
-            <button nz-button [nzSize]="'large'" class="botao botaoAdicionar" routerLink="../cadastro-empresa">Adicionar
-              Empresa</button>
-          </ng-container>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of headerTable.data">
-        <td [nzAlign]="'center'">
-          <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
-        </td>
-        <td>
-          <nz-flex [nzVertical]="true">
-            <h3>{{ data.nome }}</h3>
-            <p>Cnpj: {{ data.cnpj }}</p>
-          </nz-flex>
-        </td>
-        <td [nzAlign]="'center'">
-          <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciar" [routerLink]="['/icms/grupo-notas', data.id]" routerLinkActive="active">Gerenciar</button>
-          </ng-container>
-        </td>
-      </tr>
-      <!-- <tr>
-        <td colspan="3" class="gerenciarTodos">
-          <ng-container>
-            <button nz-button [nzSize]="'large'" class="botao botaoGerenciarTodos" routerLink="/icms"
-              routerLinkActive="active">Gerenciar Todos</button>
-          </ng-container>
-        </td>
-      </tr> -->
-    </tbody>
-  </nz-table>
+    <nz-table #headerTable [nzData]="data" [nzShowPagination]="false" class="table" [nzTotal]="total"
+        [nzFrontPagination]="false" [nzFooter]="paginacao">
+        <thead>
+            <tr>
+                <th nzWidth="5%">
+                    <h2>Empresas</h2>
+                </th>
+                <th>
+                    <nz-col nzSpan="24" class="container-acoes">
+                        <nz-row [nzGutter]="[24, 8]">
+                            <nz-col nzXs="24" nzSm="24" nzMd="18" class="barra-busca">
+                                <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large"
+                                    class="barra-busca">
+                                    <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca"
+                                        class="inp-busca" (input)="buscar()" />
+                                </nz-input-group>
+                                @if (erroBusca) {
+                                <span style="color: red; font-size: small;">Deve ter 3 ou mais dígitos</span>
+                                }
+                            </nz-col>
+                        </nz-row>
+                    </nz-col>
+                </th>
+                <th nzWidth="10%">
+                    @if (t) {
+                    <ng-container>
+                        <button nz-button [nzSize]="'large'" class="botao botaoAdicionar"
+                            routerLink="../cadastro-empresa">Adicionar
+                            Empresa</button>
+                    </ng-container>
+                    }
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of headerTable.data">
+                <td [nzAlign]="'center'">
+                    <img src="../../../assets/svgs/empresa.svg" height="30px" width="30px">
+                </td>
+                <td>
+                    <nz-flex [nzVertical]="true">
+                        <h3>{{ data.nome }}</h3>
+                        <p>Cnpj: {{ data.cnpj }}</p>
+                    </nz-flex>
+                </td>
+                <td [nzAlign]="'center'">
+                    <ng-container>
+                        <button nz-button [nzSize]="'large'" class="botao botaoGerenciar"
+                            [routerLink]="['/icms/grupo-notas', data.id]" routerLinkActive="active">Gerenciar</button>
+                    </ng-container>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
 
 </div>
+
+<ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="buscar()" class="btn-inp-busca">
+        <span nz-icon nzType="search"></span>
+    </button>
+</ng-template>
+
+<ng-template #paginacao>
+    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger [nzPageSize]="paginaTamanho"
+        (nzPageIndexChange)="atualizarPagina($event)" (nzPageSizeChange)="tamanhoPagina($event)"
+        [nzPageSizeOptions]=[5,10,20,30,40,50] [nzShowTotal]="totalTemplate">
+    </nz-pagination>
+    <ng-template #totalTemplate let-total>Total: {{ total }} Registros</ng-template>
+</ng-template>

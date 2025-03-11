@@ -17,103 +17,105 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { StoragesService } from '../../../services/storages.service';
 import { AlertaService } from '../../../services/alerta.service';
 import { ETipoAlerta } from '../../../models/e-tipo-alerta';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
+import { RequisicaoPagina } from '../../../models/requisicao-paginada';
 
 @Component({
-  selector: 'app-estado',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NzMenuModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzFlexModule,
-    NzTableModule,
-    NzButtonModule,
-    NzGridModule,
-    NzPaginationModule,
-    NzInputModule,
-    FormsModule,
-    RouterLink,
-    AdmComponent,
-  ],
-  templateUrl: './estados.component.html',
-  styleUrl: './estados.component.scss'
+    selector: 'app-estado',
+    standalone: true,
+    imports: [
+        CommonModule,
+        NzMenuModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzFlexModule,
+        NzTableModule,
+        NzButtonModule,
+        NzGridModule,
+        NzPaginationModule,
+        NzInputModule,
+        FormsModule,
+        RouterLink,
+        AdmComponent,
+    ],
+    templateUrl: './estados.component.html',
+    styleUrl: './estados.component.scss'
 })
 export class EstadosComponent implements OnInit {
-  
-  constructor(
-    private service: EstadoService,
-    private storageService: StoragesService,
-    private alertaService: AlertaService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-  ) { }
 
-  registros: Estado[] = [];
-  estados: Estado[] = [];
-  total: number = 0;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
+    constructor(
+        private service: EstadoService,
+        private storageService: StoragesService,
+        private alertaService: AlertaService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private renderer: Renderer2,
+    ) { }
 
-  ngOnInit(): void {
-    this.get()
-  }
+    respostaPaginada: RespostaPaginada<Estado> = <RespostaPaginada<Estado>>{}
+    requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
+    registros: Estado[] = [];
+    estados: Estado[] = [];
+    total: number = 0;
+    paginaTamanho = 10;
+    paginaIndex = 1;
+    termoBusca: string = '';
+    erroBusca: boolean = false;
 
-  get(): void{
-    this.service.get().subscribe({
-      next: (retorno: Estado[]) => {
-        this.registros = retorno;
-        this.estados = retorno;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar estados:', error);
-      }
-    })
-  }
-
-  atualizarTabela(): void {
-    let filtro = this.estados;
-    if (this.termoBusca) {
-      filtro = filtro.filter(estado => 
-        estado.nome.toLowerCase().includes(this.termoBusca.toLowerCase()) 
-          || 
-          estado.uf.toLowerCase().includes(this.termoBusca.toLowerCase())
-      );
+    ngOnInit(): void {
+        this.get()
     }
 
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  }
-
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
-
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
-
-  editarItem(estado: Estado){
-    this.storageService.setSession('estado', estado);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: estado.id}});
-  }
-
-  excluirItem(registro: Estado){
-    this.service.delete(registro).subscribe({
-      complete: () => {
-        this.get();
-        this.alertaService.enviarAlerta({
-            tipo: ETipoAlerta.SUCESSO,
-            mensagem: "Estado foi excluído com sucesso!"
+    get(): void {
+        this.service.get(this.termoBusca, this.requisicaoPaginada).subscribe({
+            next: (retorno: RespostaPaginada<Estado>) => {
+                this.registros = retorno.content;
+                this.estados = retorno.content;
+                this.total = retorno.totalElements;
+            },
+            error: (error) => {
+                console.error('Erro ao carregar estados:', error);
+            }
         })
-      }
-    });
-  }
+    }
+
+    atualizarPagina(paginaindex: number): void {
+        this.paginaIndex = paginaindex;
+        this.requisicaoPaginada.page = paginaindex - 1;
+        this.get();
+    }
+
+    tamanhoPagina(novoTamanho: number): void {
+        this.paginaTamanho = novoTamanho;
+        this.requisicaoPaginada.size = novoTamanho;
+        this.requisicaoPaginada.page = 0;
+        this.get();
+    }
+
+    buscar(): void {
+        if (this.termoBusca.length < 3 && this.termoBusca.length != 0) {
+            this.erroBusca = true;
+            return;
+        }
+        this.erroBusca = false;
+        this.get();
+    }
+
+    editarItem(estado: Estado) {
+        this.storageService.setSession('estado', estado);
+        this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: estado.id } });
+    }
+
+    excluirItem(registro: Estado) {
+        this.service.delete(registro).subscribe({
+            complete: () => {
+                this.get();
+                this.alertaService.enviarAlerta({
+                    tipo: ETipoAlerta.SUCESSO,
+                    mensagem: "Estado foi excluído com sucesso!"
+                })
+            }
+        });
+    }
 
 }

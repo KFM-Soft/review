@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
@@ -17,7 +17,6 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule } from '@angular/forms';
 import { IcmsNota } from '../../../models/IcmsNota';
 import { StoragesService } from '../../../services/storages.service';
-import { isPlatformBrowser } from '@angular/common';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { Empresa } from '../../../models/Empresa';
 import { EmpresasService } from '../../../services/empresas.service';
@@ -36,7 +35,6 @@ import { EmpresasService } from '../../../services/empresas.service';
     NzMenuModule, 
     CommonModule,
     NzUploadModule,
-    RouterLink,
     NzRadioModule,
     FormsModule,
   ],

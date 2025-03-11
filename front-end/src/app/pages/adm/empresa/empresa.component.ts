@@ -15,104 +15,112 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { AdmComponent } from '../adm.component';
+import { RespostaPaginada } from '../../../models/resposta-paginada';
+import { Estado } from '../../../models/Estado';
+import { RequisicaoPagina } from '../../../models/requisicao-paginada';
 
 @Component({
-  selector: 'app-empresa',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NzMenuModule,
-    NzLayoutModule,
-    NzIconModule,
-    NzFlexModule,
-    NzTableModule,
-    NzButtonModule,
-    NzGridModule,
-    NzPaginationModule,
-    NzInputModule,
-    FormsModule,
-    RouterLink,
-    AdmComponent,
-  ],
-  templateUrl: './empresa.component.html',
-  styleUrl: './empresa.component.scss'
+    selector: 'app-empresa',
+    standalone: true,
+    imports: [
+        CommonModule,
+        NzMenuModule,
+        NzLayoutModule,
+        NzIconModule,
+        NzFlexModule,
+        NzTableModule,
+        NzButtonModule,
+        NzGridModule,
+        NzPaginationModule,
+        NzInputModule,
+        FormsModule,
+        RouterLink,
+        AdmComponent,
+    ],
+    templateUrl: './empresa.component.html',
+    styleUrl: './empresa.component.scss'
 })
 export class EmpresaComponent {
-  constructor(
-    private service: EmpresasService,
-    private storageService: StoragesService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private renderer: Renderer2,
-  ) { }
+    constructor(
+        private service: EmpresasService,
+        private storageService: StoragesService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private renderer: Renderer2,
+    ) { }
 
-  registros: Empresa[] = [];
-  empresas: Empresa[] = [];
-  total: number = 0;
-  paginaTamanho = 5;
-  paginaIndex = 1;
-  termoBusca: string = '';
-  private token: string | null = null;
+    respostaPaginada: RespostaPaginada<Estado> = <RespostaPaginada<Estado>>{}
+    requisicaoPaginada: RequisicaoPagina = new RequisicaoPagina();
+    registros: Empresa[] = [];
+    empresas: Empresa[] = [];
+    total: number = 0;
+    paginaTamanho = 10;
+    paginaIndex = 1;
+    termoBusca: string = '';
+    erroBusca: boolean = false;
 
-  ngOnInit(): void {
+    private token: string | null = null;
 
-    this.token = this.storageService.getSession('token');
+    ngOnInit(): void {
 
-    if(this.token)
-    this.service.get(this.token).subscribe({
-      next: (retorno: Empresa[]) => {
-        this.registros = retorno;
-        this.empresas = retorno;
-        
-      },
-      error: (error) => {
-        console.error('Erro ao carregar empresas:', error);
-      }
-    })
-  }
-
-  atualizarTabela(): void {
-    let filtro = this.empresas;
-    if (this.termoBusca) {
-      filtro = filtro.filter(empresa => 
-        empresa.nome.toLowerCase().includes(this.termoBusca)
-        ||
-        empresa.cnpj.toLowerCase().includes(this.termoBusca)
-        ||
-        empresa.nomeFantasia.toLowerCase().includes(this.termoBusca)
-      );
+        this.token = this.storageService.getSession('token');
+        if (!this.token) {
+            this.router.navigate(['./login'], { relativeTo: this.route });
+        }
+        this.get();
     }
 
-    this.total = filtro.length;
-    const startIndex = (this.paginaIndex - 1) * this.paginaTamanho;
-    const endIndex = startIndex + this.paginaTamanho;
-    this.registros = filtro.slice(startIndex, endIndex);
-  }
+    get() {
+        this.service.get(this.token!, this.termoBusca, this.requisicaoPaginada).subscribe({
+            next: (retorno: RespostaPaginada<Empresa>) => {
+                this.registros = retorno.content;
+                this.empresas = retorno.content;
+                this.total = retorno.totalElements;
 
-  atualizarPagina(paginaindex: number): void {
-    this.paginaIndex = paginaindex;
-    this.atualizarTabela();
-  }
+            },
+            error: (error) => {
+                console.error('Erro ao carregar empresas:', error);
+            }
+        })
+    }
 
-  tamanhoPagina(paginaTamanho: number): void {
-    this.paginaTamanho = paginaTamanho;
-    this.atualizarTabela();
-  }
+    atualizarPagina(paginaindex: number): void {
+        this.paginaIndex = paginaindex;
+        this.requisicaoPaginada.page = paginaindex - 1;
+        this.get();
+    }
 
-  editarItem(registro: Empresa){
-    this.storageService.setSession('empresa', registro);
-    this.router.navigate(['./form'], {relativeTo: this.route, queryParams: {id: registro.id}});
-  }
+    tamanhoPagina(novoTamanho: number): void {
+        this.paginaTamanho = novoTamanho;
+        this.requisicaoPaginada.size = novoTamanho;
+        this.requisicaoPaginada.page = 0;
+        this.get();
+    }
 
-  excluirItem(registro: Empresa){
-    this.service.delete(registro).subscribe({
-      complete: () => {
-        alert("Registro excluido com sucesso.");
-        window.location.reload();
-      }, error: (erro) => {
-        alert("Erro na exclusão!");
-        window.location.reload();
-      }
-    })
-  }
+
+    buscar(): void {
+        if (this.termoBusca.length < 3 && this.termoBusca.length != 0) {
+            this.erroBusca = true;
+            return;
+        }
+        this.erroBusca = false;
+        this.get();
+    }
+
+    editarItem(registro: Empresa) {
+        this.storageService.setSession('empresa', registro);
+        this.router.navigate(['./form'], { relativeTo: this.route, queryParams: { id: registro.id } });
+    }
+
+    excluirItem(registro: Empresa) {
+        this.service.delete(registro).subscribe({
+            complete: () => {
+                alert("Registro excluido com sucesso.");
+                window.location.reload();
+            }, error: (erro) => {
+                alert("Erro na exclusão!");
+                window.location.reload();
+            }
+        })
+    }
 }

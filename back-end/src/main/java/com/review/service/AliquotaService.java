@@ -2,9 +2,12 @@ package com.review.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.review.models.Aliquota;
@@ -20,8 +23,18 @@ public class AliquotaService {
     @Autowired
     private EstadoRepository estadoRepository;
 
-    public List<Aliquota> getAll() {
-        return repository.findAll();
+    // Quando não precisamos de paginação fiz so quando presisamos de todos os registro entao falta quando é so empresa ou so sistema
+    public List<Aliquota> get(String termoBusca) {
+        List<Aliquota> registros = this.getPaginado(termoBusca, Pageable.unpaged()).getContent();
+        List<Aliquota> registrosOrdenados = registros.stream().sorted(Comparator.comparing(a -> a.getOrigem().getNome())).toList();
+        return registrosOrdenados;
+    }
+
+    public Page<Aliquota> getPaginado(String termoBusca, Pageable page) {
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.busca(termoBusca, page);
+        }
+        return repository.findAll(page);
     }
 
     public Aliquota getById(Long id) {
@@ -47,12 +60,19 @@ public class AliquotaService {
         return repository.findByOrigemDestinoEmpresa(origem, destino, empresa_id);
     }
 
-    public List<Aliquota> getByEmpresa(Long id){
-        return repository.findByEmpresaId(id);
+    public Page<Aliquota> getByEmpresa(String termoBusca, Long id, Pageable page){
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaByEmpresaId(termoBusca, id, page);
+        }
+        return repository.findByEmpresaId(id, page);
     }
 
-    public List<Aliquota> getBySistema(boolean sistema){
-        return repository.findBySistema(sistema);
+    public Page<Aliquota> getBySistema(String termoBusca, Pageable page){
+        if (termoBusca != null && !termoBusca.isBlank()) {
+            return repository.buscaBySistema(termoBusca, page);
+            
+        }
+        return repository.findBySistema(page);
     }
 
     // @EventListener(ApplicationReadyEvent.class)
@@ -62,7 +82,6 @@ public class AliquotaService {
         for (Estado origem : estados) {
             for(Estado destino : estados) {
                 Aliquota aliquota = new Aliquota();
-                System.out.println(aliquota);
                 aliquota.setOrigem(origem);
                 aliquota.setDestino(destino);
                 aliquota.setPorcentagem(new BigDecimal(0));

@@ -1,0 +1,15 @@
+.content {
+    max-height: 100%;
+    overflow-y: auto; /* Adiciona a scrollbar vertical */
+    overflow-x: hidden;
+  }
+  
+  .btn-novo {
+    border-radius: 10px;
+  }
+  
+tbody {
+    max-height: 100%;
+    overflow-y: auto; /* Adiciona a scrollbar vertical */
+    overflow-x: hidden;
+}

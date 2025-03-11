@@ -50,7 +50,7 @@ export class AliquotaFormComponent implements OnInit{
    ) { }
 
   ngOnInit(): void {
-    this.estadoService.get().subscribe({
+    this.estadoService.getTodos().subscribe({
       next: (retorno: Estado[]) => {
         this.estados = retorno
       }

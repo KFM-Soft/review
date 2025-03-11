@@ -5,7 +5,7 @@
                 <nz-col nzXs="24" nzMd="18" class="barra-busca">
                     <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" nzSize="large" class="barra-busca">
                         <input type="text" nz-input placeholder="Pesquisa" [(ngModel)]="termoBusca" class="inp-busca"
-                            (input)="atualizarTabela()" />
+                            (input)="buscar()" />
                     </nz-input-group>
                 </nz-col>
                 <nz-col nzXs="24" nzMd="6">
@@ -13,13 +13,13 @@
                 </nz-col>
                 <nz-col nzXs="24" nzMd="12" nzLg="9">
                     <nz-form-item>
-                        <nz-form-label nzSpan="24">Produto</nz-form-label>
+                        <nz-form-label nzSpan="24">NCM</nz-form-label>
                         <nz-form-control nzSpan="24">
                             <nz-select nzShowSearch nzAllowClear 
-                                    nzPlaceHolder="Selecionar Produto (NCM -> CEST)" [(ngModel)]="produto" 
+                                    nzPlaceHolder="Selecionar NCM (NCM -> CEST)" [(ngModel)]="ncm" 
                                     [ngModelOptions]="{standalone: true}" ngDefaultControl>
-                                <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" 
-                                        [nzValue]="produto" [nzTitle]="produto.descricao"></nz-option>
+                                <nz-option *ngFor="let ncm of lista_ncms" [nzLabel]="ncm.ncm" 
+                                        [nzValue]="ncm" [nzTitle]="ncm.descricao"></nz-option>
                             </nz-select>
                         </nz-form-control>
                     </nz-form-item>
@@ -47,7 +47,8 @@
             </nz-row>
         </nz-col>
         <nz-col nzSpan="24">
-            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="true" class="table">
+            <nz-table #headerTable [nzData]="registros" [nzShowPagination]="false" class="table" [nzTotal]="total"
+                [nzFrontPagination]="false" [nzFooter]="paginacao">
                 <thead>
                     <tr>
                         <th nzWidth="5%" nzAlign="center">Id</th>
@@ -64,7 +65,7 @@
                 <tbody>
                     <tr *ngFor="let data of headerTable.data">
                         <td [nzAlign]="'center'">{{ data.id }}</td>
-                        <td [nzAlign]="'center'"> {{ data.produto.descricao }}</td>
+                        <td [nzAlign]="'center'"> {{ data.ncm.descricao }}</td>
                         <td [nzAlign]="'center'"> {{ data.aliquota.origem.uf }} -> {{ data.aliquota.destino.uf }}</td>
                         <td [nzAlign]="'center'"> {{ data.aliquotaInternaEmit }}</td>
                         <td [nzAlign]="'center'"> {{ data.mvaOriginal }}</td>
@@ -87,18 +88,19 @@
                 </tbody>
 
             </nz-table>
-            <div class="paginacao">
-                <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
-                    [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
-                    (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
-                </nz-pagination>
-            </div>
         </nz-col>
     </nz-row>
 </app-adm>
 
 <ng-template #suffixIconButton>
-    <button nz-button nzType="primary" nzSearch (click)="atualizarTabela()" class="btn-inp-busca">
+    <button nz-button nzType="primary" nzSearch (click)="buscar()" class="btn-inp-busca">
         <span nz-icon nzType="search"></span>
     </button>
+</ng-template>
+
+<ng-template #paginacao>
+    <nz-pagination [nzPageIndex]="paginaIndex" [nzTotal]="total" nzShowSizeChanger
+        [nzPageSize]="paginaTamanho" (nzPageIndexChange)="atualizarPagina($event)"
+        (nzPageSizeChange)="tamanhoPagina($event)" [nzPageSizeOptions]=[5,10,20,30,40,50]>
+    </nz-pagination>
 </ng-template>

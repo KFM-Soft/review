@@ -3,6 +3,10 @@ package com.review.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.review.models.Empresa;
@@ -25,8 +30,12 @@ public class EmpresaController {
     private EmpresaService service;
 
     @GetMapping("/")
-    public ResponseEntity<List<Empresa>> getEmpresas(){
-        List<Empresa> registros = service.getAll();
+    public ResponseEntity<Page<Empresa>> getEmpresas(@RequestParam(required = false) String termoBusca,
+    @SortDefaults({
+        @SortDefault(sort = "nome", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Empresa> registros = service.getAll(termoBusca, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
@@ -37,8 +46,12 @@ public class EmpresaController {
     }
 
     @GetMapping("/usuario/{id}")
-    public ResponseEntity<List<Empresa>> getEmpresaByDonoId(@PathVariable Long id) {
-        List<Empresa> registro = service.getByDono(id);
+    public ResponseEntity<Page<Empresa>> getEmpresaByDonoId(@RequestParam(required = false) String termoBusca, @PathVariable Long id,
+    @SortDefaults({
+        @SortDefault(sort = "nome", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Empresa> registro = service.getByDono(termoBusca,id, page);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 

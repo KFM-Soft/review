@@ -3,6 +3,10 @@ package com.review.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,8 +40,12 @@ public class RelatorioController {
     }
 
     @GetMapping("/empresa/{empresa_id}")
-    public ResponseEntity<List<Relatorio>> getByEmpresaId(@PathVariable Long empresa_id){
-        List<Relatorio> registros = service.getByEmpresaId(empresa_id);
+    public ResponseEntity<Page<Relatorio>> getByEmpresaId(@PathVariable Long empresa_id,
+    @SortDefaults({
+        @SortDefault(sort = "id", direction = org.springframework.data.domain.Sort.Direction.DESC)
+    }) Pageable page
+    ){
+        Page<Relatorio> registros = service.getByEmpresaId(empresa_id, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 

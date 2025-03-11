@@ -44,3 +44,7 @@ body {
 .ant-input-number-group-wrapper { 
     width: 100%;
 }
+
+nz-input-number-group nz-input-number.custom-lg div input {
+    min-height: 40px !important;
+}

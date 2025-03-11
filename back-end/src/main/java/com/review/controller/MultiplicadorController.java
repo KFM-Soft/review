@@ -3,6 +3,10 @@ package com.review.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
+import org.springframework.data.web.SortDefault.SortDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,14 +35,22 @@ public class MultiplicadorController {
     }
 
     @GetMapping("/sistema/{sistema}")
-    public ResponseEntity<List<Multiplicador>> getMultiplicadoresBySistema(@PathVariable boolean sistema){
-        List<Multiplicador> registros = service.getBySistema(sistema);
+    public ResponseEntity<Page<Multiplicador>> getMultiplicadoresBySistema(@PathVariable boolean sistema,
+    @SortDefaults({
+        @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ){
+        Page<Multiplicador> registros = service.getBySistema(sistema, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
     @GetMapping("/empresa/{empresa_id}")
-    public ResponseEntity<List<Multiplicador>> getMultiplicadoresBySistema(@PathVariable Long empresa_id){
-        List<Multiplicador> registros = service.getByEmpresaId(empresa_id);
+    public ResponseEntity<Page<Multiplicador>> getMultiplicadoresBySistema(@PathVariable Long empresa_id,
+    @SortDefaults({
+        @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
+        }) Pageable page
+    ){
+        Page<Multiplicador> registros = service.getByEmpresaId(empresa_id, page);
         return new ResponseEntity<>(registros, HttpStatus.OK);
     }
 
@@ -48,9 +60,13 @@ public class MultiplicadorController {
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
     
-    @GetMapping("/getByProdutoAndAliquota/{produto_id}/{aliquota_id}")
-    public ResponseEntity<List<Multiplicador>> getMultiplicadorByProdutoIdAndAliquotaId(@PathVariable Long produto_id, @PathVariable Long aliquota_id ) {
-        List<Multiplicador> registro = service.getMultiplicadorByProdutoIdAndAliquotaId(produto_id, aliquota_id);
+    @GetMapping("/getByNcmAndAliquota/{ncm_id}/{aliquota_id}")
+    public ResponseEntity<Page<Multiplicador>> getMultiplicadorByNcmIdAndAliquotaId(@PathVariable Long ncm_id, @PathVariable Long aliquota_id, 
+    @SortDefaults({
+        @SortDefault(sort = "ncm", direction = org.springframework.data.domain.Sort.Direction.ASC)
+    }) Pageable page
+    ) {
+        Page<Multiplicador> registro = service.getMultiplicadorByNcmIdAndAliquotaId(ncm_id, aliquota_id, page);
         return new ResponseEntity<>(registro, HttpStatus.OK);
     }
 

@@ -3,12 +3,12 @@
 
         <nz-col nzXs="24" nzMd="12" nzLg="8">
             <nz-form-item>
-                <nz-form-label nzSpan="24">Produto</nz-form-label>
+                <nz-form-label nzSpan="24">NCM</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.produto" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option *ngFor="let produto of produtos" [nzLabel]="produto.ncm" [nzValue]="produto"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel" nzSize="large">
+                        <nz-option *ngFor="let ncm of ncms" [nzLabel]="ncm.ncm" [nzValue]="ncm"></nz-option>
                     </nz-select>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.produto.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.ncm.ncm" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
@@ -17,10 +17,13 @@
             <nz-form-item>
                 <nz-form-label nzSpan="24">Aliquota</nz-form-label>
                 <nz-form-control>
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.aliquota" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="this.editavel">
-                        <nz-option *ngFor="let aliquota of aliquotas" [nzLabel]="aliquota.origem.uf + '->' + aliquota.destino.uf" [nzValue]="aliquota"></nz-option>
-                    </nz-select>
-                    <input nz-input nz-col nzSize="large" nzSpan="24" [(ngModel)]="multiplicador.aliquota" [ngModelOptions]="{standalone: true}" ngDefaultControl *ngIf="!this.editavel" [disabled]="true"/>
+                    @if (editavel) {
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Selecionar Origem" [(ngModel)]="multiplicador.aliquota" [ngModelOptions]="{standalone: true}" ngDefaultControl nzSize="large">
+                            <nz-option *ngFor="let aliquota of aliquotas" [nzLabel]="aliquota.origem.uf + '->' + aliquota.destino.uf" [nzValue]="aliquota"></nz-option>
+                        </nz-select>
+                    } @else {
+                        <div class="fake-block-input">{{ multiplicador.aliquota.origem.uf }} -> {{ multiplicador.aliquota.destino.uf }}</div>
+                    }
                 </nz-form-control>
             </nz-form-item>
         </nz-col>
@@ -30,8 +33,8 @@
                 <nz-form-label nzSpan="24">Aliquota Interna</nz-form-label>
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
-                        <nz-input-number [(ngModel)]="multiplicador.aliquotaInternaEmit" [ngModelOptions]="{standalone: true}" ngDefaultControl
-                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                        <nz-input-number [(ngModel)]="multiplicador.aliquotaInternaEmit" [ngModelOptions]="{standalone: true}" class="custom-lg"
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0" [nzInputMode]="'decimal'" [nzSize]="'large'"></nz-input-number>
                       </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>
@@ -43,7 +46,7 @@
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="multiplicador.mvaOriginal" [ngModelOptions]="{standalone: true}" ngDefaultControl
-                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0" [nzInputMode]="'decimal'"></nz-input-number>
                       </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>
@@ -55,7 +58,7 @@
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="multiplicador.mvaAjustada" [ngModelOptions]="{standalone: true}" ngDefaultControl
-                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0" [nzInputMode]="'decimal'"></nz-input-number>
                       </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>
@@ -67,7 +70,7 @@
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="multiplicador.multiplicadorOriginal" [ngModelOptions]="{standalone: true}" ngDefaultControl
-                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0" [nzInputMode]="'decimal'"></nz-input-number>
                       </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>
@@ -79,7 +82,7 @@
                 <nz-form-control nzSpan="24">
                     <nz-input-number-group nzAddOnAfter="%">
                         <nz-input-number [(ngModel)]="multiplicador.multiplicadorAjustado" [ngModelOptions]="{standalone: true}" ngDefaultControl
-                            [nzStep]="1" [nzMax]="100" [nzMin]="0.1" [nzInputMode]="'decimal'"></nz-input-number>
+                            [nzStep]="1" [nzMax]="100" [nzMin]="0" [nzInputMode]="'decimal'"></nz-input-number>
                       </nz-input-number-group>
                 </nz-form-control>
             </nz-form-item>

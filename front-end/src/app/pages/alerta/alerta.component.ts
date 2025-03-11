@@ -50,6 +50,7 @@ export class AlertaComponent {
   }
 
   fecharAlerta(): void {
+    if(typeof document === 'undefined') return;
     const elAlerta = document.querySelector<HTMLElement>('div.alerta');
     if (elAlerta) {
       elAlerta.classList.add('inativo');

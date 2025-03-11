@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "multiplicadores_produtos", uniqueConstraints = {@UniqueConstraint(columnNames = {"produto_id", "aliquota_id", "empresa_id"})})
+@Table(name = "multiplicadores_ncms", uniqueConstraints = {@UniqueConstraint(columnNames = {"ncm_id", "aliquota_id", "empresa_id"})})
 @Getter
 @Setter
 public class Multiplicador implements Serializable{
@@ -25,7 +25,7 @@ public class Multiplicador implements Serializable{
     private Long id;
 
     @ManyToOne(optional = false)
-    private Produto produto;
+    private NCM ncm;
 
     @ManyToOne(optional = false)
     private Aliquota aliquota;
@@ -36,7 +36,7 @@ public class Multiplicador implements Serializable{
     @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal mvaOriginal;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(5,2)")
+    @Column(columnDefinition = "DECIMAL(5,2)")
     private BigDecimal multiplicadorOriginal;
 
     @Column(columnDefinition = "DECIMAL(5,2)")

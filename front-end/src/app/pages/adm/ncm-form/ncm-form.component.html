@@ -1,0 +1,48 @@
+<form nz-form class="form-cadastrar">
+    <nz-row [nzGutter]="[24, 0]">
+        <nz-col nzXs="24" nzLg="12">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">CEST</nz-form-label>
+                <nz-form-control>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="CEST" [(ngModel)]="NCM.cest"
+                        [ngModelOptions]="{standalone: true}" ngDefaultControl />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+        <nz-col nzXs="24" nzLg="12">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">NCM</nz-form-label>
+                <nz-form-control>
+                    <input nz-input nz-col nzSize="large" nzSpan="24" placeholder="NCM" [(ngModel)]="NCM.ncm"
+                        [ngModelOptions]="{standalone: true}" ngDefaultControl />
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+
+        <nz-col nzXs="24" nzLg="12">
+            <nz-form-item>
+                <nz-form-label nzSpan="24">Descrição:</nz-form-label>
+                <nz-form-control>
+                    <nz-input-group [nzSuffix]="textAreaClearTpl"
+                        class="ant-input-affix-wrapper-textarea-with-clear-btn">
+                        <textarea nz-input [(ngModel)]="NCM.descricao" placeholder="Descrição do NCM"
+                            [ngModelOptions]="{standalone: true}" ngDefaultControl></textarea>
+                    </nz-input-group>
+                    <ng-template #textAreaClearTpl>
+                        @if (NCM.descricao) {
+                        <span nz-icon class="ant-input-clear-icon" nzTheme="fill" nzType="close-circle"
+                            (click)="NCM.descricao = ''"></span>
+                        }
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
+        </nz-col>
+
+        <nz-col nzSpan="24">
+            <nz-row nzJustify="end">
+                <button nz-button [nzSize]="'large'" nzType="primary" class="botao botaoAdicionar"
+                    (click)="submit()">Salvar</button>
+            </nz-row>
+        </nz-col>
+    </nz-row>
+</form>
